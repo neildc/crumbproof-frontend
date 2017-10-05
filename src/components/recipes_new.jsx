@@ -3,19 +3,24 @@ import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createRecipe } from "../actions";
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+
+
 
 class RecipesNew extends Component {
   renderField(field) {
     const { meta: { touched, error } } = field;
-    const className = `form-group ${touched && error ? "has-danger" : ""}`;
 
     return (
-      <div className={className}>
-        <label>{field.label}</label>
-        <input className="form-control" type="text" {...field.input} />
-        <div className="text-help">
-          {touched ? error : ""}
-        </div>
+      <div>
+        <TextField
+            hintText=""
+            floatingLabelText={field.label}
+            errorText={touched && error}
+            {...field.input}
+            {...field.custom}
+        />
       </div>
     );
   }
@@ -26,29 +31,46 @@ class RecipesNew extends Component {
     });
   }
 
+
   render() {
     const { handleSubmit } = this.props;
 
+    let formstyle = {
+        margin: '20px',
+    };
+
+    let buttonStyle = {
+        marginBottom: '20px',
+    }
+
     return (
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-        <Field
-          label="Title For Recipe"
-          name="title"
-          component={this.renderField}
-        />
-        <Field
-          label="Categories"
-          name="categories"
-          component={this.renderField}
-        />
-        <Field
-          label="Recipe Content"
-          name="content"
-          component={this.renderField}
-        />
-        <button type="submit" className="btn btn-primary">Submit</button>
-        <Link to="/" className="btn btn-danger">Cancel</Link>
-      </form>
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))} style={formstyle}>
+            <h3>New Recipe</h3>
+            <Field
+                label="Title For Recipe"
+                name="title"
+                component={this.renderField}
+            />
+            <Field
+                label="Categories"
+                name="categories"
+                component={this.renderField}
+            />
+            <Field
+                label="Recipe Content"
+                name="content"
+                component={this.renderField}
+            />
+            <RaisedButton
+                type="submit"
+                primary={true}
+                style={buttonStyle}>
+                    Submit
+            </RaisedButton>
+            <Link to="/">
+                <RaisedButton>Cancel</RaisedButton>
+            </Link>
+        </form>
     );
   }
 }

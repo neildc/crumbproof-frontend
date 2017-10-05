@@ -2,8 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchRecipe, deleteRecipe } from "../actions";
+import {
+  Step,
+  Stepper,
+  StepLabel,
+  StepContent,
+} from 'material-ui/Stepper';
 
 class RecipesShow extends Component {
+
+  state = {
+    stepIndex: 0,
+  };
+
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.fetchRecipe(id);
@@ -19,12 +30,14 @@ class RecipesShow extends Component {
 
   render() {
     const { recipe } = this.props;
+    const {stepIndex} = this.state;
 
     if (!recipe) {
       return <div>Loading...</div>;
     }
 
     return (
+
       <div>
         <Link to="/">Back To Index</Link>
         <button
@@ -33,9 +46,51 @@ class RecipesShow extends Component {
         >
           Delete Recipe
         </button>
-        <h3>{recipe.title}</h3>
-        <h6>Categories: {recipe.categories}</h6>
+        <h3>{recipe.name}</h3>
+        <p>Prep time: {recipe.prep_time} mins</p>
+        <p>Bake time: {recipe.bake_time} mins</p>
+        <p>Oven Temperature: {recipe.oven_temperature}°C</p>
+        <p>Yields {recipe.yield_count} {recipe.yield_type}</p>
         <p>{recipe.content}</p>
+        <Stepper linear={true} orientation="vertical">
+
+            <Step active={true}>
+                <StepLabel active={true} onClick={() => this.setState({stepIndex: 1})}>
+                    Step 1
+                </StepLabel>
+                <StepContent active={true}>
+                <p>
+                    For each ad campaign that you create, you can control how much
+                    you're willing to spend on clicks and conversions, which networks
+                    and geographical locations you want your ads to show on, and more.
+                </p>
+                </StepContent>
+            </Step>
+            <Step >
+                <StepLabel active={true} onClick={() => this.setState({stepIndex: 2})}>
+                    Step 2
+                </StepLabel>
+                <StepContent active={true}>
+                <p>
+                    For each ad campaign that you create, you can control how much
+                    you're willing to spend on clicks and conversions, which networks
+                    and geographical locations you want your ads to show on, and more.
+                </p>
+                </StepContent>
+            </Step>
+            <Step >
+                <StepLabel active={true} onClick={() => this.setState({stepIndex: 2})}>
+                    Step 3
+                </StepLabel>
+                <StepContent active={true}>
+                <p>
+                    For each ad campaign that you create, you can control how much
+                    you're willing to spend on clicks and conversions, which networks
+                    and geographical locations you want your ads to show on, and more.
+                </p>
+                </StepContent>
+            </Step>
+        </Stepper>
       </div>
     );
   }

@@ -3,36 +3,48 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchRecipes } from "../actions";
+import {List, ListItem} from 'material-ui/List';
+import ContentSend from 'material-ui/svg-icons/content/send';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import Subheader from 'material-ui/Subheader';
+
+
 
 class RecipesIndex extends Component {
   componentDidMount() {
-    this.pqjwerops.fetchRecipes();
+    this.props.fetchRecipes();
   }
 
   renderRecipes() {
     return _.map(this.props.recipes, recipe => {
       return (
-        <li className="list-group-item" key={recipe.id}>
-          <Link to={`/recipes/${recipe.id}`}>
-            {recipe.title}
-          </Link>
-        </li>
+        <ListItem
+          primaryText={recipe.name}
+          leftIcon={<ContentSend/>}
+          containerElement={
+            <Link to={`/recipes/${recipe.id}`} />
+          }>
+        </ListItem>
       );
     });
   }
 
   render() {
     return (
+
       <div>
-        <div className="text-xs-right">
-          <Link className="btn btn-primary" to="/recipes/new">
-            Add a Recipe
-          </Link>
-        </div>
-        <h3>Recipes</h3>
-        <ul className="list-group">
+        <Subheader>Recipes</Subheader>
+        <List>
           {this.renderRecipes()}
-        </ul>
+        </List>
+        <div className="text-xs-right">
+            <FloatingActionButton>
+                <Link to="/recipes/new">
+                    <ContentAdd />
+                </Link>
+            </FloatingActionButton>
+        </div>
       </div>
     );
   }
