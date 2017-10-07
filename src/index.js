@@ -11,7 +11,6 @@ import crumbproofTheme from './theme'
 import AppBar from 'material-ui/AppBar';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
-//import 'typeface-roboto';
 
 
 import reducers from "./reducers";
