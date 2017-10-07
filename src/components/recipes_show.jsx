@@ -52,9 +52,8 @@ class RecipesShow extends Component {
     }
 
     return (
-      <CP_Card title={recipe.name}>
+      <CP_Card title={recipe.name} titleChildren={<Link to="/">Back To Index</Link>}>
         <div>
-          <Link to="/">Back To Index</Link>
           <RaisedButton
             label="Delete Recipe"
             icon={<DeleteIcon/>}
