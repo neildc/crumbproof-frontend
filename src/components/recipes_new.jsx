@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm , FieldArray } from "redux-form";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createRecipe } from "../actions";
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-
+import CP_Card from './crumbproof_card.jsx'
+import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui/svg-icons/content/remove-circle'
 
 
 class RecipesNew extends Component {
@@ -25,6 +27,71 @@ class RecipesNew extends Component {
     );
   }
 
+  renderIngredients = ({ fields }) => (
+    <ul>
+      <li>
+        <RaisedButton type="RaisedButton" onClick={() => fields.push({})}>Add Ingredient</RaisedButton>
+      </li>
+      {fields.map((ingredient, index) =>
+        <li key={index}>
+          <div style={{display:"flex", flexDirection:"row"}}>
+            <h4>Ingredient #{index + 1}</h4>
+            <IconButton
+              tooltip="Remove ingredient"
+              style={{marginLeft:"10px"}}
+              onClick={() => fields.remove(index)}>
+              <DeleteIcon/>
+            </IconButton>
+          </div>
+          <Field
+            label="Ingredient"
+            name={`${ingredient}.name`}
+            type="text"
+            component={this.renderField}
+            />
+          <Field
+            label="Quantity"
+            name={`${ingredient}.quantity`}
+            type="text"
+            component={this.renderField}
+            />
+          <Field
+            label="Unit"
+            name={`${ingredient}.unit`}
+            type="text"
+            component={this.renderField}
+            />
+        </li>
+      )}
+    </ul>
+  )
+
+  renderSteps= ({ fields }) => (
+    <ul>
+      <li>
+        <RaisedButton type="button" onClick={() => fields.push({})}>Add Step</RaisedButton>
+      </li>
+      {fields.map((step, index) =>
+        <li key={index}>
+          <div style={{display:"flex", flexDirection:"row"}}>
+            <Field
+              label={`Step ${index + 1}`}
+              name={`${step}.content`}
+              type="text"
+              component={this.renderField}
+              />
+            <IconButton
+              tooltip="Remove step"
+              style={{marginLeft:"10px"}}
+              onClick={() => fields.remove(index)}>
+              <DeleteIcon/>
+            </IconButton>
+          </div>
+        </li>
+      )}
+    </ul>
+  )
+
   onSubmit(values) {
     this.props.createRecipe(values, () => {
       this.props.history.push("/");
@@ -43,34 +110,65 @@ class RecipesNew extends Component {
         marginBottom: '20px',
     }
 
+   const number = value => value && isNaN(Number(value)) ? 'Must be a number' : undefined
+   const required = value => value ? undefined : 'Required'
+
     return (
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))} style={formstyle}>
-            <Field
-                label="Title For Recipe"
-                name="title"
-                component={this.renderField}
-            />
-            <Field
-                label="Categories"
-                name="categories"
-                component={this.renderField}
-            />
-            <Field
-                label="Recipe Content"
-                name="content"
-                component={this.renderField}
-            />
-            <RaisedButton
-                type="submit"
-                primary={true}
-                style={buttonStyle}>
-                    Submit
-            </RaisedButton>
-            <Link to="/">
-                <RaisedButton>Cancel</RaisedButton>
-            </Link>
-        </form>
         <CP_Card title={"New Recipe"}>
+        <form
+            onSubmit={handleSubmit(this.onSubmit.bind(this))}
+            style={formstyle}>
+
+                <Field
+                    label="Name For Recipe"
+                    name="name"
+                    component={this.renderField}
+                    validate={[ required ]}
+                />
+                <Field
+                    label="Prep Time (minutes)"
+                    name="prep_time"
+                    component={this.renderField}
+                    validate={[ required, number ]}
+                />
+                <Field
+                    label="Bake Time (minutes)"
+                    name="bake_time"
+                    component={this.renderField}
+                    validate={[ required, number ]}
+                />
+                <Field
+                    label="Oven Temperature (°C)"
+                    name="oven_temperature"
+                    component={this.renderField}
+                    validate={[ required, number ]}
+                />
+                <Field
+                    label="Yield Count"
+                    name="yield_count"
+                    component={this.renderField}
+                    validate={[ required, number ]}
+                />
+                <Field
+                    label="Yield Type"
+                    name="yield_type"
+                    component={this.renderField}
+                    validate={[ required ]}
+                />
+
+                <FieldArray name="ingredients" component={this.renderIngredients}/>
+                <FieldArray name="steps" component={this.renderSteps}/>
+
+                <RaisedButton
+                    type="submit"
+                    primary={true}
+                    style={buttonStyle}>
+                        Submit
+                </RaisedButton>
+                <Link to="/">
+                    <RaisedButton>Cancel</RaisedButton>
+                </Link>
+            </form>
         </CP_Card>
     );
   }
@@ -81,14 +179,8 @@ function validate(values) {
   const errors = {};
 
   // Validate the inputs from 'values'
-  if (!values.title) {
-    errors.title = "Enter a title";
-  }
-  if (!values.categories) {
-    errors.categories = "Enter some categories";
-  }
-  if (!values.content) {
-    errors.content = "Enter some content please";
+  if (!values.name) {
+    errors.name = "Enter a name";
   }
 
   // If errors is empty, the form is fine to submit

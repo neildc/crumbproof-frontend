@@ -1,4 +1,5 @@
 import axios from "axios";
+import _ from "lodash";
 
 export const FETCH_RECIPES = "fetch_recipes";
 export const FETCH_RECIPE = "fetch_recipe";
@@ -17,6 +18,12 @@ export function fetchRecipes() {
 }
 
 export function createRecipe(values, callback) {
+
+  // We need some way to keep track of the order of the steps in the db
+  for (var i=0; i < values.steps.length; i++) {
+    values.steps[i].stepNumber = i+1;
+  }
+
   const request = axios
     .post(`${ROOT_URL}/recipes/`, values)
     .then(() => callback());
