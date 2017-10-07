@@ -48,18 +48,21 @@ class RecipesNew extends Component {
             name={`${ingredient}.name`}
             type="text"
             component={this.renderField}
+            validate={[ required ]}
             />
           <Field
             label="Quantity"
             name={`${ingredient}.quantity`}
             type="text"
             component={this.renderField}
+            validate={[ required, isNumber ]}
             />
           <Field
             label="Unit"
             name={`${ingredient}.unit`}
             type="text"
             component={this.renderField}
+            validate={[ required ]}
             />
         </li>
       )}
@@ -110,8 +113,6 @@ class RecipesNew extends Component {
         marginBottom: '20px',
     }
 
-   const number = value => value && isNaN(Number(value)) ? 'Must be a number' : undefined
-   const required = value => value ? undefined : 'Required'
 
     return (
         <CP_Card title={"New Recipe"}>
@@ -129,25 +130,25 @@ class RecipesNew extends Component {
                     label="Prep Time (minutes)"
                     name="prep_time"
                     component={this.renderField}
-                    validate={[ required, number ]}
+                    validate={[ required, isNumber ]}
                 />
                 <Field
                     label="Bake Time (minutes)"
                     name="bake_time"
                     component={this.renderField}
-                    validate={[ required, number ]}
+                    validate={[ required, isNumber ]}
                 />
                 <Field
                     label="Oven Temperature (°C)"
                     name="oven_temperature"
                     component={this.renderField}
-                    validate={[ required, number ]}
+                    validate={[ required, isNumber ]}
                 />
                 <Field
                     label="Yield Count"
                     name="yield_count"
                     component={this.renderField}
-                    validate={[ required, number ]}
+                    validate={[ required, isNumber ]}
                 />
                 <Field
                     label="Yield Type"
