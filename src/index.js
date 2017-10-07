@@ -30,12 +30,11 @@ ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider muiTheme={crumbproofTheme}>
         <BrowserRouter>
-        <div>
-        <div style={{marginBottom:"50px"}}>
-            <AppBar title="crumb proof" showMenuIconButton={false} />
-        </div>
-        <div className="container">
-        <Card containerStyle={{padding:'30px'}}>
+        <div className="bg">
+        <AppBar title="crumb proof" showMenuIconButton={false} style={{position:"fixed"}} />
+        <div style={{ paddingTop: 50 + 50}}> </div>
+        <div className="container fill">
+        <Card containerStyle={{marginBottom:"50px"}}>
             <Switch>
             <Route path="/recipes/new" component={RecipesNew} />
             <Route path="/recipes/:id" component={RecipesShow} />
