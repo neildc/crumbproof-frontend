@@ -8,6 +8,7 @@ import ContentSend from 'material-ui/svg-icons/content/send';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import Subheader from 'material-ui/Subheader';
+import CP_Card from './crumbproof_card.jsx';
 
 
 
@@ -20,6 +21,7 @@ class RecipesIndex extends Component {
     return _.map(this.props.recipes, recipe => {
       return (
         <ListItem
+          key={recipe.id}
           primaryText={recipe.name}
           leftIcon={<ContentSend/>}
           containerElement={
@@ -32,20 +34,18 @@ class RecipesIndex extends Component {
 
   render() {
     return (
-
-      <div>
-        <Subheader>Recipes</Subheader>
-        <List>
-          {this.renderRecipes()}
-        </List>
-        <div className="text-xs-right">
-            <FloatingActionButton>
-                <Link to="/recipes/new">
-                    <ContentAdd />
-                </Link>
-            </FloatingActionButton>
-        </div>
-      </div>
+        <CP_Card title="Recipes">
+            <List>
+            {this.renderRecipes()}
+            </List>
+            <div className="text-xs-right">
+                <FloatingActionButton>
+                    <Link to="/recipes/new">
+                        <ContentAdd />
+                    </Link>
+                </FloatingActionButton>
+            </div>
+        </CP_Card>
     );
   }
 }
