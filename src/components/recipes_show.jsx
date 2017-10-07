@@ -12,10 +12,6 @@ import CP_Card from "./crumbproof_card.jsx";
 
 class RecipesShow extends Component {
 
-  state = {
-    stepIndex: 0,
-  };
-
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.fetchRecipe(id);
@@ -29,70 +25,49 @@ class RecipesShow extends Component {
     });
   }
 
+  renderSteps() {
+    return _.map(this.props.recipe.instructions, instruction => {
+      return (
+        <Step key={instruction.step_number} active={true} >
+          <StepLabel active={true} >
+            Step {instruction.step_number}
+          </StepLabel>
+          <StepContent active={true}>
+            <p>
+              {instruction.content}
+            </p>
+          </StepContent>
+        </Step>
+      );
+    });
+  };
+
   render() {
     const { recipe } = this.props;
-    const {stepIndex} = this.state;
 
     if (!recipe) {
       return <div>Loading...</div>;
     }
 
     return (
-
-      <div>
-        <Link to="/">Back To Index</Link>
-        <button
-          className="btn btn-danger pull-xs-right"
-          onClick={this.onDeleteClick.bind(this)}
-        >
-          Delete Recipe
-        </button>
-        <p>Prep time: {recipe.prep_time} mins</p>
-        <p>Bake time: {recipe.bake_time} mins</p>
-        <p>Oven Temperature: {recipe.oven_temperature}°C</p>
-        <p>Yields {recipe.yield_count} {recipe.yield_type}</p>
-        <p>{recipe.content}</p>
-        <Stepper linear={true} orientation="vertical">
-
-            <Step active={true}>
-                <StepLabel active={true} onClick={() => this.setState({stepIndex: 1})}>
-                    Step 1
-                </StepLabel>
-                <StepContent active={true}>
-                <p>
-                    For each ad campaign that you create, you can control how much
-                    you're willing to spend on clicks and conversions, which networks
-                    and geographical locations you want your ads to show on, and more.
-                </p>
-                </StepContent>
-            </Step>
-            <Step >
-                <StepLabel active={true} onClick={() => this.setState({stepIndex: 2})}>
-                    Step 2
-                </StepLabel>
-                <StepContent active={true}>
-                <p>
-                    For each ad campaign that you create, you can control how much
-                    you're willing to spend on clicks and conversions, which networks
-                    and geographical locations you want your ads to show on, and more.
-                </p>
-                </StepContent>
-            </Step>
-            <Step >
-                <StepLabel active={true} onClick={() => this.setState({stepIndex: 2})}>
-                    Step 3
-                </StepLabel>
-                <StepContent active={true}>
-                <p>
-                    For each ad campaign that you create, you can control how much
-                    you're willing to spend on clicks and conversions, which networks
-                    and geographical locations you want your ads to show on, and more.
-                </p>
-                </StepContent>
-            </Step>
-        </Stepper>
-      </div>
       <CP_Card title={recipe.name}>
+        <div>
+          <Link to="/">Back To Index</Link>
+          <button
+            className="btn btn-danger pull-xs-right"
+            onClick={this.onDeleteClick.bind(this)}
+          >
+            Delete Recipe
+          </button>
+          <p>Prep time: {recipe.prep_time} mins</p>
+          <p>Bake time: {recipe.bake_time} mins</p>
+          <p>Oven Temperature: {recipe.oven_temperature}°C</p>
+          <p>Yields {recipe.yield_count} {recipe.yield_type}</p>
+          <p>{recipe.content}</p>
+          <Stepper linear={true} orientation="vertical">
+            {this.renderSteps()}
+          </Stepper>
+        </div>
       </CP_Card>
     );
   }
