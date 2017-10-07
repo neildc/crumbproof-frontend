@@ -8,6 +8,7 @@ import TextField from 'material-ui/TextField';
 import CP_Card from './crumbproof_card.jsx'
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui/svg-icons/content/remove-circle'
+import {required, isNumber } from "../validators.js"
 
 
 class RecipesNew extends Component {
@@ -53,14 +54,13 @@ class RecipesNew extends Component {
           <Field
             label="Quantity"
             name={`${ingredient}.quantity`}
-            type="text"
             component={this.renderField}
+            parse={value => Number(value)}
             validate={[ required, isNumber ]}
             />
           <Field
             label="Unit"
             name={`${ingredient}.unit`}
-            type="text"
             component={this.renderField}
             validate={[ required ]}
             />
@@ -113,7 +113,6 @@ class RecipesNew extends Component {
         marginBottom: '20px',
     }
 
-
     return (
         <CP_Card title={"New Recipe"}>
         <form
@@ -129,6 +128,7 @@ class RecipesNew extends Component {
                 <Field
                     label="Prep Time (minutes)"
                     name="prep_time"
+                    parse={value => Number(value)}
                     component={this.renderField}
                     validate={[ required, isNumber ]}
                 />
@@ -136,18 +136,21 @@ class RecipesNew extends Component {
                     label="Bake Time (minutes)"
                     name="bake_time"
                     component={this.renderField}
+                    parse={value => Number(value)}
                     validate={[ required, isNumber ]}
                 />
                 <Field
                     label="Oven Temperature (°C)"
                     name="oven_temperature"
                     component={this.renderField}
+                    parse={value => Number(value)}
                     validate={[ required, isNumber ]}
                 />
                 <Field
                     label="Yield Count"
                     name="yield_count"
                     component={this.renderField}
+                    parse={value => Number(value)}
                     validate={[ required, isNumber ]}
                 />
                 <Field
