@@ -18,8 +18,11 @@
     "babel-preset-react": "^6.1.18",
     "chai": "^3.5.0",
     "chai-jquery": "^2.0.0",
+    "file-loader": "^1.1.5",
     "jquery": "^2.2.1",
+    "jscodeshift": "^0.3.32",
     "jsdom": "^8.1.0",
+    "material-ui-codemod": "^1.0.0-beta.11",
     "mocha": "^2.4.5",
     "react-addons-test-utils": "^0.14.7",
     "webpack": "^1.12.9",
@@ -29,13 +32,22 @@
     "axios": "^0.16.1",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-1": "^6.1.18",
+    "bootstrap": "^3.3.7",
     "lodash": "^3.10.1",
-    "react": "^0.14.3",
-    "react-dom": "^0.14.3",
-    "react-redux": "4.3.0",
+    "material-ui": "^0.19.3",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
     "react-router-dom": "^4.0.0",
     "redux": "^3.0.4",
+    "redux-devtools-extension": "^2.13.2",
     "redux-form": "^6.6.3",
-    "redux-promise": "^0.5.3"
+    "redux-promise": "^0.5.3",
+    "typeface-roboto": "^0.0.35"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   }
 }

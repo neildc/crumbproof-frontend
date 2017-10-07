@@ -1,3 +1,26 @@
 form a {
-  margin-left: 5px;
+  margin: 10px;
+}
+html{
+    background-color: #4E342E;
+}
+
+body {
+    position: absoloute;
+    height: 100% !important;
+    min-height: 100% !important;
+}
+
+/* source : https://css-tricks.com/perfect-full-page-background-image/ */
+.bg {
+    background: url("../res/breadbg.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-width: 100%;
+}
+
+.fill {
+    min-height: 100vh !important;
 }

@@ -1,15 +1,15 @@
 import axios from "axios";
+import _ from "lodash";
 
 export const FETCH_RECIPES = "fetch_recipes";
 export const FETCH_RECIPE = "fetch_recipe";
 export const CREATE_RECIPE = "create_recipe";
 export const DELETE_RECIPE = "delete_recipe";
 
-const ROOT_URL = "http://reduxblog.herokuapp.com/api";
-const API_KEY = "?key=PAPERCLIP1234";
+const ROOT_URL = "http://localhost:8000";
 
 export function fetchRecipes() {
-  const request = axios.get(`${ROOT_URL}/recipes${API_KEY}`);
+  const request = axios.get(`${ROOT_URL}/recipes/`);
 
   return {
     type: FETCH_RECIPES,
@@ -18,8 +18,14 @@ export function fetchRecipes() {
 }
 
 export function createRecipe(values, callback) {
+
+  // We need some way to keep track of the order of the steps in the db
+  for (var i=0; i < values.steps.length; i++) {
+    values.steps[i].stepNumber = i+1;
+  }
+
   const request = axios
-    .recipe(`${ROOT_URL}/recipes${API_KEY}`, values)
+    .post(`${ROOT_URL}/recipes/`, values)
     .then(() => callback());
 
   return {
@@ -29,7 +35,7 @@ export function createRecipe(values, callback) {
 }
 
 export function fetchRecipe(id) {
-  const request = axios.get(`${ROOT_URL}/recipes/${id}${API_KEY}`);
+  const request = axios.get(`${ROOT_URL}/recipes/${id}/`);
 
   return {
     type: FETCH_RECIPE,
@@ -39,7 +45,7 @@ export function fetchRecipe(id) {
 
 export function deleteRecipe(id, callback) {
   const request = axios
-    .delete(`${ROOT_URL}/recipes/${id}${API_KEY}`)
+    .delete(`${ROOT_URL}/recipes/${id}/`)
     .then(() => callback());
 
   return {

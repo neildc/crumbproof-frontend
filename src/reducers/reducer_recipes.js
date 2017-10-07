@@ -8,7 +8,7 @@ export default function(state = {}, action) {
     case FETCH_RECIPE:
       return { ...state, [action.payload.data.id]: action.payload.data };
     case FETCH_RECIPES:
-      return _.mapKeys(action.payload.data, "id");
+      return _.mapKeys(action.payload.data.results, "id");
     default:
       return state;
   }
