@@ -9,6 +9,8 @@ import {
   StepContent,
 } from 'material-ui/Stepper';
 import CP_Card from "./crumbproof_card.jsx";
+import RaisedButton from 'material-ui/RaisedButton';
+import DeleteIcon from 'material-ui/svg-icons/action/delete';
 
 class RecipesShow extends Component {
 
@@ -53,12 +55,14 @@ class RecipesShow extends Component {
       <CP_Card title={recipe.name}>
         <div>
           <Link to="/">Back To Index</Link>
-          <button
-            className="btn btn-danger pull-xs-right"
+          <RaisedButton
+            label="Delete Recipe"
+            icon={<DeleteIcon/>}
+            backgroundColor={"red"}
+            labelColor={"white"}
             onClick={this.onDeleteClick.bind(this)}
-          >
-            Delete Recipe
-          </button>
+            style={{float: "right"}}
+          />
           <p>Prep time: {recipe.prep_time} mins</p>
           <p>Bake time: {recipe.bake_time} mins</p>
           <p>Oven Temperature: {recipe.oven_temperature}°C</p>
