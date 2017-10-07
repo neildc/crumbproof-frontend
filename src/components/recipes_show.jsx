@@ -8,6 +8,7 @@ import {
   StepLabel,
   StepContent,
 } from 'material-ui/Stepper';
+import CP_Card from "./crumbproof_card.jsx";
 
 class RecipesShow extends Component {
 
@@ -46,7 +47,6 @@ class RecipesShow extends Component {
         >
           Delete Recipe
         </button>
-        <h3>{recipe.name}</h3>
         <p>Prep time: {recipe.prep_time} mins</p>
         <p>Bake time: {recipe.bake_time} mins</p>
         <p>Oven Temperature: {recipe.oven_temperature}°C</p>
@@ -92,6 +92,8 @@ class RecipesShow extends Component {
             </Step>
         </Stepper>
       </div>
+      <CP_Card title={recipe.name}>
+      </CP_Card>
     );
   }
 }

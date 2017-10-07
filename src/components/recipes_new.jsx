@@ -45,7 +45,6 @@ class RecipesNew extends Component {
 
     return (
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))} style={formstyle}>
-            <h3>New Recipe</h3>
             <Field
                 label="Title For Recipe"
                 name="title"
@@ -71,6 +70,8 @@ class RecipesNew extends Component {
                 <RaisedButton>Cancel</RaisedButton>
             </Link>
         </form>
+        <CP_Card title={"New Recipe"}>
+        </CP_Card>
     );
   }
 }
