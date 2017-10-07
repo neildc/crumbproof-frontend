@@ -158,7 +158,7 @@ class RecipesNew extends Component {
                 />
 
                 <FieldArray name="ingredients" component={this.renderIngredients}/>
-                <FieldArray name="steps" component={this.renderSteps}/>
+                <FieldArray name="instructions" component={this.renderSteps}/>
 
                 <RaisedButton
                     type="submit"
