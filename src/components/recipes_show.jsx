@@ -27,6 +27,16 @@ class RecipesShow extends Component {
     });
   }
 
+  renderIngredients() {
+    return _.map(this.props.recipe.ingredients, i => {
+      return (
+        <li key={i.name}>
+          {i.quantity} {i.unit} {i.name}
+        </li>
+      );
+    });
+  };
+
   renderSteps() {
     return _.map(this.props.recipe.instructions, instruction => {
       return (
@@ -62,11 +72,18 @@ class RecipesShow extends Component {
             onClick={this.onDeleteClick.bind(this)}
             style={{float: "right"}}
           />
+          <p>Created by: {recipe.user_id}</p>
           <p>Prep time: {recipe.prep_time} mins</p>
           <p>Bake time: {recipe.bake_time} mins</p>
           <p>Oven Temperature: {recipe.oven_temperature}°C</p>
           <p>Yields {recipe.yield_count} {recipe.yield_type}</p>
-          <p>{recipe.content}</p>
+
+          <h3>Ingredients</h3>
+          <ul>
+            {this.renderIngredients()}
+          </ul>
+
+          <h3>Instructions</h3>
           <Stepper linear={true} orientation="vertical">
             {this.renderSteps()}
           </Stepper>
