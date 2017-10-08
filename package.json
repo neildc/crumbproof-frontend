@@ -32,7 +32,6 @@
     "axios": "^0.16.1",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-1": "^6.1.18",
-    "bootstrap": "^3.3.7",
     "lodash": "^3.10.1",
     "material-ui": "^0.19.3",
     "react": "^16.0.0",

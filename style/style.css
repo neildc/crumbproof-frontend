@@ -1,14 +1,5 @@
-form a {
-  margin: 10px;
-}
 html{
     background-color: #4E342E;
-}
-
-body {
-    position: absoloute;
-    height: 100% !important;
-    min-height: 100% !important;
 }
 
 /* source : https://css-tricks.com/perfect-full-page-background-image/ */
@@ -21,6 +12,31 @@ body {
     min-width: 100%;
 }
 
-.fill {
-    min-height: 100vh !important;
+.container {
+   display: grid;
+   justify-items: stretch;
+   height: 100vh;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 50px 20px 50px auto auto;
+    grid-template-areas:
+        "appbar appbar appbar appbar appbar"
+        "toolbar toolbar toolbar toolbar toolbar"
+        ". . . . . "
+        ". . . . . "
+        ". card card card ."
+        ". . . . . ";
+}
+
+.appBar {
+    grid-area: appbar;
+}
+
+.toolbar {
+    grid-area: toolbar;
+    max-height: 35px;
+
+}
+
+.card {
+    grid-area: card;
 }

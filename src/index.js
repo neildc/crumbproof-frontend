@@ -27,24 +27,23 @@ ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider muiTheme={crumbproofTheme}>
         <BrowserRouter>
-        <div>
-        <AppBar
-          title="crumb proof"
-          style={{position:"fixed"}}
-          iconElementRight={<FlatButton containerElement={<Link to="/login"/>} label={"Login"} />}
-        />
-        <div className="bg">
-          <div style={{ paddingTop: 50 + 50}}> </div>
-          <div className="container fill">
-            <Switch>
-              <Route path="/recipes/new" component={RecipesNew} />
-              <Route path="/recipes/:id" component={RecipesShow} />
-              <Route path="/login" component={LoginIndex} />
-              <Route path="/" component={RecipesIndex} />
-            </Switch>
+          <div className="container bg">
+            <AppBar
+              className="appBar"
+              title="crumb proof"
+              showMenuIconButton={false}
+              iconElementRight={<FlatButton containerElement={<Link to="/login"/>} label={"Login"} />}
+            />
+            <div className="card">
+              <Switch>
+                <Route path="/recipes/new" component={RecipesNew} />
+                <Route path="/recipes/:id" component={RecipesShow} />
+                <Route path="/login" component={LoginIndex} />
+                <Route path="/recipes" component={RecipesIndex} />
+                <Route path="/" component={RecipesIndex} />
+              </Switch>
+            </div>
           </div>
-        </div>
-        </div>
         </BrowserRouter>
     </MuiThemeProvider>
   </Provider>,
