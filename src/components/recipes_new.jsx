@@ -30,9 +30,6 @@ class RecipesNew extends Component {
 
   renderIngredients = ({ fields }) => (
     <ul>
-      <li>
-        <RaisedButton type="RaisedButton" onClick={() => fields.push({})}>Add Ingredient</RaisedButton>
-      </li>
       {fields.map((ingredient, index) =>
         <li key={index}>
           <div style={{display:"flex", flexDirection:"row"}}>
@@ -66,14 +63,12 @@ class RecipesNew extends Component {
             />
         </li>
       )}
+      <RaisedButton type="RaisedButton" onClick={() => fields.push({})} label="Add Ingredient"/>
     </ul>
   )
 
   renderSteps= ({ fields }) => (
     <ul>
-      <li>
-        <RaisedButton type="button" onClick={() => fields.push({})}>Add Step</RaisedButton>
-      </li>
       {fields.map((step, index) =>
         <li key={index}>
           <div style={{display:"flex", flexDirection:"row"}}>
@@ -92,6 +87,7 @@ class RecipesNew extends Component {
           </div>
         </li>
       )}
+      <RaisedButton type="button" onClick={() => fields.push({})} label="Add Step"/>
     </ul>
   )
 
