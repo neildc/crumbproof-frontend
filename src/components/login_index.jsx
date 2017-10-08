@@ -41,7 +41,8 @@ class LoginIndex extends Component {
 
       return(
           <Card style={{width:"50%", height:"50%", margin:"0 auto", textAlign:"center", }}>
-            <form onSubmit={handleSubmit(this.onSubmit.bind(this))} >
+          <CardTitle title="Login" style={{textAlign:"Left",backgroundColor:"#eee"}}/>
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))} style={{padding:"50px"}}>
 
                 <Field
                     label="Username"
