@@ -9,17 +9,15 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import crumbproofTheme from './theme'
 import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-
-
 
 import reducers from "./reducers";
 import LoginIndex from "./components/login_index";
 import RecipesIndex from "./components/recipes_index";
 import RecipesNew from "./components/recipes_new";
 import RecipesShow from "./components/recipes_show";
-
-const createStoreWithMiddleware = composeWithDevTools(applyMiddleware(promise))(createStore);
+import { Link } from "react-router-dom";
 
 const store = createStore(reducers, composeWithDevTools(
   applyMiddleware(promise),
@@ -29,18 +27,22 @@ ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider muiTheme={crumbproofTheme}>
         <BrowserRouter>
+        <div>
+        <AppBar
+          title="crumb proof"
+          style={{position:"fixed"}}
+          iconElementRight={<FlatButton containerElement={<Link to="/login"/>} label={"Login"} />}
+        />
         <div className="bg">
-        <AppBar title="crumb proof" showMenuIconButton={false} style={{position:"fixed"}} />
-        <div style={{ paddingTop: 50 + 50}}> </div>
-        <div className="container fill">
-        <Card containerStyle={{marginBottom:"50px"}}>
+          <div style={{ paddingTop: 50 + 50}}> </div>
+          <div className="container fill">
             <Switch>
-            <Route path="/recipes/new" component={RecipesNew} />
-            <Route path="/recipes/:id" component={RecipesShow} />
-            <Route path="/login" component={LoginIndex} />
-            <Route path="/" component={RecipesIndex} />
+              <Route path="/recipes/new" component={RecipesNew} />
+              <Route path="/recipes/:id" component={RecipesShow} />
+              <Route path="/login" component={LoginIndex} />
+              <Route path="/" component={RecipesIndex} />
             </Switch>
-        </Card>
+          </div>
         </div>
         </div>
         </BrowserRouter>
