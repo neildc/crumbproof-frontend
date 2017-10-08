@@ -9,6 +9,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import crumbproofTheme from './theme'
 import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 import reducers from "./reducers";
@@ -26,13 +27,13 @@ ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider muiTheme={crumbproofTheme}>
         <BrowserRouter>
+        <div>
+        <AppBar
+          title="crumb proof"
+          style={{position:"fixed"}}
+          iconElementRight={<FlatButton containerElement={<Link to="/login"/>} label={"Login"} />}
+        />
         <div className="bg">
-          <AppBar
-            title="crumb proof"
-            showMenuIconButton={false}
-            style={{position:"fixed"}}
-            iconElementRight={<Link to="/login">Login</Link>}
-          />
           <div style={{ paddingTop: 50 + 50}}> </div>
           <div className="container fill">
             <Switch>
@@ -42,6 +43,7 @@ ReactDOM.render(
               <Route path="/" component={RecipesIndex} />
             </Switch>
           </div>
+        </div>
         </div>
         </BrowserRouter>
     </MuiThemeProvider>
