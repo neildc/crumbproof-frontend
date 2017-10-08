@@ -166,12 +166,10 @@ class RecipesNew extends Component {
                 <RaisedButton
                     type="submit"
                     primary={true}
+                    label="Submit"
                     style={buttonStyle}>
-                        Submit
                 </RaisedButton>
-                <Link to="/">
-                    <RaisedButton>Cancel</RaisedButton>
-                </Link>
+                <RaisedButton containerElement={<Link to="/"/>} label="Cancel"/>
             </form>
         </CP_Card>
     );

@@ -38,11 +38,9 @@ class RecipesIndex extends Component {
             <List>
             {this.renderRecipes()}
             </List>
-            <div className="text-xs-right">
-                <FloatingActionButton>
-                    <Link to="/recipes/new">
-                        <ContentAdd />
-                    </Link>
+            <div style={{float:"right"}}>
+                <FloatingActionButton containerElement={<Link to="/recipes/new"/>}>
+                    <ContentAdd/>
                 </FloatingActionButton>
             </div>
         </CP_Card>
