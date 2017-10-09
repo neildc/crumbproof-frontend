@@ -219,7 +219,7 @@ class RecipesNew extends Component {
             onSubmit={handleSubmit(this.onSubmit.bind(this))}
             style={{margin:"20px"}}
           >
-            <p>{this.getStepContent(stepIndex)}</p>
+              {this.getStepContent(stepIndex)}
 
               <div style={{marginTop: 12}}>
                 <FlatButton
