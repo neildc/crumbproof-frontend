@@ -101,19 +101,12 @@ class RecipesNew extends Component {
   render() {
     const { handleSubmit } = this.props;
 
-    let formstyle = {
-        margin: '20px',
-    };
-
-    let buttonStyle = {
-        marginBottom: '20px',
-    }
 
     return (
         <CP_Card title={"New Recipe"}>
         <form
             onSubmit={handleSubmit(this.onSubmit.bind(this))}
-            style={formstyle}>
+            style={{margin:"20px"}}>
 
                 <Field
                     label="Name For Recipe"
@@ -163,7 +156,7 @@ class RecipesNew extends Component {
                     type="submit"
                     primary={true}
                     label="Submit"
-                    style={buttonStyle}>
+                    style={{margin:"20px"}}>
                 </RaisedButton>
                 <RaisedButton containerElement={<Link to="/"/>} label="Cancel"/>
             </form>
