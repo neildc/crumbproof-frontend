@@ -19,6 +19,7 @@ import RecipesNew from "./components/recipes_new";
 import RecipesShow from "./components/recipes_show";
 
 import ActivityIndex from "./components/activity_index"
+import ActivityNew from "./components/activity_new"
 
 import { Link } from "react-router-dom";
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
@@ -49,6 +50,7 @@ ReactDOM.render(
                 <Route path="/recipes/new" component={RecipesNew} />
                 <Route path="/recipes/:id" component={RecipesShow} />
                 <Route path="/recipes" component={RecipesIndex} />
+                <Route path="/activity/new" component={ActivityNew} />
                 <Route path="/activity" component={ActivityIndex} />
                 <Route path="/login" component={LoginIndex} />
                 <Route path="/" component={RecipesIndex} />
