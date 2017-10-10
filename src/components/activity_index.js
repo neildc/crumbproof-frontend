@@ -10,6 +10,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import Subheader from 'material-ui/Subheader';
 import CP_Card from './crumbproof_card.jsx';
 import LinearProgress from 'material-ui/LinearProgress';
+import moment from "moment";
 
 
 class ActivityIndex extends Component {
@@ -20,11 +21,14 @@ class ActivityIndex extends Component {
   renderActivities() {
 
     return _.map(this.props.activities, activity => {
+
+      const time = moment(activity.started).fromNow();
+
       return (
         <ListItem
           key={activity.id}
           primaryText={activity.name}
-          secondaryText={`By ${activity.user_id} on ${activity.started}`}
+          secondaryText={`By ${activity.user_id}, ${time}`}
           leftIcon={<ContentSend/>}
           containerElement={
             <Link to={`/activity/${activity.id}`} />
