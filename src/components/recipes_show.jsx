@@ -8,6 +8,7 @@ import {
   StepLabel,
   StepContent,
 } from 'material-ui/Stepper';
+import LinearProgress from 'material-ui/LinearProgress';
 import CP_Card from "./crumbproof_card.jsx";
 import RaisedButton from 'material-ui/RaisedButton';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
@@ -58,7 +59,7 @@ class RecipesShow extends Component {
     const { recipe } = this.props;
 
     if (!recipe) {
-      return <div>Loading...</div>;
+      return <LinearProgress mode="indeterminate" />;
     }
 
     return (
