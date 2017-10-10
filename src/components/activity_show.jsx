@@ -13,6 +13,9 @@ import LinearProgress from 'material-ui/LinearProgress';
 import CP_Card from "./crumbproof_card.jsx";
 import RaisedButton from 'material-ui/RaisedButton';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
+import {Card, CardMedia, CardTitle} from 'material-ui/Card';
+import moment from "moment";
+
 
 class ActivityShow extends Component {
 
@@ -31,14 +34,26 @@ class ActivityShow extends Component {
 
   render() {
     const { activity } = this.props;
+    const time = moment(activity.started).fromNow();
+    const duration = moment(activity.completed).diff(moment(activity.started), 'hours');
 
     if (!activity) {
       return <LinearProgress mode="indeterminate" />;
     }
 
     return (
-      <CP_Card title={activity.name} titleChildren={<Link to="/activity">Back To Index</Link>}>
-        <div>
+      <Card >
+
+      <CardMedia overlay={
+        <CardTitle
+          title={activity.name}
+          subtitle={`By ${activity.user_id}, ${time}`}
+        />
+      }
+        style={{padding:"5px"}}>
+          <img src={activity.crumb_shot}/>
+        </CardMedia>
+        <div style={{padding:"30px"}}>
           <RaisedButton
             label="Delete Activity"
             icon={<DeleteIcon/>}
@@ -46,17 +61,16 @@ class ActivityShow extends Component {
             labelColor={"white"}
             onClick={this.onDeleteClick.bind(this)}
             style={{float: "right"}}
-          />
-          <div>
-            <img src={activity.crumb_shot}/>
-          </div>
-          <p>Activity by: {activity.user_id}</p>
-          <p>Started on: {activity.started}</p>
-          <p>In the oven: {activity.oven_start} - {activity.oven_end}</p>
-          <p>Completed: {activity.completed} mins</p>
+      />
+          <p>In the oven: {moment(activity.oven_start).format('h:mm:ss a')} {" - "}
+                          {moment(activity.oven_end).format('h:mm:ss a')}
+          </p>
+          <p>Completed: {activity.completed}</p>
+
+          <p>Total duration: {duration} hours</p>
 
         </div>
-      </CP_Card>
+      </Card>
     );
   }
 }
