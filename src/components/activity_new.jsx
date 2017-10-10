@@ -9,6 +9,7 @@ import CP_Card from './crumbproof_card.jsx'
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui/svg-icons/content/remove-circle'
 import {required, isNumber } from "../validators.js"
+import TimePicker from 'material-ui/TimePicker';
 
 class ActivityNew extends Component {
   renderField(field) {
@@ -27,9 +28,23 @@ class ActivityNew extends Component {
     );
   }
 
+  renderTimePicker = (field) => {
+    return (
+      <div style={{padding:"20px"}}>
+        {field.label}
+        <TimePicker
+          hintText={"Please enter a time"}
+          onChange={(notUsed, time) => {
+              field.input.onChange(time);
+          }}
+        />
+      </div>
+    );
+  }
+
   onSubmit(values) {
     this.props.createActivity(values, () => {
-      this.props.history.push("/");
+      this.props.history.push("/activity");
     });
   }
 
@@ -49,6 +64,32 @@ class ActivityNew extends Component {
               validate={[ required ]}
             />
 
+            <Field
+              label="Started"
+              name="started"
+              initialValues={new Date()}
+              component={this.renderTimePicker}
+              validate={[ required ]}
+            />
+
+            <Field
+              label="Completed"
+              name="completed"
+              component={this.renderTimePicker}
+              validate={[ required ]}
+            />
+            <Field
+              label="Time put into oven"
+              name="oven_start"
+              component={this.renderTimePicker}
+              validate={[ required ]}
+            />
+            <Field
+              label="Time pulled out of oven"
+              name="oven_end"
+              component={this.renderTimePicker}
+              validate={[ required ]}
+            />
             <div style={{marginTop: 12}}>
               <RaisedButton
                 label={'Submit'}
