@@ -19,10 +19,6 @@ class RecipesIndex extends Component {
 
   renderRecipes() {
 
-    if (!this.props.recipes[1]) {
-      return <LinearProgress mode="indeterminate" />;
-    }
-
     return _.map(this.props.recipes, recipe => {
       return (
         <ListItem

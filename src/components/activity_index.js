@@ -19,10 +19,6 @@ class ActivityIndex extends Component {
 
   renderActivities() {
 
-    if (!this.props.activities[1]) {
-      return <LinearProgress mode="indeterminate" />;
-    }
-
     return _.map(this.props.activities, activity => {
       return (
         <ListItem
