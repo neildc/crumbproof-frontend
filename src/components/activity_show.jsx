@@ -9,6 +9,7 @@ import {
   StepLabel,
   StepContent,
 } from 'material-ui/Stepper';
+import LinearProgress from 'material-ui/LinearProgress';
 import CP_Card from "./crumbproof_card.jsx";
 import RaisedButton from 'material-ui/RaisedButton';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
@@ -32,7 +33,7 @@ class ActivityShow extends Component {
     const { activity } = this.props;
 
     if (!activity) {
-      return <div>Loading...</div>;
+      return <LinearProgress mode="indeterminate" />;
     }
 
     return (
