@@ -47,6 +47,9 @@ class ActivityShow extends Component {
             onClick={this.onDeleteClick.bind(this)}
             style={{float: "right"}}
           />
+          <div>
+            <img src={activity.crumb_shot}/>
+          </div>
           <p>Activity by: {activity.user_id}</p>
           <p>Started on: {activity.started}</p>
           <p>In the oven: {activity.oven_start} - {activity.oven_end}</p>
