@@ -92,11 +92,6 @@ export function fetchActivities() {
 
 export function createActivity(values, callback) {
 
-  // We need some way to keep track of the order of the steps in the db
-  for (var i=0; i < values.instructions.length; i++) {
-    values.instructions[i].step_number = i+1;
-  }
-
   const request = axios
     .post(`${ROOT_URL}/activities/`, values, {
       headers: {
