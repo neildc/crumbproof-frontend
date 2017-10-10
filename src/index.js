@@ -29,6 +29,9 @@ const store = createStore(reducers, composeWithDevTools(
   applyMiddleware(promise),
 ));
 
+document.getElementById('loader').style.display = 'none';
+document.getElementById('app').style.display = 'block';
+
 ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider muiTheme={crumbproofTheme}>
