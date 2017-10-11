@@ -26,8 +26,12 @@ class ActivityShow extends Component {
 
   render() {
     const { activity } = this.props;
-    const time = moment(activity.started).fromNow();
-    const duration = moment(activity.completed).diff(moment(activity.started), 'hours');
+
+    var duration = null;
+
+    if (activity.completed && activity.started) {
+      duration = moment(activity.completed).diff(moment(activity.started), 'hours');
+    }
 
     if (!activity) {
       return <LinearProgress mode="indeterminate" />;
@@ -39,7 +43,7 @@ class ActivityShow extends Component {
       <CardMedia overlay={
         <CardTitle
           title={activity.name}
-          subtitle={`By ${activity.user_id}, ${time}`}
+          subtitle={`By ${activity.user_id}`}
         />
       }
         style={{padding:"5px"}}>
@@ -54,12 +58,21 @@ class ActivityShow extends Component {
             onClick={this.onDeleteClick.bind(this)}
             style={{float: "right"}}
       />
-          <p>In the oven: {moment(activity.oven_start).format('h:mm:ss a')} {" - "}
-                          {moment(activity.oven_end).format('h:mm:ss a')}
-          </p>
-          <p>Completed: {activity.completed}</p>
 
-          <p>Total duration: {duration} hours</p>
+          {activity.oven_start && activity.oven_end &&
+            <p>In the oven: {moment(activity.oven_start).format('h:mm:ss a')} {" - "}
+                            {moment(activity.oven_end).format('h:mm:ss a')}
+            </p>
+          }
+
+          { activity.completed &&
+            <p>Completed: {activity.completed}</p>
+          }
+
+          { duration &&
+            <p>Total duration: {duration} hours</p>
+          }
+
 
         </div>
       </Card>

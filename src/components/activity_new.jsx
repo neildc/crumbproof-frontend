@@ -97,38 +97,32 @@ class ActivityNew extends Component {
               component={this.renderField}
               validate={[ required ]}
             />
-
+            <Field
+              label="Photo of crumb"
+              name="crumb_shot"
+              component={this.renderDropzone}
+            />
             <Field
               label="Started"
               name="started"
               initialValues={new Date()}
               component={this.renderTimePicker}
-              validate={[ required ]}
             />
 
             <Field
               label="Completed"
               name="completed"
               component={this.renderTimePicker}
-              validate={[ required ]}
             />
             <Field
               label="Time put into oven"
               name="oven_start"
               component={this.renderTimePicker}
-              validate={[ required ]}
             />
             <Field
               label="Time pulled out of oven"
               name="oven_end"
               component={this.renderTimePicker}
-              validate={[ required ]}
-            />
-            <Field
-              label="Photo of crumb"
-              name="crumb_shot"
-              component={this.renderDropzone}
-              validate={[ required ]}
             />
             <div style={{marginTop: 12}}>
               <RaisedButton
