@@ -13,6 +13,7 @@ import LinearProgress from 'material-ui/LinearProgress';
 import CPCard from "./crumbproof_card.jsx";
 import RaisedButton from 'material-ui/RaisedButton';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
+import moment from "moment";
 
 class RecipesShow extends Component {
 
@@ -39,16 +40,44 @@ class RecipesShow extends Component {
     });
   };
 
+  calculateTimes(instructions, startTime) {
+    // instructions being passed in is simply a bunch of objects
+    var instructionsArray =  _.orderBy(instructions, ["step_number"], ["asc"]);
+    var i;
+
+    instructionsArray[0].time = startTime;
+
+    // Accumulate the time gaps from the starttime
+    for (i = 0; i < instructionsArray.length - 1; i++) {
+
+      // time_gap_to_next is a Nullable field
+      if (instructionsArray[i].time_gap_to_next) {
+        instructionsArray[i+1].time = moment(instructions[i].time)
+                                      .add(instructions[i].time_gap_to_next, 'minutes')
+      } else {
+        instructionsArray[i+1].time = moment(instructions[i].time)
+                                      .add(0, 'minutes')
+      }
+
+    }
+    return instructionsArray
+  }
+
   renderSteps() {
-    return _.map(this.props.recipe.instructions, instruction => {
+
+    // TODO: replace moment.now() with a user controllable time input
+    let timeNow = moment();
+    let instructionsWithTimes = this.calculateTimes(this.props.recipe.instructions, timeNow);
+
+    return _.map(instructionsWithTimes, instruction => {
       return (
         <Step key={instruction.step_number} active={true} >
           <StepLabel active={true} >
-            Step {instruction.step_number}
+            🕒 {instruction.time.format("h:mmA on dddd")}
           </StepLabel>
           <StepContent active={true}>
             <p>
-              {instruction.content}
+              {instruction.content} {instruction.time_gap_to_next && `for ${instruction.time_gap_to_next} minutes`}
             </p>
           </StepContent>
         </Step>
