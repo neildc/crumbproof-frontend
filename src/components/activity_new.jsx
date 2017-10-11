@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import { Field, reduxForm , FieldArray } from "redux-form";
-import { Link } from "react-router-dom";
+import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { createActivity } from "../actions";
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import CP_Card from './crumbproof_card.jsx'
-import IconButton from 'material-ui/IconButton';
-import DeleteIcon from 'material-ui/svg-icons/content/remove-circle'
-import {required, isNumber } from "../validators.js"
+import CPCard from './crumbproof_card.jsx'
+import {required} from "../validators.js"
 import TimePicker from 'material-ui/TimePicker';
 import Dropzone from 'react-dropzone';
 
@@ -89,7 +86,7 @@ class ActivityNew extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <CP_Card title={"New Activity"}>
+      <CPCard title={"New Activity"}>
           <form
             onSubmit={handleSubmit(this.onSubmit.bind(this))}
             style={{margin:"20px"}}
@@ -141,7 +138,7 @@ class ActivityNew extends Component {
               />
             </div>
           </form>
-      </CP_Card>
+      </CPCard>
     );
   }
 }

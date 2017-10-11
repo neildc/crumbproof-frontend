@@ -1,5 +1,4 @@
 import axios from "axios";
-import _ from "lodash";
 
 export const FETCH_RECIPES = "fetch_recipes";
 export const FETCH_RECIPE = "fetch_recipe";
@@ -67,6 +66,8 @@ export function fetchRecipe(id) {
 }
 
 export function deleteRecipe(id, callback) {
+
+  // eslint-disable-next-line
   const request = axios
     .delete(`${ROOT_URL}/recipes/${id}/`, {
       headers: {
@@ -116,6 +117,8 @@ export function fetchActivity(id) {
 }
 
 export function deleteActivity(id, callback) {
+
+  // eslint-disable-next-line
   const request = axios
     .delete(`${ROOT_URL}/activities/${id}/`, {
       headers: {

@@ -8,8 +8,8 @@ import { Field, reduxForm } from "redux-form";
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import {required, isNumber} from "../validators.js";
+import {Card,  CardTitle} from 'material-ui/Card';
+import {required} from "../validators.js";
 
 class LoginIndex extends Component {
 
