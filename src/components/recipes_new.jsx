@@ -69,7 +69,7 @@ class RecipesNew extends Component {
             />
         </li>
       )}
-      <RaisedButton type="RaisedButton" onClick={() => fields.push({})} label="Add Ingredient"/>
+      <RaisedButton type="button" onClick={() => fields.push({})} label="Add Ingredient"/>
     </ul>
   )
 
@@ -82,6 +82,15 @@ class RecipesNew extends Component {
               label={`Step ${index + 1}`}
               name={`${step}.content`}
               type="text"
+              validation={[required]}
+              component={this.renderField}
+              />
+            <Field
+              label={"Amount of time till next step (minutes)"}
+              name={`${step}.time_gap_to_next`}
+              style={{marginLeft:"10px"}}
+              validation={[isNumber]}
+              type="number"
               component={this.renderField}
               />
             <IconButton
@@ -98,6 +107,21 @@ class RecipesNew extends Component {
   )
 
   onSubmit(values) {
+
+    /* TODO: debug why this is happening
+     *
+     *       Currently whenever we navigate to the third/last/instruction part of
+     *       Stepper, the form automatically submits
+     *
+     *       The main difference in this step in the stepper is that the right button
+     *       has type=submit rather than type=button
+     */
+    if (!values.instructions) {
+      // Returning false for now here prevents the form from submitting
+      // automatically
+      return false;
+    }
+
     this.props.createRecipe(values, () => {
       this.props.history.push("/");
     });
