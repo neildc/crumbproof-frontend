@@ -11,6 +11,7 @@ import Subheader from 'material-ui/Subheader';
 import CP_Card from './crumbproof_card.jsx';
 import LinearProgress from 'material-ui/LinearProgress';
 import moment from "moment";
+import {GridList, GridTile} from 'material-ui/GridList';
 
 
 class ActivityIndex extends Component {
@@ -18,32 +19,50 @@ class ActivityIndex extends Component {
     this.props.fetchActivities();
   }
 
-  renderActivities() {
+  renderActivityTiles() {
 
     return _.map(this.props.activities, activity => {
 
-      const time = moment(activity.started).fromNow();
-
       return (
-        <ListItem
+        <GridTile
           key={activity.id}
-          primaryText={activity.name}
-          secondaryText={`By ${activity.user_id}, ${time}`}
-          leftIcon={<ContentSend/>}
+          title={activity.name}
+          subtitle={<span>by <b>{activity.user_id}</b></span>}
           containerElement={
             <Link to={`/activity/${activity.id}`} />
-          }>
-        </ListItem>
+          }
+        >
+          <img src={activity.crumb_shot} />
+        </GridTile>
       );
     });
   }
 
   render() {
+
+    const styles = {
+      root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+      },
+      gridList: {
+        width: 500,
+        height: 450,
+        overflowY: 'auto',
+      },
+    };
+
     return (
         <CP_Card title="Activities">
             <List>
-              {this.renderActivities()}
             </List>
+            <GridList
+                  cellHeight={180}
+                  style={styles.gridList}
+                >
+                  {this.renderActivityTiles()}
+                </GridList>
             <div style={{float:"right"}}>
                 <FloatingActionButton containerElement={<Link to="/activity/new"/>}>
                     <ContentAdd/>
