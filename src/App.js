@@ -1,7 +1,6 @@
 import './index.css';
 
 import React from "react";
-import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -12,7 +11,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import crumbproofTheme from './theme';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 import reducers from "./reducers";
 import LoginIndex from "./components/login_index";
@@ -25,7 +23,7 @@ import ActivityNew from "./components/activity_new";
 import ActivityShow from "./components/activity_show";
 
 import { Link } from "react-router-dom";
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
 
 class App extends React.Component {
 

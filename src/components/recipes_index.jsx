@@ -7,9 +7,7 @@ import {List, ListItem} from 'material-ui/List';
 import ContentSend from 'material-ui/svg-icons/content/send';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import Subheader from 'material-ui/Subheader';
 import CP_Card from './crumbproof_card.jsx';
-import LinearProgress from 'material-ui/LinearProgress';
 
 
 class RecipesIndex extends Component {

@@ -3,14 +3,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchActivities } from "../actions";
-import {List, ListItem} from 'material-ui/List';
-import ContentSend from 'material-ui/svg-icons/content/send';
+import {List} from 'material-ui/List';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import Subheader from 'material-ui/Subheader';
 import CP_Card from './crumbproof_card.jsx';
-import LinearProgress from 'material-ui/LinearProgress';
-import moment from "moment";
 import {GridList, GridTile} from 'material-ui/GridList';
 
 
@@ -32,7 +28,7 @@ class ActivityIndex extends Component {
             <Link to={`/activity/${activity.id}`} />
           }
         >
-          <img src={activity.crumb_shot} />
+          <img src={activity.crumb_shot} alt="" />
         </GridTile>
       );
     });

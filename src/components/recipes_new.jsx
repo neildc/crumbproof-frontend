@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { Field, reduxForm , FieldArray } from "redux-form";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createRecipe } from "../actions";
 import RaisedButton from 'material-ui/RaisedButton';

@@ -1,16 +1,8 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { fetchActivity, deleteActivity } from "../actions";
-import {
-  Step,
-  Stepper,
-  StepLabel,
-  StepContent,
-} from 'material-ui/Stepper';
 import LinearProgress from 'material-ui/LinearProgress';
-import CP_Card from "./crumbproof_card.jsx";
 import RaisedButton from 'material-ui/RaisedButton';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import {Card, CardMedia, CardTitle} from 'material-ui/Card';
@@ -51,7 +43,7 @@ class ActivityShow extends Component {
         />
       }
         style={{padding:"5px"}}>
-          <img src={activity.crumb_shot}/>
+          <img src={activity.crumb_shot} alt=""/>
         </CardMedia>
         <div style={{padding:"30px"}}>
           <RaisedButton

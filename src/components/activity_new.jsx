@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import { Field, reduxForm , FieldArray } from "redux-form";
-import { Link } from "react-router-dom";
+import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { createActivity } from "../actions";
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import CP_Card from './crumbproof_card.jsx'
-import IconButton from 'material-ui/IconButton';
-import DeleteIcon from 'material-ui/svg-icons/content/remove-circle'
-import {required, isNumber } from "../validators.js"
+import {required} from "../validators.js"
 import TimePicker from 'material-ui/TimePicker';
 import Dropzone from 'react-dropzone';
 

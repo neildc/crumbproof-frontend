@@ -1,5 +1,4 @@
 import axios from "axios";
-import _ from "lodash";
 
 export const FETCH_RECIPES = "fetch_recipes";
 export const FETCH_RECIPE = "fetch_recipe";
