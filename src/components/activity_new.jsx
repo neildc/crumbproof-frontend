@@ -103,6 +103,11 @@ class ActivityNew extends Component {
               component={this.renderDropzone}
             />
             <Field
+              label="Notes for next time"
+              name="notes"
+              component={this.renderField}
+            />
+            <Field
               label="Started"
               name="started"
               initialValues={new Date()}

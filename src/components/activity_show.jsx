@@ -73,6 +73,9 @@ class ActivityShow extends Component {
             <p>Total duration: {duration} hours</p>
           }
 
+          { activity.notes &&
+            <p>Notes for next time: {activity.notes}</p>
+          }
 
         </div>
       </Card>
