@@ -66,6 +66,8 @@ export function fetchRecipe(id) {
 }
 
 export function deleteRecipe(id, callback) {
+
+  // eslint-disable-next-line
   const request = axios
     .delete(`${ROOT_URL}/recipes/${id}/`, {
       headers: {
@@ -115,6 +117,8 @@ export function fetchActivity(id) {
 }
 
 export function deleteActivity(id, callback) {
+
+  // eslint-disable-next-line
   const request = axios
     .delete(`${ROOT_URL}/activities/${id}/`, {
       headers: {

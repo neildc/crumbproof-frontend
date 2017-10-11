@@ -205,7 +205,8 @@ class RecipesNew extends Component {
     const { stepIndex} = this.state;
     const contentStyle = {margin: '0 16px'};
     const BASIC_DETAILS = 0;
-    const INGREDIENTS = 1;
+    // eslint-disable-next-line
+    const INGREDIENTS = 1; // unused but useful
     const INSTRUCTIONS = 2;
 
     return (
