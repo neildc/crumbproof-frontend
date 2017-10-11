@@ -1,7 +1,7 @@
 import React from "react";
 import {Card,  CardTitle} from 'material-ui/Card';
 
-export default function CP_Card(props) {
+export default function CPCard(props) {
     return (
           <Card containerStyle={{marginBottom:"50px"}}>
             <CardTitle title={props.title} style={{backgroundColor:"#eee"}} children={props.titleChildren}/>

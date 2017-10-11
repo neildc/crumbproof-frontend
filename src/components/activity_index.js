@@ -6,7 +6,7 @@ import { fetchActivities } from "../actions";
 import {List} from 'material-ui/List';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import CP_Card from './crumbproof_card.jsx';
+import CPCard from './crumbproof_card.jsx';
 import {GridList, GridTile} from 'material-ui/GridList';
 
 
@@ -50,7 +50,7 @@ class ActivityIndex extends Component {
     };
 
     return (
-        <CP_Card title="Activities">
+        <CPCard title="Activities">
             <List>
             </List>
             <GridList
@@ -64,7 +64,7 @@ class ActivityIndex extends Component {
                     <ContentAdd/>
                 </FloatingActionButton>
             </div>
-        </CP_Card>
+        </CPCard>
     );
   }
 }

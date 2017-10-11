@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { createRecipe } from "../actions";
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import CP_Card from './crumbproof_card.jsx'
+import CPCard from './crumbproof_card.jsx'
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui/svg-icons/content/remove-circle'
 import {required, isNumber } from "../validators.js"
@@ -209,7 +209,7 @@ class RecipesNew extends Component {
     const INSTRUCTIONS = 2;
 
     return (
-        <CP_Card title={"New Recipe"}>
+        <CPCard title={"New Recipe"}>
           <Stepper activeStep={stepIndex}>
             {this.renderSteps(["Basic Details", "Ingredients", "Instructions"])}
           </Stepper>
@@ -237,7 +237,7 @@ class RecipesNew extends Component {
               </div>
             </form>
           </div>
-        </CP_Card>
+        </CPCard>
     );
   }
 }

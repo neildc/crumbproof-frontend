@@ -10,7 +10,7 @@ import {
   StepContent,
 } from 'material-ui/Stepper';
 import LinearProgress from 'material-ui/LinearProgress';
-import CP_Card from "./crumbproof_card.jsx";
+import CPCard from "./crumbproof_card.jsx";
 import RaisedButton from 'material-ui/RaisedButton';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 
@@ -64,7 +64,7 @@ class RecipesShow extends Component {
     }
 
     return (
-      <CP_Card title={recipe.name} titleChildren={<Link to="/">Back To Index</Link>}>
+      <CPCard title={recipe.name} titleChildren={<Link to="/">Back To Index</Link>}>
         <div>
           <RaisedButton
             label="Delete Recipe"
@@ -90,7 +90,7 @@ class RecipesShow extends Component {
             {this.renderSteps()}
           </Stepper>
         </div>
-      </CP_Card>
+      </CPCard>
     );
   }
 }

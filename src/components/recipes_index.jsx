@@ -7,7 +7,7 @@ import {List, ListItem} from 'material-ui/List';
 import ContentSend from 'material-ui/svg-icons/content/send';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import CP_Card from './crumbproof_card.jsx';
+import CPCard from './crumbproof_card.jsx';
 
 
 class RecipesIndex extends Component {
@@ -33,7 +33,7 @@ class RecipesIndex extends Component {
 
   render() {
     return (
-        <CP_Card title="Recipes">
+        <CPCard title="Recipes">
             <List>
             {this.renderRecipes()}
             </List>
@@ -42,7 +42,7 @@ class RecipesIndex extends Component {
                     <ContentAdd/>
                 </FloatingActionButton>
             </div>
-        </CP_Card>
+        </CPCard>
     );
   }
 }
