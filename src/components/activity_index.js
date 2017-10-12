@@ -8,6 +8,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import CPCard from './crumbproof_card.jsx';
 import {GridList, GridTile} from 'material-ui/GridList';
+import './activity_index.css';
 
 
 class ActivityIndex extends Component {
@@ -21,6 +22,7 @@ class ActivityIndex extends Component {
 
       return (
         <GridTile
+          className="galleryTile"
           key={activity.id}
           title={activity.name}
           subtitle={<span>by <b>{activity.user_id}</b></span>}
@@ -36,29 +38,11 @@ class ActivityIndex extends Component {
 
   render() {
 
-    const styles = {
-      root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-      },
-      gridList: {
-        width: 500,
-        height: 450,
-        overflowY: 'auto',
-      },
-    };
-
     return (
         <CPCard title="Activities">
-            <List>
-            </List>
-            <GridList
-                  cellHeight={180}
-                  style={styles.gridList}
-                >
-                  {this.renderActivityTiles()}
-                </GridList>
+            <div className="galleryGrid" >
+              {this.renderActivityTiles()}
+            </div>
             <div style={{float:"right"}}>
                 <FloatingActionButton containerElement={<Link to="/activity/new"/>}>
                     <ContentAdd/>
