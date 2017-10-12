@@ -14,11 +14,12 @@ export const AUTH_LOGIN = "auth_login";
 
 const ROOT_URL = "http://localhost:8000";
 
-export function authLogin(values, callback) {
+export function authLogin(values, callback, errorCallback) {
 
   const request = axios
     .post(`${ROOT_URL}/rest-auth/login/`, values)
-    .then((resp) => callback(resp));
+    .then((resp) => callback(resp))
+    .catch((error) => errorCallback(error));
 
   return {
     type: AUTH_LOGIN,

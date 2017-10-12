@@ -12,8 +12,18 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {Card,  CardTitle} from 'material-ui/Card';
 import {required} from "../validators.js";
 
+import Snackbar from 'material-ui/Snackbar';
+
+const NO_ERROR_MESSAGE = "";
 
 class LoginIndex extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: NO_ERROR_MESSAGE
+    };
+  }
 
   renderField(field) {
       const { meta: { touched, error } } = field;
@@ -33,11 +43,23 @@ class LoginIndex extends Component {
   }
 
   onSubmit(values) {
-    this.props.authLogin(values, (resp) => {
+    this.props.authLogin(values,
+    (resp) => {
       localStorage.setItem('token', resp.data.key);
       this.props.history.push("/");
-    });
-  }
+    },
+    (error) => {
+      if (!error.response) {
+        this.setState({
+          message: "Please check your internet or try again later"
+        });
+      } else if (error.response.status === 400) {
+        this.setState({
+          message: "Please enter a valid username and password"
+        });
+      }
+    }
+  )};
 
   render() {
     const { handleSubmit } = this.props;
@@ -70,6 +92,13 @@ class LoginIndex extends Component {
                 />
 
             </form>
+
+            <Snackbar
+              open={this.state.message !== NO_ERROR_MESSAGE }
+              message={this.state.message}
+              autoHideDuration={5000}
+              style={{backgroundColor: "red"}}
+            />
           </Card>
     );
   }
