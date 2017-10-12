@@ -1,17 +1,12 @@
 html body{
     background-color: #4E342E;
-    margin: 0px;
-}
-
-/* source : https://css-tricks.com/perfect-full-page-background-image/ */
-.bg {
+    background-attachment: fixed;
     background: url("breadbg.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    min-width: 100%;
-    height: 100vh;
+    margin: 0px;
 }
 
 .container {
@@ -35,7 +30,6 @@ html body{
         grid-area: main;
     }
 }
-
 
 .toolbar {
     max-height: 32px;
