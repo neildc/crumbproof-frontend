@@ -37,30 +37,34 @@ class App extends React.Component {
       <Provider store={store}>
         <MuiThemeProvider muiTheme={crumbproofTheme}>
             <BrowserRouter>
-              <div className="container bg">
-                <AppBar
-                  className="appBar"
-                  title="crumb proof"
-                  showMenuIconButton={false}
-                  iconElementRight={<FlatButton containerElement={<Link to="/login"/>} label={"Login"} />}
-                />
-                <Toolbar className="toolbar">
-                  <ToolbarGroup>
-                    <FlatButton containerElement={<Link to="/activity"/>} label={"Activites"} />
-                    <FlatButton containerElement={<Link to="/recipies"/>} label={"Recipes"} />
-                  </ToolbarGroup>
-                </Toolbar>
-                <div className="card">
-                  <Switch>
-                    <Route path="/recipes/new" component={RecipesNew} />
-                    <Route path="/recipes/:id" component={RecipesShow} />
-                    <Route path="/recipes" component={RecipesIndex} />
-                    <Route path="/activity/new" component={ActivityNew} />
-                    <Route path="/activity/:id" component={ActivityShow} />
-                    <Route path="/activity" component={ActivityIndex} />
-                    <Route path="/login" component={LoginIndex} />
-                    <Route path="/" component={RecipesIndex} />
-                  </Switch>
+              <div className="bg">
+                <div style={{position:"fixed", width:"100%", zIndex: 3}}>
+                  <AppBar
+                    className="appBar"
+                    title="crumb proof"
+                    showMenuIconButton={false}
+                    iconElementRight={<FlatButton containerElement={<Link to="/login"/>} label={"Login"} />}
+                  />
+                  <Toolbar className="toolbar">
+                    <ToolbarGroup>
+                      <FlatButton containerElement={<Link to="/activity"/>} label={"Activites"} />
+                      <FlatButton containerElement={<Link to="/recipies"/>} label={"Recipes"} />
+                    </ToolbarGroup>
+                  </Toolbar>
+                </div>
+                <div className="container">
+                  <div className="main">
+                    <Switch>
+                      <Route path="/recipes/new" component={RecipesNew} />
+                      <Route path="/recipes/:id" component={RecipesShow} />
+                      <Route path="/recipes" component={RecipesIndex} />
+                      <Route path="/activity/new" component={ActivityNew} />
+                      <Route path="/activity/:id" component={ActivityShow} />
+                      <Route path="/activity" component={ActivityIndex} />
+                      <Route path="/login" component={LoginIndex} />
+                      <Route path="/" component={RecipesIndex} />
+                    </Switch>
+                  </div>
                 </div>
               </div>
             </BrowserRouter>
