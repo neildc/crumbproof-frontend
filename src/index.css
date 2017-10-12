@@ -1,5 +1,6 @@
-html{
+html body{
     background-color: #4E342E;
+    margin: 0px;
 }
 
 /* source : https://css-tricks.com/perfect-full-page-background-image/ */
