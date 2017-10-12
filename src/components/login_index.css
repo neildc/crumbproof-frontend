@@ -1,0 +1,26 @@
+
+.loginCard {
+    margin: 0 auto;
+    text-align: center;
+}
+
+@media (min-width:768px) {
+    .loginCard {
+        width: 50%;
+        height: 50%;
+    }
+
+    .loginForm {
+        padding:50px;
+    }
+}
+
+.loginCardTitle {
+    text-align: left;
+    backgroundColor: #EEE;
+}
+
+.loginButton {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}

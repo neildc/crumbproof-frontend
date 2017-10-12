@@ -1,3 +1,4 @@
+import "./login_index.css"
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -11,6 +12,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {Card,  CardTitle} from 'material-ui/Card';
 import {required} from "../validators.js";
 
+
 class LoginIndex extends Component {
 
   renderField(field) {
@@ -19,6 +21,7 @@ class LoginIndex extends Component {
       return (
           <div>
               <TextField
+                  style={{width:"auto"}}
                   hintText=""
                   floatingLabelText={field.label}
                   errorText={touched && error}
@@ -40,9 +43,10 @@ class LoginIndex extends Component {
     const { handleSubmit } = this.props;
 
       return(
-          <Card style={{width:"50%", height:"50%", margin:"0 auto", textAlign:"center", }}>
-          <CardTitle title="Login" style={{textAlign:"Left",backgroundColor:"#eee"}}/>
-            <form onSubmit={handleSubmit(this.onSubmit.bind(this))} style={{padding:"50px"}}>
+          <Card className="loginCard">
+            <CardTitle title="Login" className="loginCardTitle"/>
+
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))} className="loginForm">
 
                 <Field
                     label="Username"
@@ -59,15 +63,12 @@ class LoginIndex extends Component {
                 />
 
                 <RaisedButton
+                    className="loginButton"
                     type="submit"
                     primary={true}
                     label="Login"
-                    style={{marginBottom:"20px", marginTop:"20px"}}>
+                />
 
-                </RaisedButton>
-                <Link to="/">
-                    <RaisedButton>Cancel</RaisedButton>
-                </Link>
             </form>
           </Card>
     );
