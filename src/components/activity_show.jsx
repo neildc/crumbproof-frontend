@@ -27,14 +27,14 @@ class ActivityShow extends Component {
   render() {
     const { activity } = this.props;
 
+    if (!activity) {
+      return <LinearProgress mode="indeterminate" />;
+    }
+
     var duration = null;
 
     if (activity.completed && activity.started) {
       duration = moment(activity.completed).diff(moment(activity.started), 'hours');
-    }
-
-    if (!activity) {
-      return <LinearProgress mode="indeterminate" />;
     }
 
     return (
