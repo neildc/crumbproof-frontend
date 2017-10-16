@@ -8,6 +8,7 @@ import DeleteIcon from 'material-ui/svg-icons/content/remove-circle'
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import renderTextField from "./redux_form_textfield"
+import Paper from 'material-ui/Paper';
 
 const renderInstructions = ({ fields }) => (
   <ul>
@@ -38,6 +39,10 @@ const renderInstructions = ({ fields }) => (
     )}
     <RaisedButton type="button" onClick={() => fields.push({})} label="Add Step"/>
 
+    {fields.length === 0 &&
+     <Paper style={{padding:"15px", margin:"20px", backgroundColor:"#bbb", color:"white"}} zDepth={4}>
+       ↑ Please add at least 1 instruction to continue
+     </Paper>
     }
   </ul>
 )
@@ -93,6 +98,9 @@ class RecipesNewWizard3Instructions extends React.Component {
 
 function validate(values) {
   const errors = {};
+  if (!values.instructions || !values.instructions.length) {
+    errors.instructions = { _error: 'At least one instruction must be entered' }
+  }
 
   return errors;
 }

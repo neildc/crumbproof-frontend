@@ -6,6 +6,7 @@ import DeleteIcon from 'material-ui/svg-icons/content/remove-circle'
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import renderTextField from "./redux_form_textfield"
+import Paper from 'material-ui/Paper';
 
 const renderIngredients = ({ fields, meta: { error } }) => (
 
@@ -44,6 +45,12 @@ const renderIngredients = ({ fields, meta: { error } }) => (
       </div>
     )}
     <RaisedButton type="button" onClick={() => fields.push({})} label="Add Ingredient"/>
+
+    {fields.length === 0 &&
+     <Paper style={{padding:"15px", margin:"20px", backgroundColor:"#bbb", color:"white"}} zDepth={4}>
+       ↑ Please add at least 1 ingredient to continue
+     </Paper>
+    }
   </ul>
 )
 
@@ -74,6 +81,9 @@ const RecipesNewWizard2Ingredients = (props) => {
 
 function validate(values) {
   const errors = {};
+  if (!values.ingredients || !values.ingredients.length) {
+    errors.ingredients = { _error: 'At least one ingredient must be entered' }
+  }
 
   return errors;
 }
