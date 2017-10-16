@@ -33,21 +33,9 @@ class LoginIndex extends Component {
   }
 
   onSubmit(values) {
-    this.props.authLogin(values,
-    (resp) => {
+    this.props.authLogin(values, (resp) => {
       localStorage.setItem('token', resp.data.key);
       this.props.history.push("/");
-    },
-    (error) => {
-      if (!error.response) {
-        this.setState({
-          message: "Please check your internet or try again later"
-        });
-      } else if (error.response.status === 400) {
-        this.setState({
-          message: "Please enter a valid username and password"
-        });
-      }
     }
   )};
 
@@ -58,7 +46,8 @@ class LoginIndex extends Component {
           <Card className="loginCard">
             <CardTitle title="Login" className="loginCardTitle"/>
 
-            <form onSubmit={handleSubmit(this.onSubmit.bind(this))} className="loginForm">
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}
+                  className="loginForm">
 
                 <Field
                     label="Username"
@@ -95,24 +84,10 @@ class LoginIndex extends Component {
   }
 }
 
-function validate(values) {
-  const errors = {};
-
-  // Validate the inputs from 'values'
-  if (!values.name) {
-    errors.name = "Enter a name";
-  }
-
-  // If errors is empty, the form is fine to submit
-  // If errors has *any* properties, redux form assumes form is invalid
-  return errors;
-}
-
 function mapStateToProps({ auth }, ownProps) {
   return { error: auth.error };
 }
 
 export default reduxForm({
-  validate,
   form: "LoginForm"
 })(connect(mapStateToProps, { authLogin, authClearError })(LoginIndex));

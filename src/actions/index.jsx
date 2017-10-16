@@ -15,7 +15,7 @@ export const AUTH_CLEAR_ERROR = "auth_clear_error";
 
 const ROOT_URL = "http://localhost:8000";
 
-export function authLogin(values, callback, errorCallback) {
+export function authLogin(values, callback) {
 
   const request = axios
     .post(`${ROOT_URL}/rest-auth/login/`, values)
