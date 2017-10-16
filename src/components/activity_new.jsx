@@ -8,6 +8,8 @@ import CPCard from './crumbproof_card.jsx'
 import {required} from "../validators.js"
 import TimePicker from 'material-ui/TimePicker';
 import Dropzone from 'react-dropzone';
+import CircularProgress from 'material-ui/CircularProgress';
+
 
 class ActivityNew extends Component {
   renderField(field) {
@@ -77,13 +79,13 @@ class ActivityNew extends Component {
 
 
   onSubmit(values) {
-    this.props.createActivity(values, () => {
+    return this.props.createActivity(values, () => {
       this.props.history.push("/activity");
     });
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, submitting } = this.props;
 
     return (
       <CPCard title={"New Activity"}>
@@ -129,12 +131,18 @@ class ActivityNew extends Component {
               name="oven_end"
               component={this.renderTimePicker}
             />
-            <div style={{marginTop: 12}}>
+            <div style={{marginTop: 12, display:"flex", flexDirection:"row", alignContent:"center"}}>
               <RaisedButton
-                label={'Submit'}
+                label={submitting ? 'Uploading...':'Submit'}
+                disabled={submitting}
                 type={'submit'}
                 primary={true}
               />
+              {submitting &&
+                <CircularProgress style={{marginLeft:"10px", marginTop:"5px"}}
+                                  size={25}
+                                  thickness={3}/>
+              }
             </div>
           </form>
       </CPCard>
