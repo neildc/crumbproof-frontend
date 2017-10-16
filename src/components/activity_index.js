@@ -3,11 +3,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchActivities } from "../actions";
-import {List} from 'material-ui/List';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import CPCard from './crumbproof_card.jsx';
-import {GridList, GridTile} from 'material-ui/GridList';
+import { GridTile } from 'material-ui/GridList';
 import './activity_index.css';
 
 

@@ -35,7 +35,7 @@ class RecipesNew extends Component {
   renderSteps(labels) {
     return _.map(labels, l => {
       return (
-        <Step>
+        <Step key={l}>
           <StepLabel>{l}</StepLabel>
         </Step>
       );
