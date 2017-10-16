@@ -2,7 +2,7 @@ import "./login_index.css"
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { authLogin } from "../actions";
+import { authLogin, authClearError } from "../actions";
 
 import { Field, reduxForm } from "redux-form";
 import TextField from 'material-ui/TextField';
@@ -13,16 +13,7 @@ import {required} from "../validators.js";
 
 import Snackbar from 'material-ui/Snackbar';
 
-const NO_ERROR_MESSAGE = "";
-
 class LoginIndex extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: NO_ERROR_MESSAGE
-    };
-  }
 
   renderField(field) {
       const { meta: { touched, error } } = field;
@@ -93,10 +84,11 @@ class LoginIndex extends Component {
             </form>
 
             <Snackbar
-              open={this.state.message !== NO_ERROR_MESSAGE }
-              message={this.state.message}
+              open={this.props.error != null}
+              message={this.props.error}
               autoHideDuration={5000}
               style={{backgroundColor: "red"}}
+              onRequestClose={this.props.authClearError}
             />
           </Card>
     );
@@ -116,7 +108,11 @@ function validate(values) {
   return errors;
 }
 
+function mapStateToProps({ auth }, ownProps) {
+  return { error: auth.error };
+}
+
 export default reduxForm({
   validate,
   form: "LoginForm"
-})(connect(null, { authLogin })(LoginIndex));
+})(connect(mapStateToProps, { authLogin, authClearError })(LoginIndex));

@@ -1,4 +1,6 @@
-import { AUTH_LOGIN } from "../actions";
+import { AUTH_LOGIN, AUTH_CLEAR_ERROR } from "../actions";
+
+const DEFAULT_ERROR_MESSAGE = "Please check your internet or try again later";
 
 export default function(state = {}, action) {
   switch (action.type) {
@@ -14,8 +16,24 @@ export default function(state = {}, action) {
      * so that we can access history anywhere including here.
      */
     // localStorage.setItem('token', action.payload.data.key);
-    return state;
+    if (action.error) {
+      if (action.payload.response) {
 
+        switch (action.payload.response.status) {
+        case (400):
+          return {"error": "Please enter a valid username/password"};
+        default:
+          return {"error": DEFAULT_ERROR_MESSAGE};
+        }
+
+      }
+      return {"error": DEFAULT_ERROR_MESSAGE};
+
+    } else {
+      return state;
+    }
+  case AUTH_CLEAR_ERROR:
+    return {...state, "error": null};
   default:
     return state;
   }
