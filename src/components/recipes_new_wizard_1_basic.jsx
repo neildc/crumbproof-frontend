@@ -2,7 +2,8 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import {required, isNumber } from "../validators.js";
 import RaisedButton from 'material-ui/RaisedButton';
-import renderTextField from "./redux_form_textfield"
+import renderTextField from "./redux_form_textfield";
+import RECIPE_NEW_FORM_NAME from "./recipes_new";
 
 const RecipesNewWizard1Basic = (props) => {
 
@@ -73,7 +74,7 @@ function validate(values) {
 }
 
 export default reduxForm({
-  form: 'RecipesNewForm',  //Form name is same
+  form: RECIPE_NEW_FORM_NAME,
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate

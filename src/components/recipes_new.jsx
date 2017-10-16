@@ -12,6 +12,8 @@ import {
   StepLabel,
 } from 'material-ui/Stepper';
 
+export const RECIPE_NEW_FORM_NAME = "RecipesNewForm";
+
 class RecipesNew extends Component {
 
   state = {

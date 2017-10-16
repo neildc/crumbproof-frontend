@@ -9,6 +9,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import renderTextField from "./redux_form_textfield"
 import Paper from 'material-ui/Paper';
+import RECIPE_NEW_FORM_NAME from "./recipes_new";
 
 const renderInstructions = ({ fields }) => (
   <ul>
@@ -106,7 +107,7 @@ function validate(values) {
 }
 
 export default reduxForm({
-  form: 'RecipesNewForm',  //Form name is same
+  form: RECIPE_NEW_FORM_NAME,
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate
