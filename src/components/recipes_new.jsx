@@ -18,21 +18,6 @@ import {
 import FlatButton from 'material-ui/FlatButton';
 
 class RecipesNew extends Component {
-  renderField(field) {
-    const { meta: { touched, error } } = field;
-
-    return (
-      <div>
-        <TextField
-            hintText=""
-            floatingLabelText={field.label}
-            errorText={touched && error}
-            {...field.input}
-            {...field.custom}
-        />
-      </div>
-    );
-  }
 
   renderIngredients = ({ fields }) => (
     <ul>
