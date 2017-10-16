@@ -7,7 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import renderTextField from "./redux_form_textfield"
 import Paper from 'material-ui/Paper';
-import RECIPE_NEW_FORM_NAME from "./recipes_new";
+import { RECIPE_NEW_FORM_NAME } from '../constants/form_names';
 
 const renderInstructions = ({ fields }) => (
   <ul>

@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 import {required, isNumber } from "../validators.js";
 import RaisedButton from 'material-ui/RaisedButton';
 import renderTextField from "./redux_form_textfield";
-import RECIPE_NEW_FORM_NAME from "./recipes_new";
+import { RECIPE_NEW_FORM_NAME } from '../constants/form_names';
 
 const RecipesNewWizard1Basic = (props) => {
 

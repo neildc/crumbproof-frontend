@@ -16,7 +16,7 @@ import {
   StepLabel,
 } from 'material-ui/Stepper';
 
-export const RECIPE_NEW_FORM_NAME = "RecipesNewForm";
+import { RECIPE_NEW_FORM_NAME } from '../constants/form_names';
 
 class RecipesNew extends Component {
 
