@@ -8,6 +8,7 @@ import ContentSend from 'material-ui/svg-icons/content/send';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import CPCard from './crumbproof_card.jsx';
+import LinearProgress from 'material-ui/LinearProgress';
 
 
 class RecipesIndex extends Component {
@@ -16,6 +17,11 @@ class RecipesIndex extends Component {
   }
 
   renderRecipes() {
+
+    // Need to _.values as recipes is an object
+    if (_.values(this.props.recipes).length === 0) {
+      return <LinearProgress mode="indeterminate" />;
+    }
 
     return _.map(this.props.recipes, recipe => {
       return (
