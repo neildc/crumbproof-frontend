@@ -2,7 +2,7 @@ import "./login_index.css"
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { authLogin } from "../actions";
+import { authLogin, authClearError } from "../actions";
 
 import { Field, reduxForm } from "redux-form";
 import TextField from 'material-ui/TextField';
@@ -11,6 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {Card,  CardTitle} from 'material-ui/Card';
 import {required} from "../validators.js";
 
+import Snackbar from 'material-ui/Snackbar';
 
 class LoginIndex extends Component {
 
@@ -35,8 +36,8 @@ class LoginIndex extends Component {
     this.props.authLogin(values, (resp) => {
       localStorage.setItem('token', resp.data.key);
       this.props.history.push("/");
-    });
-  }
+    }
+  )};
 
   render() {
     const { handleSubmit } = this.props;
@@ -45,7 +46,8 @@ class LoginIndex extends Component {
           <Card className="loginCard">
             <CardTitle title="Login" className="loginCardTitle"/>
 
-            <form onSubmit={handleSubmit(this.onSubmit.bind(this))} className="loginForm">
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}
+                  className="loginForm">
 
                 <Field
                     label="Username"
@@ -69,25 +71,23 @@ class LoginIndex extends Component {
                 />
 
             </form>
+
+            <Snackbar
+              open={this.props.error != null}
+              message={this.props.error}
+              autoHideDuration={5000}
+              style={{backgroundColor: "red"}}
+              onRequestClose={this.props.authClearError}
+            />
           </Card>
     );
   }
 }
 
-function validate(values) {
-  const errors = {};
-
-  // Validate the inputs from 'values'
-  if (!values.name) {
-    errors.name = "Enter a name";
-  }
-
-  // If errors is empty, the form is fine to submit
-  // If errors has *any* properties, redux form assumes form is invalid
-  return errors;
+function mapStateToProps({ auth }, ownProps) {
+  return { error: auth.error };
 }
 
 export default reduxForm({
-  validate,
   form: "LoginForm"
-})(connect(null, { authLogin })(LoginIndex));
+})(connect(mapStateToProps, { authLogin, authClearError })(LoginIndex));
