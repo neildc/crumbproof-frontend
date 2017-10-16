@@ -2,6 +2,10 @@ import _ from "lodash";
 import React, { Component } from "react";
 import CPCard from './crumbproof_card.jsx'
 
+import { connect } from "react-redux";
+import { createRecipe } from "../actions";
+import { reduxForm } from 'redux-form'
+
 import RecipesNewWizard1Basic from "./recipes_new_wizard_1_basic";
 import RecipesNewWizard2Ingredients from "./recipes_new_wizard_2_ingredients";
 import RecipesNewWizard3Instructions from "./recipes_new_wizard_3_instructions";
@@ -44,6 +48,13 @@ class RecipesNew extends Component {
     });
   };
 
+  onSubmit(values) {
+    this.props.createRecipe(values, () => {
+      this.props.reset();
+      this.props.history.push("/");
+    });
+  }
+
   render() {
     const { handleSubmit } = this.props;
     const { stepIndex} = this.state;
@@ -60,15 +71,21 @@ class RecipesNew extends Component {
             <RecipesNewWizard1Basic onSubmit={this.handleNext}/>}
 
           {stepIndex === 1 &&
-           <RecipesNewWizard2Ingredients previousPage={this.handlePrev}
+            <RecipesNewWizard2Ingredients previousPage={this.handlePrev}
                                          onSubmit={this.handleNext}/>}
           {stepIndex === 2 &&
-           <RecipesNewWizard3Instructions previousPage={this.handlePrev}
-                                          onSubmit={handleSubmit}/>}
+            <RecipesNewWizard3Instructions
+              previousPage={this.handlePrev}
+              onSubmit={handleSubmit(this.onSubmit.bind(this))}/>}
+
           </div>
         </CPCard>
     );
   }
 }
 
-export default RecipesNew;
+export default reduxForm({
+  form: RECIPE_NEW_FORM_NAME,
+  destroyOnUnmount: false,
+  forceUnregisterOnUnmount: true,
+})(connect(null, { createRecipe })(RecipesNew));

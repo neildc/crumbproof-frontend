@@ -1,6 +1,4 @@
 import React from 'react'
-import { connect } from "react-redux";
-import { createRecipe } from "../actions";
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import {required, isNumber } from "../validators.js";
 import IconButton from 'material-ui/IconButton';
@@ -51,31 +49,10 @@ const renderInstructions = ({ fields }) => (
 
 class RecipesNewWizard3Instructions extends React.Component {
 
-  onSubmit(values) {
-
-    /* TODO: debug why this is happening
-      *
-      *       Currently whenever we navigate to the third/last/instruction part of
-      *       Stepper, the form automatically submits
-      *
-      *       The main difference in this step in the stepper is that the right button
-      *       has type=submit rather than type=button
-      */
-    if (!values.instructions) {
-      // Returning false for now here prevents the form from submitting
-      // automatically
-      return false;
-    }
-
-    this.props.createRecipe(values, () => {
-      this.props.history.push("/");
-    });
-  }
-
   render() {
     const { handleSubmit, previousPage } = this.props;
     return (
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      <form onSubmit={handleSubmit}>
         <div>
           <FieldArray name="instructions" component={renderInstructions}/>
         </div>
@@ -87,7 +64,7 @@ class RecipesNewWizard3Instructions extends React.Component {
             style={{marginRight: 12}}
           />
           <RaisedButton
-            label={"Next"}
+            label={"Submit"}
             type={"submit"}
             primary={true}
           />
@@ -111,4 +88,4 @@ export default reduxForm({
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate
-})(connect(null, { createRecipe })(RecipesNewWizard3Instructions));
+})(RecipesNewWizard3Instructions)
