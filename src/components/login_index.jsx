@@ -2,7 +2,6 @@ import "./login_index.css"
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { authLogin } from "../actions";
 
 import { Field, reduxForm } from "redux-form";

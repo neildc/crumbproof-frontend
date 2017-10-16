@@ -3,11 +3,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchActivities } from "../actions";
-import {List} from 'material-ui/List';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import CPCard from './crumbproof_card.jsx';
-import {GridList, GridTile} from 'material-ui/GridList';
+import { GridTile } from 'material-ui/GridList';
+import LinearProgress from 'material-ui/LinearProgress';
 import './activity_index.css';
 
 
@@ -18,8 +18,12 @@ class ActivityIndex extends Component {
 
   renderActivityTiles() {
 
-    return _.map(this.props.activities, activity => {
+    // Need to _.values as activities is an object
+    if (_.values(this.props.activities).length === 0) {
+      return <LinearProgress mode="indeterminate" />;
+    }
 
+    return _.map(this.props.activities, activity => {
       return (
         <GridTile
           className="galleryTile"
