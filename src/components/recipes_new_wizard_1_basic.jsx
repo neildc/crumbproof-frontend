@@ -67,15 +67,8 @@ const RecipesNewWizard1Basic = (props) => {
   )
 }
 
-function validate(values) {
-  const errors = {};
-
-  return errors;
-}
-
 export default reduxForm({
   form: RECIPE_NEW_FORM_NAME,
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate
 })(RecipesNewWizard1Basic)
