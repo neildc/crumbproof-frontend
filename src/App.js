@@ -12,7 +12,8 @@ import crumbproofTheme from './theme';
 
 import reducers from "./reducers";
 
-import Header from "./components/header"
+import Header from "./components/header";
+import RequireAuth from "./components/hoc/require_auth";
 
 import LoginIndex from "./components/login_index";
 import RecipesIndex from "./components/recipes_index";
@@ -25,6 +26,23 @@ import ActivityShow from "./components/activity_show";
 
 
 class App extends React.Component {
+
+  routes() {
+    return (
+      <Switch>
+        <Route path="/recipes/new" component={
+          RequireAuth(RecipesNew, "Please sign in to create a new recipe")}/>
+        <Route path="/recipes/:id" component={RecipesShow} />
+        <Route path="/recipes" component={RecipesIndex} />
+        <Route path="/activity/new" component={
+          RequireAuth(ActivityNew, "Please sign in to create a new activity")} />
+        <Route path="/activity/:id" component={ActivityShow} />
+        <Route path="/activity" component={ActivityIndex} />
+        <Route path="/login" component={LoginIndex} />
+        <Route path="/" component={RecipesIndex} />
+      </Switch>
+    );
+  }
 
   render() {
 
@@ -40,16 +58,7 @@ class App extends React.Component {
                 <Header/>
                 <div className="container">
                   <div className="main">
-                    <Switch>
-                      <Route path="/recipes/new" component={RecipesNew} />
-                      <Route path="/recipes/:id" component={RecipesShow} />
-                      <Route path="/recipes" component={RecipesIndex} />
-                      <Route path="/activity/new" component={ActivityNew} />
-                      <Route path="/activity/:id" component={ActivityShow} />
-                      <Route path="/activity" component={ActivityIndex} />
-                      <Route path="/login" component={LoginIndex} />
-                      <Route path="/" component={RecipesIndex} />
-                    </Switch>
+                    {this.routes()}
                   </div>
                 </div>
               </div>
