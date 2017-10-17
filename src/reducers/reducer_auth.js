@@ -1,6 +1,7 @@
 import {
   AUTH_LOGIN,
   AUTH_LOGOUT,
+  AUTH_FORBIDDEN,
   AUTH_CLEAR_ERROR
 } from "../actions/actions_auth";
 
@@ -41,6 +42,9 @@ export default function(state = {}, action) {
   case AUTH_LOGOUT:
     localStorage.removeItem('token');
     return {"user": null};
+
+  case AUTH_FORBIDDEN:
+    return {"error": action.payload};
 
   case AUTH_CLEAR_ERROR:
     return {...state, "error": null};

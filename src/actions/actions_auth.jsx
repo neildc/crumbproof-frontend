@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const AUTH_LOGIN = "auth_login";
 export const AUTH_LOGOUT = "auth_logout";
+export const AUTH_FORBIDDEN = "auth_forbidden";
 export const AUTH_CLEAR_ERROR = "auth_clear_error";
 
 const ROOT_URL = "http://localhost:8000";
@@ -26,6 +27,15 @@ export function authLogout () {
   return {
     type: AUTH_LOGOUT,
     payload: null
+  };
+}
+
+
+export function authForbidden (errorMessage) {
+
+  return {
+    type: AUTH_FORBIDDEN,
+    payload: errorMessage
   };
 }
 
