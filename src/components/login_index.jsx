@@ -2,7 +2,7 @@ import "./login_index.css"
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { authLogin, authClearError } from "../actions";
+import { authLogin, authClearError } from "../actions/actions_auth.jsx";
 
 import { Field, reduxForm } from "redux-form";
 import TextField from 'material-ui/TextField';
@@ -34,7 +34,6 @@ class LoginIndex extends Component {
 
   onSubmit(values) {
     this.props.authLogin(values, (resp) => {
-      localStorage.setItem('token', resp.data.key);
       this.props.history.push("/");
     }
   )};
@@ -74,7 +73,7 @@ class LoginIndex extends Component {
 
             <Snackbar
               open={this.props.error != null}
-              message={this.props.error}
+              message={this.props.error ? this.props.error : ""}
               autoHideDuration={5000}
               style={{backgroundColor: "red"}}
               onRequestClose={this.props.authClearError}

@@ -1,4 +1,8 @@
-import { AUTH_LOGIN, AUTH_CLEAR_ERROR } from "../actions";
+import {
+  AUTH_LOGIN,
+  AUTH_LOGOUT,
+  AUTH_CLEAR_ERROR
+} from "../actions/actions_auth";
 
 const DEFAULT_ERROR_MESSAGE = "Please check your internet or try again later";
 
@@ -30,10 +34,17 @@ export default function(state = {}, action) {
       return {"error": DEFAULT_ERROR_MESSAGE};
 
     } else {
-      return state;
+      localStorage.setItem('token', action.payload.token);
+      return {"user": action.payload.user};
     }
+
+  case AUTH_LOGOUT:
+    localStorage.removeItem('token');
+    return {"user": null};
+
   case AUTH_CLEAR_ERROR:
     return {...state, "error": null};
+
   default:
     return state;
   }
