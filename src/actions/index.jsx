@@ -10,30 +10,7 @@ export const FETCH_ACTIVITY = "fetch_activity";
 export const CREATE_ACTIVITY = "create_activity";
 export const DELETE_ACTIVITY = "delete_activity";
 
-export const AUTH_LOGIN = "auth_login";
-export const AUTH_CLEAR_ERROR = "auth_clear_error";
-
 const ROOT_URL = "http://localhost:8000";
-
-export function authLogin(values, callback) {
-
-  const request = axios
-    .post(`${ROOT_URL}/rest-auth/login/`, values)
-    .then((resp) => callback(resp))
-
-  return {
-    type: AUTH_LOGIN,
-    payload: request
-  };
-}
-
-export function authClearError () {
-
-  return {
-    type: AUTH_CLEAR_ERROR,
-    payload: null
-  };
-}
 
 export function fetchRecipes() {
   const request = axios.get(`${ROOT_URL}/recipes/`);
