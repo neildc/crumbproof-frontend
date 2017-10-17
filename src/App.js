@@ -9,10 +9,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import crumbproofTheme from './theme';
-import AppBar from 'material-ui/AppBar';
-import FlatButton from 'material-ui/FlatButton';
 
 import reducers from "./reducers";
+
+import Header from "./components/header"
+
 import LoginIndex from "./components/login_index";
 import RecipesIndex from "./components/recipes_index";
 import RecipesNew from "./components/recipes_new";
@@ -22,8 +23,6 @@ import ActivityIndex from "./components/activity_index";
 import ActivityNew from "./components/activity_new";
 import ActivityShow from "./components/activity_show";
 
-import { Link } from "react-router-dom";
-import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
 
 class App extends React.Component {
 
@@ -38,20 +37,7 @@ class App extends React.Component {
         <MuiThemeProvider muiTheme={crumbproofTheme}>
             <BrowserRouter>
               <div className="bg">
-                <div style={{position:"fixed", width:"100%", zIndex: 3}}>
-                  <AppBar
-                    className="appBar"
-                    title="crumb proof"
-                    showMenuIconButton={false}
-                    iconElementRight={<FlatButton containerElement={<Link to="/login"/>} label={"Login"} />}
-                  />
-                  <Toolbar className="toolbar">
-                    <ToolbarGroup>
-                      <FlatButton containerElement={<Link to="/activity"/>} label={"Activites"} />
-                      <FlatButton containerElement={<Link to="/recipies"/>} label={"Recipes"} />
-                    </ToolbarGroup>
-                  </Toolbar>
-                </div>
+                <Header/>
                 <div className="container">
                   <div className="main">
                     <Switch>
