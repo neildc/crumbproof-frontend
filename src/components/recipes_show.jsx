@@ -110,6 +110,13 @@ class RecipesShow extends Component {
             </div>
           </div>
         }/>
+        <div className="recipeMeta">
+          <div><b>BY  </b> {recipe.user_id}</div>
+          <div><b>PREP  </b> {recipe.prep_time} mins</div>
+          <div><b>BAKE  </b> {recipe.bake_time} mins at {recipe.oven_temperature}°</div>
+          <div><b>YIELDS  </b> {recipe.yield_count} {recipe.yield_type}</div>
+        </div>
+        <div style={{padding:"30px"}}>
           <RaisedButton
             label="Delete Recipe"
             icon={<DeleteIcon/>}
@@ -118,11 +125,6 @@ class RecipesShow extends Component {
             onClick={this.onDeleteClick.bind(this)}
             style={{float: "right"}}
           />
-          <p>Created by: {recipe.user_id}</p>
-          <p>Prep time: {recipe.prep_time} mins</p>
-          <p>Bake time: {recipe.bake_time} mins</p>
-          <p>Oven Temperature: {recipe.oven_temperature}°C</p>
-          <p>Yields {recipe.yield_count} {recipe.yield_type}</p>
 
           <h3>Ingredients</h3>
           <ul>
