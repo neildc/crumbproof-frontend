@@ -10,8 +10,9 @@ import Paper from 'material-ui/Paper';
 import { RECIPE_NEW_FORM_NAME } from '../constants/form_names';
 
 const renderInstructions = ({ fields }) => (
-  <ul>
+  <ul style={{listStyle:"none"}}>
     {fields.map((step, index) =>
+      <li key={index}>
         <div style={{display:"flex", flexDirection:"row"}}>
           <Field
             label={`Step ${index + 1}`}
@@ -21,10 +22,11 @@ const renderInstructions = ({ fields }) => (
             component={renderTextField}
           />
           <Field
-            label={"Amount of time till next step (minutes)"}
+            label={"Duration/timegap"}
             name={`${step}.time_gap_to_next`}
-            style={{marginLeft:"10px"}}
+            style={{marginLeft:"30px"}}
             validation={[isNumber]}
+            parse={value => Number(value)}
             type="number"
             component={renderTextField}
           />
@@ -35,6 +37,7 @@ const renderInstructions = ({ fields }) => (
             <DeleteIcon/>
           </IconButton>
         </div>
+      </li>
     )}
     <RaisedButton type="button" onClick={() => fields.push({})} label="Add Step"/>
 

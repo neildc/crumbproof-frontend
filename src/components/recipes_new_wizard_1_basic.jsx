@@ -22,13 +22,14 @@ const RecipesNewWizard1Basic = (props) => {
         <Field
           label="Prep Time (minutes)"
           name="prep_time"
-          parse={value => Number(value)}
+          type="number"
           component={renderTextField}
           validate={[ required, isNumber ]}
         />
         <Field
           label="Bake Time (minutes)"
           name="bake_time"
+          type="number"
           component={renderTextField}
           parse={value => Number(value)}
           validate={[ required, isNumber ]}
@@ -37,6 +38,7 @@ const RecipesNewWizard1Basic = (props) => {
         <Field
           label="Oven Temperature (°C)"
           name="oven_temperature"
+          type="number"
           component={renderTextField}
           parse={value => Number(value)}
           validate={[ required, isNumber ]}
@@ -45,6 +47,7 @@ const RecipesNewWizard1Basic = (props) => {
         <Field
           label="Yield Count"
           name="yield_count"
+          type="number"
           component={renderTextField}
           parse={value => Number(value)}
           validate={[ required, isNumber ]}

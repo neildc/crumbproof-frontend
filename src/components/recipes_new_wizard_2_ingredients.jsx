@@ -11,9 +11,9 @@ import { RECIPE_NEW_FORM_NAME } from '../constants/form_names';
 
 const renderIngredients = ({ fields, meta: { error } }) => (
 
-  <ul>
+  <ul style={{listStyle:"none"}}>
     {fields.map((ingredient, index) =>
-      <div>
+      <li key={index}>
         <div style={{display:"flex", flexDirection:"row"}}>
           <h4>Ingredient #{index + 1}</h4>
           <IconButton
@@ -34,6 +34,7 @@ const renderIngredients = ({ fields, meta: { error } }) => (
           label="Quantity"
           name={`${ingredient}.quantity`}
           component={renderTextField}
+          type="number"
           parse={value => Number(value)}
           validate={[ required, isNumber ]}
         />
@@ -43,7 +44,7 @@ const renderIngredients = ({ fields, meta: { error } }) => (
           component={renderTextField}
           validate={[ required ]}
         />
-      </div>
+      </li>
     )}
     <RaisedButton type="button" onClick={() => fields.push({})} label="Add Ingredient"/>
 

@@ -12,6 +12,7 @@ export default function renderTextField(field) {
           errorText={touched && error}
           {...field.input}
           {...field.custom}
+          type={field.type}
       />
     </div>
   );
