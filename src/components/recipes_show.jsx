@@ -123,7 +123,7 @@ class RecipesShow extends Component {
             backgroundColor={"red"}
             labelColor={"white"}
             onClick={this.onDeleteClick.bind(this)}
-            style={{float: "right"}}
+            className={"deleteButton"}
           />
 
           <h3>Ingredients</h3>
