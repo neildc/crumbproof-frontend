@@ -16,6 +16,7 @@ import Header from "./components/header";
 import RequireAuth from "./components/hoc/require_auth";
 
 import LoginIndex from "./components/login_index";
+import RegisterIndex from "./components/register_index";
 import RecipesIndex from "./components/recipes_index";
 import RecipesNew from "./components/recipes_new";
 import RecipesShow from "./components/recipes_show";
@@ -39,6 +40,7 @@ class App extends React.Component {
         <Route path="/activity/:id" component={ActivityShow} />
         <Route path="/activity" component={ActivityIndex} />
         <Route path="/login" component={LoginIndex} />
+        <Route path="/register" component={RegisterIndex} />
         <Route path="/" component={RecipesIndex} />
       </Switch>
     );

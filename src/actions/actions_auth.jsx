@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const AUTH_LOGIN = "auth_login";
 export const AUTH_LOGOUT = "auth_logout";
+export const AUTH_REGISTER = "auth_register";
 export const AUTH_FORBIDDEN = "auth_forbidden";
 export const AUTH_CLEAR_ERROR = "auth_clear_error";
 
@@ -30,6 +31,21 @@ export function authLogout () {
   };
 }
 
+export function authRegister(values, callback) {
+
+  const request = axios
+    .post(`${ROOT_URL}/rest-auth/registration/`, values)
+    .then((resp) => {
+      callback();
+      return ({user:values.username, token:resp.data.key});
+    });
+
+
+  return {
+    type: AUTH_REGISTER,
+    payload: request
+  };
+}
 
 export function authForbidden (errorMessage) {
 

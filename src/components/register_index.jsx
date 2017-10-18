@@ -1,9 +1,8 @@
-import "./login_index.css"
+import "./register_index.css"
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { authLogin, authClearError } from "../actions/actions_auth.jsx";
+import { authRegister, authClearError } from "../actions/actions_auth.jsx";
 
 import { Field, reduxForm } from "redux-form";
 import TextField from 'material-ui/TextField';
@@ -14,7 +13,7 @@ import {required} from "../validators.js";
 
 import Snackbar from 'material-ui/Snackbar';
 
-class LoginIndex extends Component {
+class RegisterIndex extends Component {
 
   renderField(field) {
       const { meta: { touched, error } } = field;
@@ -35,20 +34,20 @@ class LoginIndex extends Component {
   }
 
   onSubmit(values) {
-    this.props.authLogin(values, (resp) => {
+    this.props.authRegister(values, (resp) => {
       this.props.history.push("/");
-    }
-  )};
+    });
+  }
 
   render() {
     const { handleSubmit } = this.props;
 
       return(
-          <Card className="loginCard">
-            <CardTitle title="Login" className="loginCardTitle"/>
+          <Card className="registerCard">
+            <CardTitle title="Register" className="registerCardTitle"/>
 
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}
-                  className="loginForm">
+                  className="registerForm">
 
                 <Field
                     label="Username"
@@ -58,24 +57,26 @@ class LoginIndex extends Component {
                 />
                 <Field
                     label="Password"
-                    name="password"
+                    name="password1"
+                    type="password"
+                    component={this.renderField}
+                    validate={[ required ]}
+                />
+
+                <Field
+                    label="Confirm Password"
+                    name="password2"
                     type="password"
                     component={this.renderField}
                     validate={[ required ]}
                 />
 
                 <RaisedButton
-                    className="loginButton"
+                    className="registerButton"
                     type="submit"
                     primary={true}
-                    label="Login"
-                    fullWidth={true}
-                />
-                <RaisedButton
-                    type="button"
                     label="Register"
                     fullWidth={true}
-                    containerElement={<Link to="/register"/>}
                 />
 
             </form>
@@ -97,5 +98,5 @@ function mapStateToProps({ auth }, ownProps) {
 }
 
 export default reduxForm({
-  form: "LoginForm"
-})(connect(mapStateToProps, { authLogin, authClearError })(LoginIndex));
+  form: "RegisterForm"
+})(connect(mapStateToProps, { authRegister, authClearError })(RegisterIndex));

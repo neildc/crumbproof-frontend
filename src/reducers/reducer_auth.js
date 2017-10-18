@@ -1,6 +1,7 @@
 import {
   AUTH_LOGIN,
   AUTH_LOGOUT,
+  AUTH_REGISTER,
   AUTH_FORBIDDEN,
   AUTH_CLEAR_ERROR
 } from "../actions/actions_auth";
@@ -20,7 +21,6 @@ export default function(state = {}, action) {
      *  https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux
      * so that we can access history anywhere including here.
      */
-    // localStorage.setItem('token', action.payload.data.key);
     if (action.error) {
       if (action.payload.response) {
 
@@ -42,6 +42,47 @@ export default function(state = {}, action) {
   case AUTH_LOGOUT:
     localStorage.removeItem('token');
     return {"user": null};
+
+  case AUTH_REGISTER:
+
+    /* TODO : Use SubmitValidation from redux-form to show per field errors
+     *            https://redux-form.com/7.1.1/examples/submitvalidation/
+     */
+
+    if (action.error) {
+      if (action.payload.response) {
+
+        let resp = action.payload.response;
+
+        switch (resp.status) {
+        case (400):
+          let fields = [ "username"
+                       , "password1"
+                       , "password2"
+                       , "non_field_errors"
+                       ];
+
+          /* For now we will just show the first error that appears
+           * from the response, its not great but it beats having
+           * no user feedback at all
+           */
+          for (let field of fields) {
+            if (resp.data[field]) {
+              return {"error": resp.data[field][0]};
+            }
+          }
+          break;
+        default:
+          return {"error": DEFAULT_ERROR_MESSAGE};
+        }
+
+      }
+      return {"error": DEFAULT_ERROR_MESSAGE};
+
+    } else {
+      localStorage.setItem('token', action.payload.token);
+      return {"user": action.payload.user};
+    }
 
   case AUTH_FORBIDDEN:
     return {"error": action.payload};
