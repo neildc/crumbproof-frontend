@@ -117,14 +117,17 @@ class RecipesShow extends Component {
           <div><b>YIELDS  </b> {recipe.yield_count} {recipe.yield_type}</div>
         </div>
         <div style={{padding:"30px"}}>
-          <RaisedButton
-            label="Delete Recipe"
-            icon={<DeleteIcon/>}
-            backgroundColor={"red"}
-            labelColor={"white"}
-            onClick={this.onDeleteClick.bind(this)}
-            className={"deleteButton"}
-          />
+
+          {(this.props.user === recipe.user_id) &&
+            <RaisedButton
+              label="Delete Recipe"
+              icon={<DeleteIcon/>}
+              backgroundColor={"red"}
+              labelColor={"white"}
+              onClick={this.onDeleteClick.bind(this)}
+              className={"deleteButton"}
+            />
+          }
 
           <h3>Ingredients</h3>
           <ul>
@@ -141,8 +144,11 @@ class RecipesShow extends Component {
   }
 }
 
-function mapStateToProps({ recipes }, ownProps) {
-  return { recipe: recipes[ownProps.match.params.id] };
+function mapStateToProps({ recipes, auth }, ownProps) {
+  return {
+    recipe: recipes[ownProps.match.params.id],
+    user: auth.user
+  };
 }
 
 export default connect(mapStateToProps, { fetchRecipe, deleteRecipe })(RecipesShow);
