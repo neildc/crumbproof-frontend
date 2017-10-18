@@ -1,3 +1,4 @@
+import "./recipes_show.css";
 import React, { Component } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
