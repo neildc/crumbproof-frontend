@@ -1,3 +1,4 @@
+import "./recipes_show.css";
 import React, { Component } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
@@ -10,10 +11,13 @@ import {
   StepContent,
 } from 'material-ui/Stepper';
 import LinearProgress from 'material-ui/LinearProgress';
-import CPCard from "./crumbproof_card.jsx";
 import RaisedButton from 'material-ui/RaisedButton';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
+import IconButton from 'material-ui/IconButton';
+import BackIcon from 'material-ui/svg-icons/navigation/arrow-back';
+import { Card, CardTitle } from 'material-ui/Card';
 import moment from "moment";
+
 
 class RecipesShow extends Component {
 
@@ -93,21 +97,37 @@ class RecipesShow extends Component {
     }
 
     return (
-      <CPCard title={recipe.name} titleChildren={<Link to="/">Back To Index</Link>}>
-        <div>
-          <RaisedButton
-            label="Delete Recipe"
-            icon={<DeleteIcon/>}
-            backgroundColor={"red"}
-            labelColor={"white"}
-            onClick={this.onDeleteClick.bind(this)}
-            style={{float: "right"}}
-          />
-          <p>Created by: {recipe.user_id}</p>
-          <p>Prep time: {recipe.prep_time} mins</p>
-          <p>Bake time: {recipe.bake_time} mins</p>
-          <p>Oven Temperature: {recipe.oven_temperature}°C</p>
-          <p>Yields {recipe.yield_count} {recipe.yield_type}</p>
+
+      <Card containerStyle={{marginBottom:"50px"}}>
+        <CardTitle className="cardTitle" title={
+          <div className="cardTitleContents">
+            <IconButton tooltip="Back to recipes"
+                        containerElement={<Link to="/recipes"/>}>
+              <BackIcon color="#999"/>
+            </IconButton>
+            <div style={{paddingTop:"5px"}}>
+              {recipe.name}
+            </div>
+          </div>
+        }/>
+        <div className="recipeMeta">
+          <div><b>BY  </b> {recipe.user_id}</div>
+          <div><b>PREP  </b> {recipe.prep_time} mins</div>
+          <div><b>BAKE  </b> {recipe.bake_time} mins at {recipe.oven_temperature}°</div>
+          <div><b>YIELDS  </b> {recipe.yield_count} {recipe.yield_type}</div>
+        </div>
+        <div style={{padding:"30px"}}>
+
+          {(this.props.user === recipe.user_id) &&
+            <RaisedButton
+              label="Delete Recipe"
+              icon={<DeleteIcon/>}
+              backgroundColor={"red"}
+              labelColor={"white"}
+              onClick={this.onDeleteClick.bind(this)}
+              className={"deleteButton"}
+            />
+          }
 
           <h3>Ingredients</h3>
           <ul>
@@ -119,13 +139,16 @@ class RecipesShow extends Component {
             {this.renderSteps()}
           </Stepper>
         </div>
-      </CPCard>
+      </Card>
     );
   }
 }
 
-function mapStateToProps({ recipes }, ownProps) {
-  return { recipe: recipes[ownProps.match.params.id] };
+function mapStateToProps({ recipes, auth }, ownProps) {
+  return {
+    recipe: recipes[ownProps.match.params.id],
+    user: auth.user
+  };
 }
 
 export default connect(mapStateToProps, { fetchRecipe, deleteRecipe })(RecipesShow);

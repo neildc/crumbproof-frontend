@@ -1,0 +1,26 @@
+.cardTitle {
+    background-color: #eee;
+}
+
+.cardTitleContents {
+    display: flex;
+    flex-direction: row;
+}
+
+.recipeMeta {
+    padding:10px 60px;
+    background: #555;
+    color: #fff;
+}
+
+@media (min-width:768px) {
+    .recipeMeta {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .deleteButton {
+        float:right;
+    }
+}
