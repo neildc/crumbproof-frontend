@@ -1,4 +1,5 @@
 import {
+  AUTH_CHECK_LOCAL_STORAGE,
   AUTH_LOGIN,
   AUTH_LOGOUT,
   AUTH_REGISTER,
@@ -36,11 +37,13 @@ export default function(state = {}, action) {
 
     } else {
       localStorage.setItem('token', action.payload.token);
+      localStorage.setItem('user', action.payload.user);
       return {"user": action.payload.user};
     }
 
   case AUTH_LOGOUT:
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     return {"user": null};
 
   case AUTH_REGISTER:
@@ -81,6 +84,7 @@ export default function(state = {}, action) {
 
     } else {
       localStorage.setItem('token', action.payload.token);
+      localStorage.setItem('user', action.payload.user);
       return {"user": action.payload.user};
     }
 
@@ -89,6 +93,15 @@ export default function(state = {}, action) {
 
   case AUTH_CLEAR_ERROR:
     return {...state, "error": null};
+
+  case AUTH_CHECK_LOCAL_STORAGE:
+    if (localStorage.getItem("token") !== null
+     && localStorage.getItem("user") !== null ) {
+
+
+      return {...state, "user": localStorage.getItem("user")};
+    }
+    return state;
 
   default:
     return state;

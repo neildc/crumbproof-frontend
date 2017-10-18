@@ -1,16 +1,10 @@
 import './index.css';
 
 import React from "react";
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
+import { connect } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import promise from "redux-promise";
-import { composeWithDevTools } from 'redux-devtools-extension';
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import crumbproofTheme from './theme';
-
-import reducers from "./reducers";
+import { authCheckLocalStorage } from "./actions/actions_auth";
 
 import Header from "./components/header";
 import RequireAuth from "./components/hoc/require_auth";
@@ -27,6 +21,10 @@ import ActivityShow from "./components/activity_show";
 
 
 class App extends React.Component {
+
+  componentDidMount() {
+    this.props.authCheckLocalStorage();
+  }
 
   routes() {
     return (
@@ -47,28 +45,19 @@ class App extends React.Component {
   }
 
   render() {
-
-    const store = createStore(reducers, composeWithDevTools(
-      applyMiddleware(promise),
-    ));
-
     return (
-      <Provider store={store}>
-        <MuiThemeProvider muiTheme={crumbproofTheme}>
-            <BrowserRouter>
-              <div className="bg">
-                <Header/>
-                <div className="container">
-                  <div className="main">
-                    {this.routes()}
-                  </div>
-                </div>
-              </div>
-            </BrowserRouter>
-        </MuiThemeProvider>
-      </Provider>
+      <BrowserRouter>
+        <div className="bg">
+          <Header/>
+          <div className="container">
+            <div className="main">
+              {this.routes()}
+            </div>
+          </div>
+        </div>
+      </BrowserRouter>
     );
   }
 }
 
-export default App;
+export default connect(null, {authCheckLocalStorage})(App)

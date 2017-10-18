@@ -5,6 +5,7 @@ export const AUTH_LOGOUT = "auth_logout";
 export const AUTH_REGISTER = "auth_register";
 export const AUTH_FORBIDDEN = "auth_forbidden";
 export const AUTH_CLEAR_ERROR = "auth_clear_error";
+export const AUTH_CHECK_LOCAL_STORAGE = "auth_check_local_storage";
 
 const ROOT_URL = "http://localhost:8000";
 
@@ -59,6 +60,14 @@ export function authClearError () {
 
   return {
     type: AUTH_CLEAR_ERROR,
+    payload: null
+  };
+}
+
+export function authCheckLocalStorage () {
+
+  return {
+    type: AUTH_CHECK_LOCAL_STORAGE,
     payload: null
   };
 }
