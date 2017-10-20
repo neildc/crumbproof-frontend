@@ -30,7 +30,7 @@ class ActivityNew extends Component {
 
   renderTimePicker = (field) => {
     return (
-      <div style={{padding:"20px"}}>
+      <div >
         {field.label}
         <TimePicker
           hintText={"Please enter a time"}
@@ -76,7 +76,6 @@ class ActivityNew extends Component {
       </div>
     );
   }
-
 
   onSubmit(values) {
     return this.props.createActivity(values, () => {
