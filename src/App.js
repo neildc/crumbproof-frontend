@@ -22,7 +22,7 @@ import ActivityShow from "./components/activity_show";
 
 class App extends React.Component {
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.authCheckLocalStorage();
   }
 
@@ -33,12 +33,17 @@ class App extends React.Component {
           RequireAuth(RecipesNew, "Please sign in to create a new recipe")}/>
         <Route path="/recipes/:id" component={RecipesShow} />
         <Route path="/recipes" component={RecipesIndex} />
+
+        <Route path="/activity/new/recipe/:recipeId" component={
+          RequireAuth(ActivityNew, "Please sign in to create a new activity")} />
         <Route path="/activity/new" component={
           RequireAuth(ActivityNew, "Please sign in to create a new activity")} />
         <Route path="/activity/:id" component={ActivityShow} />
         <Route path="/activity" component={ActivityIndex} />
+
         <Route path="/login" component={LoginIndex} />
         <Route path="/register" component={RegisterIndex} />
+
         <Route path="/" component={RecipesIndex} />
       </Switch>
     );

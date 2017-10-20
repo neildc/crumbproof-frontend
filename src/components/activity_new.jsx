@@ -78,6 +78,13 @@ class ActivityNew extends Component {
   }
 
   onSubmit(values) {
+
+    const { recipeId } = this.props.match.params;
+
+    if (recipeId) {
+      values.recipe_id = recipeId;
+    }
+
     return this.props.createActivity(values, () => {
       this.props.history.push("/activity");
     });

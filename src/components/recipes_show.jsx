@@ -12,11 +12,16 @@ import {
 } from 'material-ui/Stepper';
 import LinearProgress from 'material-ui/LinearProgress';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
+import AddIcon from 'material-ui/svg-icons/content/add-circle';
 import IconButton from 'material-ui/IconButton';
 import BackIcon from 'material-ui/svg-icons/navigation/arrow-back';
 import { Card, CardTitle } from 'material-ui/Card';
 import moment from "moment";
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 
 class RecipesShow extends Component {
@@ -32,6 +37,11 @@ class RecipesShow extends Component {
     this.props.deleteRecipe(id, () => {
       this.props.history.push("/");
     });
+  }
+
+  onRecordActivityClick() {
+    const { id } = this.props.match.params;
+    this.props.history.push(`/activity/new/recipe/${id}`);
   }
 
   renderIngredients() {
@@ -119,15 +129,26 @@ class RecipesShow extends Component {
         <div style={{padding:"30px"}}>
 
           {(this.props.user === recipe.user_id) &&
-            <RaisedButton
-              label="Delete Recipe"
-              icon={<DeleteIcon/>}
-              backgroundColor={"red"}
-              labelColor={"white"}
+            <IconMenu
+              iconButtonElement={<IconButton tooltip="Delete this recipe"><DeleteIcon/></IconButton>}
+              anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+              targetOrigin={{horizontal: 'left', vertical: 'top'}}
+              className={"recipeActions"}
+            >
+            <MenuItem
+              primaryText="Confirm Deletion"
+              leftIcon={<DeleteIcon color="black"/>}
               onClick={this.onDeleteClick.bind(this)}
-              className={"deleteButton"}
             />
+            </IconMenu>
           }
+            <RaisedButton
+              label="Record an activity with this recipe"
+              icon={<AddIcon/>}
+              labelColor={"white"}
+              onClick={this.onRecordActivityClick.bind(this)}
+              primary={true}
+            />
 
           <h3>Ingredients</h3>
           <ul>
