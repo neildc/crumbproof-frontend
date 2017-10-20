@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ROOT_URL } from "../constants/hosts";
 
 export const FETCH_RECIPES = "fetch_recipes";
 export const FETCH_RECIPE = "fetch_recipe";
@@ -10,7 +11,6 @@ export const FETCH_ACTIVITY = "fetch_activity";
 export const CREATE_ACTIVITY = "create_activity";
 export const DELETE_ACTIVITY = "delete_activity";
 
-const ROOT_URL = "http://localhost:8000";
 
 export function fetchRecipes() {
   const request = axios.get(`${ROOT_URL}/recipes/`);
