@@ -13,6 +13,7 @@ import {Card,  CardTitle} from 'material-ui/Card';
 import {required} from "../validators.js";
 
 import Snackbar from 'material-ui/Snackbar';
+import SubmitButton from "./SubmitButton";
 
 class LoginIndex extends Component {
 
@@ -35,13 +36,13 @@ class LoginIndex extends Component {
   }
 
   onSubmit(values) {
-    this.props.authLogin(values, (resp) => {
+    return this.props.authLogin(values, () => {
       this.props.history.push("/");
     }
   )};
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, submitting } = this.props;
 
       return(
           <Card className="loginCard">
@@ -64,12 +65,11 @@ class LoginIndex extends Component {
                     validate={[ required ]}
                 />
 
-                <RaisedButton
-                    className="loginButton"
-                    type="submit"
-                    primary={true}
-                    label="Login"
-                    fullWidth={true}
+                <SubmitButton
+                  label="Login"
+                  labelInProgress="Logging in..."
+                  submittingFlag={submitting}
+                  fullWidth={true}
                 />
                 <RaisedButton
                     type="button"

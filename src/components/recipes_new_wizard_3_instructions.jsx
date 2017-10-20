@@ -8,6 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 import renderTextField from "./redux_form_textfield"
 import Paper from 'material-ui/Paper';
 import { RECIPE_NEW_FORM_NAME } from '../constants/form_names';
+import SubmitButton from "./SubmitButton";
 
 const renderInstructions = ({ fields }) => (
   <ul style={{listStyle:"none"}}>
@@ -53,7 +54,7 @@ const renderInstructions = ({ fields }) => (
 class RecipesNewWizard3Instructions extends React.Component {
 
   render() {
-    const { handleSubmit, previousPage } = this.props;
+    const { handleSubmit, previousPage, submitting } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <div>
@@ -66,11 +67,13 @@ class RecipesNewWizard3Instructions extends React.Component {
             onClick={previousPage}
             style={{marginRight: 12}}
           />
-          <RaisedButton
-            label={"Submit"}
-            type={"submit"}
-            primary={true}
+
+          <SubmitButton
+            label="Submit Recipe"
+            labelInProgress="Submiting..."
+            submittingFlag={submitting}
           />
+
         </div>
       </form>
     )

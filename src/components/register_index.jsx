@@ -5,13 +5,13 @@ import { connect } from "react-redux";
 import { authRegister, authClearError } from "../actions/actions_auth.jsx";
 
 import { Field, reduxForm } from "redux-form";
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
 
+import TextField from 'material-ui/TextField';
 import {Card,  CardTitle} from 'material-ui/Card';
 import {required} from "../validators.js";
 
 import Snackbar from 'material-ui/Snackbar';
+import SubmitButton from "./SubmitButton";
 
 class RegisterIndex extends Component {
 
@@ -34,13 +34,13 @@ class RegisterIndex extends Component {
   }
 
   onSubmit(values) {
-    this.props.authRegister(values, (resp) => {
+    return this.props.authRegister(values, () => {
       this.props.history.push("/");
     });
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, submitting } = this.props;
 
       return(
           <Card className="registerCard">
@@ -71,12 +71,12 @@ class RegisterIndex extends Component {
                     validate={[ required ]}
                 />
 
-                <RaisedButton
-                    className="registerButton"
-                    type="submit"
-                    primary={true}
-                    label="Register"
-                    fullWidth={true}
+                <SubmitButton
+                  className="registerButton"
+                  submittingFlag={submitting}
+                  label="Register"
+                  labelInProgress="Registering..."
+                  fullWidth={true}
                 />
 
             </form>
