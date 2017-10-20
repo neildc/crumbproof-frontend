@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { createActivity } from "../actions";
-import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import CPCard from './crumbproof_card.jsx'
 import {required} from "../validators.js"
 import TimePicker from 'material-ui/TimePicker';
 import Dropzone from 'react-dropzone';
-import CircularProgress from 'material-ui/CircularProgress';
+import SubmitButton from "./SubmitButton";
 
 
 class ActivityNew extends Component {
@@ -130,19 +129,12 @@ class ActivityNew extends Component {
               name="oven_end"
               component={this.renderTimePicker}
             />
-            <div style={{marginTop: 12, display:"flex", flexDirection:"row", alignContent:"center"}}>
-              <RaisedButton
-                label={submitting ? 'Uploading...':'Submit'}
-                disabled={submitting}
-                type={'submit'}
-                primary={true}
-              />
-              {submitting &&
-                <CircularProgress style={{marginLeft:"10px", marginTop:"5px"}}
-                                  size={25}
-                                  thickness={3}/>
-              }
-            </div>
+
+            <SubmitButton
+              label="Submit"
+              labelInProgress="Submitting..."
+              submittingFlag={submitting}
+            />
           </form>
       </CPCard>
     );
