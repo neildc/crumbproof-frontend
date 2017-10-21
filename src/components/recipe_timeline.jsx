@@ -13,27 +13,28 @@ import {
 
 export default class RecipeTimeline extends Component {
 
-  calculateTimes(instructions, startTime) {
+  generateInstructionTimeline(instructions, startTime) {
     // instructions being passed in is simply a bunch of objects
-    var instructionsArray =  _.orderBy(instructions, ["step_number"], ["asc"]);
-    var i;
+    var instructionsArr =  _.orderBy(instructions, ["step_number"], ["asc"]);
 
-    instructionsArray[0].time = startTime;
+    var timeline = [startTime];
 
     // Accumulate the time gaps from the starttime
-    for (i = 0; i < instructionsArray.length - 1; i++) {
+    for (let i = 0; i < instructionsArr.length - 1; i++) {
 
       // time_gap_to_next is a Nullable field
-      if (instructionsArray[i].time_gap_to_next) {
-        instructionsArray[i+1].time = moment(instructions[i].time)
-                                      .add(instructions[i].time_gap_to_next, 'minutes')
+      if (instructionsArr[i].time_gap_to_next) {
+        timeline[i+1] = moment(timeline[i])
+                          .add(instructionsArr[i].time_gap_to_next, 'minutes');
       } else {
-        instructionsArray[i+1].time = moment(instructions[i].time)
-                                      .add(0, 'minutes')
+        timeline[i+1] = moment(timeline[i]);
       }
-
     }
-    return instructionsArray
+
+    return _.zipWith(timeline, instructionsArr, (time, instruction) => {
+      // Add the dates from the timeline back into the instructions
+      return Object.assign({}, instruction, {time})
+    })
   }
 
 
@@ -41,7 +42,7 @@ export default class RecipeTimeline extends Component {
 
     // TODO: replace moment.now() with a user controllable time input
     let timeNow = moment();
-    let instructionsWithTimes = this.calculateTimes(this.props.instructions, timeNow);
+    let instructionsWithTimes = this.generateInstructionTimeline(this.props.instructions, timeNow);
 
     return _.map(instructionsWithTimes, instruction => {
       return (
