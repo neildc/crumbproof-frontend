@@ -60,7 +60,7 @@ export default class RecipeTimeline extends Component {
       return (
         <Step key={instruction.step_number} active={true} >
           <StepLabel active={true} >
-            <span role="img" aria-label="Time">🕒 </span> {instruction.time.format("h:mmA on dddd")}
+            <span role="img" aria-label="Time">🕒 </span> {instruction.time.calendar()}
           </StepLabel>
           <StepContent active={true}>
             <p>
