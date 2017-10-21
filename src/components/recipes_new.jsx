@@ -49,7 +49,7 @@ class RecipesNew extends Component {
   };
 
   onSubmit(values) {
-    this.props.createRecipe(values, () => {
+    return this.props.createRecipe(values, () => {
       this.props.reset();
       this.props.history.push("/");
     });
