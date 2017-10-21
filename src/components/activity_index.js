@@ -29,7 +29,7 @@ class ActivityIndex extends Component {
           className="galleryTile"
           key={activity.id}
           title={activity.name}
-          subtitle={<span>by <b>{activity.user_id}</b></span>}
+          subtitle={<span>by <b>{activity.user}</b></span>}
           containerElement={
             <Link to={`/activity/${activity.id}`} />
           }

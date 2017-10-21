@@ -69,14 +69,14 @@ class RecipesShow extends Component {
           </div>
         }/>
         <div className="recipeMeta">
-          <div><b>BY  </b> {recipe.user_id}</div>
+          <div><b>BY  </b> {recipe.user}</div>
           <div><b>PREP  </b> {recipe.prep_time} mins</div>
           <div><b>BAKE  </b> {recipe.bake_time} mins at {recipe.oven_temperature}°</div>
           <div><b>YIELDS  </b> {recipe.yield_count} {recipe.yield_type}</div>
         </div>
         <div style={{padding:"30px"}}>
 
-          {(this.props.user === recipe.user_id) &&
+          {(this.props.user === recipe.user) &&
             <IconMenu
               iconButtonElement={<IconButton tooltip="Delete this recipe"><DeleteIcon/></IconButton>}
               anchorOrigin={{horizontal: 'left', vertical: 'top'}}

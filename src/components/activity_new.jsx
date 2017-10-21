@@ -81,7 +81,7 @@ class ActivityNew extends Component {
     const { recipeId } = this.props.match.params;
 
     if (recipeId) {
-      values.recipe_id = recipeId;
+      values.recipe = recipeId;
     }
 
     return this.props.createActivity(values, () => {

@@ -44,7 +44,7 @@ class ActivityShow extends Component {
       <CardMedia overlay={
         <CardTitle
           title={activity.name}
-          subtitle={`By ${activity.user_id}`}
+          subtitle={`By ${activity.user}`}
         />
       }
         style={{padding:"5px"}}>
@@ -60,9 +60,9 @@ class ActivityShow extends Component {
             style={{float: "right"}}
       />
 
-          { activity.recipe_id &&
+          { activity.recipe &&
             <div>
-              <b>Recipe Used:</b> <Link to={`/recipes/${activity.recipe_id}`}>{activity.recipe_name}</Link>
+              <b>Recipe Used:</b> <Link to={`/recipes/${activity.recipe}`}>{activity.recipe_name}</Link>
             </div>
           }
 
