@@ -4,24 +4,16 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchRecipe, deleteRecipe } from "../actions";
-import {
-  Step,
-  Stepper,
-  StepLabel,
-  StepContent,
-} from 'material-ui/Stepper';
 import LinearProgress from 'material-ui/LinearProgress';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import AddIcon from 'material-ui/svg-icons/content/add-circle';
 import IconButton from 'material-ui/IconButton';
 import BackIcon from 'material-ui/svg-icons/navigation/arrow-back';
 import { Card, CardTitle } from 'material-ui/Card';
-import moment from "moment";
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import RecipeTimeline from './recipe_timeline';
 
 
 class RecipesShow extends Component {
@@ -54,50 +46,6 @@ class RecipesShow extends Component {
     });
   };
 
-  calculateTimes(instructions, startTime) {
-    // instructions being passed in is simply a bunch of objects
-    var instructionsArray =  _.orderBy(instructions, ["step_number"], ["asc"]);
-    var i;
-
-    instructionsArray[0].time = startTime;
-
-    // Accumulate the time gaps from the starttime
-    for (i = 0; i < instructionsArray.length - 1; i++) {
-
-      // time_gap_to_next is a Nullable field
-      if (instructionsArray[i].time_gap_to_next) {
-        instructionsArray[i+1].time = moment(instructions[i].time)
-                                      .add(instructions[i].time_gap_to_next, 'minutes')
-      } else {
-        instructionsArray[i+1].time = moment(instructions[i].time)
-                                      .add(0, 'minutes')
-      }
-
-    }
-    return instructionsArray
-  }
-
-  renderSteps() {
-
-    // TODO: replace moment.now() with a user controllable time input
-    let timeNow = moment();
-    let instructionsWithTimes = this.calculateTimes(this.props.recipe.instructions, timeNow);
-
-    return _.map(instructionsWithTimes, instruction => {
-      return (
-        <Step key={instruction.step_number} active={true} >
-          <StepLabel active={true} >
-            <span role="img" aria-label="Time">🕒 </span> {instruction.time.format("h:mmA on dddd")}
-          </StepLabel>
-          <StepContent active={true}>
-            <p>
-              {instruction.content} {instruction.time_gap_to_next && `for ${instruction.time_gap_to_next} minutes`}
-            </p>
-          </StepContent>
-        </Step>
-      );
-    });
-  };
 
   render() {
     const { recipe } = this.props;
@@ -156,9 +104,7 @@ class RecipesShow extends Component {
           </ul>
 
           <h3>Instructions</h3>
-          <Stepper linear={true} orientation="vertical">
-            {this.renderSteps()}
-          </Stepper>
+          <RecipeTimeline instructions={this.props.recipe.instructions}/>
         </div>
       </Card>
     );
