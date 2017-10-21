@@ -13,18 +13,18 @@ html body{
 
 .container {
    display: grid;
-   padding: 20px;
+   padding: 10px;
    padding-top: 150px;
    justify-self: center;
    align-self: center;
    grid-area: "main";
-   grid-template-columns: minmax(300px, 750px);
+   grid-template-columns: minmax(200px, 640px);
    grid-template-areas: "main";
 }
 
-@media (min-width:768px) {
+@media (min-width:640px) {
     .container {
-        grid-template-columns: auto 750px auto;
+        grid-template-columns: auto 640px auto;
         grid-template-areas: ". main .";
     }
 
