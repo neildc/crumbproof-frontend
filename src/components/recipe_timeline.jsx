@@ -10,8 +10,21 @@ import {
   StepLabel,
   StepContent,
 } from 'material-ui/Stepper';
+import TimePicker from 'material-ui/TimePicker';
 
 export default class RecipeTimeline extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      recipeStartTime: moment()
+    };
+  }
+
+  handleTimePickerChange = (event, date) => {
+    debugger;
+    this.setState({recipeStartTime: moment(date)});
+  };
 
   generateInstructionTimeline(instructions, startTime) {
     // instructions being passed in is simply a bunch of objects
@@ -40,9 +53,8 @@ export default class RecipeTimeline extends Component {
 
   renderSteps() {
 
-    // TODO: replace moment.now() with a user controllable time input
-    let timeNow = moment();
-    let instructionsWithTimes = this.generateInstructionTimeline(this.props.instructions, timeNow);
+    let instructionsWithTimes = this.generateInstructionTimeline(this.props.instructions,
+                                                                 this.state.recipeStartTime);
 
     return _.map(instructionsWithTimes, instruction => {
       return (
@@ -62,9 +74,16 @@ export default class RecipeTimeline extends Component {
 
   render() {
     return (
-      <Stepper linear={true} orientation="vertical">
-        {this.renderSteps()}
-      </Stepper>
+      <div>
+        <TimePicker
+          format="ampm"
+          hintText="Change recipe start time"
+          onChange={this.handleTimePickerChange}
+        />
+        <Stepper linear={true} orientation="vertical">
+          {this.renderSteps()}
+        </Stepper>
+      </div>
     )
   }
 
