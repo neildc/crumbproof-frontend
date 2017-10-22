@@ -59,10 +59,12 @@ class RecipesNew extends Component {
     const { handleSubmit } = this.props;
     const { stepIndex} = this.state;
     const contentStyle = {margin: '0 16px'};
+    const width = window.innerWidth;
 
     return (
         <CPCard title={"New Recipe"}>
-          <Stepper activeStep={stepIndex}>
+          <Stepper activeStep={stepIndex}
+                   orientation={width < 640 ? "vertical" : "horizontal"}>
             {this.renderSteps(["Basic Details", "Ingredients", "Instructions"])}
           </Stepper>
 
