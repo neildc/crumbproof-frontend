@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import { createActivity } from "../actions";
+import { createActivity } from "../actions/actions_activity";
 import TextField from 'material-ui/TextField';
 import CPCard from './crumbproof_card.jsx'
 import {required} from "../validators.js"

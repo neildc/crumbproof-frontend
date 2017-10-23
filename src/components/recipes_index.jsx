@@ -2,7 +2,7 @@ import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchRecipes } from "../actions";
+import { fetchRecipes } from "../actions/actions_recipe";
 import {List, ListItem} from 'material-ui/List';
 import ContentSend from 'material-ui/svg-icons/content/send';
 import FloatingActionButton from 'material-ui/FloatingActionButton';

@@ -1,7 +1,7 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchActivity, deleteActivity } from "../actions";
+import { fetchActivity, deleteActivity } from "../actions/actions_activity";
 import { Link } from "react-router-dom";
 import LinearProgress from 'material-ui/LinearProgress';
 import RaisedButton from 'material-ui/RaisedButton';

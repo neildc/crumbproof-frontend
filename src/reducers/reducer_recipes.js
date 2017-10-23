@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { FETCH_RECIPES, FETCH_RECIPE, DELETE_RECIPE } from "../actions";
+import { FETCH_RECIPES, FETCH_RECIPE, DELETE_RECIPE } from "../actions/actions_recipe";
 
 export default function(state = {}, action) {
   switch (action.type) {

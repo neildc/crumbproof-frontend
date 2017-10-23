@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchRecipe, deleteRecipe } from "../actions";
+import { fetchRecipe, deleteRecipe } from "../actions/actions_recipe";
 import LinearProgress from 'material-ui/LinearProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
