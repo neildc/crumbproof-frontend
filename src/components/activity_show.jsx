@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchActivity, deleteActivity } from "../actions";
+import { Link } from "react-router-dom";
 import LinearProgress from 'material-ui/LinearProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
@@ -43,7 +44,7 @@ class ActivityShow extends Component {
       <CardMedia overlay={
         <CardTitle
           title={activity.name}
-          subtitle={`By ${activity.user_id}`}
+          subtitle={`By ${activity.user}`}
         />
       }
         style={{padding:"5px"}}>
@@ -58,6 +59,12 @@ class ActivityShow extends Component {
             onClick={this.onDeleteClick.bind(this)}
             style={{float: "right"}}
       />
+
+          { activity.recipe &&
+            <div>
+              <b>Recipe Used:</b> <Link to={`/recipes/${activity.recipe}`}>{activity.recipe_name}</Link>
+            </div>
+          }
 
           {activity.oven_start && activity.oven_end &&
             <p>In the oven: {moment(activity.oven_start).format('h:mm:ss a')} {" - "}
