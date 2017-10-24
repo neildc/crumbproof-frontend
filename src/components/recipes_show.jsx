@@ -1,6 +1,7 @@
 import "./recipes_show.css";
 import React, { Component } from "react";
 import _ from "lodash";
+import moment from "moment";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchRecipe, deleteRecipe } from "../actions/actions_recipe";
@@ -47,6 +48,12 @@ class RecipesShow extends Component {
     });
   };
 
+  getTotalTimeStr(instructions) {
+    let sumMinutes = _.sum(_.map(instructions, "time_gap_to_next"));
+    let hours = _.floor(sumMinutes/60);
+    let minutes = sumMinutes % 60;
+    return (hours > 0 ? `${hours}h ${minutes} mins`:`${minutes} mins`);
+  }
 
   render() {
     const { recipe } = this.props;
@@ -71,7 +78,7 @@ class RecipesShow extends Component {
         }/>
         <div className="recipeMeta">
           <div><b>BY  </b> {recipe.user}</div>
-          <div><b>PREP  </b> {recipe.prep_time} mins</div>
+          <div><b>TIME  </b> {this.getTotalTimeStr(recipe.instructions)}</div>
           <div><b>BAKE  </b> {recipe.bake_time} mins at {recipe.oven_temperature}°</div>
           <div><b>YIELDS  </b> {recipe.yield_count} {recipe.yield_type}</div>
         </div>

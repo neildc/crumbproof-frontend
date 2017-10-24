@@ -20,13 +20,6 @@ const RecipesNewWizard1Basic = (props) => {
         />
 
         <Field
-          label="Prep Time (minutes)"
-          name="prep_time"
-          type="number"
-          component={renderTextField}
-          validate={[ required, isNumber ]}
-        />
-        <Field
           label="Bake Time (minutes)"
           name="bake_time"
           type="number"
