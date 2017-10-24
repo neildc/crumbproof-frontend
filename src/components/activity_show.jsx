@@ -1,14 +1,9 @@
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchActivity, deleteActivity } from "../actions/actions_activity";
-import { Link } from "react-router-dom";
-import LinearProgress from 'material-ui/LinearProgress';
+import ActivityCard from "./activity_card";
 import RaisedButton from 'material-ui/RaisedButton';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
-import {Card, CardMedia, CardTitle} from 'material-ui/Card';
-import moment from "moment";
-
 
 class ActivityShow extends Component {
 
@@ -26,31 +21,13 @@ class ActivityShow extends Component {
   }
 
   render() {
-    const { activity } = this.props;
 
-    if (!activity) {
-      return <LinearProgress mode="indeterminate" />;
-    }
+    const { activity, user } = this.props;
 
-    var duration = null;
-
-    if (activity.completed && activity.started) {
-      duration = moment(activity.completed).diff(moment(activity.started), 'hours');
-    }
-
-    return (
-      <Card >
-
-      <CardMedia overlay={
-        <CardTitle
-          title={activity.name}
-          subtitle={`By ${activity.user}`}
-        />
-      }
-        style={{padding:"5px"}}>
-          <img src={activity.crumb_shot} alt=""/>
-        </CardMedia>
-        <div style={{padding:"30px"}}>
+    return(
+      <div>
+        <ActivityCard activity={activity}/>
+        {(activity && user === activity.user) &&
           <RaisedButton
             label="Delete Activity"
             icon={<DeleteIcon/>}
@@ -58,40 +35,18 @@ class ActivityShow extends Component {
             labelColor={"white"}
             onClick={this.onDeleteClick.bind(this)}
             style={{float: "right"}}
-      />
-
-          { activity.recipe &&
-            <div>
-              <b>Recipe Used:</b> <Link to={`/recipes/${activity.recipe}`}>{activity.recipe_name}</Link>
-            </div>
-          }
-
-          {activity.oven_start && activity.oven_end &&
-            <p>In the oven: {moment(activity.oven_start).format('h:mm:ss a')} {" - "}
-                            {moment(activity.oven_end).format('h:mm:ss a')}
-            </p>
-          }
-
-          { activity.completed &&
-            <p>Completed: {activity.completed}</p>
-          }
-
-          { duration &&
-            <p>Total duration: {duration} hours</p>
-          }
-
-          { activity.notes &&
-            <p>Notes for next time: {activity.notes}</p>
-          }
-
-        </div>
-      </Card>
+          />
+        }
+      </div>
     );
   }
 }
 
-function mapStateToProps({ activities }, ownProps) {
-  return { activity: activities[ownProps.match.params.id] };
+function mapStateToProps({ activities, auth }, ownProps) {
+  return {
+    activity: activities[ownProps.match.params.id],
+    user: auth.user
+  };
 }
 
 export default connect(mapStateToProps, { fetchActivity, deleteActivity })(ActivityShow);
