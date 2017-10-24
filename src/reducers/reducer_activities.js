@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { FETCH_ACTIVITIES, FETCH_ACTIVITY, DELETE_ACTIVITY } from "../actions/actions_activity";
+import { FETCH_RECIPE_ACTIVITIES } from "../actions/actions_recipe";
 
 export default function(state = {}, action) {
   switch (action.type) {
@@ -8,7 +9,8 @@ export default function(state = {}, action) {
   case FETCH_ACTIVITY:
     return { ...state, [action.payload.data.id]: action.payload.data };
   case FETCH_ACTIVITIES:
-    return _.mapKeys(action.payload.data.results, "id");
+  case FETCH_RECIPE_ACTIVITIES:
+    return {...state, ..._.mapKeys(action.payload.data.results, "id")};
   default:
     return state;
   }
