@@ -22,7 +22,8 @@ export default function(state = {}, action) {
       "byId" : {
         ...state["byId"],
         ..._.mapKeys(action.payload.data.results, "id"),
-      }
+      },
+      "next": action.payload.data.next
     };
 
   default:
