@@ -22,7 +22,7 @@ class Header extends React.Component {
       <div style={{position:"fixed", width:"100%", zIndex: 3}}>
         <AppBar
           className="appBar"
-          title="crumb proof"
+          title="crumbproof"
           showMenuIconButton={false}
           iconElementRight={this.authButton()}
         />
