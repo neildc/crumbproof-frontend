@@ -14,6 +14,7 @@ import { Card, CardTitle } from 'material-ui/Card';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import RecipeTimeline from './recipe_timeline';
+import ActivityGallery from './activities_gallery';
 
 
 class RecipesShow extends Component {
@@ -97,6 +98,10 @@ class RecipesShow extends Component {
               onClick={this.onRecordActivityClick.bind(this)}
               primary={true}
             />
+
+
+          <h3>Recent Activity</h3>
+          <ActivityGallery recipeId={Number(this.props.match.params.id)}/>
 
           <h3>Ingredients</h3>
           <ul>
