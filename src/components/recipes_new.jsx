@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import CPCard from './crumbproof_card.jsx'
 
 import { connect } from "react-redux";
-import { createRecipe } from "../actions";
+import { createRecipe } from "../actions/actions_recipe";
 import { reduxForm } from 'redux-form'
 
 import RecipesNewWizard1Basic from "./recipes_new_wizard_1_basic";
