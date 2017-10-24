@@ -18,11 +18,13 @@ class ActivityIndex extends Component {
   renderActivityCards() {
 
     // Need to _.values as activities is an object
-    if (_.values(this.props.activities).length === 0) {
+    if (_.values(this.props.activities.byId).length === 0) {
       return <LinearProgress mode="indeterminate" />;
     }
 
-    return _.map(this.props.activities, activity => {
+    let activities = _.orderBy(this.props.activities.byId, ['created'], ['desc']);
+
+    return _.map(activities, activity => {
       return (
         <div style={{marginBottom:"50px"}}>
           <ActivityCard key={activity.id} activity={activity}/>

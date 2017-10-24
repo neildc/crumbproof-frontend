@@ -43,8 +43,17 @@ class ActivityShow extends Component {
 }
 
 function mapStateToProps({ activities, auth }, ownProps) {
+
+  const getActivity = () => {
+    if (activities.byId && activities.byId[ownProps.match.params.id]) {
+      return activities.byId[ownProps.match.params.id]
+    } else {
+      return null
+    }
+  }
+
   return {
-    activity: activities[ownProps.match.params.id],
+    activity: getActivity(),
     user: auth.user
   };
 }

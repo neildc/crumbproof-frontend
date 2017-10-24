@@ -22,7 +22,7 @@ class ActivitiesGallery extends Component {
       return <LinearProgress mode="indeterminate" />;
     }
 
-    return _.map(this.props.activities.slice(0, NUM_TO_SHOW), activity => {
+    return _.map(this.props.related_activities.slice(0, NUM_TO_SHOW), activity => {
 
       const created = moment(activity.created).fromNow();
 
@@ -48,8 +48,8 @@ class ActivitiesGallery extends Component {
       return ("");
     }
 
-    if (this.props.activities.length > 0) {
-      return (`${this.props.activities.length} total activities`);
+    if (this.props.related_activities.length > 0) {
+      return (`${this.props.related_activities.length} total activities`);
     } else {
       return( "Be the first to record an activity with this recipe!");
     }
@@ -76,7 +76,7 @@ function mapStateToProps(state, ownProps) {
   let activityHistory = state.recipes[ownProps.recipeId].activity_history;
 
   return {
-    activities : _.filter(state.activities, {recipe: ownProps.recipeId}),
+    related_activities : _.filter(state.activities.byId, {recipe: ownProps.recipeId}),
     // undefined if its still loading, otherwise activityHistory should be
     // an array(possibly empty) once the fetchRecipeActivities action is complete
     loading: !activityHistory
