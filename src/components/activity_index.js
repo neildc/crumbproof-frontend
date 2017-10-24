@@ -8,7 +8,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import CPCard from './crumbproof_card.jsx';
 import { GridTile } from 'material-ui/GridList';
 import LinearProgress from 'material-ui/LinearProgress';
-import './activity_index.css';
+import './gallery.css';
 
 
 class ActivityIndex extends Component {
