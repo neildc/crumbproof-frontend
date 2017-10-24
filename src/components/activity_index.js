@@ -1,3 +1,4 @@
+import "./activity_index.css";
 import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -5,10 +6,8 @@ import { Link } from "react-router-dom";
 import { fetchActivities } from "../actions/actions_activity";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import CPCard from './crumbproof_card.jsx';
-import { GridTile } from 'material-ui/GridList';
 import LinearProgress from 'material-ui/LinearProgress';
-import './gallery.css';
+import ActivityCard from "./activity_card";
 
 
 class ActivityIndex extends Component {
@@ -16,7 +15,7 @@ class ActivityIndex extends Component {
     this.props.fetchActivities();
   }
 
-  renderActivityTiles() {
+  renderActivityCards() {
 
     // Need to _.values as activities is an object
     if (_.values(this.props.activities).length === 0) {
@@ -25,17 +24,9 @@ class ActivityIndex extends Component {
 
     return _.map(this.props.activities, activity => {
       return (
-        <GridTile
-          className="galleryTile"
-          key={activity.id}
-          title={activity.name}
-          subtitle={<span>by <b>{activity.user}</b></span>}
-          containerElement={
-            <Link to={`/activity/${activity.id}`} />
-          }
-        >
-          <img src={activity.crumb_shot} alt="" />
-        </GridTile>
+        <div style={{marginBottom:"50px"}}>
+          <ActivityCard key={activity.id} activity={activity}/>
+        </div>
       );
     });
   }
@@ -43,16 +34,16 @@ class ActivityIndex extends Component {
   render() {
 
     return (
-        <CPCard title="Activities">
-            <div className="galleryGrid" >
-              {this.renderActivityTiles()}
-            </div>
-            <div style={{float:"right"}}>
-                <FloatingActionButton containerElement={<Link to="/activity/new"/>}>
-                    <ContentAdd/>
-                </FloatingActionButton>
-            </div>
-        </CPCard>
+      <div>
+        <div className="addButton">
+          <FloatingActionButton containerElement={<Link to="/activity/new"/>}>
+            <ContentAdd/>
+          </FloatingActionButton>
+        </div>
+        <div>
+          {this.renderActivityCards()}
+        </div>
+      </div>
     );
   }
 }

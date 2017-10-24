@@ -1,0 +1,15 @@
+.addButton {
+    position: fixed !important;
+    bottom: 30px;
+    right: 30px;
+    z-index: 3;
+}
+
+
+@media (min-width:640px) {
+    .addButton{
+        bottom: 10%;
+        right: inherit;
+        padding-left:610px
+    }
+}
