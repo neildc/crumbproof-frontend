@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import LinearProgress from 'material-ui/LinearProgress';
 import {Card, CardMedia, CardTitle} from 'material-ui/Card';
 import moment from "moment";
+import ImageZoom from 'react-medium-image-zoom'
+
 
 export default function ActivityCard(props) {
 
@@ -20,16 +22,31 @@ export default function ActivityCard(props) {
 
   const created = moment(activity.created).fromNow();
 
+
   return (
     <Card >
 
-      <CardMedia overlay={
-        <CardTitle
-          title={activity.name}
-                subtitle={`${created} by ${activity.user}`}
+      <CardMedia
+        /*
+         *  Without this the overlay captures all click events
+         *  instead of the events being handled by the ImageZoom component
+         */
+        overlayContainerStyle={{pointerEvents:"none"}}
+        overlay={
+          <CardTitle
+            title={activity.name}
+            subtitle={`${created} by ${activity.user}`}
+          />
+        }>
+
+        <ImageZoom
+          image={{
+            src: activity.crumb_shot,
+            alt: '',
+            className: 'img',
+            style: { maxWidth: '100%' }
+          }}
         />
-      }>
-        <img src={activity.crumb_shot} alt=""/>
       </CardMedia>
 
       <div style={{padding:"30px"}}>
