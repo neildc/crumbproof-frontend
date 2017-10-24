@@ -3,11 +3,12 @@ import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchActivities } from "../actions/actions_activity";
+import { fetchActivities, fetchMoreActivities } from "../actions/actions_activity";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import LinearProgress from 'material-ui/LinearProgress';
 import ActivityCard from "./activity_card";
+import InfiniteScroll from 'react-infinite-scroller';
 
 
 class ActivityIndex extends Component {
@@ -33,6 +34,12 @@ class ActivityIndex extends Component {
     });
   }
 
+  loadMoreActivities() {
+    if (this.props.activities.next) {
+      this.props.fetchMoreActivities(this.props.activities.next);
+    }
+  }
+
   render() {
 
     return (
@@ -42,9 +49,21 @@ class ActivityIndex extends Component {
             <ContentAdd/>
           </FloatingActionButton>
         </div>
-        <div>
+
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={this.loadMoreActivities.bind(this)}
+          hasMore={this.props.activities.next}
+          loader={
+            <LinearProgress
+              mode="indeterminate"
+              style={{marginBottom:"30px"}}
+            />
+          }
+        >
           {this.renderActivityCards()}
-        </div>
+        </InfiniteScroll>
+
       </div>
     );
   }
@@ -54,4 +73,4 @@ function mapStateToProps(state) {
   return { activities: state.activities };
 }
 
-export default connect(mapStateToProps, { fetchActivities })(ActivityIndex);
+export default connect(mapStateToProps, { fetchActivities, fetchMoreActivities })(ActivityIndex);
