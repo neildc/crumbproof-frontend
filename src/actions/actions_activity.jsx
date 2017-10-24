@@ -15,6 +15,15 @@ export function fetchActivities() {
   };
 }
 
+export function fetchMoreActivities(url) {
+  const request = axios.get(url);
+
+  return {
+    type: FETCH_ACTIVITIES,
+    payload: request
+  };
+}
+
 export function createActivity(values, callback) {
 
   const request = axios
