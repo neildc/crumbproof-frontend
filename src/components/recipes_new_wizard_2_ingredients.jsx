@@ -8,6 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 import renderTextField from "./redux_form_textfield"
 import Paper from 'material-ui/Paper';
 import { RECIPE_NEW_FORM_NAME } from '../constants/form_names';
+import renderAutoComplete from './redux_form/auto_complete';
 
 const renderIngredients = ({ fields, meta: { error } }) => (
 
@@ -40,7 +41,8 @@ const renderIngredients = ({ fields, meta: { error } }) => (
         <Field
           label="Unit"
           name={`${ingredient}.unit`}
-          component={renderTextField}
+          suggestions={['mL', 'g', 'kg', 'mg', 'L', 'cup', 'teaspoon', 'tablespoon']}
+          component={renderAutoComplete}
           validate={[ required ]}
         />
       </li>

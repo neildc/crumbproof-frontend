@@ -4,6 +4,8 @@ import {required, isNumber } from "../validators.js";
 import RaisedButton from 'material-ui/RaisedButton';
 import renderTextField from "./redux_form_textfield";
 import { RECIPE_NEW_FORM_NAME } from '../constants/form_names';
+import renderAutoComplete from './redux_form/auto_complete';
+
 
 const RecipesNewWizard1Basic = (props) => {
 
@@ -45,7 +47,8 @@ const RecipesNewWizard1Basic = (props) => {
         <Field
           label="Yield Type"
           name="yield_type"
-          component={renderTextField}
+          suggestions ={['Loaf', 'Baguette', 'Roll', 'Bun', 'Bagel']}
+          component={renderAutoComplete}
           validate={[ required ]}
         />
       </div>
