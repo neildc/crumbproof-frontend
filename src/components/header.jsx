@@ -29,7 +29,7 @@ class Header extends React.Component {
         <Toolbar className="toolbar">
           <ToolbarGroup>
             <FlatButton containerElement={<Link to="/activity"/>} label={"Activites"} />
-            <FlatButton containerElement={<Link to="/recipies"/>} label={"Recipes"} />
+            <FlatButton containerElement={<Link to="/recipes"/>} label={"Recipes"} />
           </ToolbarGroup>
         </Toolbar>
       </div>
