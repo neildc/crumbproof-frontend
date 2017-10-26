@@ -23,7 +23,7 @@ const renderInstructions = ({ fields }) => (
             component={renderTextField}
           />
           <Field
-            label={"Duration/timegap"}
+            label={"Duration/timegap (optional)"}
             name={`${step}.time_gap_to_next`}
             style={{marginLeft:"30px"}}
             validation={[isNumber]}
