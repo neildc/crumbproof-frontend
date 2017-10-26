@@ -1,7 +1,6 @@
 import "./recipes_show.css";
 import React, { Component } from "react";
 import _ from "lodash";
-import moment from "moment";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchRecipe, deleteRecipe } from "../actions/actions_recipe";
@@ -29,7 +28,7 @@ class RecipesShow extends Component {
     const { id } = this.props.match.params;
 
     this.props.deleteRecipe(id, () => {
-      this.props.history.push("/");
+      this.props.history.push("/recipes");
     });
   }
 

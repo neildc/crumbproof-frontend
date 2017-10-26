@@ -5,7 +5,11 @@ import { FETCH_RECIPE_ACTIVITIES } from "../actions/actions_recipe";
 export default function(state = {}, action) {
   switch (action.type) {
   case DELETE_ACTIVITY:
-    return _.omit(state.byId, action.payload);
+
+    return {
+      ...state,
+      "byId" : _.omit(state.byId, action.payload)
+    };
 
   case FETCH_ACTIVITY:
     return {
