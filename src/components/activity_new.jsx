@@ -2,30 +2,15 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { createActivity } from "../actions/actions_activity";
-import TextField from 'material-ui/TextField';
 import CPCard from './crumbproof_card.jsx'
 import {required} from "../validators.js"
 import TimePicker from 'material-ui/TimePicker';
 import Dropzone from 'react-dropzone';
 import SubmitButton from "./SubmitButton";
+import renderTextField from "./redux_form/text_field";
 
 
 class ActivityNew extends Component {
-  renderField(field) {
-    const { meta: { touched, error } } = field;
-
-    return (
-      <div>
-        <TextField
-            hintText=""
-            floatingLabelText={field.label}
-            errorText={touched && error}
-            {...field.input}
-            {...field.custom}
-        />
-      </div>
-    );
-  }
 
   renderTimePicker = (field) => {
     return (
@@ -101,7 +86,7 @@ class ActivityNew extends Component {
             <Field
               label="Name For Activity"
               name="name"
-              component={this.renderField}
+              component={renderTextField}
               validate={[ required ]}
             />
             <Field
@@ -112,7 +97,7 @@ class ActivityNew extends Component {
             <Field
               label="Notes for next time"
               name="notes"
-              component={this.renderField}
+              component={renderTextField}
             />
             <Field
               label="Started"

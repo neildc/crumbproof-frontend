@@ -2,8 +2,8 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import {required, isNumber } from "../validators.js";
 import RaisedButton from 'material-ui/RaisedButton';
-import renderTextField from "./redux_form_textfield";
 import { RECIPE_NEW_FORM_NAME } from '../constants/form_names';
+import renderTextField from "./redux_form/text_field";
 import renderAutoComplete from './redux_form/auto_complete';
 
 
