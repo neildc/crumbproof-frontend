@@ -16,6 +16,7 @@ export default function renderAutoComplete(field) {
         dataSource={field.suggestions}
         filter={AutoComplete.fuzzyFilter}
         maxSearchResults={3}
+        onUpdateInput={(value) => {field.input.onChange(value)}}
     />
     </div>
   );
