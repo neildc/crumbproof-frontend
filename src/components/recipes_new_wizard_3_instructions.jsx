@@ -27,7 +27,6 @@ const renderInstructions = ({ fields }) => (
             name={`${step}.time_gap_to_next`}
             style={{marginLeft:"30px"}}
             validation={[isNumber]}
-            parse={value => Number(value)}
             type="number"
             component={renderTextField}
           />

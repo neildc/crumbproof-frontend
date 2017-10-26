@@ -35,7 +35,6 @@ const renderIngredients = ({ fields, meta: { error } }) => (
           name={`${ingredient}.quantity`}
           component={renderTextField}
           type="number"
-          parse={value => Number(value)}
           validate={[ required, isNumber ]}
         />
         <Field

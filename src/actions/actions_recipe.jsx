@@ -1,3 +1,4 @@
+import _ from "lodash";
 import axios from "axios";
 import { ROOT_URL } from "../constants/hosts";
 
@@ -16,12 +17,40 @@ export function fetchRecipes() {
   };
 }
 
+/*
+ * The values passed stored in the state from redux form are all strings
+ *
+ * Our API requires that values are numbers are either ints or floats
+ *
+ */
+function convertRecipeNumberValues(values) {
+
+  values.bake_time = Number(values.bake_time);
+  values.oven_temperature = Number(values.oven_temperature);
+  values.yield_count = Number(values.yield_count);
+
+  values.ingredients = _.map(values.ingredients, (i) => {
+    return { ...i, "quantity": Number(i.quantity)}
+  });
+
+
+  values.instructions = _.map(values.instructions, (i) => {
+    if (!i.time_gap_to_next) {
+      return i;
+    }
+
+    return {...i, "time_gap_to_next" : Number(i.time_gap_to_next)};
+  });
+}
+
 export function createRecipe(values, callback) {
 
   // We need some way to keep track of the order of the steps in the db
-  for (var i=0; i < values.instructions.length; i++) {
+  for (let i=0; i < values.instructions.length; i++) {
     values.instructions[i].step_number = i+1;
   }
+
+  convertRecipeNumberValues(values)
 
   const request = axios
     .post(`${ROOT_URL}/recipes/`, values, {
