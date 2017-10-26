@@ -27,8 +27,8 @@ class ActivityIndex extends Component {
 
     return _.map(activities, activity => {
       return (
-        <div style={{marginBottom:"50px"}}>
-          <ActivityCard key={activity.id} activity={activity}/>
+        <div key={activity.id} style={{marginBottom:"50px"}}>
+          <ActivityCard activity={activity}/>
         </div>
       );
     });
