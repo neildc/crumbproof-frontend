@@ -4,6 +4,7 @@ import LinearProgress from 'material-ui/LinearProgress';
 import {Card, CardMedia, CardTitle} from 'material-ui/Card';
 import moment from "moment";
 import ImageZoom from 'react-medium-image-zoom'
+import "./activity_card.css";
 
 
 export default function ActivityCard(props) {
@@ -22,11 +23,11 @@ export default function ActivityCard(props) {
 
   const created = moment(activity.created).fromNow();
 
-
   return (
     <Card >
 
       <CardMedia
+        className="cardPhoto"
         /*
          *  Without this the overlay captures all click events
          *  instead of the events being handled by the ImageZoom component
@@ -71,7 +72,7 @@ export default function ActivityCard(props) {
         }
 
         { activity.notes &&
-          <p>Notes for next time: {activity.notes}</p>
+          <p><b>Notes:</b> {activity.notes}</p>
         }
 
       </div>
