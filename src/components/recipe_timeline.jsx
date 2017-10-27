@@ -22,7 +22,6 @@ export default class RecipeTimeline extends Component {
   }
 
   handleTimePickerChange = (event, date) => {
-    debugger;
     this.setState({recipeStartTime: moment(date)});
   };
 

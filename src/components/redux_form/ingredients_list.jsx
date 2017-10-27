@@ -49,7 +49,7 @@ function renderIngredient(ingredient, index, fields) {
 export default function renderIngredients ({ fields, meta: { error } })  {
 
   return(
-    <ul style={{listStyle:"none"}}>
+    <ul style={{listStyle:"none", padding:"0px"}}>
 
       {fields.map((ingredient, index) =>
         renderIngredient(ingredient, index, fields)

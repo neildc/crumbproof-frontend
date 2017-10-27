@@ -47,7 +47,7 @@ function renderInstruction (step, index, fields) {
 
 export default function renderInstructions ({ fields }) {
   return (
-    <ul style={{listStyle:"none"}}>
+    <ul style={{listStyle:"none", padding:"0px"}}>
 
       {fields.map((step, index) =>
         renderInstruction(step, index, fields)
