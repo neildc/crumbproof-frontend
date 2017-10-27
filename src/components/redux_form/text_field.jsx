@@ -13,6 +13,7 @@ export default function renderTextField(field) {
           {...field.input}
           {...field.custom}
           type={field.type}
+          style={field.style}
       />
     </div>
   );

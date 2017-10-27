@@ -20,9 +20,9 @@ function renderInstruction (step, index, fields) {
           component={renderTextField}
         />
         <Field
-          label={"Duration/timegap (optional)"}
+          label={"Duration (mins)"}
           name={`${step}.time_gap_to_next`}
-          style={{marginLeft:"30px"}}
+          style={{marginLeft:"30px", width:"50%"}}
           validation={[isNumber]}
           type="number"
           component={renderTextField}
