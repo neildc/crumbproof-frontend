@@ -5,7 +5,8 @@ import renderTextField from "./text_field";
 
 import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
-import DeleteIcon from 'material-ui/svg-icons/content/remove-circle'
+import DeleteIcon from 'material-ui/svg-icons/content/remove-circle';
+import ReturnIcon from 'material-ui/svg-icons/hardware/keyboard-return';
 import RaisedButton from 'material-ui/RaisedButton';
 
 function renderInstruction (step, index, fields) {
@@ -32,6 +33,12 @@ function renderInstruction (step, index, fields) {
           style={{marginLeft:"10px"}}
           onClick={() => fields.remove(index)}>
           <DeleteIcon/>
+        </IconButton>
+        <IconButton
+          tooltip="Add step below"
+          style={{marginLeft:"5px"}}
+          onClick={() => fields.insert(index+1)}>
+          <ReturnIcon/>
         </IconButton>
       </div>
     </li>
