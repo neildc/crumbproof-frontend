@@ -10,12 +10,12 @@ export default function renderAutoComplete(field) {
         hintText=""
         floatingLabelText={field.label}
         errorText={touched && error}
-        {...field.input}
         {...field.custom}
         openOnFocus={true}
         dataSource={field.suggestions}
         filter={AutoComplete.fuzzyFilter}
         maxSearchResults={3}
+        searchText={field.input.value}
         onUpdateInput={(value) => {field.input.onChange(value)}}
     />
     </div>
