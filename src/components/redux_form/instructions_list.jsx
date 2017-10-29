@@ -28,17 +28,19 @@ function renderInstruction (step, index, fields) {
           type="number"
           component={renderTextField}
         />
-        <IconButton
-          tooltip="Remove step"
-          style={{marginLeft:"10px"}}
-          onClick={() => fields.remove(index)}>
-          <DeleteIcon/>
-        </IconButton>
+
         <IconButton
           tooltip="Add step below"
-          style={{marginLeft:"5px"}}
+          style={{marginLeft:"10px"}}
           onClick={() => fields.insert(index+1)}>
           <ReturnIcon/>
+        </IconButton>
+
+        <IconButton
+          tooltip="Remove step"
+          style={{marginLeft:"5px"}}
+          onClick={() => fields.remove(index)}>
+          <DeleteIcon/>
         </IconButton>
       </div>
     </li>
