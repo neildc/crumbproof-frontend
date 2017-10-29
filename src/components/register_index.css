@@ -2,6 +2,7 @@
 .registerCard {
     margin: 0 auto;
     text-align: center;
+    padding: 10px;
 }
 
 .registerForm {
@@ -25,6 +26,6 @@
 }
 
 .registerButton {
-    margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
 }
