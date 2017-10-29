@@ -7,13 +7,12 @@ export default function renderTextField(field) {
   return (
     <div>
       <TextField
+          {...field}
+          {...field.input}
+          {...field.custom}
           hintText=""
           floatingLabelText={field.label}
           errorText={touched && error}
-          {...field.input}
-          {...field.custom}
-          type={field.type}
-          style={field.style}
       />
     </div>
   );

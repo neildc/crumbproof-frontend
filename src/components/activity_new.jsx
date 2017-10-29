@@ -139,8 +139,10 @@ class ActivityNew extends Component {
             component={renderDropzone}
           />
           <Field
-            label="Notes for next time"
+            label="Notes"
             name="notes"
+            multiLine={true}
+            fullWidth={true}
             component={renderTextField}
           />
 
