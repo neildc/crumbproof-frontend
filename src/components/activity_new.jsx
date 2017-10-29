@@ -7,12 +7,13 @@ import { fetchRecipe } from "../actions/actions_recipe";
 import CPCard from './crumbproof_card.jsx'
 import {required, isNumber} from "../validators.js"
 import TimePicker from 'material-ui/TimePicker';
-import Dropzone from 'react-dropzone';
 import SubmitButton from "./SubmitButton";
 import renderTextField from "./redux_form/text_field";
 import renderAutoComplete from "./redux_form/auto_complete";
 import renderIngredients from "./redux_form/ingredients_list";
 import renderInstructions from "./redux_form/instructions_list";
+import renderDropzone from "./redux_form/drop_zone";
+
 import {getModifications, INSTRUCTIONS, INGREDIENTS} from "../util/diff";
 
 class ActivityNew extends Component {
@@ -78,41 +79,6 @@ class ActivityNew extends Component {
     );
   }
 
-  renderDropzone = (field) => {
-    const files = field.input.value;
-    return (
-      <div>
-        <Dropzone
-          name={field.name}
-          onDrop={( acceptedFiles, e ) => {
-            acceptedFiles.forEach(file => {
-                const reader = new FileReader();
-                reader.onload = () => {
-                    const fileAsBase64String = reader.result;
-                    field.input.onChange(fileAsBase64String)
-                };
-                reader.onabort = () => console.log('file reading was aborted');
-                reader.onerror = () => console.log('file reading has failed');
-
-                reader.readAsDataURL(file);
-            });
-            }
-          }
-        >
-          <div>Upload your crumb shot!</div>
-        </Dropzone>
-        {field.meta.touched &&
-          field.meta.error &&
-          <span className="error">{field.meta.error}</span>}
-        {files && Array.isArray(files) && (
-          <ul>
-            { files.map((file, i) => <li key={i}>{file.name}</li>) }
-          </ul>
-        )}
-      </div>
-    );
-  }
-
   onSubmit(values) {
 
     var payload = {
@@ -170,7 +136,7 @@ class ActivityNew extends Component {
           <Field
             label="Photo of crumb"
             name="crumb_shot"
-            component={this.renderDropzone}
+            component={renderDropzone}
           />
           <Field
             label="Notes for next time"
