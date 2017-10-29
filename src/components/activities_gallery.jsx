@@ -22,7 +22,11 @@ class ActivitiesGallery extends Component {
       return <LinearProgress mode="indeterminate" />;
     }
 
-    return _.map(this.props.related_activities.slice(0, NUM_TO_SHOW), activity => {
+    let mostRecentActivities = _.sortBy(this.props.related_activities, 'created')
+                                .reverse()
+                                .slice(0, NUM_TO_SHOW);
+
+    return _.map(mostRecentActivities, activity => {
 
       const created = moment(activity.created).fromNow();
 
