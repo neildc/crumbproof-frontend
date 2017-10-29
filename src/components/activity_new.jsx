@@ -1,16 +1,68 @@
+import _ from "lodash";
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, FieldArray, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { createActivity } from "../actions/actions_activity";
+import { fetchRecipe } from "../actions/actions_recipe";
 import CPCard from './crumbproof_card.jsx'
-import {required} from "../validators.js"
+import {required, isNumber} from "../validators.js"
 import TimePicker from 'material-ui/TimePicker';
 import Dropzone from 'react-dropzone';
 import SubmitButton from "./SubmitButton";
 import renderTextField from "./redux_form/text_field";
-
+import renderAutoComplete from "./redux_form/auto_complete";
+import renderIngredients from "./redux_form/ingredients_list";
+import renderInstructions from "./redux_form/instructions_list";
+import {getModifications, INSTRUCTIONS, INGREDIENTS} from "../util/diff";
 
 class ActivityNew extends Component {
+
+  renderRecipeEditor() {
+    return (
+      <div>
+        <h3>Recipe used: {this.props.initialValues.name}</h3>
+        <h4>Modifications:</h4>
+        <Field
+          label="Bake Time (minutes)"
+          name="bake_time"
+          type="number"
+          component={renderTextField}
+          validate={[ required, isNumber ]}
+        />
+
+        <Field
+          label="Oven Temperature (°C)"
+          name="oven_temperature"
+          type="number"
+          component={renderTextField}
+          validate={[ required, isNumber ]}
+        />
+
+        <Field
+          label="Yield Count"
+          name="yield_count"
+          type="number"
+          component={renderTextField}
+          validate={[ required, isNumber ]}
+        />
+        <Field
+          label="Yield Type"
+          name="yield_type"
+          suggestions ={['Loaf', 'Baguette', 'Roll', 'Bun', 'Bagel']}
+          component={renderAutoComplete}
+          validate={[ required ]}
+        />
+
+        <div>
+          <FieldArray name="ingredients" component={renderIngredients}/>
+          <br/>
+          <FieldArray name="instructions" component={renderInstructions}/>
+          <br/>
+        </div>
+
+      </div>
+    );
+  }
 
   renderTimePicker = (field) => {
     return (
@@ -63,13 +115,39 @@ class ActivityNew extends Component {
 
   onSubmit(values) {
 
-    const { recipeId } = this.props.match.params;
+    var payload = {
+      name: values.activity_name,
+      crumb_shot:  values.crumb_shot
+    };
 
+    if (values.notes) {
+      _.assign(payload, { notes: values.notes })
+    };
+
+    const { recipeId } = this.props.match.params;
     if (recipeId) {
-      values.recipe = recipeId;
+      payload.recipe = recipeId;
+
+      let modifications = {
+        ingredients: getModifications(
+                        INGREDIENTS,
+                        this.props.initialValues.ingredients,
+                        values.ingredients),
+
+        instructions: getModifications(
+                        INSTRUCTIONS,
+                        this.props.initialValues.instructions,
+                        values.instructions)
+      }
+
+      _.assign(payload,
+               { recipe_changes: modifications,
+                 recipe_data: this.props.initialValues
+               }
+      );
     }
 
-    return this.props.createActivity(values, () => {
+    return this.props.createActivity(payload, () => {
       this.props.history.push("/activity");
     });
   }
@@ -79,55 +157,38 @@ class ActivityNew extends Component {
 
     return (
       <CPCard title={"New Activity"}>
-          <form
-            onSubmit={handleSubmit(this.onSubmit.bind(this))}
-            style={{margin:"20px"}}
-          >
-            <Field
-              label="Name For Activity"
-              name="name"
-              component={renderTextField}
-              validate={[ required ]}
-            />
-            <Field
-              label="Photo of crumb"
-              name="crumb_shot"
-              component={this.renderDropzone}
-            />
-            <Field
-              label="Notes for next time"
-              name="notes"
-              component={renderTextField}
-            />
-            <Field
-              label="Started"
-              name="started"
-              initialValues={new Date()}
-              component={this.renderTimePicker}
-            />
+        <form
+          onSubmit={handleSubmit(this.onSubmit.bind(this))}
+          style={{margin:"20px"}}
+        >
+          <Field
+            label="Name For Activity"
+            name="activity_name"
+            component={renderTextField}
+            validate={[ required ]}
+          />
+          <Field
+            label="Photo of crumb"
+            name="crumb_shot"
+            component={this.renderDropzone}
+          />
+          <Field
+            label="Notes for next time"
+            name="notes"
+            component={renderTextField}
+          />
 
-            <Field
-              label="Completed"
-              name="completed"
-              component={this.renderTimePicker}
-            />
-            <Field
-              label="Time put into oven"
-              name="oven_start"
-              component={this.renderTimePicker}
-            />
-            <Field
-              label="Time pulled out of oven"
-              name="oven_end"
-              component={this.renderTimePicker}
-            />
+          {this.props.initialValues &&
+            this.renderRecipeEditor()
+          }
 
-            <SubmitButton
-              label="Submit"
-              labelInProgress="Submitting..."
-              submittingFlag={submitting}
-            />
-          </form>
+          <SubmitButton
+            label="Submit"
+            labelInProgress="Submitting..."
+            submittingFlag={submitting}
+          />
+
+        </form>
       </CPCard>
     );
   }
@@ -147,7 +208,31 @@ function validate(values) {
   return errors;
 }
 
-export default reduxForm({
-  validate,
-  form: "ActivityNewForm"
-})(connect(null, { createActivity })(ActivityNew));
+function mapStateToProps({recipes}, ownProps) {
+
+  const { recipeId } = ownProps.match.params;
+
+  if (!recipeId) {
+    return {};
+  }
+
+  let recipe = recipes[recipeId];
+  /* TODO: Fetch recipe if its not in the store
+   */
+  if (!recipe) {return {}}
+
+  return {
+    initialValues: {
+      ...recipe,
+      instructions: _.sortBy(recipe.instructions, 'step_number')
+    }
+  };
+
+}
+
+export default connect(mapStateToProps, { createActivity, fetchRecipe })(
+  reduxForm({
+    form: "ActivityNewForm",
+    validate
+  })(ActivityNew)
+)

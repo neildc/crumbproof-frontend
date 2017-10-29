@@ -11,6 +11,8 @@ import TripleDotIcon from 'material-ui/svg-icons/navigation/more-horiz';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
+
+import RecipeDiff from "./recipe_diff";
 import "./activity_card.css";
 
 
@@ -103,7 +105,14 @@ class ActivityCard extends Component {
             <p><b>Notes:</b> {activity.notes}</p>
           }
 
+          { activity.recipe_data &&
+            <RecipeDiff
+              recipe={this.props.activity.recipe_data}
+              modifications={this.props.activity.recipe_changes}
+            />
+          }
         </div>
+
       </Card>
     )
   }
