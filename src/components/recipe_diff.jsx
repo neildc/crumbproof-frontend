@@ -43,25 +43,30 @@ renderInstructions () {
 
   renderDiff(type) {
 
+    /*
+     * TODO: rewrite this to make more sense
+     */
+
     let toString = {
       [INGREDIENTS] : ingredientStr,
       [INSTRUCTIONS] : instructionStr
     }
 
+    let original = this.props.parentRecipe.data[type];
+    let originalMapped = _.mapKeys(this.props.parentRecipe.data[type], 'id');
     let modified = _.mapKeys(this.props.recipe.diff[type].modified, 'id');
     let removed = _.mapKeys(this.props.recipe.diff[type].removed, 'id');
     let added = _.mapKeys(this.props.recipe.diff[type].added, 'id');
+    let curr = this.props.recipe.data[type];
+
+    var all;
+    if (_.isEmpty(removed)) {
+      // If i apply the union below here I end up with all my elements added
+      // Appearing at the bottom
+      all = curr;
+    } else {
+      all = _.unionBy(original, curr, 'id')
     }
-
-    let original = this.props.recipe[type];
-
-    let all =_.sortBy(_.concat(original, added), key[type]);
-    // Ensure that we map keys only AFTER we concat
-    // Otherwise we get invalid array keys when concating
-    //    - Negative ints for ingredients
-    //    - Decimal values for instructions
-
-    added = _.mapKeys(this.props.modifications[type].added, key[type]);
 
     return _.map(all, i => {
 
