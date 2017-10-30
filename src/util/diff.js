@@ -4,7 +4,7 @@ import equal from "fast-deep-equal";
 export const INSTRUCTIONS = 'instructions';
 export const INGREDIENTS = 'ingredients';
 
-export function getModifications(type, orig, curr) {
+export function generateDiff(type, orig, curr) {
 
   if (equal(orig, curr)) {
     return null;

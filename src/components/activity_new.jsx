@@ -15,7 +15,7 @@ import renderIngredients from "./redux_form/ingredients_list";
 import renderInstructions from "./redux_form/instructions_list";
 import renderDropzone from "./redux_form/drop_zone";
 
-import {getModifications, INSTRUCTIONS, INGREDIENTS} from "../util/diff";
+import {generateDiff, INSTRUCTIONS, INGREDIENTS} from "../util/diff";
 
 class ActivityNew extends Component {
 
@@ -116,13 +116,13 @@ class ActivityNew extends Component {
     const { recipeId } = this.props.match.params;
     if (recipeId) {
 
-      let modifications = {
-        ingredients: getModifications(
+      let diffs = {
+        ingredients: generateDiff(
                         INGREDIENTS,
                         this.props.initialValues.ingredients,
                         values.ingredients),
 
-        instructions: getModifications(
+        instructions: generateDiff(
                         INSTRUCTIONS,
                         this.props.initialValues.instructions,
                         values.instructions)
@@ -141,7 +141,7 @@ class ActivityNew extends Component {
       let base = this.props.recipe.base_recipe ? this.props.recipe.base_recipe : this.props.recipe.id;
 
       _.assign(payload, { recipe: {
-                 diff: modifications,
+                 diff: diffs,
                  data: newRecipe,
                  base_recipe : base,
                  parent: recipeId,

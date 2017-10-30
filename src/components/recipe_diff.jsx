@@ -114,8 +114,8 @@ renderInstructions () {
       <div>
         <b>Ingredients:</b>
         <ul>
-        {this.props.modifications.ingredients ? this.renderDiff(INGREDIENTS) :
-                                                this.renderIngredients()
+        { diff && diff.ingredients ? this.renderDiff(INGREDIENTS) :
+                                     this.renderIngredients()
         }
         </ul>
 
@@ -123,8 +123,8 @@ renderInstructions () {
 
         <b>Instructions:</b>
         <ol>
-        {this.props.modifications.instructions ? this.renderDiff(INSTRUCTIONS) :
-                                                 this.renderInstructions()
+        { diff && diff.instructions ? this.renderDiff(INSTRUCTIONS) :
+                                      this.renderInstructions()
         }
         </ol>
       </div>
