@@ -33,7 +33,6 @@ function convertRecipeNumberValues(values) {
     return { ...i, "quantity": Number(i.quantity)}
   });
 
-
   values.instructions = _.map(values.instructions, (i) => {
     if (!i.time_gap_to_next) {
       return i;
@@ -45,15 +44,25 @@ function convertRecipeNumberValues(values) {
 
 export function createRecipe(values, callback) {
 
-  // We need some way to keep track of the order of the steps in the db
-  for (let i=0; i < values.instructions.length; i++) {
-    values.instructions[i].step_number = i+1;
-  }
-
   convertRecipeNumberValues(values)
 
+  let payload = {
+    diff: null,
+    data: {
+      bake_time : values.bake_time,
+      name: values.name,
+      instructions: values.instructions,
+      ingredients: values.ingredients,
+      oven_temperature: values.oven_temperature,
+      yield_count: values.yield_count,
+      yield_type: values.yield_type
+    },
+    base_recipe : null,
+    parent: null,
+  }
+
   const request = axios
-    .post(`${ROOT_URL}/recipes/`, values, {
+    .post(`${ROOT_URL}/recipes/`, payload, {
       headers: {
         Authorization: "Token " + localStorage.getItem("token")
       }

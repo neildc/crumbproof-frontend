@@ -38,7 +38,7 @@ class RecipesShow extends Component {
   }
 
   renderIngredients() {
-    return _.map(this.props.recipe.ingredients, i => {
+    return _.map(this.props.recipe.data.ingredients, i => {
       return (
         <li key={i.name}>
           {i.quantity} {i.unit} {i.name}
@@ -71,15 +71,15 @@ class RecipesShow extends Component {
               <BackIcon color="#999"/>
             </IconButton>
             <div style={{paddingTop:"5px"}}>
-              {recipe.name}
+              {recipe.data.name}
             </div>
           </div>
         }/>
         <div className="recipeMeta">
           <div><b>BY  </b> {recipe.user}</div>
-          <div><b>TIME  </b> {this.getTotalTimeStr(recipe.instructions)}</div>
-          <div><b>BAKE  </b> {recipe.bake_time} mins at {recipe.oven_temperature}°</div>
-          <div><b>YIELDS  </b> {recipe.yield_count} {recipe.yield_type}</div>
+          <div><b>TIME  </b> {getTotalTimeStr(recipe.data.instructions)}</div>
+          <div><b>BAKE  </b> {recipe.data.bake_time} mins at {recipe.data.oven_temperature}°</div>
+          <div><b>YIELDS  </b> {recipe.data.yield_count} {recipe.data.yield_type}</div>
         </div>
         <div style={{padding:"30px"}}>
 
@@ -115,7 +115,7 @@ class RecipesShow extends Component {
           </ul>
 
           <h3>Instructions</h3>
-          <RecipeTimeline instructions={this.props.recipe.instructions}/>
+          <RecipeTimeline instructions={recipe.data.instructions}/>
         </div>
       </Card>
     );

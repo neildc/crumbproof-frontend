@@ -109,7 +109,6 @@ class ActivityNew extends Component {
 
     const { recipeId } = this.props.match.params;
     if (recipeId) {
-      payload.recipe = recipeId;
 
       let modifications = {
         ingredients: getModifications(
@@ -123,10 +122,25 @@ class ActivityNew extends Component {
                         values.instructions)
       }
 
-      _.assign(payload,
-               { recipe_changes: modifications,
-                 recipe_data: this.props.initialValues
-               }
+      let newRecipe = {
+        bake_time : values.bake_time,
+        name: values.name,
+        instructions: values.instructions,
+        ingredients: values.ingredients,
+        oven_temperature: values.oven_temperature,
+        yield_count: values.yield_count,
+        yield_type: values.yield_type
+      }
+
+      let base = this.props.recipe.base_recipe ? this.props.recipe.base_recipe : this.props.recipe.id;
+
+      _.assign(payload, { recipe: {
+                 diff: modifications,
+                 data: newRecipe,
+                 base_recipe : base,
+                 parent: recipeId,
+               }}
+
       );
     }
 
@@ -202,14 +216,17 @@ function mapStateToProps({recipes}, ownProps) {
   }
 
   let recipe = recipes[recipeId];
-  if (!recipe) {return {}}
 
-  return {
-    initialValues: {
-      ...recipe,
-      instructions: _.sortBy(recipe.instructions, 'step_number')
-    }
-  };
+  if (!recipe) {
+    return {}
+  } else {
+    return {
+      initialValues: {
+        ...recipe.data,
+      },
+      recipe
+    };
+  }
 
 }
 

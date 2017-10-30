@@ -14,7 +14,7 @@ export default class RecipeDiff extends Component {
 
 
 renderIngredients () {
-  return _.map(this.props.recipe.ingredients, i => {
+  return _.map(this.props.recipe.data.ingredients, i => {
     return(
       <li key={i.id}>
         {ingredientStr(i)}
@@ -24,7 +24,7 @@ renderIngredients () {
 }
 
 renderInstructions () {
-  return _.map(this.props.recipe.instructions, i => {
+  return _.map(this.props.recipe.data.instructions, i => {
       return(
         <li key={i.step_number}>
           {instructionStr(i)}

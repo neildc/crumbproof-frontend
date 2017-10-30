@@ -84,7 +84,7 @@ class ActivityCard extends Component {
 
           { activity.recipe &&
               <p>
-              <b>Recipe Used:</b> <Link to={`/recipes/${activity.recipe}`}>{activity.recipe_name}</Link>
+              <b>Recipe Used:</b> <Link to={`/recipes/${activity.recipe.id}`}>{activity.recipe.data.name}</Link>
               </p>
           }
           {activity.oven_start && activity.oven_end &&
@@ -105,10 +105,9 @@ class ActivityCard extends Component {
             <p><b>Notes:</b> {activity.notes}</p>
           }
 
-          { activity.recipe_data &&
+          { activity.recipe &&
             <RecipeDiff
-              recipe={this.props.activity.recipe_data}
-              modifications={this.props.activity.recipe_changes}
+              recipe={this.props.activity.recipe}
             />
           }
         </div>

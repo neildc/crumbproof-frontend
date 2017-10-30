@@ -27,7 +27,7 @@ class RecipesIndex extends Component {
       return (
         <ListItem
           key={recipe.id}
-          primaryText={recipe.name}
+          primaryText={recipe.data.name}
           leftIcon={<ContentSend/>}
           containerElement={
             <Link to={`/recipes/${recipe.id}`} />
