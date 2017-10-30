@@ -1,8 +1,11 @@
 import React, {Component} from "react";
+import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import _ from "lodash";
 import Diff from "./diff";
+import { fetchRecipe } from "../actions/actions_recipe";
 import {INSTRUCTIONS, INGREDIENTS} from "../util/diff";
+import LinearProgress from 'material-ui/LinearProgress';
 
 const ingredientStr = (i) => `${i.quantity} ${i.unit} ${i.name}`;
 
@@ -10,8 +13,13 @@ const instructionStr = (i) => i.time_gap_to_next ?
                             `${i.content} for ${i.time_gap_to_next} mins` :
                             `${i.content}`;
 
-export default class RecipeDiff extends Component {
+class RecipeDiff extends Component {
 
+  componentDidMount() {
+    if (this.props.recipe.diff && !this.props.parentRecipe) {
+      this.props.fetchRecipe(this.props.recipe.parent);
+    }
+  }
 
 renderIngredients () {
   return _.map(this.props.recipe.data.ingredients, i => {
@@ -98,6 +106,13 @@ renderInstructions () {
 
   render(){
 
+
+    let { diff } = this.props.recipe
+
+    if (diff && !this.props.parentRecipe) {
+      return <LinearProgress mode="indeterminate" />;
+    }
+
     return(
 
       <div>
@@ -125,5 +140,19 @@ renderInstructions () {
 
 RecipeDiff.proptypes = {
   recipe: PropTypes.object.required,
-  modifications: PropTypes.object
 }
+
+function mapStateToProps({ recipes }, ownProps) {
+
+  let parentRecipe = ownProps.recipe.parent
+
+  if (!parentRecipe) {return {}}
+
+  if (!recipes[parentRecipe]) {return {}}
+
+  return {
+    parentRecipe: recipes[parentRecipe]
+  };
+}
+
+export default connect(mapStateToProps, { fetchRecipe })(RecipeDiff);
