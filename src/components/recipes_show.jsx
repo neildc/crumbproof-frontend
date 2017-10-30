@@ -15,7 +15,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import RecipeTimeline from './recipe_timeline';
 import ActivityGallery from './activities_gallery';
-
+import { getTotalTimeStr } from "../util/time.js";
 
 class RecipesShow extends Component {
 
@@ -46,13 +46,6 @@ class RecipesShow extends Component {
       );
     });
   };
-
-  getTotalTimeStr(instructions) {
-    let sumMinutes = _.sum(_.map(instructions, "time_gap_to_next"));
-    let hours = _.floor(sumMinutes/60);
-    let minutes = sumMinutes % 60;
-    return (hours > 0 ? `${hours}h ${minutes} mins`:`${minutes} mins`);
-  }
 
   render() {
     const { recipe } = this.props;
@@ -120,6 +113,7 @@ class RecipesShow extends Component {
       </Card>
     );
   }
+
 }
 
 function mapStateToProps({ recipes, auth }, ownProps) {
