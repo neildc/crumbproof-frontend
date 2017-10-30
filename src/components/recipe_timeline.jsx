@@ -27,7 +27,7 @@ export default class RecipeTimeline extends Component {
 
   generateInstructionTimeline(instructions, startTime) {
     // instructions being passed in is simply a bunch of objects
-    var instructionsArr =  _.orderBy(instructions, ["step_number"], ["asc"]);
+    var instructionsArr = instructions;
 
     var timeline = [startTime];
 
@@ -57,7 +57,7 @@ export default class RecipeTimeline extends Component {
 
     return _.map(instructionsWithTimes, instruction => {
       return (
-        <Step key={instruction.step_number} active={true} >
+        <Step key={instruction.id} active={true} >
           <StepLabel active={true} >
             <span role="img" aria-label="Time">🕒 </span> {instruction.time.calendar()}
           </StepLabel>

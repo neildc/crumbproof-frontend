@@ -34,7 +34,7 @@ renderIngredients () {
 renderInstructions () {
   return _.map(this.props.recipe.data.instructions, i => {
       return(
-        <li key={i.step_number}>
+        <li key={i.id}>
           {instructionStr(i)}
         </li>
       );
@@ -48,15 +48,12 @@ renderInstructions () {
       [INSTRUCTIONS] : instructionStr
     }
 
-    let key = {
-      [INGREDIENTS] : "id",
-      [INSTRUCTIONS] : "step_number",
+    let modified = _.mapKeys(this.props.recipe.diff[type].modified, 'id');
+    let removed = _.mapKeys(this.props.recipe.diff[type].removed, 'id');
+    let added = _.mapKeys(this.props.recipe.diff[type].added, 'id');
     }
 
     let original = this.props.recipe[type];
-    let modified = _.mapKeys(this.props.modifications[type].modified, key[type]);
-    let removed = _.mapKeys(this.props.modifications[type].removed, key[type]);
-    let added = this.props.modifications[type].added
 
     let all =_.sortBy(_.concat(original, added), key[type]);
     // Ensure that we map keys only AFTER we concat
@@ -67,37 +64,36 @@ renderInstructions () {
     added = _.mapKeys(this.props.modifications[type].added, key[type]);
 
     return _.map(all, i => {
-      let lookupKey = i[key[type]];
 
-      if (added[lookupKey]) {
+      if (added[i.id]) {
         return (
-          <li key={lookupKey}>
+          <li key={i.id}>
             <Diff inputB={toString[type](i)} />
           </li>
         )
       }
 
-      if (modified[lookupKey]) {
+      if (modified[i.id]) {
         return (
-          <li key={lookupKey}>
-            <Diff inputA={toString[type](i)}
-                  inputB={toString[type](modified[lookupKey])}
+          <li key={i.id}>
+            <Diff inputA={toString[type](originalMapped[i.id])}
+                  inputB={toString[type](modified[i.id])}
             />
           </li>
         )
       }
 
-      if (removed[lookupKey]) {
+      if (removed[i.id]) {
         return (
-          <li key={lookupKey}>
+          <p key={i.id} style={{margin:"0px"}}>
             <Diff inputA={toString[type](i)} />
-          </li>
+          </p>
         )
       }
 
 
       return (
-        <li key={lookupKey}>
+        <li key={i.id}>
           {toString[type](i)}
         </li>
       );
