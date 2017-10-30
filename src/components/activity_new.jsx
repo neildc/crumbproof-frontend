@@ -7,6 +7,7 @@ import { fetchRecipe } from "../actions/actions_recipe";
 import CPCard from './crumbproof_card.jsx'
 import {required, isNumber} from "../validators.js"
 import TimePicker from 'material-ui/TimePicker';
+import LinearProgress from 'material-ui/LinearProgress';
 import SubmitButton from "./SubmitButton";
 import renderTextField from "./redux_form/text_field";
 import renderAutoComplete from "./redux_form/auto_complete";
@@ -18,7 +19,23 @@ import {getModifications, INSTRUCTIONS, INGREDIENTS} from "../util/diff";
 
 class ActivityNew extends Component {
 
+  componentDidMount() {
+    const { recipeId } = this.props.match.params;
+    if (recipeId && !this.props.initialValues) {
+      this.props.fetchRecipe(recipeId);
+    }
+  }
+
   renderRecipeEditor() {
+    if (!this.props.initialValues) {
+      return(
+        <div style={{padding:"10px"}}>
+          Loading recipe...
+          <LinearProgress mode="indeterminate" />
+        </div>
+      )
+    }
+
     return (
       <div>
         <h3>Recipe used: {this.props.initialValues.name}</h3>
@@ -146,7 +163,7 @@ class ActivityNew extends Component {
             component={renderTextField}
           />
 
-          {this.props.initialValues &&
+          {this.props.match.params.recipeId &&
             this.renderRecipeEditor()
           }
 
@@ -185,8 +202,6 @@ function mapStateToProps({recipes}, ownProps) {
   }
 
   let recipe = recipes[recipeId];
-  /* TODO: Fetch recipe if its not in the store
-   */
   if (!recipe) {return {}}
 
   return {
