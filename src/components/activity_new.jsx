@@ -41,6 +41,12 @@ class ActivityNew extends Component {
         <h3>Recipe used: {this.props.initialValues.name}</h3>
         <h4>Modifications:</h4>
         <Field
+          label="Name of Recipe"
+          name="name"
+          component={renderTextField}
+          validate={[ required ]}
+        />
+        <Field
           label="Bake Time (minutes)"
           name="bake_time"
           type="number"
