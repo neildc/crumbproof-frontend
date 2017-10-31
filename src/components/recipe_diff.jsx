@@ -1,8 +1,11 @@
 import React, {Component} from "react";
+import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import _ from "lodash";
 import Diff from "./diff";
-import {INSTRUCTIONS, INGREDIENTS} from "../util/diff";
+import { fetchRecipe } from "../actions/actions_recipe";
+import {insertDeadToClosestLivingNeighbour, INSTRUCTIONS, INGREDIENTS} from "../util/diff";
+import LinearProgress from 'material-ui/LinearProgress';
 
 const ingredientStr = (i) => `${i.quantity} ${i.unit} ${i.name}`;
 
@@ -10,11 +13,16 @@ const instructionStr = (i) => i.time_gap_to_next ?
                             `${i.content} for ${i.time_gap_to_next} mins` :
                             `${i.content}`;
 
-export default class RecipeDiff extends Component {
+class RecipeDiff extends Component {
 
+  componentDidMount() {
+    if (this.props.recipe.diff && !this.props.parentRecipe) {
+      this.props.fetchRecipe(this.props.recipe.parent);
+    }
+  }
 
 renderIngredients () {
-  return _.map(this.props.recipe.ingredients, i => {
+  return _.map(this.props.recipe.data.ingredients, i => {
     return(
       <li key={i.id}>
         {ingredientStr(i)}
@@ -24,14 +32,15 @@ renderIngredients () {
 }
 
 renderInstructions () {
-  return _.map(this.props.recipe.instructions, i => {
+  return _.map(this.props.recipe.data.instructions, i => {
       return(
-        <li key={i.step_number}>
+        <li key={i.id}>
           {instructionStr(i)}
         </li>
       );
     })
   }
+
 
   renderDiff(type) {
 
@@ -40,56 +49,55 @@ renderInstructions () {
       [INSTRUCTIONS] : instructionStr
     }
 
-    let key = {
-      [INGREDIENTS] : "id",
-      [INSTRUCTIONS] : "step_number",
+    let original = this.props.parentRecipe.data[type];
+    let originalMap = _.mapKeys(original, 'id');
+    let modifiedMap = _.mapKeys(this.props.recipe.diff[type].modified, 'id');
+    let addedMap = _.mapKeys(this.props.recipe.diff[type].added, 'id');
+    let removed = this.props.recipe.diff[type].removed;
+    let removedMap = _.mapKeys(removed, 'id');
+    let curr = this.props.recipe.data[type];
+
+    var all;
+    if (_.isEmpty(removed)) {
+      all = curr;
+    } else {
+      all = _.cloneDeep(curr);
+      for (let i = 0; i < removed.length; i++) {
+        insertDeadToClosestLivingNeighbour(removed[i], original, all)
+      }
     }
 
-    let original = this.props.recipe[type];
-    let modified = _.mapKeys(this.props.modifications[type].modified, key[type]);
-    let removed = _.mapKeys(this.props.modifications[type].removed, key[type]);
-    let added = this.props.modifications[type].added
-
-    let all =_.sortBy(_.concat(original, added), key[type]);
-    // Ensure that we map keys only AFTER we concat
-    // Otherwise we get invalid array keys when concating
-    //    - Negative ints for ingredients
-    //    - Decimal values for instructions
-
-    added = _.mapKeys(this.props.modifications[type].added, key[type]);
-
     return _.map(all, i => {
-      let lookupKey = i[key[type]];
 
-      if (added[lookupKey]) {
+      if (addedMap[i.id]) {
         return (
-          <li key={lookupKey}>
+          <li key={i.id}>
             <Diff inputB={toString[type](i)} />
           </li>
         )
       }
 
-      if (modified[lookupKey]) {
+      if (modifiedMap[i.id]) {
         return (
-          <li key={lookupKey}>
-            <Diff inputA={toString[type](i)}
-                  inputB={toString[type](modified[lookupKey])}
+          <li key={i.id}>
+            <Diff inputA={toString[type](originalMap[i.id])}
+                  inputB={toString[type](modifiedMap[i.id])}
             />
           </li>
         )
       }
 
-      if (removed[lookupKey]) {
+      if (removedMap[i.id]) {
         return (
-          <li key={lookupKey}>
+          <p key={i.id} style={{margin:"0px"}}>
             <Diff inputA={toString[type](i)} />
-          </li>
+          </p>
         )
       }
 
 
       return (
-        <li key={lookupKey}>
+        <li key={i.id}>
           {toString[type](i)}
         </li>
       );
@@ -98,13 +106,20 @@ renderInstructions () {
 
   render(){
 
+
+    let { diff } = this.props.recipe
+
+    if (diff && !this.props.parentRecipe) {
+      return <LinearProgress mode="indeterminate" />;
+    }
+
     return(
 
       <div>
         <b>Ingredients:</b>
         <ul>
-        {this.props.modifications.ingredients ? this.renderDiff(INGREDIENTS) :
-                                                this.renderIngredients()
+        { diff && diff.ingredients ? this.renderDiff(INGREDIENTS) :
+                                     this.renderIngredients()
         }
         </ul>
 
@@ -112,8 +127,8 @@ renderInstructions () {
 
         <b>Instructions:</b>
         <ol>
-        {this.props.modifications.instructions ? this.renderDiff(INSTRUCTIONS) :
-                                                 this.renderInstructions()
+        { diff && diff.instructions ? this.renderDiff(INSTRUCTIONS) :
+                                      this.renderInstructions()
         }
         </ol>
       </div>
@@ -125,5 +140,19 @@ renderInstructions () {
 
 RecipeDiff.proptypes = {
   recipe: PropTypes.object.required,
-  modifications: PropTypes.object
 }
+
+function mapStateToProps({ recipes }, ownProps) {
+
+  let parentRecipe = ownProps.recipe.parent
+
+  if (!parentRecipe) {return {}}
+
+  if (!recipes[parentRecipe]) {return {}}
+
+  return {
+    parentRecipe: recipes[parentRecipe]
+  };
+}
+
+export default connect(mapStateToProps, { fetchRecipe })(RecipeDiff);

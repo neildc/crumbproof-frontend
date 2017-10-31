@@ -4,15 +4,13 @@ import equal from "fast-deep-equal";
 export const INSTRUCTIONS = 'instructions';
 export const INGREDIENTS = 'ingredients';
 
-export function getModifications(type, orig, curr) {
+export function generateDiff(type, orig, curr) {
 
   if (equal(orig, curr)) {
     return null;
   }
 
-  var key;
-  if (type === INGREDIENTS) { key = 'id';}
-  if (type === INSTRUCTIONS) { key = 'step_number';}
+  let key = 'id';
 
   let removed = _.differenceBy(orig, curr, key);
 
@@ -23,45 +21,75 @@ export function getModifications(type, orig, curr) {
     return !equal(i, match);
   });
 
-  var added;
-  if (type === INGREDIENTS) {
-    added = _.filter(curr, i => !(key in i));
-
-    // Add negative ids from -1..-inf to any new ingredients
-    // guaranteed to not have any collisions with since existing
-    // ingredients will have a positive id
-    for (let i = 0; i < added.length; i++) {
-      added[i].id = (i+1)*(-1);
-    }
-  } else if (type === INSTRUCTIONS) {
-    let currWithStepNumbers = insertIntermediateStepNumbers(curr);
-    // All existing steps will have a integer for their step number
-    // New steps will have a decimal value for their step_number
-    added = _.filter(currWithStepNumbers, i => !_.isInteger(i.step_number));
-  }
+  let added = _.filter(curr, i => !(key in i));
 
   return {removed, added, modified};
 }
 
-function insertIntermediateStepNumbers(instructions) {
+/*
+ * Insert the removed elements into the new recipe
+ *
+ * Since we don't have any step numbers simply place the removed instructions
+ * as close to any neighbouring instructions that haven't been also removed
+ *
+ *  [prev]         [living]
+ *   1              1  -           ^
+ *   2              2  | top       |
+ *   3              3  -           |
+ *   4 <- removed               Search  alternating between up and down
+ *   5              5  -           |    until we find a neighbour
+ *   6              6  | bot       |    from prev that exists in living.
+ *   7              7  |           |    All elements have a UUID
+ *   8              8  -           v
+ *
+ *  Once we find a match then we simply insert it next to the match
+ *     - match from top: Insert below the match if it came from
+ *     - match from bottom: Insert above the match if it came from
+ */
+export function insertDeadToClosestLivingNeighbour(dead, prev, living) {
 
-  var ret = _.cloneDeep(instructions);
+  let deadIndex = _.findIndex(prev, {'id': dead.id});
 
-  // Gives us 100 possible keys to use in between each step
-  // Should be plenty, unlikely that a user will add 100 steps
-  const STEP_INCREMENT = 0.01;
+  // [0 1 2 3 DEAD(4) 5 6]
+  // top = 0 - 3
+  // DEAD = 4
+  // bot = 5 - 6
+  // head is reversed since we want to start looking at the closest first
+  let top = _.slice(prev, 0, deadIndex).reverse();
+  let bot = _.slice(prev, deadIndex+1, prev.length);
 
-  for (let i = 0; i < ret.length; i++) {
+  let neighbour = findLivingNeighbour(bot, top, living);
 
-    // No step number therefore it must be a modification
-    // to the original, since step numbers only get added to the
-    // instruction when a recipe is submitted
-    if (!ret[i].step_number) {
+  if (neighbour) {
+    insertDeadNextToLivingNeighbour(dead, living, neighbour);
+  } else {
+    // If we can't find anyone alive then simply
+    // place the instruction at the top of the list
+    insertDeadNextToLivingNeighbour(dead, living, {id:0, position:'above'});
+  }
+}
 
-      // The fractional increment gives us a way to distinguish it from
-      // original ret while retaining order
-      ret[i].step_number = ret[i-1].step_number + STEP_INCREMENT;
+function findLivingNeighbour(bot, top, curr) {
+  for (let i=0; top[i] || bot[i]; i++) {
+    if (top[i]) {
+      let topIndex = _.findIndex(curr, {'id': top[i].id});
+      if (topIndex) {
+        return {index: topIndex, position: 'below'};
+      }
+    }
+
+    if (bot[i]) {
+      let botIndex = _.findIndex(curr, {'id': bot[i].id});
+      if (botIndex) {
+        return {index: botIndex, position: 'above'};
+      }
     }
   }
-  return ret;
+  return null;
+}
+
+function insertDeadNextToLivingNeighbour(dead, all, neighbour) {
+  let {index, position} = neighbour;
+  if (position === 'below') all.splice(index + 1, 0, dead);
+  if (position === 'above') all.splice(index - 1, 0, dead);
 }

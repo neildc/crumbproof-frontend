@@ -15,7 +15,7 @@ import renderIngredients from "./redux_form/ingredients_list";
 import renderInstructions from "./redux_form/instructions_list";
 import renderDropzone from "./redux_form/drop_zone";
 
-import {getModifications, INSTRUCTIONS, INGREDIENTS} from "../util/diff";
+import {generateDiff, INSTRUCTIONS, INGREDIENTS} from "../util/diff";
 
 class ActivityNew extends Component {
 
@@ -40,6 +40,12 @@ class ActivityNew extends Component {
       <div>
         <h3>Recipe used: {this.props.initialValues.name}</h3>
         <h4>Modifications:</h4>
+        <Field
+          label="Name of Recipe"
+          name="name"
+          component={renderTextField}
+          validate={[ required ]}
+        />
         <Field
           label="Bake Time (minutes)"
           name="bake_time"
@@ -109,24 +115,38 @@ class ActivityNew extends Component {
 
     const { recipeId } = this.props.match.params;
     if (recipeId) {
-      payload.recipe = recipeId;
 
-      let modifications = {
-        ingredients: getModifications(
+      let diffs = {
+        ingredients: generateDiff(
                         INGREDIENTS,
                         this.props.initialValues.ingredients,
                         values.ingredients),
 
-        instructions: getModifications(
+        instructions: generateDiff(
                         INSTRUCTIONS,
                         this.props.initialValues.instructions,
                         values.instructions)
       }
 
-      _.assign(payload,
-               { recipe_changes: modifications,
-                 recipe_data: this.props.initialValues
-               }
+      let newRecipe = {
+        bake_time : values.bake_time,
+        name: values.name,
+        instructions: values.instructions,
+        ingredients: values.ingredients,
+        oven_temperature: values.oven_temperature,
+        yield_count: values.yield_count,
+        yield_type: values.yield_type
+      }
+
+      let base = this.props.recipe.base_recipe ? this.props.recipe.base_recipe : this.props.recipe.id;
+
+      _.assign(payload, { recipe: {
+                 diff: diffs,
+                 data: newRecipe,
+                 base_recipe : base,
+                 parent: recipeId,
+               }}
+
       );
     }
 
@@ -202,14 +222,17 @@ function mapStateToProps({recipes}, ownProps) {
   }
 
   let recipe = recipes[recipeId];
-  if (!recipe) {return {}}
 
-  return {
-    initialValues: {
-      ...recipe,
-      instructions: _.sortBy(recipe.instructions, 'step_number')
-    }
-  };
+  if (!recipe) {
+    return {}
+  } else {
+    return {
+      initialValues: {
+        ...recipe.data,
+      },
+      recipe
+    };
+  }
 
 }
 
