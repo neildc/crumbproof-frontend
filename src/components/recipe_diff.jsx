@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import _ from "lodash";
 import Diff from "./diff";
 import { fetchRecipe } from "../actions/actions_recipe";
-import {INSTRUCTIONS, INGREDIENTS} from "../util/diff";
+import {insertDeadToClosestLivingNeighbour, INSTRUCTIONS, INGREDIENTS} from "../util/diff";
 import LinearProgress from 'material-ui/LinearProgress';
 
 const ingredientStr = (i) => `${i.quantity} ${i.unit} ${i.name}`;
@@ -41,11 +41,8 @@ renderInstructions () {
     })
   }
 
-  renderDiff(type) {
 
-    /*
-     * TODO: rewrite this to make more sense
-     */
+  renderDiff(type) {
 
     let toString = {
       [INGREDIENTS] : ingredientStr,
@@ -53,24 +50,26 @@ renderInstructions () {
     }
 
     let original = this.props.parentRecipe.data[type];
-    let originalMapped = _.mapKeys(this.props.parentRecipe.data[type], 'id');
-    let modified = _.mapKeys(this.props.recipe.diff[type].modified, 'id');
-    let removed = _.mapKeys(this.props.recipe.diff[type].removed, 'id');
-    let added = _.mapKeys(this.props.recipe.diff[type].added, 'id');
+    let originalMap = _.mapKeys(original, 'id');
+    let modifiedMap = _.mapKeys(this.props.recipe.diff[type].modified, 'id');
+    let addedMap = _.mapKeys(this.props.recipe.diff[type].added, 'id');
+    let removed = this.props.recipe.diff[type].removed;
+    let removedMap = _.mapKeys(removed, 'id');
     let curr = this.props.recipe.data[type];
 
     var all;
     if (_.isEmpty(removed)) {
-      // If i apply the union below here I end up with all my elements added
-      // Appearing at the bottom
       all = curr;
     } else {
-      all = _.unionBy(original, curr, 'id')
+      all = _.cloneDeep(curr);
+      for (let i = 0; i < removed.length; i++) {
+        insertDeadToClosestLivingNeighbour(removed[i], original, all)
+      }
     }
 
     return _.map(all, i => {
 
-      if (added[i.id]) {
+      if (addedMap[i.id]) {
         return (
           <li key={i.id}>
             <Diff inputB={toString[type](i)} />
@@ -78,17 +77,17 @@ renderInstructions () {
         )
       }
 
-      if (modified[i.id]) {
+      if (modifiedMap[i.id]) {
         return (
           <li key={i.id}>
-            <Diff inputA={toString[type](originalMapped[i.id])}
-                  inputB={toString[type](modified[i.id])}
+            <Diff inputA={toString[type](originalMap[i.id])}
+                  inputB={toString[type](modifiedMap[i.id])}
             />
           </li>
         )
       }
 
-      if (removed[i.id]) {
+      if (removedMap[i.id]) {
         return (
           <p key={i.id} style={{margin:"0px"}}>
             <Diff inputA={toString[type](i)} />
