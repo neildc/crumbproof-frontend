@@ -66,6 +66,7 @@ class LoginIndex extends Component {
                 />
 
                 <SubmitButton
+                  className="loginButton"
                   label="Login"
                   labelInProgress="Logging in..."
                   submittingFlag={submitting}

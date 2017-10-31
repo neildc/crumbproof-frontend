@@ -1,16 +1,15 @@
-.galleryGrid {
-    display: grid;
-    /* grid-template-columns: repeat(auto-fit, 210px); */
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    grid-auto-rows: 160px;
-    align-content: center;
-    justify-content: center;
-    grid-gap: 20px;
+.addButton {
+    position: fixed !important;
+    bottom: 30px;
+    right: 30px;
+    z-index: 3;
 }
 
-.galleryTile {
-    width: auto;
-    height : auto;
-    max-height: 100%;
-    max-width: 100%;
+
+@media (min-width:640px) {
+    .addButton{
+        bottom: 10%;
+        right: inherit;
+        padding-left:610px
+    }
 }

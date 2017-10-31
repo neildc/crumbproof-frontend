@@ -22,14 +22,14 @@ class Header extends React.Component {
       <div style={{position:"fixed", width:"100%", zIndex: 3}}>
         <AppBar
           className="appBar"
-          title="crumb proof"
+          title="crumbproof"
           showMenuIconButton={false}
           iconElementRight={this.authButton()}
         />
         <Toolbar className="toolbar">
           <ToolbarGroup>
             <FlatButton containerElement={<Link to="/activity"/>} label={"Activites"} />
-            <FlatButton containerElement={<Link to="/recipies"/>} label={"Recipes"} />
+            <FlatButton containerElement={<Link to="/recipes"/>} label={"Recipes"} />
           </ToolbarGroup>
         </Toolbar>
       </div>

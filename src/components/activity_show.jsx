@@ -1,13 +1,7 @@
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchActivity, deleteActivity } from "../actions";
-import LinearProgress from 'material-ui/LinearProgress';
-import RaisedButton from 'material-ui/RaisedButton';
-import DeleteIcon from 'material-ui/svg-icons/action/delete';
-import {Card, CardMedia, CardTitle} from 'material-ui/Card';
-import moment from "moment";
-
+import { fetchActivity } from "../actions/actions_activity";
+import ActivityCard from "./activity_card";
 
 class ActivityShow extends Component {
 
@@ -16,75 +10,29 @@ class ActivityShow extends Component {
     this.props.fetchActivity(id);
   }
 
-  onDeleteClick() {
-    const { id } = this.props.match.params;
-
-    this.props.deleteActivity(id, () => {
-      this.props.history.push("/activity");
-    });
-  }
-
   render() {
-    const { activity } = this.props;
 
-    if (!activity) {
-      return <LinearProgress mode="indeterminate" />;
-    }
-
-    var duration = null;
-
-    if (activity.completed && activity.started) {
-      duration = moment(activity.completed).diff(moment(activity.started), 'hours');
-    }
-
-    return (
-      <Card >
-
-      <CardMedia overlay={
-        <CardTitle
-          title={activity.name}
-          subtitle={`By ${activity.user_id}`}
-        />
-      }
-        style={{padding:"5px"}}>
-          <img src={activity.crumb_shot} alt=""/>
-        </CardMedia>
-        <div style={{padding:"30px"}}>
-          <RaisedButton
-            label="Delete Activity"
-            icon={<DeleteIcon/>}
-            backgroundColor={"red"}
-            labelColor={"white"}
-            onClick={this.onDeleteClick.bind(this)}
-            style={{float: "right"}}
-      />
-
-          {activity.oven_start && activity.oven_end &&
-            <p>In the oven: {moment(activity.oven_start).format('h:mm:ss a')} {" - "}
-                            {moment(activity.oven_end).format('h:mm:ss a')}
-            </p>
-          }
-
-          { activity.completed &&
-            <p>Completed: {activity.completed}</p>
-          }
-
-          { duration &&
-            <p>Total duration: {duration} hours</p>
-          }
-
-          { activity.notes &&
-            <p>Notes for next time: {activity.notes}</p>
-          }
-
-        </div>
-      </Card>
+    return(
+      <div>
+        <ActivityCard activity={this.props.activity}/>
+      </div>
     );
   }
 }
 
 function mapStateToProps({ activities }, ownProps) {
-  return { activity: activities[ownProps.match.params.id] };
+
+  const getActivity = () => {
+    if (activities.byId && activities.byId[ownProps.match.params.id]) {
+      return activities.byId[ownProps.match.params.id]
+    } else {
+      return null
+    }
+  }
+
+  return {
+    activity: getActivity()
+  };
 }
 
-export default connect(mapStateToProps, { fetchActivity, deleteActivity })(ActivityShow);
+export default connect(mapStateToProps, { fetchActivity })(ActivityShow);

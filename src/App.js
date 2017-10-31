@@ -29,22 +29,22 @@ class App extends React.Component {
   routes() {
     return (
       <Switch>
-        <Route path="/recipes/new" component={
+        <Route exact path="/recipes/new" component={
           RequireAuth(RecipesNew, "Please sign in to create a new recipe")}/>
         <Route path="/recipes/:id" component={RecipesShow} />
-        <Route path="/recipes" component={RecipesIndex} />
+        <Route exact path="/recipes" component={RecipesIndex} />
 
         <Route path="/activity/new/recipe/:recipeId" component={
           RequireAuth(ActivityNew, "Please sign in to create a new activity")} />
-        <Route path="/activity/new" component={
+        <Route exact path="/activity/new" component={
           RequireAuth(ActivityNew, "Please sign in to create a new activity")} />
         <Route path="/activity/:id" component={ActivityShow} />
-        <Route path="/activity" component={ActivityIndex} />
+        <Route exact path="/activity" component={ActivityIndex} />
 
-        <Route path="/login" component={LoginIndex} />
-        <Route path="/register" component={RegisterIndex} />
+        <Route exact path="/login" component={LoginIndex} />
+        <Route exact path="/register" component={RegisterIndex} />
 
-        <Route path="/" component={RecipesIndex} />
+        <Route exact path="/" component={ActivityIndex} />
       </Switch>
     );
   }

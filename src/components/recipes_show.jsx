@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchRecipe, deleteRecipe } from "../actions";
+import { fetchRecipe, deleteRecipe } from "../actions/actions_recipe";
 import LinearProgress from 'material-ui/LinearProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
@@ -14,7 +14,8 @@ import { Card, CardTitle } from 'material-ui/Card';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import RecipeTimeline from './recipe_timeline';
-
+import ActivityGallery from './activities_gallery';
+import { getTotalTimeStr } from "../util/time.js";
 
 class RecipesShow extends Component {
 
@@ -27,7 +28,7 @@ class RecipesShow extends Component {
     const { id } = this.props.match.params;
 
     this.props.deleteRecipe(id, () => {
-      this.props.history.push("/");
+      this.props.history.push("/recipes");
     });
   }
 
@@ -37,7 +38,7 @@ class RecipesShow extends Component {
   }
 
   renderIngredients() {
-    return _.map(this.props.recipe.ingredients, i => {
+    return _.map(this.props.recipe.data.ingredients, i => {
       return (
         <li key={i.name}>
           {i.quantity} {i.unit} {i.name}
@@ -45,7 +46,6 @@ class RecipesShow extends Component {
       );
     });
   };
-
 
   render() {
     const { recipe } = this.props;
@@ -64,19 +64,19 @@ class RecipesShow extends Component {
               <BackIcon color="#999"/>
             </IconButton>
             <div style={{paddingTop:"5px"}}>
-              {recipe.name}
+              {recipe.data.name}
             </div>
           </div>
         }/>
         <div className="recipeMeta">
-          <div><b>BY  </b> {recipe.user_id}</div>
-          <div><b>PREP  </b> {recipe.prep_time} mins</div>
-          <div><b>BAKE  </b> {recipe.bake_time} mins at {recipe.oven_temperature}°</div>
-          <div><b>YIELDS  </b> {recipe.yield_count} {recipe.yield_type}</div>
+          <div><b>BY  </b> {recipe.user}</div>
+          <div><b>TIME  </b> {getTotalTimeStr(recipe.data.instructions)}</div>
+          <div><b>BAKE  </b> {recipe.data.bake_time} mins at {recipe.data.oven_temperature}°</div>
+          <div><b>YIELDS  </b> {recipe.data.yield_count} {recipe.data.yield_type}</div>
         </div>
         <div style={{padding:"30px"}}>
 
-          {(this.props.user === recipe.user_id) &&
+          {(this.props.user === recipe.user) &&
             <IconMenu
               iconButtonElement={<IconButton tooltip="Delete this recipe"><DeleteIcon/></IconButton>}
               anchorOrigin={{horizontal: 'left', vertical: 'top'}}
@@ -98,17 +98,22 @@ class RecipesShow extends Component {
               primary={true}
             />
 
+
+          <h3>Recent Activity</h3>
+          <ActivityGallery recipeId={Number(this.props.match.params.id)}/>
+
           <h3>Ingredients</h3>
           <ul>
             {this.renderIngredients()}
           </ul>
 
           <h3>Instructions</h3>
-          <RecipeTimeline instructions={this.props.recipe.instructions}/>
+          <RecipeTimeline instructions={recipe.data.instructions}/>
         </div>
       </Card>
     );
   }
+
 }
 
 function mapStateToProps({ recipes, auth }, ownProps) {

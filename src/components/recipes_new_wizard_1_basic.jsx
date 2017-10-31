@@ -2,8 +2,10 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import {required, isNumber } from "../validators.js";
 import RaisedButton from 'material-ui/RaisedButton';
-import renderTextField from "./redux_form_textfield";
 import { RECIPE_NEW_FORM_NAME } from '../constants/form_names';
+import renderTextField from "./redux_form/text_field";
+import renderAutoComplete from './redux_form/auto_complete';
+
 
 const RecipesNewWizard1Basic = (props) => {
 
@@ -20,18 +22,10 @@ const RecipesNewWizard1Basic = (props) => {
         />
 
         <Field
-          label="Prep Time (minutes)"
-          name="prep_time"
-          type="number"
-          component={renderTextField}
-          validate={[ required, isNumber ]}
-        />
-        <Field
           label="Bake Time (minutes)"
           name="bake_time"
           type="number"
           component={renderTextField}
-          parse={value => Number(value)}
           validate={[ required, isNumber ]}
         />
 
@@ -40,7 +34,6 @@ const RecipesNewWizard1Basic = (props) => {
           name="oven_temperature"
           type="number"
           component={renderTextField}
-          parse={value => Number(value)}
           validate={[ required, isNumber ]}
         />
 
@@ -49,13 +42,13 @@ const RecipesNewWizard1Basic = (props) => {
           name="yield_count"
           type="number"
           component={renderTextField}
-          parse={value => Number(value)}
           validate={[ required, isNumber ]}
         />
         <Field
           label="Yield Type"
           name="yield_type"
-          component={renderTextField}
+          suggestions ={['Loaf', 'Baguette', 'Roll', 'Bun', 'Bagel']}
+          component={renderAutoComplete}
           validate={[ required ]}
         />
       </div>

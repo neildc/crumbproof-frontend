@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import CPCard from './crumbproof_card.jsx'
 
 import { connect } from "react-redux";
-import { createRecipe } from "../actions";
+import { createRecipe } from "../actions/actions_recipe";
 import { reduxForm } from 'redux-form'
 
 import RecipesNewWizard1Basic from "./recipes_new_wizard_1_basic";
@@ -59,10 +59,12 @@ class RecipesNew extends Component {
     const { handleSubmit } = this.props;
     const { stepIndex} = this.state;
     const contentStyle = {margin: '0 16px'};
+    const width = window.innerWidth;
 
     return (
         <CPCard title={"New Recipe"}>
-          <Stepper activeStep={stepIndex}>
+          <Stepper activeStep={stepIndex}
+                   orientation={width < 640 ? "vertical" : "horizontal"}>
             {this.renderSteps(["Basic Details", "Ingredients", "Instructions"])}
           </Stepper>
 

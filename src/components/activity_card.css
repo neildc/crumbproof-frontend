@@ -1,0 +1,10 @@
+.cardPhoto{
+    background: #f0f0f0;
+    min-height:300px !important;
+    width: 100%;
+    heigth: 100%;
+}
+
+.menuButton {
+    float:right;
+}

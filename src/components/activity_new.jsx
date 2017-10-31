@@ -1,28 +1,89 @@
+import _ from "lodash";
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, FieldArray, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import { createActivity } from "../actions";
-import TextField from 'material-ui/TextField';
+import { createActivity } from "../actions/actions_activity";
+import { fetchRecipe } from "../actions/actions_recipe";
 import CPCard from './crumbproof_card.jsx'
-import {required} from "../validators.js"
+import {required, isNumber} from "../validators.js"
 import TimePicker from 'material-ui/TimePicker';
-import Dropzone from 'react-dropzone';
+import LinearProgress from 'material-ui/LinearProgress';
 import SubmitButton from "./SubmitButton";
+import renderTextField from "./redux_form/text_field";
+import renderAutoComplete from "./redux_form/auto_complete";
+import renderIngredients from "./redux_form/ingredients_list";
+import renderInstructions from "./redux_form/instructions_list";
+import renderDropzone from "./redux_form/drop_zone";
 
+import {generateDiff, INSTRUCTIONS, INGREDIENTS} from "../util/diff";
 
 class ActivityNew extends Component {
-  renderField(field) {
-    const { meta: { touched, error } } = field;
+
+  componentDidMount() {
+    const { recipeId } = this.props.match.params;
+    if (recipeId && !this.props.initialValues) {
+      this.props.fetchRecipe(recipeId);
+    }
+  }
+
+  renderRecipeEditor() {
+    if (!this.props.initialValues) {
+      return(
+        <div style={{padding:"10px"}}>
+          Loading recipe...
+          <LinearProgress mode="indeterminate" />
+        </div>
+      )
+    }
 
     return (
       <div>
-        <TextField
-            hintText=""
-            floatingLabelText={field.label}
-            errorText={touched && error}
-            {...field.input}
-            {...field.custom}
+        <h3>Recipe used: {this.props.initialValues.name}</h3>
+        <h4>Modifications:</h4>
+        <Field
+          label="Name of Recipe"
+          name="name"
+          component={renderTextField}
+          validate={[ required ]}
         />
+        <Field
+          label="Bake Time (minutes)"
+          name="bake_time"
+          type="number"
+          component={renderTextField}
+          validate={[ required, isNumber ]}
+        />
+
+        <Field
+          label="Oven Temperature (°C)"
+          name="oven_temperature"
+          type="number"
+          component={renderTextField}
+          validate={[ required, isNumber ]}
+        />
+
+        <Field
+          label="Yield Count"
+          name="yield_count"
+          type="number"
+          component={renderTextField}
+          validate={[ required, isNumber ]}
+        />
+        <Field
+          label="Yield Type"
+          name="yield_type"
+          suggestions ={['Loaf', 'Baguette', 'Roll', 'Bun', 'Bagel']}
+          component={renderAutoComplete}
+          validate={[ required ]}
+        />
+
+        <div>
+          <FieldArray name="ingredients" component={renderIngredients}/>
+          <br/>
+          <FieldArray name="instructions" component={renderInstructions}/>
+          <br/>
+        </div>
+
       </div>
     );
   }
@@ -41,50 +102,55 @@ class ActivityNew extends Component {
     );
   }
 
-  renderDropzone = (field) => {
-    const files = field.input.value;
-    return (
-      <div>
-        <Dropzone
-          name={field.name}
-          onDrop={( acceptedFiles, e ) => {
-            acceptedFiles.forEach(file => {
-                const reader = new FileReader();
-                reader.onload = () => {
-                    const fileAsBase64String = reader.result;
-                    field.input.onChange(fileAsBase64String)
-                };
-                reader.onabort = () => console.log('file reading was aborted');
-                reader.onerror = () => console.log('file reading has failed');
-
-                reader.readAsDataURL(file);
-            });
-            }
-          }
-        >
-          <div>Upload your crumb shot!</div>
-        </Dropzone>
-        {field.meta.touched &&
-          field.meta.error &&
-          <span className="error">{field.meta.error}</span>}
-        {files && Array.isArray(files) && (
-          <ul>
-            { files.map((file, i) => <li key={i}>{file.name}</li>) }
-          </ul>
-        )}
-      </div>
-    );
-  }
-
   onSubmit(values) {
 
-    const { recipeId } = this.props.match.params;
+    var payload = {
+      name: values.activity_name,
+      crumb_shot:  values.crumb_shot
+    };
 
+    if (values.notes) {
+      _.assign(payload, { notes: values.notes })
+    };
+
+    const { recipeId } = this.props.match.params;
     if (recipeId) {
-      values.recipe_id = recipeId;
+
+      let diffs = {
+        ingredients: generateDiff(
+                        INGREDIENTS,
+                        this.props.initialValues.ingredients,
+                        values.ingredients),
+
+        instructions: generateDiff(
+                        INSTRUCTIONS,
+                        this.props.initialValues.instructions,
+                        values.instructions)
+      }
+
+      let newRecipe = {
+        bake_time : values.bake_time,
+        name: values.name,
+        instructions: values.instructions,
+        ingredients: values.ingredients,
+        oven_temperature: values.oven_temperature,
+        yield_count: values.yield_count,
+        yield_type: values.yield_type
+      }
+
+      let base = this.props.recipe.base_recipe ? this.props.recipe.base_recipe : this.props.recipe.id;
+
+      _.assign(payload, { recipe: {
+                 diff: diffs,
+                 data: newRecipe,
+                 base_recipe : base,
+                 parent: recipeId,
+               }}
+
+      );
     }
 
-    return this.props.createActivity(values, () => {
+    return this.props.createActivity(payload, () => {
       this.props.history.push("/activity");
     });
   }
@@ -94,55 +160,40 @@ class ActivityNew extends Component {
 
     return (
       <CPCard title={"New Activity"}>
-          <form
-            onSubmit={handleSubmit(this.onSubmit.bind(this))}
-            style={{margin:"20px"}}
-          >
-            <Field
-              label="Name For Activity"
-              name="name"
-              component={this.renderField}
-              validate={[ required ]}
-            />
-            <Field
-              label="Photo of crumb"
-              name="crumb_shot"
-              component={this.renderDropzone}
-            />
-            <Field
-              label="Notes for next time"
-              name="notes"
-              component={this.renderField}
-            />
-            <Field
-              label="Started"
-              name="started"
-              initialValues={new Date()}
-              component={this.renderTimePicker}
-            />
+        <form
+          onSubmit={handleSubmit(this.onSubmit.bind(this))}
+          style={{margin:"20px"}}
+        >
+          <Field
+            label="Name For Activity"
+            name="activity_name"
+            component={renderTextField}
+            validate={[ required ]}
+          />
+          <Field
+            label="Photo of crumb"
+            name="crumb_shot"
+            component={renderDropzone}
+          />
+          <Field
+            label="Notes"
+            name="notes"
+            multiLine={true}
+            fullWidth={true}
+            component={renderTextField}
+          />
 
-            <Field
-              label="Completed"
-              name="completed"
-              component={this.renderTimePicker}
-            />
-            <Field
-              label="Time put into oven"
-              name="oven_start"
-              component={this.renderTimePicker}
-            />
-            <Field
-              label="Time pulled out of oven"
-              name="oven_end"
-              component={this.renderTimePicker}
-            />
+          {this.props.match.params.recipeId &&
+            this.renderRecipeEditor()
+          }
 
-            <SubmitButton
-              label="Submit"
-              labelInProgress="Submitting..."
-              submittingFlag={submitting}
-            />
-          </form>
+          <SubmitButton
+            label="Submit"
+            labelInProgress="Submitting..."
+            submittingFlag={submitting}
+          />
+
+        </form>
       </CPCard>
     );
   }
@@ -162,7 +213,32 @@ function validate(values) {
   return errors;
 }
 
-export default reduxForm({
-  validate,
-  form: "ActivityNewForm"
-})(connect(null, { createActivity })(ActivityNew));
+function mapStateToProps({recipes}, ownProps) {
+
+  const { recipeId } = ownProps.match.params;
+
+  if (!recipeId) {
+    return {};
+  }
+
+  let recipe = recipes[recipeId];
+
+  if (!recipe) {
+    return {}
+  } else {
+    return {
+      initialValues: {
+        ...recipe.data,
+      },
+      recipe
+    };
+  }
+
+}
+
+export default connect(mapStateToProps, { createActivity, fetchRecipe })(
+  reduxForm({
+    form: "ActivityNewForm",
+    validate
+  })(ActivityNew)
+)
