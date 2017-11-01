@@ -10,18 +10,33 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import AddIcon from 'material-ui/svg-icons/content/add-circle';
 import IconButton from 'material-ui/IconButton';
 import BackIcon from 'material-ui/svg-icons/navigation/arrow-back';
-import { Card, CardTitle } from 'material-ui/Card';
+import { Card, CardTitle, CardHeader, CardText} from 'material-ui/Card';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import RecipeTimeline from './recipe_timeline';
 import ActivityGallery from './activities_gallery';
 import { getTotalTimeStr } from "../util/time.js";
+import RecipeDiff from "./recipe_diff";
+import moment from "moment"
 
 class RecipesShow extends Component {
 
   componentDidMount() {
-    const { id } = this.props.match.params;
-    this.props.fetchRecipe(id);
+
+    if (!this.props.recipe) {
+      const { id } = this.props.match.params;
+      this.props.fetchRecipe(id);
+    }
+  }
+
+  componentDidUpdate() {
+      if (this.props.recipe.parent && !this.props.parentRecipe) {
+        this.props.fetchRecipe(this.props.recipe.parent);
+      }
+
+      if (this.props.recipe.base_recipe && !this.props.baseRecipe) {
+        this.props.fetchRecipe(this.props.recipe.base_recipe);
+      }
   }
 
   onDeleteClick() {
@@ -47,6 +62,66 @@ class RecipesShow extends Component {
     });
   };
 
+  renderRecipe(recipe) {
+    return(
+      <Card containerStyle={{marginBottom:"20px"}} initiallyExpanded={true}>
+        <CardHeader title="RECIPE" showExpandableButton={true}/>
+        <CardText expandable={true} style={{padding:"30px", paddingTop:"0px"}}>
+
+
+          { recipe.data.credits &&
+            <div>
+              <h3>Credits:</h3>
+              {recipe.data.credits}
+            </div>
+          }
+        <h3>Ingredients</h3>
+
+          <ul> {this.renderIngredients()} </ul>
+
+          <h3>Instructions</h3>
+          <RecipeTimeline instructions={recipe.data.instructions}/>
+        </CardText>
+      </Card>
+    )
+  }
+
+  renderHistory() {
+
+    let { recipe, baseRecipe, parentRecipe } = this.props;
+
+    if (!baseRecipe) {
+      return <LinearProgress mode="indeterminate" />;
+    }
+
+    return(
+      <Card containerStyle={{marginBottom:"20px"}} initiallyExpanded={true}>
+          <CardHeader title="RECIPE HISTORY"
+          showExpandableButton={true}
+          >
+          </CardHeader>
+          <CardText expandable={true} style={{padding:"30px", paddingTop:"0px"}}>
+            <h3>Recipe based off:</h3>
+            <Link to={`/recipes/${baseRecipe.id}`}>{baseRecipe.data.name}</Link>
+            {` created ${moment(baseRecipe.created).fromNow()}`}
+
+            {parentRecipe &&
+             <div>
+               <h3>Previous iteration of this recipe:</h3>
+               <Link to={`/recipes/${parentRecipe.id}`}>
+                 {parentRecipe.data.name}
+               </Link>
+               {` created ${moment(parentRecipe.created).fromNow()}`}
+
+               <h2>Changes made:</h2>
+               <RecipeDiff recipe={recipe}/>
+             </div>
+            }
+          </CardText>
+        </Card>
+      )
+  }
+
   render() {
     const { recipe } = this.props;
 
@@ -56,7 +131,8 @@ class RecipesShow extends Component {
 
     return (
 
-      <Card containerStyle={{marginBottom:"50px"}}>
+      <div>
+      <Card containerStyle={{marginBottom:"20px"}}>
         <CardTitle className="cardTitle" title={
           <div className="cardTitleContents">
             <IconButton tooltip="Back to recipes"
@@ -90,6 +166,9 @@ class RecipesShow extends Component {
             />
             </IconMenu>
           }
+
+          <h3>Recent Activity</h3>
+          <ActivityGallery recipeId={Number(this.props.match.params.id)}/>
             <RaisedButton
               label="Record an activity with this recipe"
               icon={<AddIcon/>}
@@ -98,33 +177,35 @@ class RecipesShow extends Component {
               primary={true}
             />
 
-
-          <h3>Recent Activity</h3>
-          <ActivityGallery recipeId={Number(this.props.match.params.id)}/>
-
-          <h3>Ingredients</h3>
-          <ul>
-            {this.renderIngredients()}
-          </ul>
-          { recipe.data.credits &&
-            <div>
-              <h3>Credits:</h3>
-              {recipe.data.credits}
-            </div>
-          }
-
-          <h3>Instructions</h3>
-          <RecipeTimeline instructions={recipe.data.instructions}/>
         </div>
       </Card>
+
+      { this.renderRecipe(recipe) }
+
+      { recipe.base_recipe &&
+         this.renderHistory()
+      }
+      </div>
     );
   }
 
 }
 
 function mapStateToProps({ recipes, auth }, ownProps) {
+
+  let recipe = recipes[ownProps.match.params.id];
+
+  if (!recipe) {
+    return {user: auth.user};
+  }
+
+  let parentRecipe = recipes[recipe.parent];
+  let baseRecipe = recipes[recipe.base_recipe];
+
   return {
-    recipe: recipes[ownProps.match.params.id],
+    recipe,
+    parentRecipe,
+    baseRecipe,
     user: auth.user
   };
 }
