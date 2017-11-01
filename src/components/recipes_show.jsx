@@ -106,6 +106,12 @@ class RecipesShow extends Component {
           <ul>
             {this.renderIngredients()}
           </ul>
+          { recipe.data.credits &&
+            <div>
+              <h3>Credits:</h3>
+              {recipe.data.credits}
+            </div>
+          }
 
           <h3>Instructions</h3>
           <RecipeTimeline instructions={recipe.data.instructions}/>

@@ -49,6 +49,7 @@ export function createRecipe(values, callback) {
   let payload = {
     diff: null,
     data: {
+      credits: values.credits,
       bake_time : values.bake_time,
       name: values.name,
       instructions: values.instructions,

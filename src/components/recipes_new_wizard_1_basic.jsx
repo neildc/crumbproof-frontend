@@ -22,6 +22,13 @@ const RecipesNewWizard1Basic = (props) => {
         />
 
         <Field
+          label="Credit/Source (optional)"
+          name="credits"
+          component={renderTextField}
+          validate={[]}
+        />
+
+        <Field
           label="Bake Time (minutes)"
           name="bake_time"
           type="number"
