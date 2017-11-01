@@ -19,24 +19,28 @@ class RecipesIndex extends Component {
   }
 
 
+  handleRecipeClick(id) {
+    this.props.history.push(`/recipes/${id}`);
+  }
 
   renderRecipeNode(recipe) {
     return (
       <ListItem
         key={recipe.id}
         primaryText={recipe.data.name}
+        secondaryText={`By ${recipe.user}`}
         leftIcon={recipe.base_recipe === null ? <ContentSend/>:<ArrowRight/>}
-        open={true}
+        initiallyOpen={true}
+        onClick={this.handleRecipeClick.bind(this, recipe.id)}
         nestedItems={this.renderRecipeChildren(recipe.children)}
-        containerElement={
-          <Link to={`/recipes/${recipe.id}`} />
-        }>
+        >
       </ListItem>
     );
   }
 
   renderRecipeChildren(children) {
     if (!children) return null;
+
     return _.map(children, r => {
         return this.renderRecipeNode(r)
     });
