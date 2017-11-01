@@ -11,6 +11,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import CPCard from './crumbproof_card.jsx';
 import LinearProgress from 'material-ui/LinearProgress';
 
+import "./floating_add_button.css";
 
 class RecipesIndex extends Component {
   componentDidMount() {
@@ -77,7 +78,7 @@ class RecipesIndex extends Component {
             <List>
             {this.renderRecipes()}
             </List>
-            <div style={{float:"right"}}>
+            <div className="addButton">
                 <FloatingActionButton containerElement={<Link to="/recipes/new"/>}>
                     <ContentAdd/>
                 </FloatingActionButton>

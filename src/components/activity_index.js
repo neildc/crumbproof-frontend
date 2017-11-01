@@ -1,4 +1,4 @@
-import "./activity_index.css";
+import "./floating_add_button.css";
 import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
