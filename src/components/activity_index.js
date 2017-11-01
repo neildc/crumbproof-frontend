@@ -9,6 +9,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import LinearProgress from 'material-ui/LinearProgress';
 import ActivityCard from "./activity_card";
 import InfiniteScroll from 'react-infinite-scroller';
+import { Card } from 'material-ui/Card';
 
 
 class ActivityIndex extends Component {
@@ -55,10 +56,9 @@ class ActivityIndex extends Component {
           loadMore={this.loadMoreActivities.bind(this)}
           hasMore={this.props.activities.next}
           loader={
-            <LinearProgress
-              mode="indeterminate"
-              style={{marginBottom:"30px"}}
-            />
+            <Card style={{padding:"20px", marginBottom:"30px"}}>
+              <LinearProgress mode="indeterminate" />
+            </Card>
           }
         >
           {this.renderActivityCards()}
