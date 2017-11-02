@@ -14,10 +14,12 @@ import renderAutoComplete from "./redux_form/auto_complete";
 import renderIngredients from "./redux_form/ingredients_list";
 import renderInstructions from "./redux_form/instructions_list";
 import renderDropzone from "./redux_form/drop_zone";
+import {dateToday} from "../util/time";
 
 import {generateDiff, INSTRUCTIONS, INGREDIENTS} from "../util/diff";
 
 class ActivityNew extends Component {
+
 
   componentDidMount() {
     const { recipeId } = this.props.match.params;
@@ -38,11 +40,12 @@ class ActivityNew extends Component {
 
     return (
       <div>
-        <h3>Recipe used: {this.props.initialValues.name}</h3>
-        <h4>Modifications:</h4>
+        <h3>Recipe used: {this.props.initialValues.name.replace(`(${dateToday()})`,'')}</h3>
+        <h4>Modifications made this iteration:</h4>
         <Field
-          label="Name of Recipe"
+          label="Name of this variation"
           name="name"
+          fullWidth={true}
           component={renderTextField}
           validate={[ required ]}
         />
@@ -78,10 +81,12 @@ class ActivityNew extends Component {
         />
 
         <div>
+          <br/>
+          <h3> Ingredients:</h3>
           <FieldArray name="ingredients" component={renderIngredients}/>
           <br/>
+          <h3> Instructons:</h3>
           <FieldArray name="instructions" component={renderInstructions}/>
-          <br/>
         </div>
 
       </div>
@@ -229,6 +234,7 @@ function mapStateToProps({recipes}, ownProps) {
     return {
       initialValues: {
         ...recipe.data,
+        name: `${recipe.data.name} (${dateToday()})`
       },
       recipe
     };

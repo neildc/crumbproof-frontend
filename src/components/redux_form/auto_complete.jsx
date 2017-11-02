@@ -5,8 +5,8 @@ export default function renderAutoComplete(field) {
   const { meta: { touched, error } } = field;
 
   return (
-    <div>
       <AutoComplete
+        {...field}
         hintText=""
         floatingLabelText={field.label}
         errorText={touched && error}
@@ -18,6 +18,5 @@ export default function renderAutoComplete(field) {
         searchText={field.input.value}
         onUpdateInput={(value) => {field.input.onChange(value)}}
     />
-    </div>
   );
 }
