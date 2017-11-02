@@ -11,6 +11,8 @@ import TripleDotIcon from 'material-ui/svg-icons/navigation/more-horiz';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
+import LazyLoad from "react-lazyload";
+
 
 import RecipeDiff from "./recipe_diff";
 import "./activity_card.css";
@@ -55,14 +57,16 @@ class ActivityCard extends Component {
             />
           }>
 
-          <ImageZoom
-            image={{
-              src: activity.crumb_shot,
-              alt: '',
-              className: 'img',
-              style: { maxWidth: '100%' }
-            }}
-          />
+          <LazyLoad offset={200}>
+            <ImageZoom
+              image={{
+                src: activity.crumb_shot,
+                alt: '',
+                className: 'img',
+                style: { maxWidth: '100%' }
+              }}
+            />
+          </LazyLoad>
         </CardMedia>
 
         <div style={{padding:"30px"}}>
