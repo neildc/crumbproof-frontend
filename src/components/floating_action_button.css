@@ -1,4 +1,4 @@
-.addButton {
+.floatingActionButton {
     position: fixed !important;
     bottom: 30px;
     right: 30px;
@@ -7,9 +7,9 @@
 
 
 @media (min-width:640px) {
-    .addButton{
+    .floatingActionButton {
         bottom: 10%;
         right: inherit;
-        padding-left:610px
+        margin-left:610px
     }
 }

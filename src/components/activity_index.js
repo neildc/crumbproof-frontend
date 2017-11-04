@@ -1,20 +1,45 @@
-import "./floating_add_button.css";
 import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { fetchActivities, fetchMoreActivities } from "../actions/actions_activity";
-import FloatingActionButton from 'material-ui/FloatingActionButton';
+import FloatingActionButton from "./floating_action_button";
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import LinearProgress from 'material-ui/LinearProgress';
 import ActivityCard from "./activity_card";
 import InfiniteScroll from 'react-infinite-scroller';
 import { Card } from 'material-ui/Card';
+import { SlideInBottom } from './animations/slide';
+import { forceCheck } from 'react-lazyload';
+
 
 
 class ActivityIndex extends Component {
+
   componentDidMount() {
     this.props.fetchActivities();
+  }
+
+  componentDidUpdate() {
+
+    /* TODO: find a less hacky solution
+     *
+     * The following is needed since the activity images are lazy loaded.
+     * The lazy loader only fetches images that are in the viewport + a small
+     * offset.
+     *
+     * Since we are animating the activity cards to slide in from the bottom
+     * the lazy loader will not load the image for the first card.
+     *
+     * Simple solution is to force the lazyLoader to check after a short
+     * delay after an update.
+     *
+     */
+
+    /* Optimistic case */
+    forceCheck();
+
+    /* Backup/First load */
+    setTimeout(() => {forceCheck();}, 500);
   }
 
   renderActivityCards() {
@@ -28,11 +53,13 @@ class ActivityIndex extends Component {
 
     return _.map(activities, activity => {
       return (
-        <div key={activity.id} style={{marginBottom:"50px"}}>
-          <ActivityCard activity={activity}/>
-        </div>
-      );
-    });
+            <SlideInBottom>
+              <div key={activity.id} style={{marginBottom:"50px"}}>
+                <ActivityCard activity={activity}/>
+              </div>
+            </SlideInBottom>
+      )
+    })
   }
 
   loadMoreActivities() {
@@ -45,11 +72,9 @@ class ActivityIndex extends Component {
 
     return (
       <div>
-        <div className="addButton">
-          <FloatingActionButton containerElement={<Link to="/activity/new"/>}>
+        <FloatingActionButton link="/activity/new">
             <ContentAdd/>
-          </FloatingActionButton>
-        </div>
+        </FloatingActionButton>
 
         <InfiniteScroll
           pageStart={0}
