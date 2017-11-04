@@ -46,11 +46,9 @@ class ActivityIndex extends Component {
 
     return (
       <div>
-        <div className="addButton">
-          <FloatingActionButton containerElement={<Link to="/activity/new"/>}>
+        <FloatingActionButton link="/activity/new">
             <ContentAdd/>
-          </FloatingActionButton>
-        </div>
+        </FloatingActionButton>
 
         <InfiniteScroll
           pageStart={0}

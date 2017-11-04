@@ -1,17 +1,14 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { fetchRecipes } from "../actions/actions_recipe";
 import {List, ListItem} from 'material-ui/List';
 import ContentSend from 'material-ui/svg-icons/content/send';
 import ArrowRight from 'material-ui/svg-icons/navigation/subdirectory-arrow-right';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
+import FloatingActionButton from "./floating_action_button";
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import CPCard from './crumbproof_card.jsx';
 import LinearProgress from 'material-ui/LinearProgress';
-
-import "./floating_add_button.css";
 
 class RecipesIndex extends Component {
   componentDidMount() {
@@ -78,16 +75,16 @@ class RecipesIndex extends Component {
 
   render() {
     return (
+      <div>
+        <FloatingActionButton link="/recipes/new">
+            <ContentAdd/>
+        </FloatingActionButton>
         <CPCard title="Recipes">
             <List>
             {this.renderRecipes()}
             </List>
-            <div className="addButton">
-                <FloatingActionButton containerElement={<Link to="/recipes/new"/>}>
-                    <ContentAdd/>
-                </FloatingActionButton>
-            </div>
         </CPCard>
+      </div>
     );
   }
 }
