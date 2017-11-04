@@ -14,6 +14,7 @@ import {required} from "../validators.js";
 
 import Snackbar from 'material-ui/Snackbar';
 import SubmitButton from "./SubmitButton";
+import { FadeIn } from "./animations/fade";
 
 class LoginIndex extends Component {
 
@@ -45,6 +46,7 @@ class LoginIndex extends Component {
     const { handleSubmit, submitting } = this.props;
 
       return(
+        <FadeIn>
           <Card className="loginCard">
             <CardTitle title="Login" className="loginCardTitle"/>
 
@@ -89,6 +91,7 @@ class LoginIndex extends Component {
               onRequestClose={this.props.authClearError}
             />
           </Card>
+        </FadeIn>
     );
   }
 }

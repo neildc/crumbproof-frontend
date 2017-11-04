@@ -18,6 +18,7 @@ import ActivityGallery from './activities_gallery';
 import { getTotalTimeStr } from "../util/time.js";
 import RecipeDiff from "./recipe_diff";
 import moment from "moment"
+import { FadeIn } from "./animations/fade";
 
 class RecipesShow extends Component {
 
@@ -131,7 +132,7 @@ class RecipesShow extends Component {
 
     return (
 
-      <div>
+      <FadeIn>
       <Card containerStyle={{marginBottom:"20px"}}>
         <CardTitle className="cardTitle" title={
           <div className="cardTitleContents">
@@ -185,7 +186,7 @@ class RecipesShow extends Component {
       { recipe.base_recipe &&
          this.renderHistory()
       }
-      </div>
+      </FadeIn>
     );
   }
 

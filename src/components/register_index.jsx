@@ -13,6 +13,8 @@ import {required} from "../validators.js";
 import Snackbar from 'material-ui/Snackbar';
 import SubmitButton from "./SubmitButton";
 
+import { FadeIn } from "./animations/fade";
+
 class RegisterIndex extends Component {
 
   renderField(field) {
@@ -43,6 +45,7 @@ class RegisterIndex extends Component {
     const { handleSubmit, submitting } = this.props;
 
       return(
+        <FadeIn>
           <Card className="registerCard">
             <CardTitle title="Register" className="registerCardTitle"/>
 
@@ -89,6 +92,7 @@ class RegisterIndex extends Component {
               onRequestClose={this.props.authClearError}
             />
           </Card>
+        </FadeIn>
     );
   }
 }
