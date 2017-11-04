@@ -9,11 +9,37 @@ import ActivityCard from "./activity_card";
 import InfiniteScroll from 'react-infinite-scroller';
 import { Card } from 'material-ui/Card';
 import { SlideInBottom } from './animations/slide';
+import { forceCheck } from 'react-lazyload';
+
 
 
 class ActivityIndex extends Component {
+
   componentDidMount() {
     this.props.fetchActivities();
+  }
+
+  componentDidUpdate() {
+
+    /* TODO: find a less hacky solution
+     *
+     * The following is needed since the activity images are lazy loaded.
+     * The lazy loader only fetches images that are in the viewport + a small
+     * offset.
+     *
+     * Since we are animating the activity cards to slide in from the bottom
+     * the lazy loader will not load the image for the first card.
+     *
+     * Simple solution is to force the lazyLoader to check after a short
+     * delay after an update.
+     *
+     */
+
+    /* Optimistic case */
+    forceCheck();
+
+    /* Backup/First load */
+    setTimeout(() => {forceCheck();}, 500);
   }
 
   renderActivityCards() {

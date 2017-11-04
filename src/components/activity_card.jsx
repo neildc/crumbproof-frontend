@@ -57,7 +57,7 @@ class ActivityCard extends Component {
             />
           }>
 
-          <LazyLoad offset={200}>
+          <LazyLoad offset={200} once={true}>
             <ImageZoom
               image={{
                 src: activity.crumb_shot,
