@@ -78,7 +78,7 @@ class ActivityIndex extends Component {
         <InfiniteScroll
           pageStart={0}
           loadMore={this.loadMoreActivities.bind(this)}
-          hasMore={this.props.activities.next}
+          hasMore={this.props.activities.next != null}
           loader={<LoadingCard style={{marginBottom:"30px"}}/>}
         >
           {this.renderActivityCards()}
