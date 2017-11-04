@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteActivity } from "../actions/actions_activity";
-import LinearProgress from 'material-ui/LinearProgress';
 import {Card, CardMedia, CardTitle} from 'material-ui/Card';
+import LoadingCard from "./loading_card";
 import moment from "moment";
 import ImageZoom from 'react-medium-image-zoom'
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
@@ -29,7 +29,7 @@ class ActivityCard extends Component {
     const { activity } = this.props;
 
     if (!activity) {
-      return <LinearProgress mode="indeterminate" />;
+      return <LoadingCard/>
     }
 
     var duration = null;

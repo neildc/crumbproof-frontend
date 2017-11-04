@@ -4,10 +4,9 @@ import { connect } from "react-redux";
 import { fetchActivities, fetchMoreActivities } from "../actions/actions_activity";
 import FloatingActionButton from "./floating_action_button";
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import LinearProgress from 'material-ui/LinearProgress';
+import LoadingCard from "./loading_card";
 import ActivityCard from "./activity_card";
 import InfiniteScroll from 'react-infinite-scroller';
-import { Card } from 'material-ui/Card';
 import { SlideInBottom } from './animations/slide';
 import { forceCheck } from 'react-lazyload';
 
@@ -46,7 +45,7 @@ class ActivityIndex extends Component {
 
     // Need to _.values as activities is an object
     if (_.values(this.props.activities.byId).length === 0) {
-      return <LinearProgress mode="indeterminate" />;
+      return <LoadingCard/>
     }
 
     let activities = _.orderBy(this.props.activities.byId, ['created'], ['desc']);
@@ -80,11 +79,7 @@ class ActivityIndex extends Component {
           pageStart={0}
           loadMore={this.loadMoreActivities.bind(this)}
           hasMore={this.props.activities.next}
-          loader={
-            <Card style={{padding:"20px", marginBottom:"30px"}}>
-              <LinearProgress mode="indeterminate" />
-            </Card>
-          }
+          loader={<LoadingCard style={{marginBottom:"30px"}}/>}
         >
           {this.renderActivityCards()}
         </InfiniteScroll>
