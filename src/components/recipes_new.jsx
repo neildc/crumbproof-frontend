@@ -1,14 +1,9 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import CPCard from './crumbproof_card.jsx'
 
 import { connect } from "react-redux";
-import { createRecipe } from "../actions/actions_recipe";
 import { reduxForm } from 'redux-form'
-
-import RecipesNewWizard1Basic from "./recipes_new_wizard_1_basic";
-import RecipesNewWizard2Ingredients from "./recipes_new_wizard_2_ingredients";
-import RecipesNewWizard3Instructions from "./recipes_new_wizard_3_instructions";
+import { createRecipe } from "../actions/actions_recipe";
 
 import {
   Step,
@@ -16,27 +11,36 @@ import {
   StepLabel,
 } from 'material-ui/Stepper';
 
+import CPCard from './crumbproof_card.jsx'
+
+import RecipesNewWizard1Basic from "./recipes_new_wizard_1_basic";
+import RecipesNewWizard2Ingredients from "./recipes_new_wizard_2_ingredients";
+import RecipesNewWizard3Instructions from "./recipes_new_wizard_3_instructions";
+
+
 import { RECIPE_NEW_FORM_NAME } from '../constants/form_names';
 
 class RecipesNew extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      stepIndex: 0,
+    };
+  }
 
-  state = {
-    stepIndex: 0,
-  };
-
-  handleNext = () => {
-    const {stepIndex} = this.state;
+  handleNext() {
+    const { stepIndex } = this.state;
     this.setState({
       stepIndex: stepIndex + 1,
     });
-  };
+  }
 
-  handlePrev = () => {
-    const {stepIndex} = this.state;
+  handlePrev() {
+    const { stepIndex } = this.state;
     if (stepIndex > 0) {
-      this.setState({stepIndex: stepIndex - 1});
+      this.setState({ stepIndex: stepIndex - 1 });
     }
-  };
+  }
 
   renderSteps(labels) {
     return _.map(labels, l => {

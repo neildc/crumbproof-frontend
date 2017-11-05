@@ -1,8 +1,9 @@
-import './index.css';
 
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import './index.css';
 
 import { authCheckLocalStorage } from './actions/actions_auth';
 

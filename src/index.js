@@ -6,20 +6,20 @@ import promise from 'redux-promise';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { createStore, applyMiddleware } from 'redux';
-import reducers from './reducers';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import crumbproofTheme from './theme';
-import registerServiceWorker from './registerServiceWorker';
-import './index.css';
-import App from './App';
 
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
+import './index.css';
+import crumbproofTheme from './theme';
+import App from './App';
+import reducers from './reducers';
 import { ROOT_URL } from './constants/hosts';
+import registerServiceWorker from './registerServiceWorker';
 
 
 document.getElementById('loader').style.display = 'none';

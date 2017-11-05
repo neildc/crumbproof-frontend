@@ -25,6 +25,31 @@ export function generateDiff(type, orig, curr) {
   return { removed, added, modified };
 }
 
+function findLivingNeighbour(bot, top, curr) {
+  for (let i = 0; top[i] || bot[i]; i += 1) {
+    if (top[i]) {
+      const topIndex = _.findIndex(curr, { id: top[i].id });
+      if (topIndex) {
+        return { index: topIndex, position: 'below' };
+      }
+    }
+
+    if (bot[i]) {
+      const botIndex = _.findIndex(curr, { id: bot[i].id });
+      if (botIndex) {
+        return { index: botIndex, position: 'above' };
+      }
+    }
+  }
+  return null;
+}
+
+function insertDeadNextToLivingNeighbour(dead, all, neighbour) {
+  const { index, position } = neighbour;
+  if (position === 'below') all.splice(index + 1, 0, dead);
+  if (position === 'above') all.splice(index - 1, 0, dead);
+}
+
 /*
  * Insert the removed elements into the new recipe
  *
@@ -65,29 +90,4 @@ export function insertDeadToClosestLivingNeighbour(dead, prev, living) {
     // place the instruction at the top of the list
     insertDeadNextToLivingNeighbour(dead, living, { id: 0, position: 'above' });
   }
-}
-
-function findLivingNeighbour(bot, top, curr) {
-  for (let i = 0; top[i] || bot[i]; i++) {
-    if (top[i]) {
-      const topIndex = _.findIndex(curr, { id: top[i].id });
-      if (topIndex) {
-        return { index: topIndex, position: 'below' };
-      }
-    }
-
-    if (bot[i]) {
-      const botIndex = _.findIndex(curr, { id: bot[i].id });
-      if (botIndex) {
-        return { index: botIndex, position: 'above' };
-      }
-    }
-  }
-  return null;
-}
-
-function insertDeadNextToLivingNeighbour(dead, all, neighbour) {
-  const { index, position } = neighbour;
-  if (position === 'below') all.splice(index + 1, 0, dead);
-  if (position === 'above') all.splice(index - 1, 0, dead);
 }

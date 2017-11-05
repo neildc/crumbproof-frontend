@@ -1,14 +1,16 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchActivities, fetchMoreActivities } from '../actions/actions_activity';
-import FloatingActionButton from './floating_action_button';
+import { forceCheck } from 'react-lazyload';
+import InfiniteScroll from 'react-infinite-scroller';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+
+import { fetchActivities, fetchMoreActivities } from '../actions/actions_activity';
+
+import FloatingActionButton from './floating_action_button';
 import LoadingCard from './loading_card';
 import ActivityCard from './activity_card';
-import InfiniteScroll from 'react-infinite-scroller';
 import { SlideInBottom } from './animations/slide';
-import { forceCheck } from 'react-lazyload';
 
 
 class ActivityIndex extends Component {
@@ -38,6 +40,12 @@ class ActivityIndex extends Component {
     setTimeout(() => { forceCheck(); }, 500);
   }
 
+  loadMoreActivities() {
+    if (this.props.activities.next) {
+      this.props.fetchMoreActivities(this.props.activities.next);
+    }
+  }
+
   renderActivityCards() {
     // Need to _.values as activities is an object
     if (_.values(this.props.activities.byId).length === 0) {
@@ -53,12 +61,6 @@ class ActivityIndex extends Component {
         </div>
       </SlideInBottom>
     ));
-  }
-
-  loadMoreActivities() {
-    if (this.props.activities.next) {
-      this.props.fetchMoreActivities(this.props.activities.next);
-    }
   }
 
   render() {

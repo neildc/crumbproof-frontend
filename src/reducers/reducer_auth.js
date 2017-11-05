@@ -54,7 +54,7 @@ export default function (state = {}, action) {
           const resp = action.payload.response;
 
           switch (resp.status) {
-            case (400):
+            case (400): {
               const fields = ['username',
                 'password1',
                 'password2',
@@ -71,8 +71,10 @@ export default function (state = {}, action) {
                 }
               }
               break;
-            default:
+            }
+            default: {
               return { error: DEFAULT_ERROR_MESSAGE };
+            }
           }
         }
         return { error: DEFAULT_ERROR_MESSAGE };
