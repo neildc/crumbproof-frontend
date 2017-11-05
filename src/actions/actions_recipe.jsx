@@ -4,7 +4,6 @@ import { ROOT_URL } from "../constants/hosts";
 
 export const FETCH_RECIPES = "fetch_recipes";
 export const FETCH_RECIPE = "fetch_recipe";
-export const FETCH_RECIPE_ACTIVITIES = "fetch_recipe_activities";
 export const CREATE_RECIPE = "create_recipe";
 export const DELETE_RECIPE = "delete_recipe";
 
@@ -99,14 +98,5 @@ export function deleteRecipe(id, callback) {
   return {
     type: DELETE_RECIPE,
     payload: id
-  };
-}
-
-export function fetchRecipeActivities(id) {
-  const request = axios.get(`${ROOT_URL}/recipes/${id}/activities/`);
-
-  return {
-    type: FETCH_RECIPE_ACTIVITIES,
-    payload: request
   };
 }

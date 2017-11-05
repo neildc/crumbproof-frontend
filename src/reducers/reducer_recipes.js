@@ -3,7 +3,6 @@ import {
   FETCH_RECIPES,
   FETCH_RECIPE,
   DELETE_RECIPE,
-  FETCH_RECIPE_ACTIVITIES,
 } from "../actions/actions_recipe";
 
 export default function(state = {}, action) {
@@ -30,21 +29,6 @@ export default function(state = {}, action) {
     case FETCH_RECIPES:
       let newRecipes = _.mapKeys(action.payload.data.results, "id");
       return _.merge({}, newRecipes, state);
-  case FETCH_RECIPE_ACTIVITIES:
-      /* Only storing the ids of the activities and not any of the data
-       *
-       * Actual storage of data will be handled by the activity reducer
-       * to ensure that the data is normalized
-       */
-      let activity_ids = _.map(action.payload.data.results, "id");
-
-      return {
-        ...state,
-        [action.payload.data.recipe] : {
-          ...state[action.payload.data.recipe],
-          activity_history: activity_ids
-        }
-      };
 
     default:
       return state;
