@@ -2,12 +2,15 @@ import _ from "lodash";
 import React, { Component } from "react";
 import { Field, FieldArray, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import { createActivity } from "../actions/actions_activity";
+import {
+  createActivity, createActivityWithModifiedRecipe
+} from "../actions/actions_activity";
 import { fetchRecipe } from "../actions/actions_recipe";
 import CPCard from './crumbproof_card.jsx'
 import {required, isNumber} from "../validators.js"
 import TimePicker from 'material-ui/TimePicker';
 import LinearProgress from 'material-ui/LinearProgress';
+import Toggle from 'material-ui/Toggle';
 import SubmitButton from "./SubmitButton";
 import renderTextField from "./redux_form/text_field";
 import renderAutoComplete from "./redux_form/auto_complete";
@@ -20,6 +23,12 @@ import {generateDiff, INSTRUCTIONS, INGREDIENTS} from "../util/diff";
 
 class ActivityNew extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      recipe_modified : false
+    };
+  }
 
   componentDidMount() {
     const { recipeId } = this.props.match.params;
@@ -107,19 +116,7 @@ class ActivityNew extends Component {
     );
   }
 
-  onSubmit(values) {
-
-    var payload = {
-      name: values.activity_name,
-      crumb_shot:  values.crumb_shot
-    };
-
-    if (values.notes) {
-      _.assign(payload, { notes: values.notes })
-    };
-
-    const { recipeId } = this.props.match.params;
-    if (recipeId) {
+  submitModifiedRecipe(values, payload, recipeId) {
 
       let diffs = {
         ingredients: generateDiff(
@@ -143,7 +140,8 @@ class ActivityNew extends Component {
         yield_type: values.yield_type
       }
 
-      let base = this.props.recipe.base_recipe ? this.props.recipe.base_recipe : this.props.recipe.id;
+      let base = this.props.recipe.base_recipe ? this.props.recipe.base_recipe :
+                                                 this.props.recipe.id;
 
       _.assign(payload, { recipe: {
                  diff: diffs,
@@ -153,11 +151,37 @@ class ActivityNew extends Component {
                }}
 
       );
+
+    return this.props.createActivityWithModifiedRecipe(payload, () => {
+      this.props.history.push("/activity");
+    });
+  }
+
+  onSubmit(values) {
+    const { recipeId } = this.props.match.params;
+
+    var payload = {
+      name: values.activity_name,
+      crumb_shot:  values.crumb_shot
+    };
+
+    if (values.notes) {
+      _.assign(payload, { notes: values.notes })
+    };
+
+    if (recipeId && this.state.recipe_modified) {
+      return this.submitModifiedRecipe(values, payload, recipeId);
+    }
+
+    if (recipeId) {
+      _.assign(payload, { recipe: recipeId })
     }
 
     return this.props.createActivity(payload, () => {
       this.props.history.push("/activity");
     });
+
+
   }
 
   render() {
@@ -189,7 +213,16 @@ class ActivityNew extends Component {
           />
 
           {this.props.match.params.recipeId &&
-            this.renderRecipeEditor()
+
+           <div style={{padding:"20px 0px"}}>
+            <Toggle label="Submit recipe modifications?"
+                    onToggle={(event, toggled) =>
+                        {this.setState({recipe_modified:toggled})}
+                    }
+            />
+
+            {this.state.recipe_modified && this.renderRecipeEditor()}
+           </div>
           }
 
           <SubmitButton
@@ -242,7 +275,10 @@ function mapStateToProps({recipes}, ownProps) {
 
 }
 
-export default connect(mapStateToProps, { createActivity, fetchRecipe })(
+export default connect(
+  mapStateToProps,
+  { createActivity, createActivityWithModifiedRecipe, fetchRecipe }
+)(
   reduxForm({
     form: "ActivityNewForm",
     validate
