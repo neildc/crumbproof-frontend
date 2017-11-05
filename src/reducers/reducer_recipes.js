@@ -1,11 +1,11 @@
-import _ from "lodash";
+import _ from 'lodash';
 import {
   FETCH_RECIPES,
   FETCH_RECIPE,
   DELETE_RECIPE,
-} from "../actions/actions_recipe";
+} from '../actions/actions_recipe';
 
-export default function(state = {}, action) {
+export default function (state = {}, action) {
   switch (action.type) {
     case DELETE_RECIPE:
       return _.omit(state, action.payload);
@@ -24,10 +24,10 @@ export default function(state = {}, action) {
      *
      */
     case FETCH_RECIPE:
-      let newRecipe = {[action.payload.data.id]: action.payload.data};
+      const newRecipe = { [action.payload.data.id]: action.payload.data };
       return _.merge({}, newRecipe, state);
     case FETCH_RECIPES:
-      let newRecipes = _.mapKeys(action.payload.data.results, "id");
+      const newRecipes = _.mapKeys(action.payload.data.results, 'id');
       return _.merge({}, newRecipes, state);
 
     default:

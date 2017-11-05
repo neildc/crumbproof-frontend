@@ -1,29 +1,28 @@
-import _ from "lodash";
-import equal from "fast-deep-equal";
+import _ from 'lodash';
+import equal from 'fast-deep-equal';
 
 export const INSTRUCTIONS = 'instructions';
 export const INGREDIENTS = 'ingredients';
 
 export function generateDiff(type, orig, curr) {
-
   if (equal(orig, curr)) {
     return null;
   }
 
-  let key = 'id';
+  const key = 'id';
 
-  let removed = _.differenceBy(orig, curr, key);
+  const removed = _.differenceBy(orig, curr, key);
 
-  let existedInOriginal = _.filter(curr, i => key in i);
+  const existedInOriginal = _.filter(curr, i => key in i);
 
-  let modified = _.filter(existedInOriginal , (i) => {
-    let match = _.find(orig, {[key]: i[key]});
+  const modified = _.filter(existedInOriginal, (i) => {
+    const match = _.find(orig, { [key]: i[key] });
     return !equal(i, match);
   });
 
-  let added = _.filter(curr, i => !(key in i));
+  const added = _.filter(curr, i => !(key in i));
 
-  return {removed, added, modified};
+  return { removed, added, modified };
 }
 
 /*
@@ -47,41 +46,40 @@ export function generateDiff(type, orig, curr) {
  *     - match from bottom: Insert above the match if it came from
  */
 export function insertDeadToClosestLivingNeighbour(dead, prev, living) {
-
-  let deadIndex = _.findIndex(prev, {'id': dead.id});
+  const deadIndex = _.findIndex(prev, { id: dead.id });
 
   // [0 1 2 3 DEAD(4) 5 6]
   // top = 0 - 3
   // DEAD = 4
   // bot = 5 - 6
   // head is reversed since we want to start looking at the closest first
-  let top = _.slice(prev, 0, deadIndex).reverse();
-  let bot = _.slice(prev, deadIndex+1, prev.length);
+  const top = _.slice(prev, 0, deadIndex).reverse();
+  const bot = _.slice(prev, deadIndex + 1, prev.length);
 
-  let neighbour = findLivingNeighbour(bot, top, living);
+  const neighbour = findLivingNeighbour(bot, top, living);
 
   if (neighbour) {
     insertDeadNextToLivingNeighbour(dead, living, neighbour);
   } else {
     // If we can't find anyone alive then simply
     // place the instruction at the top of the list
-    insertDeadNextToLivingNeighbour(dead, living, {id:0, position:'above'});
+    insertDeadNextToLivingNeighbour(dead, living, { id: 0, position: 'above' });
   }
 }
 
 function findLivingNeighbour(bot, top, curr) {
-  for (let i=0; top[i] || bot[i]; i++) {
+  for (let i = 0; top[i] || bot[i]; i++) {
     if (top[i]) {
-      let topIndex = _.findIndex(curr, {'id': top[i].id});
+      const topIndex = _.findIndex(curr, { id: top[i].id });
       if (topIndex) {
-        return {index: topIndex, position: 'below'};
+        return { index: topIndex, position: 'below' };
       }
     }
 
     if (bot[i]) {
-      let botIndex = _.findIndex(curr, {'id': bot[i].id});
+      const botIndex = _.findIndex(curr, { id: bot[i].id });
       if (botIndex) {
-        return {index: botIndex, position: 'above'};
+        return { index: botIndex, position: 'above' };
       }
     }
   }
@@ -89,7 +87,7 @@ function findLivingNeighbour(bot, top, curr) {
 }
 
 function insertDeadNextToLivingNeighbour(dead, all, neighbour) {
-  let {index, position} = neighbour;
+  const { index, position } = neighbour;
   if (position === 'below') all.splice(index + 1, 0, dead);
   if (position === 'above') all.splice(index - 1, 0, dead);
 }

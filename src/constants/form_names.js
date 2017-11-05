@@ -1,1 +1,1 @@
-export const RECIPE_NEW_FORM_NAME = "RecipesNewForm";
+export const RECIPE_NEW_FORM_NAME = 'RecipesNewForm';

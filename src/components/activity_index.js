@@ -1,25 +1,22 @@
-import _ from "lodash";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fetchActivities, fetchMoreActivities } from "../actions/actions_activity";
-import FloatingActionButton from "./floating_action_button";
+import _ from 'lodash';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchActivities, fetchMoreActivities } from '../actions/actions_activity';
+import FloatingActionButton from './floating_action_button';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import LoadingCard from "./loading_card";
-import ActivityCard from "./activity_card";
+import LoadingCard from './loading_card';
+import ActivityCard from './activity_card';
 import InfiniteScroll from 'react-infinite-scroller';
 import { SlideInBottom } from './animations/slide';
 import { forceCheck } from 'react-lazyload';
 
 
-
 class ActivityIndex extends Component {
-
   componentDidMount() {
     this.props.fetchActivities();
   }
 
   componentDidUpdate() {
-
     /* TODO: find a less hacky solution
      *
      * The following is needed since the activity images are lazy loaded.
@@ -38,27 +35,24 @@ class ActivityIndex extends Component {
     forceCheck();
 
     /* Backup/First load */
-    setTimeout(() => {forceCheck();}, 500);
+    setTimeout(() => { forceCheck(); }, 500);
   }
 
   renderActivityCards() {
-
     // Need to _.values as activities is an object
     if (_.values(this.props.activities.byId).length === 0) {
-      return <LoadingCard/>
+      return <LoadingCard />;
     }
 
-    let activities = _.orderBy(this.props.activities.byId, ['created'], ['desc']);
+    const activities = _.orderBy(this.props.activities.byId, ['created'], ['desc']);
 
-    return _.map(activities, activity => {
-      return (
-            <SlideInBottom>
-              <div key={activity.id} style={{marginBottom:"50px"}}>
-                <ActivityCard activity={activity}/>
-              </div>
-            </SlideInBottom>
-      )
-    })
+    return _.map(activities, activity => (
+      <SlideInBottom>
+        <div key={activity.id} style={{ marginBottom: '50px' }}>
+          <ActivityCard activity={activity} />
+        </div>
+      </SlideInBottom>
+    ));
   }
 
   loadMoreActivities() {
@@ -68,18 +62,17 @@ class ActivityIndex extends Component {
   }
 
   render() {
-
     return (
       <div>
         <FloatingActionButton link="/activity/new">
-            <ContentAdd/>
+          <ContentAdd />
         </FloatingActionButton>
 
         <InfiniteScroll
           pageStart={0}
           loadMore={this.loadMoreActivities.bind(this)}
           hasMore={this.props.activities.next != null}
-          loader={<LoadingCard style={{marginBottom:"30px"}}/>}
+          loader={<LoadingCard style={{ marginBottom: '30px' }} />}
         >
           {this.renderActivityCards()}
         </InfiniteScroll>

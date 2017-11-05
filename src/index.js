@@ -1,12 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import { Provider } from "react-redux";
-import promise from "redux-promise";
+import { Provider } from 'react-redux';
+import promise from 'redux-promise';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import { createStore, applyMiddleware } from "redux";
-import reducers from "./reducers";
+import { createStore, applyMiddleware } from 'redux';
+import reducers from './reducers';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import crumbproofTheme from './theme';
@@ -27,10 +27,7 @@ document.getElementById('app').style.display = 'block';
 
 
 function root() {
-
-  const store = createStore(reducers, composeWithDevTools(
-    applyMiddleware(promise),
-  ));
+  const store = createStore(reducers, composeWithDevTools(applyMiddleware(promise)));
 
 
   const client = new ApolloClient({
@@ -45,13 +42,13 @@ function root() {
     <ApolloProvider client={client}>
       <Provider store={store}>
         <MuiThemeProvider muiTheme={crumbproofTheme}>
-          <App/>
+          <App />
         </MuiThemeProvider>
       </Provider>
     </ApolloProvider>
   );
 }
 
-ReactDOM.render(root(), document.querySelector(".app"));
+ReactDOM.render(root(), document.querySelector('.app'));
 
 registerServiceWorker();

@@ -1,27 +1,26 @@
 import './index.css';
 
-import React from "react";
-import { connect } from "react-redux";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React from 'react';
+import { connect } from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import { authCheckLocalStorage } from "./actions/actions_auth";
+import { authCheckLocalStorage } from './actions/actions_auth';
 
-import Header from "./components/header";
-import RequireAuth from "./components/hoc/require_auth";
+import Header from './components/header';
+import RequireAuth from './components/hoc/require_auth';
 
-import LoginIndex from "./components/login_index";
-import RegisterIndex from "./components/register_index";
-import RecipesIndex from "./components/recipes_index";
-import RecipesNew from "./components/recipes_new";
-import RecipesShow from "./components/recipes_show";
+import LoginIndex from './components/login_index';
+import RegisterIndex from './components/register_index';
+import RecipesIndex from './components/recipes_index';
+import RecipesNew from './components/recipes_new';
+import RecipesShow from './components/recipes_show';
 
-import ActivityIndex from "./components/activity_index";
-import ActivityNew from "./components/activity_new";
-import ActivityShow from "./components/activity_show";
+import ActivityIndex from './components/activity_index';
+import ActivityNew from './components/activity_new';
+import ActivityShow from './components/activity_show';
 
 
 class App extends React.Component {
-
   componentWillMount() {
     this.props.authCheckLocalStorage();
   }
@@ -29,15 +28,26 @@ class App extends React.Component {
   routes() {
     return (
       <Switch>
-        <Route exact path="/recipes/new" component={
-          RequireAuth(RecipesNew, "Please sign in to create a new recipe")}/>
+        <Route
+          exact
+          path="/recipes/new"
+          component={
+          RequireAuth(RecipesNew, 'Please sign in to create a new recipe')}
+        />
         <Route path="/recipes/:id" component={RecipesShow} />
         <Route exact path="/recipes" component={RecipesIndex} />
 
-        <Route path="/activity/new/recipe/:recipeId" component={
-          RequireAuth(ActivityNew, "Please sign in to create a new activity")} />
-        <Route exact path="/activity/new" component={
-          RequireAuth(ActivityNew, "Please sign in to create a new activity")} />
+        <Route
+          path="/activity/new/recipe/:recipeId"
+          component={
+          RequireAuth(ActivityNew, 'Please sign in to create a new activity')}
+        />
+        <Route
+          exact
+          path="/activity/new"
+          component={
+          RequireAuth(ActivityNew, 'Please sign in to create a new activity')}
+        />
         <Route path="/activity/:id" component={ActivityShow} />
         <Route exact path="/activity" component={ActivityIndex} />
 
@@ -53,7 +63,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div className="bg">
-          <Header/>
+          <Header />
           <div className="container">
             <div className="main">
               {this.routes()}
@@ -65,4 +75,4 @@ class App extends React.Component {
   }
 }
 
-export default connect(null, {authCheckLocalStorage})(App)
+export default connect(null, { authCheckLocalStorage })(App);
