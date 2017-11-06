@@ -155,7 +155,11 @@ class RecipesShow extends Component {
 
           {(this.props.user === recipe.user) &&
             <IconMenu
-              iconButtonElement={<IconButton tooltip="Delete this recipe"><DeleteIcon/></IconButton>}
+              iconButtonElement={
+                <IconButton tooltip="Delete this recipe">
+                  <DeleteIcon />
+                </IconButton>
+              }
               anchorOrigin={{horizontal: 'left', vertical: 'top'}}
               targetOrigin={{horizontal: 'left', vertical: 'top'}}
               className={"recipeActions"}
@@ -170,14 +174,14 @@ class RecipesShow extends Component {
 
           <h3>Recent Activity</h3>
           <ActivityGallery recipeId={Number(this.props.match.params.id)}/>
-            <RaisedButton
-              label="Record an activity with this recipe"
-              icon={<AddIcon/>}
-              labelColor={"white"}
-              onClick={this.onRecordActivityClick.bind(this)}
-              primary={true}
-            />
-
+          <RaisedButton
+            label="Record an activity with this recipe"
+            icon={<AddIcon/>}
+            labelColor={"white"}
+            onClick={this.onRecordActivityClick.bind(this)}
+            primary={true}
+            style={{ margin: '20px 0' }}
+          />
         </div>
       </Card>
 
