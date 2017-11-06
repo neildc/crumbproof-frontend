@@ -19,6 +19,7 @@ const RecipesNewWizard1Basic = (props) => {
           name="name"
           component={renderTextField}
           validate={[ required ]}
+          style={{ margin: '0 10px '}}
         />
 
         <Field
@@ -26,6 +27,7 @@ const RecipesNewWizard1Basic = (props) => {
           name="credits"
           component={renderTextField}
           validate={[]}
+          style={{ margin: '0 10px '}}
         />
 
         <Field
@@ -34,6 +36,7 @@ const RecipesNewWizard1Basic = (props) => {
           type="number"
           component={renderTextField}
           validate={[ required, isNumber ]}
+          style={{ margin: '0 10px '}}
         />
 
         <Field
@@ -42,6 +45,7 @@ const RecipesNewWizard1Basic = (props) => {
           type="number"
           component={renderTextField}
           validate={[ required, isNumber ]}
+          style={{ margin: '0 10px '}}
         />
 
         <Field
@@ -50,6 +54,7 @@ const RecipesNewWizard1Basic = (props) => {
           type="number"
           component={renderTextField}
           validate={[ required, isNumber ]}
+          style={{ margin: '0 10px '}}
         />
         <Field
           label="Yield Type"
@@ -57,6 +62,7 @@ const RecipesNewWizard1Basic = (props) => {
           suggestions ={['Loaf', 'Baguette', 'Roll', 'Bun', 'Bagel']}
           component={renderAutoComplete}
           validate={[ required ]}
+          style={{ margin: '0 10px '}}
         />
       </div>
       <div style={{marginTop: 12}}>
