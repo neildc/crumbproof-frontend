@@ -44,7 +44,7 @@ export function createActivity(values, callback) {
 export function createActivityWithModifiedRecipe(values, callback) {
 
   const request = axios
-    .post(`${ROOT_URL}/activities/modified_recipe`, values, {
+    .post(`${ROOT_URL}/activity_with_modified_recipe/`, values, {
       headers: {
         Authorization: "Token " + localStorage.getItem("token")
       }
