@@ -49,7 +49,6 @@ class ActivityNew extends Component {
 
     return (
       <div>
-        <h3>Recipe used: {this.props.initialValues.name.replace(`(${dateToday()})`,'')}</h3>
         <h4>Modifications made this iteration:</h4>
         <Field
           label="Name of this variation"
@@ -215,13 +214,14 @@ class ActivityNew extends Component {
           {this.props.match.params.recipeId &&
 
            <div style={{padding:"20px 0px"}}>
-            <Toggle label="Submit recipe modifications?"
-                    onToggle={(event, toggled) =>
-                        {this.setState({recipe_modified:toggled})}
-                    }
-            />
+             <h3>Recipe used: {this.props.initialValues.name.replace(`(${dateToday()})`,'')}</h3>
+             <Toggle label="Submit recipe modifications?"
+                     onToggle={(event, toggled) =>
+                       {this.setState({recipe_modified:toggled})}
+                     }
+             />
 
-            {this.state.recipe_modified && this.renderRecipeEditor()}
+             {this.state.recipe_modified && this.renderRecipeEditor()}
            </div>
           }
 
