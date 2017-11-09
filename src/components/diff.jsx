@@ -5,19 +5,19 @@
  */
 
 import React from 'react';
-import PropTypes from "prop-types";
-import _ from "lodash";
-import {diffChars, diffWords, diffWordsWithSpace, diffLines, diffTrimmedLines, diffSentences, diffCss, diffJson} from 'diff';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
+import { diffChars, diffWords, diffWordsWithSpace, diffLines, diffTrimmedLines, diffSentences, diffCss, diffJson } from 'diff';
 
 const fnMap = {
-  'chars': diffChars,
-  'words': diffWords,
-  'wordsWithSpace': diffWordsWithSpace,
-  'lines': diffLines,
-  'trimmedLines': diffTrimmedLines,
-  'sentences': diffSentences,
-  'css': diffCss,
-  'json': diffJson
+  chars: diffChars,
+  words: diffWords,
+  wordsWithSpace: diffWordsWithSpace,
+  lines: diffLines,
+  trimmedLines: diffTrimmedLines,
+  sentences: diffSentences,
+  css: diffCss,
+  json: diffJson,
 };
 
 /**
@@ -39,24 +39,22 @@ class Diff extends React.Component {
       inputA: '',
       inputB: '',
       type: 'chars',
-      className: 'difference'
+      className: 'difference',
     };
-
   }
 
   render() {
-
-    var diff = fnMap[this.props.type](this.props.inputA, this.props.inputB, this.props.options);
+    const diff = fnMap[this.props.type](this.props.inputA, this.props.inputB, this.props.options);
 
     return _.map(diff, (part, index) => {
-      let spanStyle = {
+      const spanStyle = {
         backgroundColor: part.added ? 'lightgreen' :
-                         part.removed ? 'salmon' :
-                         'lightgrey'
+          part.removed ? 'salmon' :
+            'lightgrey',
       };
 
       return (<span key={index} style={spanStyle}>{part.value}</span>);
-    })
+    });
   }
 }
 
@@ -64,17 +62,17 @@ Diff.defaultProps = {
   inputA: '',
   inputB: '',
   type: 'chars',
-  className: 'difference'
+  className: 'difference',
 };
 
 Diff.propTypes = {
   inputA: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.object
+    PropTypes.object,
   ]),
   inputB: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.object
+    PropTypes.object,
   ]),
   type: PropTypes.oneOf([
     'chars',
@@ -84,9 +82,9 @@ Diff.propTypes = {
     'trimmedLines',
     'sentences',
     'css',
-    'json'
+    'json',
   ]),
-  options: PropTypes.object
-}
+  options: PropTypes.object,
+};
 
 export default Diff;

@@ -1,16 +1,17 @@
-import React from "react";
-import { Motion, spring } from "react-motion";
+import React from 'react';
+import { Motion, spring } from 'react-motion';
 
 export function FadeIn(props) {
-  return(
-    <Motion defaultStyle={{opacity: 0}}
-            style={{opacity: spring(1, {stiffness:100, damping: 14}),
-            }}>
+  return (
+    <Motion
+      defaultStyle={{ opacity: 0 }}
+      style={{ opacity: spring(1, { stiffness: 100, damping: 14 }) }}
+    >
 
-        {iStyle => (
-          <div style={{...iStyle, ...props.style}}>
-            {props.children}
-          </div>
+      {iStyle => (
+        <div style={{ ...iStyle, ...props.style }}>
+          {props.children}
+        </div>
         )}
     </Motion>
   );

@@ -1,41 +1,41 @@
-import React from "react";
-import "./ingredients_list.css";
-import { Field } from 'redux-form'
-import {required, isNumber } from "../../validators.js";
+import React from 'react';
+import './ingredients_list.css';
+import { Field } from 'redux-form';
+import { required, isNumber } from '../../validators.js';
 
 import IconButton from 'material-ui/IconButton';
-import DeleteIcon from 'material-ui/svg-icons/content/remove-circle'
+import DeleteIcon from 'material-ui/svg-icons/content/remove-circle';
 import RaisedButton from 'material-ui/RaisedButton';
-import renderTextField from "./text_field";
+import renderTextField from './text_field';
 import renderAutoComplete from './auto_complete';
 import Paper from 'material-ui/Paper';
 import UpArrowIcon from 'material-ui/svg-icons/navigation/arrow-drop-up';
 
 function renderRemoveButton(fields, index) {
   if (window.innerWidth > 640) {
-    return(
+    return (
       <div className="ingredientRemoveButton">
         <IconButton
           tooltip={`Remove ingredient #${index + 1}`}
-          onClick={() => fields.remove(index)}>
-          <DeleteIcon/>
+          onClick={() => fields.remove(index)}
+        >
+          <DeleteIcon />
         </IconButton>
       </div>
-      );
-  }else {
-    return(
-    <RaisedButton
-      icon={<UpArrowIcon/>}
-      label={`Remove ingredient #${index + 1}`}
-      labelPosition={"before"}
-      onClick={() => fields.remove(index)}>
-    </RaisedButton>
-    )
+    );
   }
+  return (
+    <RaisedButton
+      icon={<UpArrowIcon />}
+      label={`Remove ingredient #${index + 1}`}
+      labelPosition="before"
+      onClick={() => fields.remove(index)}
+    />
+  );
 }
 
 function renderIngredient(ingredient, index, fields) {
-  return(
+  return (
     <li key={index}>
       <div className="ingredientFields">
         <Field
@@ -44,7 +44,7 @@ function renderIngredient(ingredient, index, fields) {
           name={`${ingredient}.name`}
           type="text"
           component={renderTextField}
-          validate={[ required ]}
+          validate={[required]}
         />
         <Field
           className="ingredientQuantity"
@@ -52,7 +52,7 @@ function renderIngredient(ingredient, index, fields) {
           name={`${ingredient}.quantity`}
           component={renderTextField}
           type="number"
-          validate={[ required, isNumber ]}
+          validate={[required, isNumber]}
         />
         <Field
           className="ingredientUnit"
@@ -60,7 +60,7 @@ function renderIngredient(ingredient, index, fields) {
           name={`${ingredient}.unit`}
           suggestions={['mL', 'g', 'kg', 'mg', 'L', 'cup', 'teaspoon', 'tablespoon']}
           component={renderAutoComplete}
-          validate={[ required ]}
+          validate={[required]}
         />
         {renderRemoveButton(fields, index)}
       </div>
@@ -68,14 +68,12 @@ function renderIngredient(ingredient, index, fields) {
   );
 }
 
-export default function renderIngredients ({ fields, meta: { error } })  {
-
-  return(
-    <ul style={{listStyle:"none", padding:"0px"}}>
+export default function renderIngredients({ fields, meta: { error } }) {
+  return (
+    <ul style={{ listStyle: 'none', padding: '0px' }}>
 
       {fields.map((ingredient, index) =>
-        renderIngredient(ingredient, index, fields)
-      )}
+        renderIngredient(ingredient, index, fields))}
 
       <RaisedButton
         className="addIngredientButton"
@@ -85,14 +83,18 @@ export default function renderIngredients ({ fields, meta: { error } })  {
       />
 
       {fields.length === 0 &&
-       <Paper style={{padding:"15px",
-                      margin:"20px",
-                      backgroundColor:"#bbb",
-                      color:"white"}}
-              zDepth={4}>
+      <Paper
+        style={{
+padding: '15px',
+                      margin: '20px',
+                      backgroundColor: '#bbb',
+                      color: 'white',
+}}
+        zDepth={4}
+      >
 
          ↑ Please add at least 1 ingredient to continue
-       </Paper>
+      </Paper>
       }
     </ul>
   );

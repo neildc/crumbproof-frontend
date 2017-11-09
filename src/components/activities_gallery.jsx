@@ -16,8 +16,8 @@ const NUM_TO_SHOW = 2;
 class ActivitiesGallery extends Component {
   renderActivityTiles(activities) {
     const mostRecentActivities = _.sortBy(activities, 'created')
-                                  .reverse()
-                                  .slice(0, NUM_TO_SHOW);
+      .reverse()
+      .slice(0, NUM_TO_SHOW);
 
     return _.map(mostRecentActivities, (activity) => {
       const created = moment(activity.created).fromNow();

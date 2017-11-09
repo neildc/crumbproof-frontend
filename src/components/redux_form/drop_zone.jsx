@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import Dropzone from 'react-dropzone';
 
 export default function renderDropzone(field) {
@@ -7,12 +7,12 @@ export default function renderDropzone(field) {
     <div>
       <Dropzone
         name={field.name}
-        onDrop={( acceptedFiles, e ) => {
-          acceptedFiles.forEach(file => {
+        onDrop={(acceptedFiles, e) => {
+          acceptedFiles.forEach((file) => {
               const reader = new FileReader();
               reader.onload = () => {
                   const fileAsBase64String = reader.result;
-                  field.input.onChange(fileAsBase64String)
+                  field.input.onChange(fileAsBase64String);
               };
               reader.onabort = () => console.log('file reading was aborted');
               reader.onerror = () => console.log('file reading has failed');
@@ -29,8 +29,8 @@ export default function renderDropzone(field) {
         <span className="error">{field.meta.error}</span>}
       {file && (
         <div>
-         <img src={file} alt="" style={{width:"100%"}}/>
-           {file.name}
+          <img src={file} alt="" style={{ width: '100%' }} />
+          {file.name}
         </div>
       )}
     </div>
