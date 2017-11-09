@@ -1,19 +1,18 @@
-import './register_index.css';
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { authRegister, authClearError } from '../actions/actions_auth.jsx';
-
 import { Field, reduxForm } from 'redux-form';
 
+import Snackbar from 'material-ui/Snackbar';
 import TextField from 'material-ui/TextField';
 import { Card, CardTitle } from 'material-ui/Card';
-import { required } from '../validators.js';
 
-import Snackbar from 'material-ui/Snackbar';
+import { required } from '../validators';
+import { authRegister, authClearError } from '../actions/actions_auth';
+
 import SubmitButton from './SubmitButton';
-
 import { FadeIn } from './animations/fade';
+
+import './register_index.css';
 
 class RegisterIndex extends Component {
   renderField(field) {

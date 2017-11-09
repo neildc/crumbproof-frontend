@@ -1,9 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { createRecipe } from '../actions/actions_recipe';
 
 import {
   Step,
@@ -11,13 +9,13 @@ import {
   StepLabel,
 } from 'material-ui/Stepper';
 
-import CPCard from './crumbproof_card.jsx';
+import CPCard from './crumbproof_card';
 
 import RecipesNewWizard1Basic from './recipes_new_wizard_1_basic';
 import RecipesNewWizard2Ingredients from './recipes_new_wizard_2_ingredients';
 import RecipesNewWizard3Instructions from './recipes_new_wizard_3_instructions';
 
-
+import { createRecipe } from '../actions/actions_recipe';
 import { RECIPE_NEW_FORM_NAME } from '../constants/form_names';
 
 class RecipesNew extends Component {

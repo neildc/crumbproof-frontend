@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { deleteActivity } from '../actions/actions_activity';
-import { Card, CardMedia, CardTitle } from 'material-ui/Card';
-import LoadingCard from './loading_card';
+import LazyLoad from 'react-lazyload';
 import moment from 'moment';
-import ImageZoom from 'react-medium-image-zoom';
+
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
-import TripleDotIcon from 'material-ui/svg-icons/navigation/more-horiz';
+import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton';
-import LazyLoad from 'react-lazyload';
+import TripleDotIcon from 'material-ui/svg-icons/navigation/more-horiz';
+import { Card, CardMedia, CardTitle } from 'material-ui/Card';
 
+import ImageZoom from 'react-medium-image-zoom';
 
+import { deleteActivity } from '../actions/actions_activity';
+
+import LoadingCard from './loading_card';
 import RecipeDiff from './recipe_diff';
+
 import './activity_card.css';
 
 

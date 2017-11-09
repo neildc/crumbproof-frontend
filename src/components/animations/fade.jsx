@@ -1,6 +1,7 @@
 import React from 'react';
 import { Motion, spring } from 'react-motion';
 
+// eslint-disable-next-line import/prefer-default-export
 export function FadeIn(props) {
   return (
     <Motion

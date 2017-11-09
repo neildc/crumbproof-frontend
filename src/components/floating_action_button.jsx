@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './floating_action_button.css';
-import MUIFloatingActionButton from 'material-ui/FloatingActionButton';
 import { Link } from 'react-router-dom';
 import { Motion, spring, presets } from 'react-motion';
+
+import MUIFloatingActionButton from 'material-ui/FloatingActionButton';
+
+import './floating_action_button.css';
 
 export default class FloatingActionButton extends Component {
   render() {

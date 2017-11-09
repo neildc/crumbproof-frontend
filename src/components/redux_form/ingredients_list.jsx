@@ -1,15 +1,18 @@
 import React from 'react';
-import './ingredients_list.css';
 import { Field } from 'redux-form';
-import { required, isNumber } from '../../validators.js';
 
-import IconButton from 'material-ui/IconButton';
-import DeleteIcon from 'material-ui/svg-icons/content/remove-circle';
-import RaisedButton from 'material-ui/RaisedButton';
-import renderTextField from './text_field';
-import renderAutoComplete from './auto_complete';
 import Paper from 'material-ui/Paper';
+import IconButton from 'material-ui/IconButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import DeleteIcon from 'material-ui/svg-icons/content/remove-circle';
 import UpArrowIcon from 'material-ui/svg-icons/navigation/arrow-drop-up';
+
+import renderAutoComplete from './auto_complete';
+import renderTextField from './text_field';
+
+import { required, isNumber } from '../../validators';
+
+import './ingredients_list.css';
 
 function renderRemoveButton(fields, index) {
   if (window.innerWidth > 640) {

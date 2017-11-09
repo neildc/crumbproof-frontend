@@ -4,10 +4,20 @@
  * Package is no longer maintained as of (28/10/2017)
  */
 
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
-import { diffChars, diffWords, diffWordsWithSpace, diffLines, diffTrimmedLines, diffSentences, diffCss, diffJson } from 'diff';
+
+import {
+  diffChars,
+  diffWords,
+  diffWordsWithSpace,
+  diffLines,
+  diffTrimmedLines,
+  diffSentences,
+  diffCss,
+  diffJson,
+} from 'diff';
 
 const fnMap = {
   chars: diffChars,

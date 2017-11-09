@@ -2,24 +2,28 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import {
-  createActivity, createActivityWithModifiedRecipe,
-} from '../actions/actions_activity';
-import { fetchRecipe } from '../actions/actions_recipe';
-import CPCard from './crumbproof_card.jsx';
-import { required, isNumber } from '../validators.js';
-import TimePicker from 'material-ui/TimePicker';
+
 import LinearProgress from 'material-ui/LinearProgress';
+import TimePicker from 'material-ui/TimePicker';
 import Toggle from 'material-ui/Toggle';
+
+import { fetchRecipe } from '../actions/actions_recipe';
+
 import SubmitButton from './SubmitButton';
+import CPCard from './crumbproof_card';
+
 import renderTextField from './redux_form/text_field';
 import renderAutoComplete from './redux_form/auto_complete';
 import renderIngredients from './redux_form/ingredients_list';
 import renderInstructions from './redux_form/instructions_list';
 import renderDropzone from './redux_form/drop_zone';
-import { dateToday } from '../util/time';
+import {
+  createActivity, createActivityWithModifiedRecipe,
+} from '../actions/actions_activity';
 
+import { dateToday } from '../util/time';
 import { generateDiff, INSTRUCTIONS, INGREDIENTS } from '../util/diff';
+import { required, isNumber } from '../validators';
 
 class ActivityNew extends Component {
   constructor(props) {

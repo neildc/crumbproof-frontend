@@ -1,24 +1,28 @@
-import './recipes_show.css';
-import React, { Component } from 'react';
 import _ from 'lodash';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchRecipe, deleteRecipe } from '../actions/actions_recipe';
+import moment from 'moment';
+
 import LinearProgress from 'material-ui/LinearProgress';
 import RaisedButton from 'material-ui/RaisedButton';
-import DeleteIcon from 'material-ui/svg-icons/action/delete';
-import AddIcon from 'material-ui/svg-icons/content/add-circle';
 import IconButton from 'material-ui/IconButton';
+import AddIcon from 'material-ui/svg-icons/content/add-circle';
+import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import BackIcon from 'material-ui/svg-icons/navigation/arrow-back';
 import { Card, CardTitle, CardHeader, CardText } from 'material-ui/Card';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+
 import RecipeTimeline from './recipe_timeline';
 import ActivityGallery from './activities_gallery';
-import { getTotalTimeStr } from '../util/time.js';
 import RecipeDiff from './recipe_diff';
-import moment from 'moment';
 import { FadeIn } from './animations/fade';
+
+import { fetchRecipe, deleteRecipe } from '../actions/actions_recipe';
+import { getTotalTimeStr } from '../util/time';
+
+import './recipes_show.css';
 
 class RecipesShow extends Component {
   componentDidMount() {

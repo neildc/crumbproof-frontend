@@ -1,11 +1,13 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { required, isNumber } from '../validators.js';
+
 import RaisedButton from 'material-ui/RaisedButton';
-import { RECIPE_NEW_FORM_NAME } from '../constants/form_names';
+
 import renderTextField from './redux_form/text_field';
 import renderAutoComplete from './redux_form/auto_complete';
 
+import { RECIPE_NEW_FORM_NAME } from '../constants/form_names';
+import { required, isNumber } from '../validators';
 
 const RecipesNewWizard1Basic = (props) => {
   const { handleSubmit } = props;

@@ -1,14 +1,17 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchRecipes } from '../actions/actions_recipe';
+
 import { List, ListItem } from 'material-ui/List';
+import LinearProgress from 'material-ui/LinearProgress';
 import ContentSend from 'material-ui/svg-icons/content/send';
 import ArrowRight from 'material-ui/svg-icons/navigation/subdirectory-arrow-right';
-import FloatingActionButton from './floating_action_button';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import CPCard from './crumbproof_card.jsx';
-import LinearProgress from 'material-ui/LinearProgress';
+
+import { fetchRecipes } from '../actions/actions_recipe';
+
+import CPCard from './crumbproof_card';
+import FloatingActionButton from './floating_action_button';
 
 class RecipesIndex extends Component {
   componentDidMount() {

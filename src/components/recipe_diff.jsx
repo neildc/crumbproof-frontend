@@ -1,11 +1,13 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+
+import LinearProgress from 'material-ui/LinearProgress';
+
 import Diff from './diff';
 import { fetchRecipe } from '../actions/actions_recipe';
 import { insertDeadToClosestLivingNeighbour, INSTRUCTIONS, INGREDIENTS } from '../util/diff';
-import LinearProgress from 'material-ui/LinearProgress';
 
 const ingredientStr = i => `${i.quantity} ${i.unit} ${i.name}`;
 

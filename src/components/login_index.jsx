@@ -1,20 +1,21 @@
-import './login_index.css';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { authLogin, authClearError } from '../actions/actions_auth.jsx';
-
 import { Field, reduxForm } from 'redux-form';
-import TextField from 'material-ui/TextField';
+
 import RaisedButton from 'material-ui/RaisedButton';
-
-import { Card, CardTitle } from 'material-ui/Card';
-import { required } from '../validators.js';
-
 import Snackbar from 'material-ui/Snackbar';
+import TextField from 'material-ui/TextField';
+import { Card, CardTitle } from 'material-ui/Card';
+
+import { authLogin, authClearError } from '../actions/actions_auth';
+
 import SubmitButton from './SubmitButton';
 import { FadeIn } from './animations/fade';
+import { required } from '../validators';
+
+import './login_index.css';
 
 class LoginIndex extends Component {
   renderField(field) {

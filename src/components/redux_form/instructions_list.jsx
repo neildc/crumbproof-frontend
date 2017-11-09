@@ -1,15 +1,18 @@
 import React from 'react';
-import './instructions_list.css';
 import { Field } from 'redux-form';
-import { required, isNumber } from '../../validators.js';
-import renderTextField from './text_field';
 
 import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import DeleteIcon from 'material-ui/svg-icons/content/remove-circle';
 import ReturnIcon from 'material-ui/svg-icons/hardware/keyboard-return';
-import RaisedButton from 'material-ui/RaisedButton';
 import UpArrowIcon from 'material-ui/svg-icons/navigation/arrow-drop-up';
+
+import { required, isNumber } from '../../validators';
+
+import renderTextField from './text_field';
+
+import './instructions_list.css';
 
 function renderButtons(index, fields) {
   if (window.innerWidth > 640) {
