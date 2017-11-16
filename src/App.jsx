@@ -21,6 +21,7 @@ import ActivityNew from './components/activity_new';
 import ActivityShow from './components/activity_show';
 
 import LiveActivityStart from './components/live_activity_start';
+import LiveActivity from './components/live_activity';
 
 class App extends React.Component {
   componentWillMount() {
@@ -56,6 +57,13 @@ class App extends React.Component {
           component={
           RequireAuth(LiveActivityStart, 'Please sign to start a new activity')}
         />
+        <Route
+          exact
+          path="/live"
+          component={
+            RequireAuth(LiveActivity, 'Please sign in to see your current activity')}
+        />
+
         <Route path="/activity/:id" component={ActivityShow} />
 
         <Route exact path="/login" component={LoginIndex} />

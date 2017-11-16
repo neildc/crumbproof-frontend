@@ -14,7 +14,7 @@ html body{
 .container {
    display: grid;
    padding: 10px;
-   padding-top: 150px;
+   padding-top: 90px;
    justify-self: center;
    align-self: center;
    grid-area: "main";
@@ -26,6 +26,7 @@ html body{
     .container {
         grid-template-columns: auto 640px auto;
         grid-template-areas: ". main .";
+        padding-top: 150px;
     }
 
     .main{
