@@ -213,18 +213,18 @@ class ActivityNew extends Component {
             component={renderTextField}
           />
 
-          {this.props.match.params.recipeId &&
+          { this.props.match.params.recipeId && this.props.initialValues &&
 
-          <div style={{ padding: '20px 0px' }}>
-            <h3>Recipe used: {this.props.initialValues.name.replace(`(${dateToday()})`, '')}</h3>
-            <Toggle
-              label="Submit recipe modifications?"
-              onToggle={(event, toggled) => { this.setState({ recipe_modified: toggled }); }
-                     }
-            />
+            <div style={{ padding: '20px 0px' }}>
+              <h3>Recipe used: {this.props.initialValues.name.replace(`(${dateToday()})`, '')}</h3>
+              <Toggle
+                label="Submit recipe modifications?"
+                onToggle={(event, toggled) => { this.setState({ recipe_modified: toggled }); }
+                }
+              />
 
-            {this.state.recipe_modified && this.renderRecipeEditor()}
-          </div>
+              {this.state.recipe_modified && this.renderRecipeEditor()}
+            </div>
           }
 
           <SubmitButton
