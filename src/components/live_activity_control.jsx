@@ -15,12 +15,31 @@ import {
 } from '../actions/actions_live_activity';
 
 import Tooltip from './tooltip';
+import SubmitButton from './submit_button';
+
 import { minToHandM } from '../util/time';
 import { FadeIn } from './animations/fade';
 
 import './live_activity_control.css';
 
 class LiveActivityControl extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      movingToNextStep: false,
+    };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const prevStep = prevProps.liveActivity.current_step;
+    const currStep = this.props.liveActivity.current_step;
+
+    if (this.state.movingToNextStep && prevStep !== currStep) {
+      this.setState({ movingToNextStep : false });
+    }
+  }
+
   isLastStep(instructions) {
     const numSteps = instructions.length;
     return (this.props.liveActivity.current_step + 1 >= numSteps);
@@ -31,6 +50,7 @@ class LiveActivityControl extends Component {
       this.props.history.push(`/activity/new/recipe/${recipe.id}`);
     } else {
       this.props.liveActivityNextStep();
+      this.setState({ movingToNextStep : true });
     }
   }
 
@@ -99,7 +119,6 @@ class LiveActivityControl extends Component {
       <Card className="liveController">
         { instructions[currStep].time_gap_to_next &&
           <FadeIn>
-
             <div className="timerContainer">
               <Tooltip
                 className="tooltip"
@@ -129,10 +148,11 @@ class LiveActivityControl extends Component {
             />
           </Tooltip>
 
-          <RaisedButton
-            primary
+          <SubmitButton
             className="nextStepButton"
+            submittingFlag={this.state.movingToNextStep}
             label={this.isLastStep(instructions) ? 'Submit Activity' : 'Next'}
+            labelInProgress={this.isLastStep(instructions) ? 'Submit Activity' : 'Saving...'}
             labelStyle={{ verticalAlign: 'middle' }}
             href={`#step${currStep + 2}`}
             onClick={() => this.handleNextClick(recipe)}
