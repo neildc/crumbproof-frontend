@@ -9,7 +9,7 @@ import Toggle from 'material-ui/Toggle';
 
 import { fetchRecipe } from '../actions/actions_recipe';
 
-import SubmitButton from './SubmitButton';
+import SubmitButton from './submit_button';
 import CPCard from './crumbproof_card';
 
 import renderTextField from './redux_form/text_field';

@@ -11,7 +11,7 @@ import { Card, CardTitle } from 'material-ui/Card';
 
 import { authLogin, authClearError } from '../actions/actions_auth';
 
-import SubmitButton from './SubmitButton';
+import SubmitButton from './submit_button';
 import { FadeIn } from './animations/fade';
 import { required } from '../validators';
 
