@@ -1,0 +1,51 @@
+.liveController {
+    padding: 20px 30px;
+    width: 95%;
+    justify-content: space-around;
+    font-size: 30px;
+    vertical-align: middle;
+}
+
+.timerDivider {
+    margin: 10px !important;
+}
+
+.timerContainer{
+    font-size: 55px;
+    text-align: center;
+}
+
+.nextStepButton {
+    margin-top: 20px;
+}
+
+.currentStepButton {
+    /* defined inline */
+    font-weight: 400 !important;
+    font-size: 22px !important;
+}
+
+.tooltip {
+    font-size: 14px !important;
+    display: block !important;
+}
+
+@media (min-width:640px) {
+    .liveController {
+        width: 640px;
+    }
+
+    .timer {
+        margin: 30px !important;
+    }
+
+    .pageControls {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .nextStepButton {
+        margin-top: 0;
+    }
+}
