@@ -1,34 +1,52 @@
-import "./recipes_show.css";
-import React, { Component } from "react";
-import _ from "lodash";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchRecipe, deleteRecipe } from "../actions/actions_recipe";
+import _ from 'lodash';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+
 import LinearProgress from 'material-ui/LinearProgress';
 import RaisedButton from 'material-ui/RaisedButton';
-import DeleteIcon from 'material-ui/svg-icons/action/delete';
-import AddIcon from 'material-ui/svg-icons/content/add-circle';
 import IconButton from 'material-ui/IconButton';
+import AddIcon from 'material-ui/svg-icons/content/add-circle';
+import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import BackIcon from 'material-ui/svg-icons/navigation/arrow-back';
-import { Card, CardTitle } from 'material-ui/Card';
+import { Card, CardTitle, CardHeader, CardText } from 'material-ui/Card';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+
 import RecipeTimeline from './recipe_timeline';
 import ActivityGallery from './activities_gallery';
-import { getTotalTimeStr } from "../util/time.js";
+import RecipeDiff from './recipe_diff';
+import { FadeIn } from './animations/fade';
+
+import { fetchRecipe, deleteRecipe } from '../actions/actions_recipe';
+import { getTotalTimeStr } from '../util/time';
+
+import './recipes_show.css';
 
 class RecipesShow extends Component {
-
   componentDidMount() {
-    const { id } = this.props.match.params;
-    this.props.fetchRecipe(id);
+    if (!this.props.recipe) {
+      const { id } = this.props.match.params;
+      this.props.fetchRecipe(id);
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.recipe.parent && !this.props.parentRecipe) {
+      this.props.fetchRecipe(this.props.recipe.parent);
+    }
+
+    if (this.props.recipe.base_recipe && !this.props.baseRecipe) {
+      this.props.fetchRecipe(this.props.recipe.base_recipe);
+    }
   }
 
   onDeleteClick() {
     const { id } = this.props.match.params;
 
     this.props.deleteRecipe(id, () => {
-      this.props.history.push("/recipes");
+      this.props.history.push('/recipes');
     });
   }
 
@@ -38,14 +56,71 @@ class RecipesShow extends Component {
   }
 
   renderIngredients() {
-    return _.map(this.props.recipe.data.ingredients, i => {
-      return (
-        <li key={i.name}>
-          {i.quantity} {i.unit} {i.name}
-        </li>
-      );
-    });
-  };
+    return _.map(this.props.recipe.data.ingredients, i => (
+      <li key={i.name}>
+        {i.quantity} {i.unit} {i.name}
+      </li>
+    ));
+  }
+
+  renderRecipe(recipe) {
+    return (
+      <Card containerStyle={{ marginBottom: '20px' }} initiallyExpanded>
+        <CardHeader title="RECIPE" showExpandableButton />
+        <CardText expandable style={{ padding: '30px', paddingTop: '0px' }}>
+
+
+          { recipe.data.credits &&
+            <div>
+              <h3>Credits:</h3>
+              {recipe.data.credits}
+            </div>
+          }
+          <h3>Ingredients</h3>
+
+          <ul> {this.renderIngredients()} </ul>
+
+          <h3>Instructions</h3>
+          <RecipeTimeline instructions={recipe.data.instructions} />
+        </CardText>
+      </Card>
+    );
+  }
+
+  renderHistory() {
+    const { recipe, baseRecipe, parentRecipe } = this.props;
+
+    if (!baseRecipe) {
+      return <LinearProgress mode="indeterminate" />;
+    }
+
+    return (
+      <Card containerStyle={{ marginBottom: '20px' }} initiallyExpanded>
+        <CardHeader
+          title="RECIPE HISTORY"
+          showExpandableButton
+        />
+        <CardText expandable style={{ padding: '30px', paddingTop: '0px' }}>
+          <h3>Recipe based off:</h3>
+          <Link to={`/recipes/${baseRecipe.id}`}>{baseRecipe.data.name}</Link>
+          {` created ${moment(baseRecipe.created).fromNow()}`}
+
+          {parentRecipe &&
+            <div>
+              <h3>Previous iteration of this recipe:</h3>
+              <Link to={`/recipes/${parentRecipe.id}`}>
+                {parentRecipe.data.name}
+              </Link>
+              {` created ${moment(parentRecipe.created).fromNow()}`}
+
+              <h2>Changes made:</h2>
+              <RecipeDiff recipe={recipe} />
+            </div>
+            }
+        </CardText>
+      </Card>
+    );
+  }
 
   render() {
     const { recipe } = this.props;
@@ -56,70 +131,89 @@ class RecipesShow extends Component {
 
     return (
 
-      <Card containerStyle={{marginBottom:"50px"}}>
-        <CardTitle className="cardTitle" title={
-          <div className="cardTitleContents">
-            <IconButton tooltip="Back to recipes"
-                        containerElement={<Link to="/recipes"/>}>
-              <BackIcon color="#999"/>
-            </IconButton>
-            <div style={{paddingTop:"5px"}}>
-              {recipe.data.name}
-            </div>
+      <FadeIn>
+        <Card containerStyle={{ marginBottom: '20px' }}>
+          <CardTitle
+            className="cardTitle"
+            title={
+              <div className="cardTitleContents">
+                <IconButton
+                  tooltip="Back to recipes"
+                  containerElement={<Link to="/recipes" />}
+                >
+                  <BackIcon color="#999" />
+                </IconButton>
+                <div style={{ paddingTop: '5px' }}>
+                  {recipe.data.name}
+                </div>
+              </div>
+        }
+          />
+          <div className="recipeMeta">
+            <div><b>BY  </b> {recipe.user}</div>
+            <div><b>TIME  </b> {getTotalTimeStr(recipe.data.instructions)}</div>
+            <div><b>BAKE  </b> {recipe.data.bake_time} mins at {recipe.data.oven_temperature}°</div>
+            <div><b>YIELDS  </b> {recipe.data.yield_count} {recipe.data.yield_type}</div>
           </div>
-        }/>
-        <div className="recipeMeta">
-          <div><b>BY  </b> {recipe.user}</div>
-          <div><b>TIME  </b> {getTotalTimeStr(recipe.data.instructions)}</div>
-          <div><b>BAKE  </b> {recipe.data.bake_time} mins at {recipe.data.oven_temperature}°</div>
-          <div><b>YIELDS  </b> {recipe.data.yield_count} {recipe.data.yield_type}</div>
-        </div>
-        <div style={{padding:"30px"}}>
+          <div style={{ padding: '30px' }}>
 
-          {(this.props.user === recipe.user) &&
+            {(this.props.user === recipe.user) &&
             <IconMenu
-              iconButtonElement={<IconButton tooltip="Delete this recipe"><DeleteIcon/></IconButton>}
-              anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-              targetOrigin={{horizontal: 'left', vertical: 'top'}}
-              className={"recipeActions"}
+              iconButtonElement={
+                <IconButton tooltip="Delete this recipe">
+                  <DeleteIcon />
+                </IconButton>
+              }
+              anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+              targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+              className="recipeActions"
             >
-            <MenuItem
-              primaryText="Confirm Deletion"
-              leftIcon={<DeleteIcon color="black"/>}
-              onClick={this.onDeleteClick.bind(this)}
-            />
+              <MenuItem
+                primaryText="Confirm Deletion"
+                leftIcon={<DeleteIcon color="black" />}
+                onClick={this.onDeleteClick.bind(this)}
+              />
             </IconMenu>
           }
+
+            <h3>Recent Activity</h3>
+            <ActivityGallery recipeId={Number(this.props.match.params.id)} />
             <RaisedButton
               label="Record an activity with this recipe"
-              icon={<AddIcon/>}
-              labelColor={"white"}
+              icon={<AddIcon />}
+              labelColor="white"
               onClick={this.onRecordActivityClick.bind(this)}
-              primary={true}
+              primary
+              style={{ margin: '20px 0' }}
             />
+          </div>
+        </Card>
 
+        { this.renderRecipe(recipe) }
 
-          <h3>Recent Activity</h3>
-          <ActivityGallery recipeId={Number(this.props.match.params.id)}/>
-
-          <h3>Ingredients</h3>
-          <ul>
-            {this.renderIngredients()}
-          </ul>
-
-          <h3>Instructions</h3>
-          <RecipeTimeline instructions={recipe.data.instructions}/>
-        </div>
-      </Card>
+        { recipe.base_recipe &&
+         this.renderHistory()
+      }
+      </FadeIn>
     );
   }
-
 }
 
 function mapStateToProps({ recipes, auth }, ownProps) {
+  const recipe = recipes[ownProps.match.params.id];
+
+  if (!recipe) {
+    return { user: auth.user };
+  }
+
+  const parentRecipe = recipes[recipe.parent];
+  const baseRecipe = recipes[recipe.base_recipe];
+
   return {
-    recipe: recipes[ownProps.match.params.id],
-    user: auth.user
+    recipe,
+    parentRecipe,
+    baseRecipe,
+    user: auth.user,
   };
 }
 

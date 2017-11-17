@@ -1,16 +1,17 @@
-import _ from "lodash";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchRecipes } from "../actions/actions_recipe";
-import {List, ListItem} from 'material-ui/List';
+import _ from 'lodash';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { List, ListItem } from 'material-ui/List';
+import LinearProgress from 'material-ui/LinearProgress';
 import ContentSend from 'material-ui/svg-icons/content/send';
 import ArrowRight from 'material-ui/svg-icons/navigation/subdirectory-arrow-right';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import CPCard from './crumbproof_card.jsx';
-import LinearProgress from 'material-ui/LinearProgress';
 
+import { fetchRecipes } from '../actions/actions_recipe';
+
+import CPCard from './crumbproof_card';
+import FloatingActionButton from './floating_action_button';
 
 class RecipesIndex extends Component {
   componentDidMount() {
@@ -18,71 +19,69 @@ class RecipesIndex extends Component {
   }
 
 
+  handleRecipeClick(id) {
+    this.props.history.push(`/recipes/${id}`);
+  }
 
   renderRecipeNode(recipe) {
     return (
       <ListItem
         key={recipe.id}
         primaryText={recipe.data.name}
-        leftIcon={recipe.base_recipe === null ? <ContentSend/>:<ArrowRight/>}
-        open={true}
+        secondaryText={`By ${recipe.user}`}
+        leftIcon={recipe.base_recipe === null ? <ContentSend /> : <ArrowRight />}
+        initiallyOpen
+        onClick={this.handleRecipeClick.bind(this, recipe.id)}
         nestedItems={this.renderRecipeChildren(recipe.children)}
-        containerElement={
-          <Link to={`/recipes/${recipe.id}`} />
-        }>
-      </ListItem>
+      />
     );
   }
 
   renderRecipeChildren(children) {
     if (!children) return null;
-    return _.map(children, r => {
-        return this.renderRecipeNode(r)
-    });
+
+    return _.map(children, r => this.renderRecipeNode(r));
   }
 
   buildRecipeTree(recipesList) {
+    const recipes = _.mapKeys(
+      _.map(recipesList, r => ({ ...r, children: [] }))
+      , 'id',
+    );
 
-    let recipes = _.mapKeys(
-                    _.map(recipesList, r => ({...r, children:[]}))
-                  , 'id');
+    const root = _.filter(recipes, r => r.base_recipe === null);
 
-    let root = _.filter(recipes, r => r.base_recipe === null);
-
-    let variants = _.filter(recipes, r => r.base_recipe !== null);
-    _.forEach(variants, (r) => recipes[r.parent].children.push(r));
+    const variants = _.filter(recipes, r => r.base_recipe !== null);
+    _.forEach(variants, r => recipes[r.parent].children.push(r));
 
     return root;
   }
 
   renderRecipes() {
-
     // Need to _.values as recipes is an object
     if (_.values(this.props.recipes).length === 0) {
       return <LinearProgress mode="indeterminate" />;
     }
 
-    let recipeTree = this.buildRecipeTree(this.props.recipes);
+    const recipeTree = this.buildRecipeTree(this.props.recipes);
 
-    return _.map(recipeTree, rootRecipe => {
-      return (
-        this.renderRecipeNode(rootRecipe)
-      );
-    });
+    return _.map(recipeTree, rootRecipe => (
+      this.renderRecipeNode(rootRecipe)
+    ));
   }
 
   render() {
     return (
+      <div>
+        <FloatingActionButton link="/recipes/new">
+          <ContentAdd />
+        </FloatingActionButton>
         <CPCard title="Recipes">
-            <List>
+          <List>
             {this.renderRecipes()}
-            </List>
-            <div style={{float:"right"}}>
-                <FloatingActionButton containerElement={<Link to="/recipes/new"/>}>
-                    <ContentAdd/>
-                </FloatingActionButton>
-            </div>
+          </List>
         </CPCard>
+      </div>
     );
   }
 }

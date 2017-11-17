@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { authForbidden } from '../../actions/actions_auth';
 
-export default function(WrappedComponent, errorMessage) {
+export default function (WrappedComponent, errorMessage) {
   class RequireAuthentication extends Component {
-
     componentWillMount() {
       if (!this.props.authenticatedUser) {
         this.props.authForbidden(errorMessage);
@@ -20,14 +19,14 @@ export default function(WrappedComponent, errorMessage) {
     }
 
     render() {
-      return <WrappedComponent {...this.props} />
+      return <WrappedComponent {...this.props} />;
     }
   }
 
-  function mapStateToProps({auth}) {
-    return { authenticatedUser: auth.user};
+  function mapStateToProps({ auth }) {
+    return { authenticatedUser: auth.user };
   }
 
 
-  return connect(mapStateToProps, {authForbidden})(RequireAuthentication);
+  return connect(mapStateToProps, { authForbidden })(RequireAuthentication);
 }

@@ -3,17 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "apollo-cache-inmemory": "^1.0.0",
+    "apollo-client": "^2.0.1",
+    "apollo-link-http": "^1.1.0",
     "axios": "^0.16.2",
     "fast-deep-equal": "^1.0.0",
+    "graphql": "^0.11.7",
+    "graphql-tag": "^2.5.0",
     "jsdiff": "^1.1.1",
     "lodash": "^4.17.4",
     "material-ui": "^0.19.4",
     "moment": "2.18.0",
+    "prop-types": "^15.6.0",
     "react": "^16.0.0",
+    "react-apollo": "^2.0.0",
     "react-dom": "^16.0.0",
     "react-dropzone": "^4.1.3",
     "react-infinite-scroller": "^1.0.15",
+    "react-lazyload": "^2.3.0",
     "react-medium-image-zoom": "^3.0.1",
+    "react-motion": "^0.5.2",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
@@ -26,6 +35,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "node_modules/.bin/eslint --ext .jsx,.js src"
+  },
+  "devDependencies": {
+    "eslint": "^4.10.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0"
   }
 }

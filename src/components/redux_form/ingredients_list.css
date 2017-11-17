@@ -1,0 +1,30 @@
+.addIngredientButton {
+    margin-top: 10px;
+}
+@media (min-width:640px) {
+    .ingredientFields{
+        margin-top: 0px;
+        padding-top: 0px;
+        display: flex;
+    }
+
+    .ingredientRemoveButton {
+        display: flex;
+        align-items: center;
+    }
+
+    .ingredientName {
+        width: 500px !important;
+        margin-right:10px
+    }
+
+    .ingredientQuantity {
+        max-width: 10%;
+        margin-right:10px
+    }
+
+    .ingredientUnit {
+        max-width: 130px;
+    }
+
+}

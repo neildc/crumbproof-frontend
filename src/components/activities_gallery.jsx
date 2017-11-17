@@ -1,33 +1,25 @@
-import _ from "lodash";
-import "./gallery.css";
-import React, { Component } from "react";
+import _ from 'lodash';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchRecipeActivities } from "../actions/actions_recipe";
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+
 import { GridTile } from 'material-ui/GridList';
 import LinearProgress from 'material-ui/LinearProgress';
-import moment from "moment";
+
+import './gallery.css';
 
 const NUM_TO_SHOW = 2;
 
 class ActivitiesGallery extends Component {
-  componentDidMount() {
-    this.props.fetchRecipeActivities(this.props.recipeId);
-  }
+  renderActivityTiles(activities) {
+    const mostRecentActivities = _.sortBy(activities, 'created')
+      .reverse()
+      .slice(0, NUM_TO_SHOW);
 
-  renderActivityTiles() {
-
-    if (this.props.loading) {
-      return <LinearProgress mode="indeterminate" />;
-    }
-
-    let mostRecentActivities = _.sortBy(this.props.related_activities, 'created')
-                                .reverse()
-                                .slice(0, NUM_TO_SHOW);
-
-    return _.map(mostRecentActivities, activity => {
-
+    return _.map(mostRecentActivities, (activity) => {
       const created = moment(activity.created).fromNow();
 
       return (
@@ -40,31 +32,32 @@ class ActivitiesGallery extends Component {
             <Link to={`/activity/${activity.id}`} />
           }
         >
-          <img src={activity.crumb_shot} alt="" />
+          <img src={`https://crumbproof-img.s3.amazonaws.com/media/${activity.crumbShot}`} alt="" />
         </GridTile>
       );
     });
   }
 
-  renderHeader() {
-
-    if (this.props.loading) {
-      return ("");
+  renderHeader(length) {
+    if (length > 0) {
+      return (`${length} total activities`);
     }
 
-    if (this.props.related_activities.length > 0) {
-      return (`${this.props.related_activities.length} total activities`);
-    } else {
-      return( "Be the first to record an activity with this recipe!");
-    }
+    return ('Be the first to record an activity with this recipe!');
   }
 
   render() {
+    if (this.props.data.loading) {
+      return <LinearProgress mode="indeterminate" />;
+    }
+
+    const { activities } = this.props.data.recipe;
+
     return (
       <div>
-        {this.renderHeader()}
+        {this.renderHeader(activities.length)}
         <div className="galleryGrid" >
-          {this.renderActivityTiles()}
+          {this.renderActivityTiles(activities)}
         </div>
       </div>
     );
@@ -72,19 +65,22 @@ class ActivitiesGallery extends Component {
 }
 
 ActivitiesGallery.proptypes = {
-  recipeId: PropTypes.number.required
-}
+  recipeId: PropTypes.number.required,
+  data: PropTypes.object.required,
+};
 
-function mapStateToProps(state, ownProps) {
+const GET_RECIPE_ACTIVITIES = gql`
+  query getRecipeActivities($id: Int!) {
+    recipe (id: $id) {
+      activities {
+        id
+        name
+        crumbShot
+      }
+    }
+  }
+`;
 
-  let activityHistory = state.recipes[ownProps.recipeId].activity_history;
-
-  return {
-    related_activities : _.filter(state.activities.byId, {recipe: ownProps.recipeId}),
-    // undefined if its still loading, otherwise activityHistory should be
-    // an array(possibly empty) once the fetchRecipeActivities action is complete
-    loading: !activityHistory
-  };
-}
-
-export default connect(mapStateToProps, { fetchRecipeActivities })(ActivitiesGallery);
+export default graphql(GET_RECIPE_ACTIVITIES, {
+  options: ({ recipeId }) => ({ variables: { id: recipeId } }),
+})(ActivitiesGallery);
