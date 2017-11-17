@@ -111,7 +111,7 @@ export default class Tooltip extends React.Component {
   }
 
   render() {
-    const {props, state, styles, show, hide, handleTouch} = this;
+    const {props, state, show, hide, handleTouch} = this;
     return (
       <div
         onMouseEnter={show}
