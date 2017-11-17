@@ -6,7 +6,9 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import {
-  fetchLiveActivity, startLiveActivity,
+  fetchLiveActivity,
+  startLiveActivity,
+  discardLiveActivity,
 } from '../actions/actions_live_activity';
 import LoadingCard from './loading_card';
 
@@ -16,7 +18,13 @@ class LiveActivityStart extends Component {
     this.props.fetchLiveActivity();
   }
 
-  handleContinue() {
+  componentDidUpdate() {
+    if (!this.props.liveActivity.id) {
+      this.startAndNavigateToLive();
+    }
+  }
+
+  startAndNavigateToLive() {
     const { recipeId } = this.props.match.params;
     if (recipeId) {
       this.props.startLiveActivity(
@@ -24,6 +32,16 @@ class LiveActivityStart extends Component {
         () => this.props.history.push('/live'),
       );
     }
+  }
+
+  handleDiscardAndContinue() {
+
+    const { id } = this.props.liveActivity;
+
+    this.props.discardLiveActivity(id, () => {
+      this.startAndNavigateToLive();
+    });
+
   }
 
   renderExistingLiveActivityPrompt() {
@@ -39,7 +57,7 @@ class LiveActivityStart extends Component {
       <RaisedButton
         primary
         label="Discard and continue"
-        onClick={this.handleContinue.bind(this)}
+        onClick={this.handleDiscardAndContinue.bind(this)}
       />,
     ];
 
@@ -72,5 +90,5 @@ function mapStateToProps({ liveActivity }) {
 
 export default connect(
   mapStateToProps,
-  { fetchLiveActivity, startLiveActivity },
+  { fetchLiveActivity, startLiveActivity, discardLiveActivity },
 )(LiveActivityStart);
