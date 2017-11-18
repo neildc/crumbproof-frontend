@@ -69,19 +69,18 @@ class RecipesNew extends Component {
         >
           {this.renderSteps(['Basic Details', 'Ingredients', 'Instructions'])}
         </Stepper>
-
         <div style={contentStyle}>
           {stepIndex === 0 &&
-            <RecipesNewWizard1Basic onSubmit={this.handleNext} />}
+            <RecipesNewWizard1Basic onSubmit={this.handleNext.bind(this)} />}
 
           {stepIndex === 1 &&
             <RecipesNewWizard2Ingredients
-              previousPage={this.handlePrev}
-              onSubmit={this.handleNext}
+              previousPage={this.handlePrev.bind(this)}
+              onSubmit={this.handleNext.bind(this)}
             />}
           {stepIndex === 2 &&
             <RecipesNewWizard3Instructions
-              previousPage={this.handlePrev}
+              previousPage={this.handlePrev.bind(this)}
               onSubmit={handleSubmit(this.onSubmit.bind(this))}
             />}
 
