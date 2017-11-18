@@ -28,38 +28,30 @@ self.addEventListener('notificationclick', function(event) {
   // Example: Open window after 3 seconds.
   // (doing so is a terrible user experience by the way, because
   //  the user is left wondering what happens for 3 seconds.)
-  var promise = new Promise(function(resolve) {
-    setTimeout(resolve, 3000);
-  }).then(function() {
-    // return the promise returned by openWindow, just in case.
-    // Opening any origin only works in Chrome 43+.
-    //
-    //
-    const urlToOpen = new URL('/live', self.location.origin).href;
+  const urlToOpen = new URL('/live', self.location.origin).href;
 
-    const openPromise = clients.matchAll({
-      type: 'window',
-      includeUncontrolled: true
-    })
-      .then((windowClients) => {
-        let matchingClient = null;
+  const openPromise = clients.matchAll({
+    type: 'window',
+    includeUncontrolled: true
+  })
+  .then((windowClients) => {
+      let matchingClient = null;
 
-        for (let i = 0; i < windowClients.length; i++) {
-          const windowClient = windowClients[i];
-          if (windowClient.url === urlToOpen) {
-            matchingClient = windowClient;
-            break;
-          }
+      for (let i = 0; i < windowClients.length; i++) {
+        const windowClient = windowClients[i];
+        if (windowClient.url === urlToOpen) {
+          matchingClient = windowClient;
+          break;
         }
+      }
 
-        if (matchingClient) {
-          return matchingClient.focus();
-        }
+      if (matchingClient) {
+        return matchingClient.focus();
+      }
 
-        return clients.openWindow(urlToOpen);
-      });
-
-    // Now wait for the promise to keep the permission alive.
-    event.waitUntil(openPromise);
+      return clients.openWindow(urlToOpen);
   });
+
+  // Now wait for the promise to keep the permission alive.
+  event.waitUntil(openPromise);
 });
