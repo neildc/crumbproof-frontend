@@ -1,13 +1,17 @@
 self.addEventListener('push', function(event) {
+
+  const data = event.data.json();
+
   const options = {
-    body: 'This notification has data attached to it that is printed ' +
-          'to the console when it\'s clicked.',
+    body: data.body,
     tag: 'data-notification',
     vibrate: [500,110,500,110,450,110,200,110,170,40,450,110,200,110,170,40,500],
 
     requireInteraction: true,
     renotify: true,
-
+    icon: '/icon-512x512.png',
+    badge: '/icon-128x128.png',
+    timestamp: Date.parse(data.timestamp),
 
     data: {
       time: new Date(Date.now()).toString(),
@@ -15,7 +19,9 @@ self.addEventListener('push', function(event) {
     }
   };
 
-  const promiseChain = self.registration.showNotification('Notification with Data', options);
+  const TITLE = `Step #${data.current_step + 1} complete`;
+
+  const promiseChain = self.registration.showNotification(TITLE, options);
 
 
   event.waitUntil(promiseChain);
