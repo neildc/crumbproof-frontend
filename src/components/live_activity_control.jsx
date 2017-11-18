@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import { Card } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
 import ReplayIcon from 'material-ui/svg-icons/av/replay';
 import Divider from 'material-ui/Divider';
 import Countdown, { zeroPad } from 'react-countdown-now';
@@ -28,6 +27,7 @@ class LiveActivityControl extends Component {
     super();
     this.state = {
       movingToNextStep: false,
+      startingTimer: false,
     };
   }
 
@@ -37,6 +37,15 @@ class LiveActivityControl extends Component {
 
     if (this.state.movingToNextStep && prevStep !== currStep) {
       this.setState({ movingToNextStep : false });
+    }
+
+    if (this.state.startingTimer) {
+      const prevNumStartTimes = Object.keys(prevProps.liveActivity.start_times).length;
+      const currNumStartTimes = Object.keys(this.props.liveActivity.start_times).length;
+
+      if (prevNumStartTimes < currNumStartTimes) {
+        this.setState({ startingTimer : false });
+      }
     }
   }
 
@@ -50,8 +59,13 @@ class LiveActivityControl extends Component {
       this.props.history.push(`/activity/new/recipe/${recipe.id}`);
     } else {
       this.props.liveActivityNextStep();
-      this.setState({ movingToNextStep : true });
+      this.setState({ movingToNextStep: true, startingTimer: false });
     }
+  }
+
+  handleStartTimerClick() {
+    this.props.liveActivityStartTimer();
+    this.setState({ startingTimer: true });
   }
 
   renderTimerStart(instruction) {
@@ -62,10 +76,13 @@ class LiveActivityControl extends Component {
 
     return (
       <div>
-        <FlatButton
+        <SubmitButton
           fullWidth
+          flat
           label="Start timer"
-          onClick={this.props.liveActivityStartTimer}
+          labelInProgress="Starting timer..."
+          submittingFlag={this.state.startingTimer}
+          onClick={() => this.handleStartTimerClick()}
         />
         <div className="timer">
           {`${h}:${m}:00`}
