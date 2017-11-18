@@ -1,5 +1,9 @@
 import _ from 'lodash';
-import { FETCH_ACTIVITIES, FETCH_ACTIVITY, DELETE_ACTIVITY } from '../actions/actions_activity';
+import {
+  FETCH_ACTIVITIES,
+  FETCH_ACTIVITY,
+  DELETE_ACTIVITY,
+} from '../actions/actions_activity';
 
 export default function (state = {}, action) {
   switch (action.type) {

@@ -1,0 +1,22 @@
+
+.stepCard {
+    margin-top: 0px;
+}
+
+.Navigation {
+    display: none;
+}
+
+.stepCard {
+    margin-top: 10px;
+}
+
+@media (min-width:640px) {
+    .Navigation {
+        display: block;
+    }
+
+    .stepCard {
+        margin-top: 120px;
+    }
+}

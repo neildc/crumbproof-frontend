@@ -20,6 +20,8 @@ import ActivityIndex from './components/activity_index';
 import ActivityNew from './components/activity_new';
 import ActivityShow from './components/activity_show';
 
+import LiveActivityStart from './components/live_activity_start';
+import LiveActivity from './components/live_activity';
 
 class App extends React.Component {
   componentWillMount() {
@@ -35,8 +37,8 @@ class App extends React.Component {
           component={
           RequireAuth(RecipesNew, 'Please sign in to create a new recipe')}
         />
-        <Route path="/recipes/:id" component={RecipesShow} />
         <Route exact path="/recipes" component={RecipesIndex} />
+        <Route path="/recipes/:id" component={RecipesShow} />
 
         <Route
           path="/activity/new/recipe/:recipeId"
@@ -49,8 +51,20 @@ class App extends React.Component {
           component={
           RequireAuth(ActivityNew, 'Please sign in to create a new activity')}
         />
-        <Route path="/activity/:id" component={ActivityShow} />
         <Route exact path="/activity" component={ActivityIndex} />
+        <Route
+          path="/live/start/recipe/:recipeId"
+          component={
+          RequireAuth(LiveActivityStart, 'Please sign to start a new activity')}
+        />
+        <Route
+          exact
+          path="/live"
+          component={
+            RequireAuth(LiveActivity, 'Please sign in to see your current activity')}
+        />
+
+        <Route path="/activity/:id" component={ActivityShow} />
 
         <Route exact path="/login" component={LoginIndex} />
         <Route exact path="/register" component={RegisterIndex} />

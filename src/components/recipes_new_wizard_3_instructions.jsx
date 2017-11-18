@@ -3,7 +3,7 @@ import { FieldArray, reduxForm } from 'redux-form';
 import FlatButton from 'material-ui/FlatButton';
 import renderInstructions from './redux_form/instructions_list';
 import { RECIPE_NEW_FORM_NAME } from '../constants/form_names';
-import SubmitButton from './SubmitButton';
+import SubmitButton from './submit_button';
 
 
 class RecipesNewWizard3Instructions extends React.Component {
