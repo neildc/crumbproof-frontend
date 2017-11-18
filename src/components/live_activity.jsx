@@ -124,6 +124,7 @@ class LiveActivity extends Component {
         <Footer>
           <LiveActivityControl
             liveActivity={this.props.liveActivity}
+            currentStepInAnchor={Number(window.location.hash.substr(5))}
             history={this.props.history}
           />
         </Footer>

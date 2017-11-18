@@ -130,8 +130,6 @@ class LiveActivityControl extends Component {
     const currStep = this.props.liveActivity.current_step;
     const { instructions } = recipe.data;
 
-    const currentStepInAnchor = Number(window.location.hash.substr(5)); //remove #step
-
     return (
       <Card className="liveController">
         { instructions[currStep].time_gap_to_next &&
@@ -160,7 +158,7 @@ class LiveActivityControl extends Component {
               label={`Return to current step: ${currStep + 1}`}
               labelStyle={{ fontSize: '22px', fontWeight: 400 }}
               href={`#step${currStep + 1}`}
-              disabled={currentStepInAnchor === currStep + 1}
+              disabled={this.props.currentStepInAnchor === currStep + 1}
               icon={<ReplayIcon />}
             />
           </Tooltip>
@@ -183,6 +181,7 @@ class LiveActivityControl extends Component {
 
 LiveActivityControl.propTypes = {
   liveActivity: PropTypes.object.required,
+  currentStepInAnchor: PropTypes.number,
   history: PropTypes.object.required,
 }
 
