@@ -1,19 +1,82 @@
-import React from 'react';
+import _ from 'lodash';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import Drawer from 'material-ui/Drawer';
+import { ListItem } from 'material-ui/List';
+
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
-import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
+
+import RecipeIcon from 'material-ui/svg-icons/action/description';
+import ActivityIcon from 'material-ui/svg-icons/image/gradient';
+import LiveIcon from 'material-ui/svg-icons/image/timer';
 
 import { authLogout } from '../actions/actions_auth';
 
-class Header extends React.Component {
+import './header.css';
+
+
+const navItems = [
+  { title: 'Activities', url: '/activity', icon: ActivityIcon },
+  { title: 'Recipes', url: '/recipes', icon: RecipeIcon },
+  { title: 'Live activity', url: '/live', icon: LiveIcon },
+];
+
+class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { drawerOpen: false };
+  }
+
+  handleDrawerToggle() {
+    this.setState({ drawerOpen: !this.state.drawerOpen });
+  }
+
   authButton() {
+    const Button = props => (
+      <FlatButton
+        {...props}
+        labelStyle={{ color: 'white' }}
+        className="authButton"
+      />
+    );
+
     if (this.props.authenticatedUser) {
-      return <FlatButton onClick={this.props.authLogout} label="Logout" />;
+      return <Button onClick={this.props.authLogout} label="Logout" />;
     }
-    return <FlatButton containerElement={<Link to="/login" />} label="Login" />;
+    return <Button containerElement={<Link to="/login" />} label="Login" />;
+  }
+
+  closeDrawer() {
+    this.setState({ drawerOpen: false });
+  }
+
+  renderAppBarNavLinks() {
+    return (
+      _.map(navItems, i => (
+        <FlatButton
+          containerElement={<Link to={i.url} />}
+          label={i.title}
+          labelStyle={{ color: 'white' }}
+          icon={<i.icon color="#FFFFFF" />}
+        />
+      ))
+    );
+  }
+
+  renderNavDrawerItems() {
+    return (
+      _.map(navItems, i => (
+        <ListItem
+          primaryText={i.title}
+          containerElement={<Link to={i.url} />}
+          leftIcon={<i.icon />}
+          onClick={() => this.closeDrawer()}
+        />
+      ))
+    );
   }
 
   render() {
@@ -22,22 +85,32 @@ class Header extends React.Component {
         <AppBar
           className="appBar"
           title="crumbproof"
-          showMenuIconButton={false}
-          iconElementRight={this.authButton()}
-        />
-        <Toolbar className="toolbar">
-          <ToolbarGroup>
-            <FlatButton containerElement={<Link to="/activity" />} label="Activites" />
-            <FlatButton containerElement={<Link to="/recipes" />} label="Recipes" />
-          </ToolbarGroup>
-        </Toolbar>
+          onLeftIconButtonTouchTap={() => this.handleDrawerToggle()}
+        >
+          <div className="navLinks">
+            { window.innerWidth > 640 &&
+              this.renderAppBarNavLinks()
+            }
+            {this.authButton()}
+          </div>
+        </AppBar>
+
+        <Drawer
+          open={this.state.drawerOpen}
+          docked={false}
+          onRequestChange={open => this.setState({ drawerOpen: open })}
+        >
+          {this.renderNavDrawerItems()}
+        </Drawer>
       </div>
     );
   }
 }
 
 function mapStateToProps({ auth }) {
-  return { authenticatedUser: auth.user };
+  return {
+    authenticatedUser: auth.user,
+  };
 }
 
 export default connect(mapStateToProps, { authLogout })(Header);
