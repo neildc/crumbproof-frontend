@@ -10,7 +10,7 @@ self.addEventListener('push', function(event) {
     requireInteraction: true,
     renotify: true,
     icon: '/icon-512x512.png',
-    badge: '/icon-128x128.png',
+    badge: '/badge.png',
     timestamp: Date.parse(data.timestamp),
 
     data: {
