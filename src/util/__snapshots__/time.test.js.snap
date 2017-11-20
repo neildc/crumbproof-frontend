@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`converts minutes < 60 to minutes & hours 1`] = `
+Object {
+  "hours": 0,
+  "minutes": 30,
+}
+`;
+
+exports[`converts minutes > 60 to minutes & hours 1`] = `
+Object {
+  "hours": 5,
+  "minutes": 20,
+}
+`;
+
+exports[`generates a total time string (1 instruction, with time) 1`] = `"30 mins"`;
+
+exports[`generates a total time string (multiple instructions) 1`] = `"4h 26 mins"`;
+
+exports[`null total time string (1 instruction, no time) 1`] = `null`;
+
+exports[`null total time string (no instructions) 1`] = `null`;
