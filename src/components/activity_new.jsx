@@ -9,7 +9,7 @@ import Toggle from 'material-ui/Toggle';
 
 import { fetchRecipe } from '../actions/actions_recipe';
 
-import SubmitButton from './SubmitButton';
+import SubmitButton from './submit_button';
 import CPCard from './crumbproof_card';
 
 import renderTextField from './redux_form/text_field';
@@ -213,18 +213,18 @@ class ActivityNew extends Component {
             component={renderTextField}
           />
 
-          {this.props.match.params.recipeId &&
+          { this.props.match.params.recipeId && this.props.initialValues &&
 
-          <div style={{ padding: '20px 0px' }}>
-            <h3>Recipe used: {this.props.initialValues.name.replace(`(${dateToday()})`, '')}</h3>
-            <Toggle
-              label="Submit recipe modifications?"
-              onToggle={(event, toggled) => { this.setState({ recipe_modified: toggled }); }
-                     }
-            />
+            <div style={{ padding: '20px 0px' }}>
+              <h3>Recipe used: {this.props.initialValues.name.replace(`(${dateToday()})`, '')}</h3>
+              <Toggle
+                label="Submit recipe modifications?"
+                onToggle={(event, toggled) => { this.setState({ recipe_modified: toggled }); }
+                }
+              />
 
-            {this.state.recipe_modified && this.renderRecipeEditor()}
-          </div>
+              {this.state.recipe_modified && this.renderRecipeEditor()}
+            </div>
           }
 
           <SubmitButton

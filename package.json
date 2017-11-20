@@ -17,8 +17,10 @@
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-apollo": "^2.0.0",
+    "react-countdown-now": "^1.2.0",
     "react-dom": "^16.0.0",
     "react-dropzone": "^4.1.3",
+    "react-fullpage": "^0.1.18",
     "react-infinite-scroller": "^1.0.15",
     "react-lazyload": "^2.3.0",
     "react-medium-image-zoom": "^3.0.1",
@@ -33,7 +35,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cat src/pushListener.js >> build/service-worker.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "node_modules/.bin/eslint --ext .jsx,.js src"

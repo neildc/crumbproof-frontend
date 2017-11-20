@@ -8,12 +8,11 @@ export function FadeIn(props) {
       defaultStyle={{ opacity: 0 }}
       style={{ opacity: spring(1, { stiffness: 100, damping: 14 }) }}
     >
-
       {iStyle => (
         <div style={{ ...iStyle, ...props.style }}>
           {props.children}
         </div>
-        )}
+      )}
     </Motion>
   );
 }

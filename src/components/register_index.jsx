@@ -9,7 +9,7 @@ import { Card, CardTitle } from 'material-ui/Card';
 import { required } from '../validators';
 import { authRegister, authClearError } from '../actions/actions_auth';
 
-import SubmitButton from './SubmitButton';
+import SubmitButton from './submit_button';
 import { FadeIn } from './animations/fade';
 
 import './register_index.css';

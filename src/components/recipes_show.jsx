@@ -55,6 +55,11 @@ class RecipesShow extends Component {
     this.props.history.push(`/activity/new/recipe/${id}`);
   }
 
+  onStartActivityClick() {
+    const { id } = this.props.match.params;
+    this.props.history.push(`/live/start/recipe/${id}`);
+  }
+
   renderIngredients() {
     return _.map(this.props.recipe.data.ingredients, i => (
       <li key={i.name}>
@@ -181,8 +186,15 @@ class RecipesShow extends Component {
             <RaisedButton
               label="Record an activity with this recipe"
               icon={<AddIcon />}
-              labelColor="white"
               onClick={this.onRecordActivityClick.bind(this)}
+              style={{ margin: '20px 0' }}
+            />
+            <br />
+            <RaisedButton
+              label="Start guided activity"
+              icon={<AddIcon />}
+              labelColor="white"
+              onClick={this.onStartActivityClick.bind(this)}
               primary
               style={{ margin: '20px 0' }}
             />
