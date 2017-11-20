@@ -46,6 +46,7 @@ function findLivingNeighbour(bot, top, curr) {
 
 function insertDeadNextToLivingNeighbour(dead, all, neighbour) {
   const { index, position } = neighbour;
+
   if (position === 'below') all.splice(index + 1, 0, dead);
   if (position === 'above') all.splice(index - 1, 0, dead);
 }
@@ -70,7 +71,7 @@ function insertDeadNextToLivingNeighbour(dead, all, neighbour) {
  *     - match from top: Insert below the match if it came from
  *     - match from bottom: Insert above the match if it came from
  */
-export function insertDeadToClosestLivingNeighbour(dead, prev, living) {
+function insertDeadToClosestLivingNeighbour(dead, prev, living) {
   const deadIndex = _.findIndex(prev, { id: dead.id });
 
   // [0 1 2 3 DEAD(4) 5 6]
@@ -90,4 +91,17 @@ export function insertDeadToClosestLivingNeighbour(dead, prev, living) {
     // place the instruction at the top of the list
     insertDeadNextToLivingNeighbour(dead, living, { id: 0, position: 'above' });
   }
+}
+
+export function insertAllRemovedItemsIntoCurrent(removed, prev, curr) {
+  let ret;
+  if (_.isEmpty(removed)) {
+    ret = curr;
+  } else {
+    ret = _.cloneDeep(curr);
+    for (let i = 0; i < removed.length; i++) {
+      insertDeadToClosestLivingNeighbour(removed[i], prev, ret);
+    }
+  }
+  return ret;
 }
