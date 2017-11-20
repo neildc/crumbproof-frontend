@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import Drawer from 'material-ui/Drawer';
+import { ListItem } from 'material-ui/List';
+
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 
@@ -22,11 +25,34 @@ const navItems = [
 ];
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { drawerOpen: false };
+  }
+
+  handleDrawerToggle() {
+    this.setState({ drawerOpen: !this.state.drawerOpen });
+  }
+
   authButton() {
+    const Button = props => (
+      <FlatButton
+        {...props}
+        labelStyle={{ color: 'white' }}
+        className="authButton"
+      />
+    );
+
     if (this.props.authenticatedUser) {
-      return <FlatButton onClick={this.props.authLogout} label="Logout" />;
+      return <Button onClick={this.props.authLogout} label="Logout" />;
     }
-    return <FlatButton containerElement={<Link to="/login" />} label="Login" />;
+    return <Button containerElement={<Link to="/login" />} label="Login" />;
+  }
+
+  closeDrawer() {
+    this.setState({ drawerOpen: false });
+  }
+
   renderAppBarNavLinks() {
     return (
       _.map(navItems, i => (
@@ -40,6 +66,17 @@ class Header extends Component {
     );
   }
 
+  renderNavDrawerItems() {
+    return (
+      _.map(navItems, i => (
+        <ListItem
+          primaryText={i.title}
+          containerElement={<Link to={i.url} />}
+          leftIcon={<i.icon />}
+          onClick={() => this.closeDrawer()}
+        />
+      ))
+    );
   }
 
   render() {
@@ -48,7 +85,8 @@ class Header extends Component {
         <AppBar
           className="appBar"
           title="crumbproof"
-          showMenuIconButton={false}
+          onLeftIconButtonTouchTap={() => this.handleDrawerToggle()}
+        >
           <div className="navLinks">
             { window.innerWidth > 640 &&
               this.renderAppBarNavLinks()
@@ -56,6 +94,14 @@ class Header extends Component {
             {this.authButton()}
           </div>
         </AppBar>
+
+        <Drawer
+          open={this.state.drawerOpen}
+          docked={false}
+          onRequestChange={open => this.setState({ drawerOpen: open })}
+        >
+          {this.renderNavDrawerItems()}
+        </Drawer>
       </div>
     );
   }
