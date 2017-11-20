@@ -1,0 +1,19 @@
+.navLinks {
+    display: flex;
+    align-items: center;
+}
+
+.drawer > div {
+    top: 50px !important;
+}
+
+@media (min-width:640px) {
+
+    .appBar {
+        padding: 0px 10% !important;
+    }
+
+    .authButton {
+        margin-left: 100px !important;
+    }
+}

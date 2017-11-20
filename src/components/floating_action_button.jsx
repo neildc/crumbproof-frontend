@@ -17,6 +17,7 @@ export default class FloatingActionButton extends Component {
         {iStyle => (
           <MUIFloatingActionButton
             className="floatingActionButton"
+            backgroundColor="#6BD425"
             containerElement={<Link to={this.props.link} />}
             style={{ transform: `translate(${iStyle.x}px)` }}
           >

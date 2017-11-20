@@ -33,7 +33,7 @@ export function askPushNotificationsPermission() {
   })
     .then((permissionResult) => {
       if (permissionResult !== 'granted') {
-        /* throw new Error('We weren\'t granted permission.');*/
+        /* throw new Error('We weren\'t granted permission.'); */
       }
     });
 }

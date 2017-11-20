@@ -7,7 +7,7 @@ import LinearProgress from 'material-ui/LinearProgress';
 
 import Diff from './diff';
 import { fetchRecipe } from '../actions/actions_recipe';
-import { insertDeadToClosestLivingNeighbour, INSTRUCTIONS, INGREDIENTS } from '../util/diff';
+import { insertAllRemovedItemsIntoCurrent, INSTRUCTIONS, INGREDIENTS } from '../util/diff';
 
 const ingredientStr = i => `${i.quantity} ${i.unit} ${i.name}`;
 
@@ -53,15 +53,7 @@ class RecipeDiff extends Component {
     const removedMap = _.mapKeys(removed, 'id');
     const curr = this.props.recipe.data[type];
 
-    let all;
-    if (_.isEmpty(removed)) {
-      all = curr;
-    } else {
-      all = _.cloneDeep(curr);
-      for (let i = 0; i < removed.length; i++) {
-        insertDeadToClosestLivingNeighbour(removed[i], original, all);
-      }
-    }
+    const all = insertAllRemovedItemsIntoCurrent(removed, original, curr);
 
     return _.map(all, (i) => {
       if (addedMap[i.id]) {

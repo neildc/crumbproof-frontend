@@ -1,0 +1,227 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`correct diff after adding an instruction 1`] = `
+Object {
+  "added": Array [],
+  "modified": Array [
+    Object {
+      "content": "ADDED",
+      "id": "1",
+    },
+  ],
+  "removed": Array [],
+}
+`;
+
+exports[`correct diff after modifying an instruction 1`] = `
+Object {
+  "added": Array [],
+  "modified": Array [
+    Object {
+      "content": "MODIFIED",
+      "id": "1",
+    },
+  ],
+  "removed": Array [],
+}
+`;
+
+exports[`correct diff after modifying, removing and adding instructions 1`] = `
+Object {
+  "added": Array [],
+  "modified": Array [
+    Object {
+      "content": "MODIFIED",
+      "id": "1",
+    },
+    Object {
+      "content": "ADDED",
+      "id": "3",
+    },
+  ],
+  "removed": Array [
+    Object {
+      "content": "REMOVED",
+      "id": "2",
+    },
+  ],
+}
+`;
+
+exports[`correct diff after removing an instruction 1`] = `
+Object {
+  "added": Array [],
+  "modified": Array [],
+  "removed": Array [
+    Object {
+      "content": "REMOVED",
+      "id": "1",
+    },
+  ],
+}
+`;
+
+exports[`inserts removed element in correct position (first) 1`] = `
+Array [
+  Object {
+    "content": "1",
+    "id": "1",
+  },
+  Object {
+    "content": "2",
+    "id": "2",
+  },
+  Object {
+    "content": "3",
+    "id": "3",
+  },
+  Object {
+    "content": "4",
+    "id": "4",
+  },
+  Object {
+    "content": "5",
+    "id": "5",
+  },
+  Object {
+    "content": "6",
+    "id": "6",
+  },
+  Object {
+    "content": "7",
+    "id": "7",
+  },
+]
+`;
+
+exports[`inserts removed element in correct position (last) 1`] = `
+Array [
+  Object {
+    "content": "1",
+    "id": "1",
+  },
+  Object {
+    "content": "2",
+    "id": "2",
+  },
+  Object {
+    "content": "3",
+    "id": "3",
+  },
+  Object {
+    "content": "4",
+    "id": "4",
+  },
+  Object {
+    "content": "5",
+    "id": "5",
+  },
+  Object {
+    "content": "6",
+    "id": "6",
+  },
+  Object {
+    "content": "7",
+    "id": "7",
+  },
+]
+`;
+
+exports[`inserts removed element in correct position (middle & multiple split) 1`] = `
+Array [
+  Object {
+    "content": "1",
+    "id": "1",
+  },
+  Object {
+    "content": "2",
+    "id": "2",
+  },
+  Object {
+    "content": "3",
+    "id": "3",
+  },
+  Object {
+    "content": "4",
+    "id": "4",
+  },
+  Object {
+    "content": "5",
+    "id": "5",
+  },
+  Object {
+    "content": "6",
+    "id": "6",
+  },
+  Object {
+    "content": "7",
+    "id": "7",
+  },
+]
+`;
+
+exports[`inserts removed element in correct position (middle & multiple together) 1`] = `
+Array [
+  Object {
+    "content": "1",
+    "id": "1",
+  },
+  Object {
+    "content": "2",
+    "id": "2",
+  },
+  Object {
+    "content": "3",
+    "id": "3",
+  },
+  Object {
+    "content": "4",
+    "id": "4",
+  },
+  Object {
+    "content": "5",
+    "id": "5",
+  },
+  Object {
+    "content": "6",
+    "id": "6",
+  },
+  Object {
+    "content": "7",
+    "id": "7",
+  },
+]
+`;
+
+exports[`inserts removed element in correct position (middle) 1`] = `
+Array [
+  Object {
+    "content": "1",
+    "id": "1",
+  },
+  Object {
+    "content": "2",
+    "id": "2",
+  },
+  Object {
+    "content": "3",
+    "id": "3",
+  },
+  Object {
+    "content": "4",
+    "id": "4",
+  },
+  Object {
+    "content": "5",
+    "id": "5",
+  },
+  Object {
+    "content": "6",
+    "id": "6",
+  },
+  Object {
+    "content": "7",
+    "id": "7",
+  },
+]
+`;
