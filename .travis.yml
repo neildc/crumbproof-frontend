@@ -1,9 +1,18 @@
 language: node_js
 node_js:
-  - 8
+- 8
 cache:
   yarn: true
 script:
-  - yarn build
-  - yarn test
-  - yarn lint || true
+- yarn build
+- "yarn test --coverage --verbose"
+- yarn lint || true
+
+# Deploy using awscli to enable pruning of removed files
+before_deploy: pip install --user awscli
+deploy:
+  provider: script
+  script: ~/.local/bin/aws s3 sync build s3://crumbproof.com --region=ap-southeast-2 --delete
+  skip_cleanup: true
+  on:
+    branch: master
