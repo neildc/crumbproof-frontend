@@ -98,6 +98,7 @@ class Header extends Component {
         <Drawer
           open={this.state.drawerOpen}
           docked={false}
+          className="drawer"
           onRequestChange={open => this.setState({ drawerOpen: open })}
         >
           {this.renderNavDrawerItems()}
