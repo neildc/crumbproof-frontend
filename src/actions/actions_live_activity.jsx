@@ -39,7 +39,6 @@ export function discardLiveActivity(id, callback) {
 
 
 export function startLiveActivity(recipeId, callback) {
-
   const payload = { recipe: Number(recipeId) };
 
   const request = axios

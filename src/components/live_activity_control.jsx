@@ -22,7 +22,6 @@ import { FadeIn } from './animations/fade';
 import './live_activity_control.css';
 
 class LiveActivityControl extends Component {
-
   constructor() {
     super();
     this.state = {
@@ -36,7 +35,7 @@ class LiveActivityControl extends Component {
     const currStep = this.props.liveActivity.current_step;
 
     if (this.state.movingToNextStep && prevStep !== currStep) {
-      this.setState({ movingToNextStep : false });
+      this.setState({ movingToNextStep: false });
     }
 
     if (this.state.startingTimer) {
@@ -44,7 +43,7 @@ class LiveActivityControl extends Component {
       const currNumStartTimes = Object.keys(this.props.liveActivity.start_times).length;
 
       if (prevNumStartTimes < currNumStartTimes) {
-        this.setState({ startingTimer : false });
+        this.setState({ startingTimer: false });
       }
     }
   }
@@ -186,7 +185,7 @@ LiveActivityControl.propTypes = {
   liveActivity: PropTypes.object.required,
   currentStepInAnchor: PropTypes.number,
   history: PropTypes.object.required,
-}
+};
 
 
 export default connect(
