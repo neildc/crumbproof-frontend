@@ -155,7 +155,10 @@ class LiveActivityControl extends Component {
             content="Feel free to scroll through the steps, only the next button actually changes your current step"
           >
             <FlatButton
-              label={`Return to current step: ${currStep + 1}`}
+              label={window.innerWidth < 640 ?
+                     `Step #${currStep + 1}` :
+                     `Return to current step: ${currStep + 1}`}
+
               labelStyle={{ fontSize: '22px', fontWeight: 400 }}
               href={`#step${currStep + 1}`}
               disabled={this.props.currentStepInAnchor === currStep + 1}
