@@ -2,22 +2,22 @@ import {
   INSTRUCTIONS,
   INGREDIENTS,
   generateDiff,
-  insertAllRemovedItemsIntoCurrent
+  insertAllRemovedItemsIntoCurrent,
 } from './diff';
 
-it ('returns null when diffing two equal instructions', () => {
+it('returns null when diffing two equal instructions', () => {
   const instructions = [
-    { content: 'Mix the all the flour and water', id: '1'},
-    { content: 'Add salt and yeast', id: '2'},
+    { content: 'Mix the all the flour and water', id: '1' },
+    { content: 'Add salt and yeast', id: '2' },
   ];
 
   expect(generateDiff(INSTRUCTIONS, instructions, instructions)).toBeNull();
 });
 
-it ('correct diff after removing an instruction', () => {
+it('correct diff after removing an instruction', () => {
   const instructionsA = [
     { content: 'REMOVED', id: '1' },
-    { content: 'Add salt and yeast', id: '2'},
+    { content: 'Add salt and yeast', id: '2' },
   ];
 
   const instructionsB = [
@@ -27,7 +27,7 @@ it ('correct diff after removing an instruction', () => {
   expect(generateDiff(INSTRUCTIONS, instructionsA, instructionsB)).toMatchSnapshot();
 });
 
-it ('correct diff after adding an instruction', () => {
+it('correct diff after adding an instruction', () => {
   const instructionsA = [
     { content: 'Add salt and yeast', id: '2' },
   ];
@@ -40,26 +40,26 @@ it ('correct diff after adding an instruction', () => {
   expect(generateDiff(INSTRUCTIONS, instructionsA, instructionsB)).toMatchSnapshot();
 });
 
-it ('correct diff after modifying an instruction', () => {
+it('correct diff after modifying an instruction', () => {
   const instructionsA = [
-    { content: 'Mix the all the flour and water', id: '1'},
+    { content: 'Mix the all the flour and water', id: '1' },
     { content: 'Add salt and yeast', id: '2' },
   ];
   const instructionsB = [
-    { content: 'MODIFIED', id: '1'},
+    { content: 'MODIFIED', id: '1' },
     { content: 'Add salt and yeast', id: '2' },
   ];
 
   expect(generateDiff(INSTRUCTIONS, instructionsA, instructionsB)).toMatchSnapshot();
 });
 
-it ('correct diff after modifying, removing and adding instructions', () => {
+it('correct diff after modifying, removing and adding instructions', () => {
   const instructionsA = [
-    { content: 'Mix the all the flour and water', id: '1'},
+    { content: 'Mix the all the flour and water', id: '1' },
     { content: 'REMOVED', id: '2' },
   ];
   const instructionsB = [
-    { content: 'MODIFIED', id: '1'},
+    { content: 'MODIFIED', id: '1' },
     { content: 'ADDED', id: '3' },
   ];
 
@@ -76,8 +76,8 @@ const originalInstructions = [
   { content: '7', id: '7' },
 ];
 
-it ('inserts removed element in correct position (first)', () => {
-  const removed = [{ content: '1', id: '1'}];
+it('inserts removed element in correct position (first)', () => {
+  const removed = [{ content: '1', id: '1' }];
 
   const removedInstruction4 = [
     { content: '2', id: '2' },
@@ -97,8 +97,8 @@ it ('inserts removed element in correct position (first)', () => {
   expect(result).toMatchSnapshot();
 });
 
-it ('inserts removed element in correct position (last)', () => {
-  const removed = [{ content: '7', id: '7'}];
+it('inserts removed element in correct position (last)', () => {
+  const removed = [{ content: '7', id: '7' }];
 
   const removedInstruction4 = [
     { content: '1', id: '1' },
@@ -118,8 +118,8 @@ it ('inserts removed element in correct position (last)', () => {
   expect(result).toMatchSnapshot();
 });
 
-it ('inserts removed element in correct position (middle)', () => {
-  const removed = [{ content: '4', id: '4'}];
+it('inserts removed element in correct position (middle)', () => {
+  const removed = [{ content: '4', id: '4' }];
 
   const removedInstruction4 = [
     { content: '1', id: '1' },
@@ -139,7 +139,7 @@ it ('inserts removed element in correct position (middle)', () => {
   expect(result).toMatchSnapshot();
 });
 
-it ('inserts removed element in correct position (middle & multiple together)', () => {
+it('inserts removed element in correct position (middle & multiple together)', () => {
   const removed = [
     { content: '4', id: '4' },
     { content: '5', id: '5' },
@@ -162,7 +162,7 @@ it ('inserts removed element in correct position (middle & multiple together)', 
   expect(result).toMatchSnapshot();
 });
 
-it ('inserts removed element in correct position (middle & multiple split)', () => {
+it('inserts removed element in correct position (middle & multiple split)', () => {
   const removed = [
     { content: '4', id: '4' },
     { content: '6', id: '6' },

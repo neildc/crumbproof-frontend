@@ -19,6 +19,6 @@ export default function generateInstructionTimeline(instructions, startTime) {
   }
 
   return _.zipWith(timeline, instructionsArr, (time, instruction) =>
-                   // Add the dates from the timeline back into the instructions
-                   Object.assign({}, instruction, { time }));
+    // Add the dates from the timeline back into the instructions
+    Object.assign({}, instruction, { time }));
 }

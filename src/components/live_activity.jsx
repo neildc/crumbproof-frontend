@@ -21,17 +21,17 @@ import LiveActivityControl from './live_activity_control';
 
 
 const fullPageOptions = {
-  activeClass:          'active', // the class that is appended to the sections links
-  anchors:              [], // the anchors for each sections
-  arrowNavigation:      true, // use arrow keys
-  className:            'SectionContainer', // the class name for the section container
-  delay:                300, // the scroll animation speed
-  navigation:           true, // use dots navigatio
-  scrollBar:            false, // use the browser default scrollbar
-  sectionPaddingTop:    '0', // the section top padding
+  activeClass: 'active', // the class that is appended to the sections links
+  anchors: [], // the anchors for each sections
+  arrowNavigation: true, // use arrow keys
+  className: 'SectionContainer', // the class name for the section container
+  delay: 300, // the scroll animation speed
+  navigation: true, // use dots navigatio
+  scrollBar: false, // use the browser default scrollbar
+  sectionPaddingTop: '0', // the section top padding
   sectionPaddingBottom: '0', // the section bottom padding
-  verticalAlign:        false, // align the content of each section vertical
-  sectionClassName:     'section'
+  verticalAlign: false, // align the content of each section vertical
+  sectionClassName: 'section',
 };
 
 class LiveActivity extends Component {
@@ -52,7 +52,7 @@ class LiveActivity extends Component {
   }
 
   componentDidUpdate() {
-    const { current_step } = this.props.liveActivity
+    const { current_step } = this.props.liveActivity;
 
     // Scroll the user down their current step when they load the page
     if (current_step && this.state.firstLoad) {
@@ -73,9 +73,8 @@ class LiveActivity extends Component {
   crossOutStep(instruction) {
     if (this.props.liveActivity.end_times[instruction.id]) {
       return { textDecoration: 'line-through', color: 'grey' };
-    } else {
-      return {};
     }
+    return {};
   }
 
   endTime(instruction) {

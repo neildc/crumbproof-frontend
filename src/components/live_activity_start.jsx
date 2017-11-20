@@ -13,7 +13,6 @@ import {
 import LoadingCard from './loading_card';
 
 class LiveActivityStart extends Component {
-
   componentDidMount() {
     this.props.fetchLiveActivity();
   }
@@ -35,13 +34,11 @@ class LiveActivityStart extends Component {
   }
 
   handleDiscardAndContinue() {
-
     const { id } = this.props.liveActivity;
 
     this.props.discardLiveActivity(id, () => {
       this.startAndNavigateToLive();
     });
-
   }
 
   renderExistingLiveActivityPrompt() {

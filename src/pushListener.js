@@ -1,11 +1,10 @@
-self.addEventListener('push', function(event) {
-
+self.addEventListener('push', (event) => {
   const data = event.data.json();
 
   const options = {
     body: data.body,
     tag: 'data-notification',
-    vibrate: [500,110,500,110,450,110,200,110,170,40,450,110,200,110,170,40,500],
+    vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
 
     requireInteraction: true,
     renotify: true,
@@ -15,8 +14,8 @@ self.addEventListener('push', function(event) {
 
     data: {
       time: new Date(Date.now()).toString(),
-      message: event.data.text()
-    }
+      message: event.data.text(),
+    },
   };
 
   const TITLE = `Step #${data.current_step + 1} complete`;
@@ -27,7 +26,7 @@ self.addEventListener('push', function(event) {
   event.waitUntil(promiseChain);
 });
 
-self.addEventListener('notificationclick', function(event) {
+self.addEventListener('notificationclick', (event) => {
   // Close notification.
   event.notification.close();
 
@@ -38,9 +37,9 @@ self.addEventListener('notificationclick', function(event) {
 
   const openPromise = clients.matchAll({
     type: 'window',
-    includeUncontrolled: true
+    includeUncontrolled: true,
   })
-  .then((windowClients) => {
+    .then((windowClients) => {
       let matchingClient = null;
 
       for (let i = 0; i < windowClients.length; i++) {
@@ -56,7 +55,7 @@ self.addEventListener('notificationclick', function(event) {
       }
 
       return clients.openWindow(urlToOpen);
-  });
+    });
 
   // Now wait for the promise to keep the permission alive.
   event.waitUntil(openPromise);

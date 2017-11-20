@@ -5,7 +5,7 @@ export function minToHandM(minutes) {
   const hours = _.floor(minutes / 60);
   const minutesRemainder = minutes % 60;
 
-  return { hours, minutes: minutesRemainder};
+  return { hours, minutes: minutesRemainder };
 }
 
 export function getTotalTimeStr(instructions) {
