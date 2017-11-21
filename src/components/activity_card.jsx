@@ -21,7 +21,7 @@ import RecipeDiff from './recipe_diff';
 import './activity_card.css';
 
 
-class ActivityCard extends Component {
+export class ActivityCard extends Component {
   handleDeleteClick() {
     this.props.deleteActivity(this.props.activity.id, () => {});
   }
@@ -41,6 +41,7 @@ class ActivityCard extends Component {
 
     const created = moment(activity.created).fromNow();
 
+    debugger;
     return (
       <Card >
 
