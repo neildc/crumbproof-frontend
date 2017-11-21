@@ -31,7 +31,7 @@ const renderIngredients = ingredients => (
   ))
 );
 
-const renderRecipe = ({ data: {credits, ingredients, instructions}}) => (
+const renderRecipe = ({ data: { credits, ingredients, instructions } }) => (
   <Card containerStyle={{ marginBottom: '20px' }} initiallyExpanded>
     <CardHeader title="RECIPE" showExpandableButton />
     <CardText expandable style={{ padding: '30px', paddingTop: '0px' }}>
@@ -54,7 +54,6 @@ const renderRecipe = ({ data: {credits, ingredients, instructions}}) => (
 );
 
 const renderHistory = ({ recipe, baseRecipe, parentRecipe }) => {
-
   if (!baseRecipe) {
     return <LinearProgress mode="indeterminate" />;
   }
@@ -103,8 +102,8 @@ const RecipeShowPresentation = (props) => {
             <div className="cardTitleContents">
               <IconButton
                 tooltip="Back to recipes"
-                         containerElement={<Link to="/recipes" />}
-                                           >
+                containerElement={<Link to="/recipes" />}
+              >
                 <BackIcon color="#999" />
               </IconButton>
               <div style={{ paddingTop: '5px' }}>
@@ -122,22 +121,22 @@ const RecipeShowPresentation = (props) => {
         <div style={{ padding: '30px' }}>
 
           {(props.user === recipe.user) &&
-           <IconMenu
-             iconButtonElement={
-               <IconButton tooltip="Delete recipe">
-                 <DeleteIcon />
-               </IconButton>
+          <IconMenu
+            iconButtonElement={
+              <IconButton tooltip="Delete recipe">
+                <DeleteIcon />
+              </IconButton>
              }
-             anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
-             targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-             className="recipeActions"
-             >
-             <MenuItem
-               primaryText="Confirm Deletion"
-               leftIcon={<DeleteIcon color="black" />}
-               onClick={props.onDeleteClick}
-             />
-           </IconMenu>
+            anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+            targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+            className="recipeActions"
+          >
+            <MenuItem
+              primaryText="Confirm Deletion"
+              leftIcon={<DeleteIcon color="black" />}
+              onClick={props.onDeleteClick}
+            />
+          </IconMenu>
           }
 
           <h3>Recent Activity</h3>
@@ -145,7 +144,7 @@ const RecipeShowPresentation = (props) => {
           <RaisedButton
             label="Record an activity with recipe"
             icon={<AddIcon />}
-            onClick={ props.onRecordActivityClick }
+            onClick={props.onRecordActivityClick}
             style={{ margin: '20px 0' }}
           />
           <br />
@@ -166,7 +165,7 @@ const RecipeShowPresentation = (props) => {
         renderHistory(props)
       }
     </FadeIn>
-  )
+  );
 };
 
 RecipeShowPresentation.propTypes = {

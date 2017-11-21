@@ -54,12 +54,12 @@ class RecipeShow extends Component {
 
     return (
       <RecipeShowPresentation
-         recipe={recipe}
-         parentRecipe={parentRecipe}
-         baseRecipe={baseRecipe}
-         onDeleteClick={this.handleDeleteClick.bind(this)}
-         onRecordActivityClick={this.handleRecordActivityClick.bind(this)}
-         onStartActivityClick={this.handleStartActivityClick.bind(this)}
+        recipe={recipe}
+        parentRecipe={parentRecipe}
+        baseRecipe={baseRecipe}
+        onDeleteClick={this.handleDeleteClick.bind(this)}
+        onRecordActivityClick={this.handleRecordActivityClick.bind(this)}
+        onStartActivityClick={this.handleStartActivityClick.bind(this)}
       />
     );
   }

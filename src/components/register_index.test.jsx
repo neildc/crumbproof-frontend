@@ -8,7 +8,7 @@ it('renders without throwing', () => {
       error={null}
       handleSubmit={jest.fn()}
       submitting={false}
-    />
+    />,
   );
 
   expect(component).toMatchSnapshot();

@@ -4,7 +4,7 @@ import { Header } from './header';
 
 it('renders without throwing', () => {
   const component = shallow(
-    <Header />
+    <Header />,
   );
 
   expect(component).toMatchSnapshot();

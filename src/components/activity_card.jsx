@@ -41,7 +41,7 @@ export class ActivityCard extends Component {
 
     const created = moment(activity.created).fromNow();
 
-    debugger;
+
     return (
       <Card >
 

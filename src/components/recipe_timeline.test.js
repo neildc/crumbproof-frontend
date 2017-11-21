@@ -101,11 +101,9 @@ const instructions = [
 ];
 
 it('renders without crashing', () => {
-
   Date.now = jest.fn(() => 1487076708000);
 
   const component = shallow(<RecipeTimeline instructions={instructions} />);
 
   expect(component).toMatchSnapshot();
-
 });
