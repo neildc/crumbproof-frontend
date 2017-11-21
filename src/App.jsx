@@ -14,7 +14,7 @@ import LoginIndex from './components/login_index';
 import RegisterIndex from './components/register_index';
 import RecipesIndex from './components/recipes_index';
 import RecipesNew from './components/recipes_new';
-import RecipesShow from './components/recipes_show';
+import RecipeShow from './components/recipe_show';
 
 import ActivityIndex from './components/activity_index';
 import ActivityNew from './components/activity_new';
@@ -38,7 +38,7 @@ class App extends React.Component {
           RequireAuth(RecipesNew, 'Please sign in to create a new recipe')}
         />
         <Route exact path="/recipes" component={RecipesIndex} />
-        <Route path="/recipes/:id" component={RecipesShow} />
+        <Route path="/recipes/:id" component={RecipeShow} />
 
         <Route
           path="/activity/new/recipe/:recipeId"
