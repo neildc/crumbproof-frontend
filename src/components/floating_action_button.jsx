@@ -30,5 +30,5 @@ export default class FloatingActionButton extends Component {
 }
 
 FloatingActionButton.propTypes = {
-  link: PropTypes.string.required,
+  link: PropTypes.string.isRequired,
 };
