@@ -13,7 +13,7 @@ import ActivityCard from './activity_card';
 import { SlideInBottom } from './animations/slide';
 
 
-class ActivityIndex extends Component {
+export class ActivityIndex extends Component {
   componentDidMount() {
     this.props.fetchActivities();
   }
@@ -55,8 +55,8 @@ class ActivityIndex extends Component {
     const activities = _.orderBy(this.props.activities.byId, ['created'], ['desc']);
 
     return _.map(activities, activity => (
-      <SlideInBottom>
-        <div key={activity.id} style={{ marginBottom: '50px' }}>
+      <SlideInBottom key={activity.id}>
+        <div style={{ marginBottom: '50px' }}>
           <ActivityCard activity={activity} />
         </div>
       </SlideInBottom>

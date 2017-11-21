@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a nice forest 1`] = `
+<div>
+  <FloatingActionButton
+    link="/recipes/new"
+  >
+    <ContentAdd />
+  </FloatingActionButton>
+  <CPCard
+    title="Recipes"
+  >
+    <List>
+      <ListItem
+        autoGenerateNestedIndicator={true}
+        containerElement="span"
+        disableKeyboardFocus={false}
+        disabled={false}
+        initiallyOpen={true}
+        insetChildren={false}
+        key="1"
+        leftIcon={<ContentSend />}
+        nestedItems={
+          Array [
+            <ListItem
+              autoGenerateNestedIndicator={true}
+              containerElement="span"
+              disableKeyboardFocus={false}
+              disabled={false}
+              initiallyOpen={true}
+              insetChildren={false}
+              leftIcon={<NavigationSubdirectoryArrowRight />}
+              nestedItems={
+                  Array [
+                      <ListItem
+                        autoGenerateNestedIndicator={true}
+                        containerElement="span"
+                        disableKeyboardFocus={false}
+                        disabled={false}
+                        initiallyOpen={true}
+                        insetChildren={false}
+                        leftIcon={<NavigationSubdirectoryArrowRight />}
+                        nestedItems={Array []}
+                        nestedLevel={0}
+                        onClick={[Function]}
+                        onKeyboardFocus={[Function]}
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        onNestedListToggle={[Function]}
+                        onTouchEnd={[Function]}
+                        onTouchStart={[Function]}
+                        open={null}
+                        primaryText="It was the only flour they had v3"
+                        primaryTogglesNestedList={false}
+                        secondaryText="By neildc"
+                        secondaryTextLines={1}
+                  />,
+                    ]
+              }
+              nestedLevel={0}
+              onClick={[Function]}
+              onKeyboardFocus={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              onNestedListToggle={[Function]}
+              onTouchEnd={[Function]}
+              onTouchStart={[Function]}
+              open={null}
+              primaryText="It was the only flour they had v2"
+              primaryTogglesNestedList={false}
+              secondaryText="By neildc"
+              secondaryTextLines={1}
+          />,
+          ]
+        }
+        nestedLevel={0}
+        onClick={[Function]}
+        onKeyboardFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onNestedListToggle={[Function]}
+        onTouchEnd={[Function]}
+        onTouchStart={[Function]}
+        open={null}
+        primaryText="It was the only flour they had"
+        primaryTogglesNestedList={false}
+        secondaryText="By neildc"
+        secondaryTextLines={1}
+      />
+      <ListItem
+        autoGenerateNestedIndicator={true}
+        containerElement="span"
+        disableKeyboardFocus={false}
+        disabled={false}
+        initiallyOpen={true}
+        insetChildren={false}
+        key="4"
+        leftIcon={<ContentSend />}
+        nestedItems={Array []}
+        nestedLevel={0}
+        onClick={[Function]}
+        onKeyboardFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onNestedListToggle={[Function]}
+        onTouchEnd={[Function]}
+        onTouchStart={[Function]}
+        open={null}
+        primaryText="SBS Basic Sourdough"
+        primaryTogglesNestedList={false}
+        secondaryText="By neildc"
+        secondaryTextLines={1}
+      />
+      <ListItem
+        autoGenerateNestedIndicator={true}
+        containerElement="span"
+        disableKeyboardFocus={false}
+        disabled={false}
+        initiallyOpen={true}
+        insetChildren={false}
+        key="5"
+        leftIcon={<ContentSend />}
+        nestedItems={Array []}
+        nestedLevel={0}
+        onClick={[Function]}
+        onKeyboardFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onNestedListToggle={[Function]}
+        onTouchEnd={[Function]}
+        onTouchStart={[Function]}
+        open={null}
+        primaryText="The Saturday 75% Whole Wheat Bread"
+        primaryTogglesNestedList={false}
+        secondaryText="By neildc"
+        secondaryTextLines={1}
+      />
+    </List>
+  </CPCard>
+</div>
+`;

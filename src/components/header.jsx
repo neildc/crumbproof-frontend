@@ -24,7 +24,7 @@ const navItems = [
   { title: 'Live activity', url: '/live', icon: LiveIcon },
 ];
 
-class Header extends Component {
+export class Header extends Component {
   constructor(props) {
     super(props);
     this.state = { drawerOpen: false };
@@ -57,6 +57,7 @@ class Header extends Component {
     return (
       _.map(navItems, i => (
         <FlatButton
+          key={i.title}
           containerElement={<Link to={i.url} />}
           label={i.title}
           labelStyle={{ color: 'white' }}
@@ -70,6 +71,7 @@ class Header extends Component {
     return (
       _.map(navItems, i => (
         <ListItem
+          key={i.title}
           primaryText={i.title}
           containerElement={<Link to={i.url} />}
           leftIcon={<i.icon />}

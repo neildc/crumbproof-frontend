@@ -17,7 +17,7 @@ import { required } from '../validators';
 
 import './login_index.css';
 
-class LoginIndex extends Component {
+export class LoginIndex extends Component {
   renderField(field) {
     const { meta: { touched, error } } = field;
 
