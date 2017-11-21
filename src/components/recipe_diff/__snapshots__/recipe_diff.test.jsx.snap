@@ -1,0 +1,196 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders loading bars when recipe is loaded, but parent is null 1`] = `
+<LinearProgress
+  max={100}
+  min={0}
+  mode="indeterminate"
+  value={0}
+/>
+`;
+
+exports[`renders without crashing 1`] = `
+<div>
+  <b>
+    Ingredients:
+  </b>
+  <ul>
+    <p
+      key="eb1b8781-68d0-4f17-aef5-cd572488c253"
+      style={
+        Object {
+          "margin": "0px",
+        }
+      }
+    >
+      <Diff
+        className="difference"
+        inputA="380 mL Water"
+        inputB=""
+        type="chars"
+      />
+    </p>
+    <li
+      key="9c827860-1aa5-4e00-9eca-9b25ac3c0a8b"
+    >
+      590 grams Lauke Wholegrain Breadmix
+    </li>
+    <li
+      key="eab76adf-a6aa-44f0-aba4-bcc1578ba34e"
+    >
+      <Diff
+        className="difference"
+        inputA="3 Teaspoons Yeast"
+        inputB="5 Teaspoons WAS MODIFIED (quantity was 3)"
+        type="chars"
+      />
+    </li>
+    <li
+      key="576c31a5-29e7-4c33-90b0-4e1f8bcc616c"
+    >
+      <Diff
+        className="difference"
+        inputA=""
+        inputB="2 kg This was added, water was removed"
+        type="chars"
+      />
+    </li>
+  </ul>
+  <br />
+  <b>
+    Instructions:
+  </b>
+  <ol>
+    <li
+      key="3e62254f-dec3-469a-a914-1fa5f28ad7b1"
+    >
+      Dump all ingredients into the bowl
+    </li>
+    <li
+      key="0fae1481-8e36-406d-bdb1-1bd63a1fac39"
+    >
+      <Diff
+        className="difference"
+        inputA="Mix everything together for 5 mins"
+        inputB="CHANGED THIS ONE for 5 mins"
+        type="chars"
+      />
+    </li>
+    <li
+      key="e7478adf-b000-4b1b-8ee6-9d5608cfc95d"
+    >
+      Knead for 15 mins
+    </li>
+    <li
+      key="1cf51cf8-3fb7-47ea-9d5a-9743dbde5068"
+    >
+      Place into a cling wrapped container
+    </li>
+    <li
+      key="86a03291-146a-4935-b8d7-b1afcef11924"
+    >
+      Proof for 30 mins
+    </li>
+    <li
+      key="980dbd9c-2ec3-4ef1-a477-fc9e361a2c59"
+    >
+      Fold
+    </li>
+    <li
+      key="45e1857e-b223-434c-ad8d-137eae4e3d32"
+    >
+      Proof for 30 mins
+    </li>
+    <li
+      key="4210336c-02be-417c-933c-15ed0853ffba"
+    >
+      <Diff
+        className="difference"
+        inputA=""
+        inputB="1st INSERT AFTER 7"
+        type="chars"
+      />
+    </li>
+    <li
+      key="9fc0f49b-ae3b-4cb2-b978-4e87a2257509"
+    >
+      <Diff
+        className="difference"
+        inputA=""
+        inputB="2nd INSERT AFTER 7"
+        type="chars"
+      />
+    </li>
+    <li
+      key="f107ac75-7f34-4721-b02b-2a4cc19ee4c7"
+    >
+      Fold
+    </li>
+    <li
+      key="51657483-038f-41d2-ac12-e105c6a99b22"
+    >
+      Proof for 60 mins
+    </li>
+    <li
+      key="0e301924-217c-44ce-ab84-46495ad63d0b"
+    >
+      Preheat oven and dutch oven
+    </li>
+    <li
+      key="1350120b-79c0-4314-a7cc-08fe9b6fbaab"
+    >
+      Shape dough
+    </li>
+    <li
+      key="05c72cff-a836-4e99-a7a7-5163286333f8"
+    >
+      Final proof for 25 mins
+    </li>
+    <li
+      key="92c2d615-cab8-42d7-901b-ffebeeb88d4e"
+    >
+      Sprinkle a bit of water onto the dough
+    </li>
+    <li
+      key="c1c185ab-4859-493f-a292-2464b76cc494"
+    >
+      Start baking with lid on at the bottom rack of the oven for 30 mins
+    </li>
+    <li
+      key="32a3b48b-4d4f-455a-87b4-b5f36444e595"
+    >
+      Remove lid and continue baking for 15 mins
+    </li>
+    <li
+      key="dfb737bb-5291-4e58-8162-a19cfa6d3aa3"
+    >
+      Remove from oven and rest for 10 mins
+    </li>
+    <p
+      key="983d591d-f050-4fb1-8a34-63db202f6c72"
+      style={
+        Object {
+          "margin": "0px",
+        }
+      }
+    >
+      <Diff
+        className="difference"
+        inputA="EAT ALL THE BREAD"
+        inputB=""
+        type="chars"
+      />
+    </p>
+    <li
+      key="87ec0203-8659-4536-83dc-bda438dbcd9d"
+    >
+      <Diff
+        className="difference"
+        inputA=""
+        inputB="Removed previous last step (EAT ALL)"
+        type="chars"
+      />
+    </li>
+  </ol>
+</div>
+`;
