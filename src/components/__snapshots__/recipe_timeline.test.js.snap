@@ -35,7 +35,7 @@ exports[`renders without crashing 1`] = `
           🕒 
         </span>
          
-        Today at 11:51 PM
+        Today at 4:41 AM
       </StepLabel>
       <StepContent
         active={true}
@@ -63,7 +63,7 @@ exports[`renders without crashing 1`] = `
           🕒 
         </span>
          
-        Today at 11:51 PM
+        Today at 4:41 AM
       </StepLabel>
       <StepContent
         active={true}
@@ -91,7 +91,7 @@ exports[`renders without crashing 1`] = `
           🕒 
         </span>
          
-        Today at 11:56 PM
+        Today at 4:46 AM
       </StepLabel>
       <StepContent
         active={true}
@@ -119,7 +119,7 @@ exports[`renders without crashing 1`] = `
           🕒 
         </span>
          
-        Tomorrow at 12:11 AM
+        Today at 5:01 AM
       </StepLabel>
       <StepContent
         active={true}
@@ -146,7 +146,7 @@ exports[`renders without crashing 1`] = `
           🕒 
         </span>
          
-        Tomorrow at 12:11 AM
+        Today at 5:01 AM
       </StepLabel>
       <StepContent
         active={true}
@@ -174,7 +174,7 @@ exports[`renders without crashing 1`] = `
           🕒 
         </span>
          
-        Tomorrow at 12:41 AM
+        Today at 5:31 AM
       </StepLabel>
       <StepContent
         active={true}
@@ -201,7 +201,7 @@ exports[`renders without crashing 1`] = `
           🕒 
         </span>
          
-        Tomorrow at 12:41 AM
+        Today at 5:31 AM
       </StepLabel>
       <StepContent
         active={true}
@@ -229,7 +229,7 @@ exports[`renders without crashing 1`] = `
           🕒 
         </span>
          
-        Tomorrow at 1:11 AM
+        Today at 6:01 AM
       </StepLabel>
       <StepContent
         active={true}
@@ -257,7 +257,7 @@ exports[`renders without crashing 1`] = `
           🕒 
         </span>
          
-        Tomorrow at 1:11 AM
+        Today at 6:01 AM
       </StepLabel>
       <StepContent
         active={true}
@@ -285,7 +285,7 @@ exports[`renders without crashing 1`] = `
           🕒 
         </span>
          
-        Tomorrow at 2:11 AM
+        Today at 7:01 AM
       </StepLabel>
       <StepContent
         active={true}
@@ -312,7 +312,7 @@ exports[`renders without crashing 1`] = `
           🕒 
         </span>
          
-        Tomorrow at 2:11 AM
+        Today at 7:01 AM
       </StepLabel>
       <StepContent
         active={true}
@@ -339,7 +339,7 @@ exports[`renders without crashing 1`] = `
           🕒 
         </span>
          
-        Tomorrow at 2:11 AM
+        Today at 7:01 AM
       </StepLabel>
       <StepContent
         active={true}
@@ -367,7 +367,7 @@ exports[`renders without crashing 1`] = `
           🕒 
         </span>
          
-        Tomorrow at 2:36 AM
+        Today at 7:26 AM
       </StepLabel>
       <StepContent
         active={true}
@@ -394,7 +394,7 @@ exports[`renders without crashing 1`] = `
           🕒 
         </span>
          
-        Tomorrow at 2:36 AM
+        Today at 7:26 AM
       </StepLabel>
       <StepContent
         active={true}
@@ -422,7 +422,7 @@ exports[`renders without crashing 1`] = `
           🕒 
         </span>
          
-        Tomorrow at 3:06 AM
+        Today at 7:56 AM
       </StepLabel>
       <StepContent
         active={true}
@@ -450,7 +450,7 @@ exports[`renders without crashing 1`] = `
           🕒 
         </span>
          
-        Tomorrow at 3:16 AM
+        Today at 8:06 AM
       </StepLabel>
       <StepContent
         active={true}
@@ -478,7 +478,7 @@ exports[`renders without crashing 1`] = `
           🕒 
         </span>
          
-        Tomorrow at 3:26 AM
+        Today at 8:16 AM
       </StepLabel>
       <StepContent
         active={true}

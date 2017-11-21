@@ -101,7 +101,8 @@ const instructions = [
 ];
 
 it('renders without crashing', () => {
-  Date.now = jest.fn(() => 1487076708000);
+
+  Date.now = () => Date.parse('2017-06-13T04:41:20')
 
   const component = shallow(<RecipeTimeline instructions={instructions} />);
 
