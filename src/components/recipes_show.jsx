@@ -33,12 +33,19 @@ class RecipesShow extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.recipe.parent && !this.props.parentRecipe) {
-      this.props.fetchRecipe(this.props.recipe.parent);
-    }
+    /* This guard is needed for the case that a recipe is deleted.
+     *
+     * Once a recipe is deleted, it's removed from the store
+     * triggering an update before any rerouting happens.
+     */
+    if (this.props.recipe) {
+      if (this.props.recipe.parent && !this.props.parentRecipe) {
+        this.props.fetchRecipe(this.props.recipe.parent);
+      }
 
-    if (this.props.recipe.base_recipe && !this.props.baseRecipe) {
-      this.props.fetchRecipe(this.props.recipe.base_recipe);
+      if (this.props.recipe.base_recipe && !this.props.baseRecipe) {
+        this.props.fetchRecipe(this.props.recipe.base_recipe);
+      }
     }
   }
 
