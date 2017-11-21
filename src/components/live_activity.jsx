@@ -43,8 +43,10 @@ class LiveActivity extends Component {
   }
 
   componentDidMount() {
-    askPushNotificationsPermission();
-    subscribeUserToPush();
+    if (this.props.user) {
+      askPushNotificationsPermission();
+      subscribeUserToPush();
+    }
 
     if (!this.props.liveActivity.current_step) {
       this.props.fetchLiveActivity();
@@ -136,9 +138,10 @@ class LiveActivity extends Component {
   }
 }
 
-function mapStateToProps({ liveActivity }) {
+function mapStateToProps({ liveActivity, user }) {
   return {
     liveActivity,
+    user,
   };
 }
 
