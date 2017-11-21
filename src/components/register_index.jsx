@@ -14,7 +14,7 @@ import { FadeIn } from './animations/fade';
 
 import './register_index.css';
 
-class RegisterIndex extends Component {
+export class RegisterIndex extends Component {
   renderField(field) {
     const { meta: { touched, error } } = field;
 

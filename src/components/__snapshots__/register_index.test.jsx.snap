@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without throwing 1`] = `
+<FadeIn>
+  <Card
+    className="registerCard"
+    expandable={false}
+    expanded={null}
+    initiallyExpanded={false}
+  >
+    <CardTitle
+      className="registerCardTitle"
+      title="Register"
+    />
+    <form
+      className="registerForm"
+    >
+      <Field
+        component={[Function]}
+        label="Username"
+        name="username"
+        validate={
+          Array [
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        label="Password"
+        name="password1"
+        type="password"
+        validate={
+          Array [
+            [Function],
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        label="Confirm Password"
+        name="password2"
+        type="password"
+        validate={
+          Array [
+            [Function],
+          ]
+        }
+      />
+      <SubmitButton
+        className="registerButton"
+        fullWidth={true}
+        label="Register"
+        labelInProgress="Registering..."
+        submittingFlag={false}
+      />
+    </form>
+    <Snackbar
+      autoHideDuration={5000}
+      message=""
+      open={false}
+      style={
+        Object {
+          "backgroundColor": "red",
+        }
+      }
+    />
+  </Card>
+</FadeIn>
+`;
