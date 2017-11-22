@@ -42,7 +42,7 @@ export default function (state = {}, action) {
     case AUTH_LOGOUT:
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      return { user: null };
+      return { user: null, message: "Logged out"};
 
     case AUTH_REGISTER:
 
