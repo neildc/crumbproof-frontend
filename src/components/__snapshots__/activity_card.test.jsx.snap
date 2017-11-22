@@ -90,7 +90,6 @@ exports[`renders without throwing 1`] = `
           "base_recipe": null,
           "created": "2017-10-31T22:18:58.628723Z",
           "data": Object {
-            "bake_time": 50,
             "credits": "Flour water salt yeast by Ken Forkish",
             "ingredients": Array [
               Object {
@@ -210,7 +209,7 @@ exports[`renders without throwing 1`] = `
               },
             ],
             "name": "The Saturday 75% Whole Wheat Bread",
-            "oven_temperature": 245,
+            "room_temperature": 22,
             "yield_count": 2,
             "yield_type": "Loaves",
           },

@@ -23,8 +23,7 @@ export function fetchRecipes() {
  *
  */
 function convertRecipeNumberValues(values) {
-  values.bake_time = Number(values.bake_time);
-  values.oven_temperature = Number(values.oven_temperature);
+  values.room_temperature = Number(values.room_temperature);
   values.yield_count = Number(values.yield_count);
 
   values.ingredients = _.map(values.ingredients, i => ({ ...i, quantity: Number(i.quantity) }));
@@ -45,11 +44,10 @@ export function createRecipe(values, callback) {
     diff: null,
     data: {
       credits: values.credits,
-      bake_time: values.bake_time,
       name: values.name,
       instructions: values.instructions,
       ingredients: values.ingredients,
-      oven_temperature: values.oven_temperature,
+      room_temperature: values.room_temperature,
       yield_count: values.yield_count,
       yield_type: values.yield_type,
     },

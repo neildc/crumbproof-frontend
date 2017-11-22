@@ -32,20 +32,11 @@ const RecipesNewWizard1Basic = (props) => {
         />
 
         <Field
-          label="Bake Time (minutes)"
-          name="bake_time"
+          label="Ideal room temperature (°C)"
+          name="room_temperature"
           type="number"
           component={renderTextField}
-          validate={[required, isNumber]}
-          style={{ margin: '0 10px ' }}
-        />
-
-        <Field
-          label="Oven Temperature (°C)"
-          name="oven_temperature"
-          type="number"
-          component={renderTextField}
-          validate={[required, isNumber]}
+          validate={[isNumber]}
           style={{ margin: '0 10px ' }}
         />
 

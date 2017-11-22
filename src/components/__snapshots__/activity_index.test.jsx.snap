@@ -54,7 +54,6 @@ exports[`renders without throwing 1`] = `
                 "base_recipe": null,
                 "created": "2017-10-31T22:18:58.628723Z",
                 "data": Object {
-                  "bake_time": 50,
                   "credits": "Flour water salt yeast by Ken Forkish",
                   "ingredients": Array [
                     Object {
@@ -174,7 +173,7 @@ exports[`renders without throwing 1`] = `
                     },
                   ],
                   "name": "The Saturday 75% Whole Wheat Bread",
-                  "oven_temperature": 245,
+                  "room_temperature": 22,
                   "yield_count": 2,
                   "yield_type": "Loaves",
                 },
@@ -215,7 +214,6 @@ exports[`renders without throwing 1`] = `
                 "base_recipe": 1,
                 "created": "2017-10-31T05:54:00.788891Z",
                 "data": Object {
-                  "bake_time": 40,
                   "ingredients": Array [
                     Object {
                       "id": "9c827860-1aa5-4e00-9eca-9b25ac3c0a8b",
@@ -334,7 +332,7 @@ exports[`renders without throwing 1`] = `
                     },
                   ],
                   "name": "It was the only flour they had v3",
-                  "oven_temperature": 250,
+                  "room_temperature": 22,
                   "yield_count": 1,
                   "yield_type": "Loaf",
                 },
@@ -395,7 +393,6 @@ exports[`renders without throwing 1`] = `
                 "base_recipe": 1,
                 "created": "2017-10-31T05:50:44.821819Z",
                 "data": Object {
-                  "bake_time": 40,
                   "ingredients": Array [
                     Object {
                       "id": "9c827860-1aa5-4e00-9eca-9b25ac3c0a8b",
@@ -514,7 +511,7 @@ exports[`renders without throwing 1`] = `
                     },
                   ],
                   "name": "It was the only flour they had v2",
-                  "oven_temperature": 250,
+                  "room_temperature": 22,
                   "yield_count": 1,
                   "yield_type": "Loaf",
                 },

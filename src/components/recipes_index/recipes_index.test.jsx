@@ -41,8 +41,7 @@ const recipes = {
       ],
       yield_count: 1,
       yield_type: 'Loaf',
-      bake_time: 40,
-      oven_temperature: 250,
+      room_temperature: 22,
       instructions: [
         {
           content: 'Dump all ingredients into the bowl',
@@ -169,8 +168,7 @@ const recipes = {
       ],
       yield_count: 1,
       yield_type: 'Loaf',
-      bake_time: 40,
-      oven_temperature: 250,
+      room_temperature: 22,
       instructions: [
         {
           content: 'Dump all ingredients into the bowl',
@@ -324,8 +322,7 @@ const recipes = {
       ],
       yield_count: 1,
       yield_type: 'Loaf',
-      bake_time: 40,
-      oven_temperature: 250,
+      room_temperature: 22,
       instructions: [
         {
           content: 'Dump all ingredients into the bowl',
@@ -495,8 +492,7 @@ const recipes = {
       yield_count: 2,
       credits: 'http://www.sbs.com.au/food/recipes/basic-sourdough-bread',
       yield_type: 'Loaves',
-      bake_time: 35,
-      oven_temperature: 220,
+      room_temperature: 22,
       instructions: [
         {
           content: 'Feed your sourdough starter to get it active (up to 8 hours)',
@@ -619,8 +615,7 @@ const recipes = {
       yield_count: 2,
       credits: 'Flour water salt yeast by Ken Forkish',
       yield_type: 'Loaves',
-      bake_time: 50,
-      oven_temperature: 245,
+      room_temperature: 22,
       instructions: [
         {
           content: 'Mix the all the flour and water',
