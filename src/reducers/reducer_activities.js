@@ -5,6 +5,8 @@ import {
   DELETE_ACTIVITY,
 } from '../actions/actions_activity';
 
+import { CLEAR_FEEDBACK_MESSAGE } from '../actions/actions_feedback_messages';
+
 export default function (state = {}, action) {
   switch (action.type) {
     case DELETE_ACTIVITY:
@@ -12,6 +14,7 @@ export default function (state = {}, action) {
       return {
         ...state,
         byId: _.omit(state.byId, action.payload),
+        message: "Activity Deleted"
       };
 
     case FETCH_ACTIVITY:
@@ -31,6 +34,13 @@ export default function (state = {}, action) {
         },
         next: action.payload.data.next,
       };
+
+    case CLEAR_FEEDBACK_MESSAGE:
+      if (action.payload === 'activities') {
+        return { ...state, error: null, message: null };
+      } else {
+        return state;
+      }
 
     default:
       return state;

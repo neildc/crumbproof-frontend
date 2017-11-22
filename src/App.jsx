@@ -10,11 +10,13 @@ import { authCheckLocalStorage } from './actions/actions_auth';
 import Header from './components/header';
 import RequireAuth from './components/hoc/require_auth';
 
+import UserFeedbackSnackbar from './components/user_feedback_snackbar';
+
 import LoginIndex from './components/login_index';
 import RegisterIndex from './components/register_index';
 import RecipesIndex from './components/recipes_index';
 import RecipesNew from './components/recipes_new';
-import RecipesShow from './components/recipes_show';
+import RecipeShow from './components/recipe_show';
 
 import ActivityIndex from './components/activity_index';
 import ActivityNew from './components/activity_new';
@@ -38,7 +40,7 @@ class App extends React.Component {
           RequireAuth(RecipesNew, 'Please sign in to create a new recipe')}
         />
         <Route exact path="/recipes" component={RecipesIndex} />
-        <Route path="/recipes/:id" component={RecipesShow} />
+        <Route path="/recipes/:id" component={RecipeShow} />
 
         <Route
           path="/activity/new/recipe/:recipeId"
@@ -77,14 +79,15 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="bg">
-          <Header />
-          <div className="container">
-            <div className="main">
-              {this.routes()}
+          <div className="bg">
+            <Header />
+            <div className="container">
+              <div className="main">
+                {this.routes()}
+                <UserFeedbackSnackbar />
+              </div>
             </div>
           </div>
-        </div>
       </BrowserRouter>
     );
   }

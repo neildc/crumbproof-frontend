@@ -1,0 +1,218 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without throwing 1`] = `
+<div
+  style={
+    Object {
+      "position": "fixed",
+      "width": "100%",
+      "zIndex": 3,
+    }
+  }
+>
+  <AppBar
+    className="appBar"
+    onLeftIconButtonTouchTap={[Function]}
+    showMenuIconButton={true}
+    title="crumbproof"
+    zDepth={1}
+  >
+    <div
+      className="navLinks"
+    >
+      <FlatButton
+        containerElement={
+          <Link
+            replace={false}
+            to="/activity"
+          />
+        }
+        disabled={false}
+        fullWidth={false}
+        icon={
+          <ImageGradient
+            color="#FFFFFF"
+          />
+        }
+        key="Activities"
+        label="Activities"
+        labelPosition="after"
+        labelStyle={
+          Object {
+            "color": "white",
+          }
+        }
+        onKeyboardFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onTouchStart={[Function]}
+        primary={false}
+        secondary={false}
+      />
+      <FlatButton
+        containerElement={
+          <Link
+            replace={false}
+            to="/recipes"
+          />
+        }
+        disabled={false}
+        fullWidth={false}
+        icon={
+          <ActionDescription
+            color="#FFFFFF"
+          />
+        }
+        key="Recipes"
+        label="Recipes"
+        labelPosition="after"
+        labelStyle={
+          Object {
+            "color": "white",
+          }
+        }
+        onKeyboardFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onTouchStart={[Function]}
+        primary={false}
+        secondary={false}
+      />
+      <FlatButton
+        containerElement={
+          <Link
+            replace={false}
+            to="/live"
+          />
+        }
+        disabled={false}
+        fullWidth={false}
+        icon={
+          <ImageTimer
+            color="#FFFFFF"
+          />
+        }
+        key="Live activity"
+        label="Live activity"
+        labelPosition="after"
+        labelStyle={
+          Object {
+            "color": "white",
+          }
+        }
+        onKeyboardFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onTouchStart={[Function]}
+        primary={false}
+        secondary={false}
+      />
+      <Button
+        containerElement={
+          <Link
+            replace={false}
+            to="/login"
+          />
+        }
+        label="Login"
+      />
+    </div>
+  </AppBar>
+  <Drawer
+    className="drawer"
+    disableSwipeToOpen={false}
+    docked={false}
+    onRequestChange={[Function]}
+    open={false}
+    openSecondary={false}
+    swipeAreaWidth={30}
+    width={null}
+    zDepth={2}
+  >
+    <ListItem
+      autoGenerateNestedIndicator={true}
+      containerElement={
+        <Link
+          replace={false}
+          to="/activity"
+        />
+      }
+      disableKeyboardFocus={false}
+      disabled={false}
+      initiallyOpen={false}
+      insetChildren={false}
+      key="Activities"
+      leftIcon={<ImageGradient />}
+      nestedItems={Array []}
+      nestedLevel={0}
+      onClick={[Function]}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onNestedListToggle={[Function]}
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+      open={null}
+      primaryText="Activities"
+      primaryTogglesNestedList={false}
+      secondaryTextLines={1}
+    />
+    <ListItem
+      autoGenerateNestedIndicator={true}
+      containerElement={
+        <Link
+          replace={false}
+          to="/recipes"
+        />
+      }
+      disableKeyboardFocus={false}
+      disabled={false}
+      initiallyOpen={false}
+      insetChildren={false}
+      key="Recipes"
+      leftIcon={<ActionDescription />}
+      nestedItems={Array []}
+      nestedLevel={0}
+      onClick={[Function]}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onNestedListToggle={[Function]}
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+      open={null}
+      primaryText="Recipes"
+      primaryTogglesNestedList={false}
+      secondaryTextLines={1}
+    />
+    <ListItem
+      autoGenerateNestedIndicator={true}
+      containerElement={
+        <Link
+          replace={false}
+          to="/live"
+        />
+      }
+      disableKeyboardFocus={false}
+      disabled={false}
+      initiallyOpen={false}
+      insetChildren={false}
+      key="Live activity"
+      leftIcon={<ImageTimer />}
+      nestedItems={Array []}
+      nestedLevel={0}
+      onClick={[Function]}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onNestedListToggle={[Function]}
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+      open={null}
+      primaryText="Live activity"
+      primaryTogglesNestedList={false}
+      secondaryTextLines={1}
+    />
+  </Drawer>
+</div>
+`;

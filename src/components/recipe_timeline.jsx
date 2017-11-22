@@ -63,5 +63,5 @@ export default class RecipeTimeline extends Component {
 }
 
 RecipeTimeline.proptypes = {
-  instructions: PropTypes.object.required,
+  instructions: PropTypes.array.required,
 };

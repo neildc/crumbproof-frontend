@@ -1,0 +1,496 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+<div>
+  <TimePicker
+    autoOk={false}
+    cancelLabel="Cancel"
+    defaultTime={null}
+    disabled={false}
+    format="ampm"
+    hintText="Change recipe start time"
+    minutesStep={1}
+    okLabel="OK"
+    onChange={[Function]}
+    pedantic={false}
+    style={Object {}}
+    value={null}
+  />
+  <Stepper
+    connector={<pure(StepConnector) />}
+    linear={true}
+    orientation="vertical"
+  >
+    <Step
+      active={true}
+      key="3e62254f-dec3-469a-a914-1fa5f28ad7b1"
+    >
+      <StepLabel
+        active={true}
+      >
+        <span
+          aria-label="Time"
+          role="img"
+        >
+          🕒 
+        </span>
+         
+        Today at 4:41 AM
+      </StepLabel>
+      <StepContent
+        active={true}
+        transition={[Function]}
+        transitionDuration={450}
+      >
+        <p>
+          Dump all ingredients into the bowl
+           
+          0
+        </p>
+      </StepContent>
+    </Step>
+    <Step
+      active={true}
+      key="0fae1481-8e36-406d-bdb1-1bd63a1fac39"
+    >
+      <StepLabel
+        active={true}
+      >
+        <span
+          aria-label="Time"
+          role="img"
+        >
+          🕒 
+        </span>
+         
+        Today at 4:41 AM
+      </StepLabel>
+      <StepContent
+        active={true}
+        transition={[Function]}
+        transitionDuration={450}
+      >
+        <p>
+          Mix everything together
+           
+          for 5 minutes
+        </p>
+      </StepContent>
+    </Step>
+    <Step
+      active={true}
+      key="e7478adf-b000-4b1b-8ee6-9d5608cfc95d"
+    >
+      <StepLabel
+        active={true}
+      >
+        <span
+          aria-label="Time"
+          role="img"
+        >
+          🕒 
+        </span>
+         
+        Today at 4:46 AM
+      </StepLabel>
+      <StepContent
+        active={true}
+        transition={[Function]}
+        transitionDuration={450}
+      >
+        <p>
+          Knead
+           
+          for 15 minutes
+        </p>
+      </StepContent>
+    </Step>
+    <Step
+      active={true}
+      key="1cf51cf8-3fb7-47ea-9d5a-9743dbde5068"
+    >
+      <StepLabel
+        active={true}
+      >
+        <span
+          aria-label="Time"
+          role="img"
+        >
+          🕒 
+        </span>
+         
+        Today at 5:01 AM
+      </StepLabel>
+      <StepContent
+        active={true}
+        transition={[Function]}
+        transitionDuration={450}
+      >
+        <p>
+          Place into a cling wrapped container
+           
+        </p>
+      </StepContent>
+    </Step>
+    <Step
+      active={true}
+      key="86a03291-146a-4935-b8d7-b1afcef11924"
+    >
+      <StepLabel
+        active={true}
+      >
+        <span
+          aria-label="Time"
+          role="img"
+        >
+          🕒 
+        </span>
+         
+        Today at 5:01 AM
+      </StepLabel>
+      <StepContent
+        active={true}
+        transition={[Function]}
+        transitionDuration={450}
+      >
+        <p>
+          Proof
+           
+          for 30 minutes
+        </p>
+      </StepContent>
+    </Step>
+    <Step
+      active={true}
+      key="980dbd9c-2ec3-4ef1-a477-fc9e361a2c59"
+    >
+      <StepLabel
+        active={true}
+      >
+        <span
+          aria-label="Time"
+          role="img"
+        >
+          🕒 
+        </span>
+         
+        Today at 5:31 AM
+      </StepLabel>
+      <StepContent
+        active={true}
+        transition={[Function]}
+        transitionDuration={450}
+      >
+        <p>
+          Fold
+           
+        </p>
+      </StepContent>
+    </Step>
+    <Step
+      active={true}
+      key="45e1857e-b223-434c-ad8d-137eae4e3d32"
+    >
+      <StepLabel
+        active={true}
+      >
+        <span
+          aria-label="Time"
+          role="img"
+        >
+          🕒 
+        </span>
+         
+        Today at 5:31 AM
+      </StepLabel>
+      <StepContent
+        active={true}
+        transition={[Function]}
+        transitionDuration={450}
+      >
+        <p>
+          Proof
+           
+          for 30 minutes
+        </p>
+      </StepContent>
+    </Step>
+    <Step
+      active={true}
+      key="f107ac75-7f34-4721-b02b-2a4cc19ee4c7"
+    >
+      <StepLabel
+        active={true}
+      >
+        <span
+          aria-label="Time"
+          role="img"
+        >
+          🕒 
+        </span>
+         
+        Today at 6:01 AM
+      </StepLabel>
+      <StepContent
+        active={true}
+        transition={[Function]}
+        transitionDuration={450}
+      >
+        <p>
+          Fold
+           
+          0
+        </p>
+      </StepContent>
+    </Step>
+    <Step
+      active={true}
+      key="51657483-038f-41d2-ac12-e105c6a99b22"
+    >
+      <StepLabel
+        active={true}
+      >
+        <span
+          aria-label="Time"
+          role="img"
+        >
+          🕒 
+        </span>
+         
+        Today at 6:01 AM
+      </StepLabel>
+      <StepContent
+        active={true}
+        transition={[Function]}
+        transitionDuration={450}
+      >
+        <p>
+          Proof
+           
+          for 60 minutes
+        </p>
+      </StepContent>
+    </Step>
+    <Step
+      active={true}
+      key="0e301924-217c-44ce-ab84-46495ad63d0b"
+    >
+      <StepLabel
+        active={true}
+      >
+        <span
+          aria-label="Time"
+          role="img"
+        >
+          🕒 
+        </span>
+         
+        Today at 7:01 AM
+      </StepLabel>
+      <StepContent
+        active={true}
+        transition={[Function]}
+        transitionDuration={450}
+      >
+        <p>
+          Preheat oven and dutch oven
+           
+        </p>
+      </StepContent>
+    </Step>
+    <Step
+      active={true}
+      key="1350120b-79c0-4314-a7cc-08fe9b6fbaab"
+    >
+      <StepLabel
+        active={true}
+      >
+        <span
+          aria-label="Time"
+          role="img"
+        >
+          🕒 
+        </span>
+         
+        Today at 7:01 AM
+      </StepLabel>
+      <StepContent
+        active={true}
+        transition={[Function]}
+        transitionDuration={450}
+      >
+        <p>
+          Shape dough
+           
+        </p>
+      </StepContent>
+    </Step>
+    <Step
+      active={true}
+      key="05c72cff-a836-4e99-a7a7-5163286333f8"
+    >
+      <StepLabel
+        active={true}
+      >
+        <span
+          aria-label="Time"
+          role="img"
+        >
+          🕒 
+        </span>
+         
+        Today at 7:01 AM
+      </StepLabel>
+      <StepContent
+        active={true}
+        transition={[Function]}
+        transitionDuration={450}
+      >
+        <p>
+          Final proof
+           
+          for 25 minutes
+        </p>
+      </StepContent>
+    </Step>
+    <Step
+      active={true}
+      key="92c2d615-cab8-42d7-901b-ffebeeb88d4e"
+    >
+      <StepLabel
+        active={true}
+      >
+        <span
+          aria-label="Time"
+          role="img"
+        >
+          🕒 
+        </span>
+         
+        Today at 7:26 AM
+      </StepLabel>
+      <StepContent
+        active={true}
+        transition={[Function]}
+        transitionDuration={450}
+      >
+        <p>
+          Sprinkle a bit of water onto the dough
+           
+        </p>
+      </StepContent>
+    </Step>
+    <Step
+      active={true}
+      key="c1c185ab-4859-493f-a292-2464b76cc494"
+    >
+      <StepLabel
+        active={true}
+      >
+        <span
+          aria-label="Time"
+          role="img"
+        >
+          🕒 
+        </span>
+         
+        Today at 7:26 AM
+      </StepLabel>
+      <StepContent
+        active={true}
+        transition={[Function]}
+        transitionDuration={450}
+      >
+        <p>
+          Start baking with lid on
+           
+          for 30 minutes
+        </p>
+      </StepContent>
+    </Step>
+    <Step
+      active={true}
+      key="32a3b48b-4d4f-455a-87b4-b5f36444e595"
+    >
+      <StepLabel
+        active={true}
+      >
+        <span
+          aria-label="Time"
+          role="img"
+        >
+          🕒 
+        </span>
+         
+        Today at 7:56 AM
+      </StepLabel>
+      <StepContent
+        active={true}
+        transition={[Function]}
+        transitionDuration={450}
+      >
+        <p>
+          Remove lid and continue baking
+           
+          for 10 minutes
+        </p>
+      </StepContent>
+    </Step>
+    <Step
+      active={true}
+      key="dfb737bb-5291-4e58-8162-a19cfa6d3aa3"
+    >
+      <StepLabel
+        active={true}
+      >
+        <span
+          aria-label="Time"
+          role="img"
+        >
+          🕒 
+        </span>
+         
+        Today at 8:06 AM
+      </StepLabel>
+      <StepContent
+        active={true}
+        transition={[Function]}
+        transitionDuration={450}
+      >
+        <p>
+          Remove from oven and rest
+           
+          for 10 minutes
+        </p>
+      </StepContent>
+    </Step>
+    <Step
+      active={true}
+      key="983d591d-f050-4fb1-8a34-63db202f6c72"
+    >
+      <StepLabel
+        active={true}
+      >
+        <span
+          aria-label="Time"
+          role="img"
+        >
+          🕒 
+        </span>
+         
+        Today at 8:16 AM
+      </StepLabel>
+      <StepContent
+        active={true}
+        transition={[Function]}
+        transitionDuration={450}
+      >
+        <p>
+          EAT ALL THE BREAD
+           
+        </p>
+      </StepContent>
+    </Step>
+  </Stepper>
+</div>
+`;
