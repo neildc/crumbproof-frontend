@@ -102,8 +102,6 @@ const instructions = [
 
 it('renders without crashing', () => {
 
-  Date.now = () => Date.parse('2017-06-13T04:41:20')
-
   const component = shallow(<RecipeTimeline instructions={instructions} />);
 
   expect(component).toMatchSnapshot();

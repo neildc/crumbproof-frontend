@@ -10,7 +10,7 @@ exports[`renders without throwing 1`] = `
     className="cardPhoto"
     overlay={
       <CardTitle
-        subtitle="12 days ago by neildc"
+        subtitle="in 5 months by neildc"
         title="Saturday wholewheat but on a Thursday (first attempt)"
       />
     }
