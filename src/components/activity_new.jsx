@@ -60,20 +60,13 @@ class ActivityNew extends Component {
           component={renderTextField}
           validate={[required]}
         />
-        <Field
-          label="Bake Time (minutes)"
-          name="bake_time"
-          type="number"
-          component={renderTextField}
-          validate={[required, isNumber]}
-        />
 
         <Field
-          label="Oven Temperature (°C)"
-          name="oven_temperature"
+          label="Ideal Room Temp (°C)"
+          name="room_temperature"
           type="number"
           component={renderTextField}
-          validate={[required, isNumber]}
+          validate={[isNumber]}
         />
 
         <Field
@@ -134,11 +127,10 @@ class ActivityNew extends Component {
     };
 
     const newRecipe = {
-      bake_time: values.bake_time,
       name: values.name,
       instructions: values.instructions,
       ingredients: values.ingredients,
-      oven_temperature: values.oven_temperature,
+      room_temperature: values.room_temperature,
       yield_count: values.yield_count,
       yield_type: values.yield_type,
     };

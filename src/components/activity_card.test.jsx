@@ -57,8 +57,7 @@ const activity = {
       yield_count: 2,
       credits: 'Flour water salt yeast by Ken Forkish',
       yield_type: 'Loaves',
-      bake_time: 50,
-      oven_temperature: 245,
+      room_temperature: 22,
       instructions: [
         {
           content: 'Mix the all the flour and water',

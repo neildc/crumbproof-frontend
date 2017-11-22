@@ -115,7 +115,9 @@ const RecipeShowPresentation = (props) => {
         <div className="recipeMeta">
           <div><b>BY  </b> {recipe.user}</div>
           <div><b>TIME  </b> {getTotalTimeStr(recipe.data.instructions)}</div>
-          <div><b>BAKE  </b> {recipe.data.bake_time} mins at {recipe.data.oven_temperature}°</div>
+          { recipe.data.room_temperature &&
+            <div><b>IDEAL TEMP</b> {recipe.data.room_temperature}°</div>
+          }
           <div><b>YIELDS  </b> {recipe.data.yield_count} {recipe.data.yield_type}</div>
         </div>
         <div style={{ padding: '30px' }}>

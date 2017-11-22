@@ -67,12 +67,10 @@ exports[`renders with no user logged in 1`] = `
       </div>
       <div>
         <b>
-          BAKE  
+          IDEAL TEMP
         </b>
          
-        40
-         mins at 
-        250
+        22
         °
       </div>
       <div>
@@ -358,7 +356,6 @@ exports[`renders with no user logged in 1`] = `
               "base_recipe": 1,
               "created": "2017-11-21T03:07:01.409623Z",
               "data": Object {
-                "bake_time": 40,
                 "ingredients": Array [
                   Object {
                     "id": "9c827860-1aa5-4e00-9eca-9b25ac3c0a8b",
@@ -485,7 +482,7 @@ exports[`renders with no user logged in 1`] = `
                   },
                 ],
                 "name": "It was the only flour they had v3 (Nov 21st 17)",
-                "oven_temperature": 250,
+                "room_temperature": 22,
                 "yield_count": 1,
                 "yield_type": "Loaf",
               },
@@ -628,12 +625,10 @@ exports[`renders with user logged in (not recipe owner) 1`] = `
       </div>
       <div>
         <b>
-          BAKE  
+          IDEAL TEMP
         </b>
          
-        40
-         mins at 
-        250
+        22
         °
       </div>
       <div>
@@ -919,7 +914,6 @@ exports[`renders with user logged in (not recipe owner) 1`] = `
               "base_recipe": 1,
               "created": "2017-11-21T03:07:01.409623Z",
               "data": Object {
-                "bake_time": 40,
                 "ingredients": Array [
                   Object {
                     "id": "9c827860-1aa5-4e00-9eca-9b25ac3c0a8b",
@@ -1046,7 +1040,7 @@ exports[`renders with user logged in (not recipe owner) 1`] = `
                   },
                 ],
                 "name": "It was the only flour they had v3 (Nov 21st 17)",
-                "oven_temperature": 250,
+                "room_temperature": 22,
                 "yield_count": 1,
                 "yield_type": "Loaf",
               },
@@ -1189,12 +1183,10 @@ exports[`renders with user logged in that created recipe 1`] = `
       </div>
       <div>
         <b>
-          BAKE  
+          IDEAL TEMP
         </b>
          
-        40
-         mins at 
-        250
+        22
         °
       </div>
       <div>
@@ -1547,7 +1539,6 @@ exports[`renders with user logged in that created recipe 1`] = `
               "base_recipe": 1,
               "created": "2017-11-21T03:07:01.409623Z",
               "data": Object {
-                "bake_time": 40,
                 "ingredients": Array [
                   Object {
                     "id": "9c827860-1aa5-4e00-9eca-9b25ac3c0a8b",
@@ -1674,7 +1665,7 @@ exports[`renders with user logged in that created recipe 1`] = `
                   },
                 ],
                 "name": "It was the only flour they had v3 (Nov 21st 17)",
-                "oven_temperature": 250,
+                "room_temperature": 22,
                 "yield_count": 1,
                 "yield_type": "Loaf",
               },

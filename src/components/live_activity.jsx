@@ -67,7 +67,11 @@ class LiveActivity extends Component {
       }
 
       setTimeout(() => {
-        document.getElementsByClassName('Navigation-Anchor')[current_step].click();
+        const anchor = document.getElementsByClassName('Navigation-Anchor')[current_step];
+        // Guard against the user navigating away from the page before this timesout
+        if (anchor) {
+          anchor.click();
+        }
       }, 500);
     }
   }

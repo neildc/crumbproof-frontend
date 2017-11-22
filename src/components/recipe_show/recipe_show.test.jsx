@@ -77,8 +77,7 @@ const recipe = {
     ],
     yield_count: 1,
     yield_type: 'Loaf',
-    bake_time: 40,
-    oven_temperature: 250,
+    room_temperature: 22,
     instructions: [
       {
         content: 'Dump all ingredients into the bowl',
@@ -277,8 +276,7 @@ const parentRecipe = {
     ],
     yield_count: 1,
     yield_type: 'Loaf',
-    bake_time: 40,
-    oven_temperature: 250,
+    room_temperature: 22,
     instructions: [
       {
         content: 'Dump all ingredients into the bowl',
@@ -431,7 +429,7 @@ const baseRecipe = {
     yield_count: 1,
     yield_type: 'Loaf',
     bake_time: 40,
-    oven_temperature: 250,
+    room_temperature: 22,
     instructions: [
       {
         content: 'Dump all ingredients into the bowl',
