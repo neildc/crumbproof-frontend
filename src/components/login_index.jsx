@@ -1,15 +1,13 @@
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 
 import RaisedButton from 'material-ui/RaisedButton';
-import Snackbar from 'material-ui/Snackbar';
 import TextField from 'material-ui/TextField';
 import { Card, CardTitle } from 'material-ui/Card';
 
-import { authLogin, authClearError } from '../actions/actions_auth';
+import { authLogin } from '../actions/actions_auth';
 
 import SubmitButton from './submit_button';
 import { FadeIn } from './animations/fade';
@@ -82,26 +80,13 @@ export class LoginIndex extends Component {
               fullWidth
               containerElement={<Link to="/register" />}
             />
-
           </form>
-
-          <Snackbar
-            open={this.props.error != null}
-            message={this.props.error ? this.props.error : ''}
-            autoHideDuration={5000}
-            style={{ backgroundColor: 'red' }}
-            onRequestClose={this.props.authClearError}
-          />
         </Card>
       </FadeIn>
     );
   }
 }
 
-function mapStateToProps({ auth }, ownProps) {
-  return { error: auth.error };
-}
-
 export default reduxForm({
   form: 'LoginForm',
-})(connect(mapStateToProps, { authLogin, authClearError })(LoginIndex));
+})(connect(null, { authLogin })(LoginIndex));
