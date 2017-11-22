@@ -25,6 +25,12 @@ export class ActivityIndex extends Component {
   }
 
   renderActivityCards() {
+    const ActivityCardPadded = ({ activity }) => (
+      <div key={activity.id} style={{ marginBottom: '50px' }}>
+        <ActivityCard activity={activity} />
+      </div>
+    );
+
     // Need to _.values as activities is an object
     if (_.values(this.props.activities.byId).length === 0) {
       return <LoadingCard />;
@@ -32,13 +38,30 @@ export class ActivityIndex extends Component {
 
     const activities = _.orderBy(this.props.activities.byId, ['created'], ['desc']);
 
-    return _.map(activities, activity => (
-      <SlideInBottom key={activity.id} onRest={() => forceCheck()}>
-        <div style={{ marginBottom: '50px' }}>
-          <ActivityCard activity={activity} />
-        </div>
+    /*
+     * Only animate the first activity, otherwise the slide in is quite laggy
+     */
+
+    /*
+     * forceCheck() is needed since the activity images are lazy loaded.
+     *
+     * The lazy loader only fetches images that are in the viewport + a small
+     * offset.
+     *
+     * Since we are animating the activity cards to slide in from the bottom
+     * the lazy loader will not load the image for the first card.
+     *
+     */
+    const head = (
+      <SlideInBottom onRest={() => forceCheck()}>
+        <ActivityCardPadded activity={_.head(activities)} />
       </SlideInBottom>
+    );
+    const tail = _.map(_.tail(activities), activity => (
+      <ActivityCardPadded activity={activity} />
     ));
+
+    return _.concat(head, tail);
   }
 
   render() {
