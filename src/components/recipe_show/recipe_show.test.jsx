@@ -2,9 +2,42 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import RecipeShowPresentation from './recipe_show';
 
-it('renders', () => {
+it('renders with user logged in that created recipe', () => {
   const component = shallow(
     <RecipeShowPresentation
+      user={recipe.user}
+      recipe={recipe}
+      parentRecipe={parentRecipe}
+      baseRecipe={baseRecipe}
+      onDeleteClick={jest.fn()}
+      onRecordActivityClick={jest.fn()}
+      onStartActivityClick={jest.fn()}
+    />,
+  );
+
+  expect(component).toMatchSnapshot();
+});
+
+it('renders with user logged in (not recipe owner)', () => {
+  const component = shallow(
+    <RecipeShowPresentation
+      user={'other'}
+      recipe={recipe}
+      parentRecipe={parentRecipe}
+      baseRecipe={baseRecipe}
+      onDeleteClick={jest.fn()}
+      onRecordActivityClick={jest.fn()}
+      onStartActivityClick={jest.fn()}
+    />,
+  );
+
+  expect(component).toMatchSnapshot();
+});
+
+it('renders with no user logged in', () => {
+  const component = shallow(
+    <RecipeShowPresentation
+      user={null}
       recipe={recipe}
       parentRecipe={parentRecipe}
       baseRecipe={baseRecipe}

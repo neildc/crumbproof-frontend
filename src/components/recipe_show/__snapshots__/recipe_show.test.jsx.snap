@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders 1`] = `
+exports[`renders with no user logged in 1`] = `
 <FadeIn>
   <Card
     containerStyle={
@@ -92,6 +92,1195 @@ exports[`renders 1`] = `
         }
       }
     >
+      <h3>
+        Recent Activity
+      </h3>
+      <Apollo(ActivitiesGallery)
+        recipeId={30}
+      />
+      <RaisedButton
+        disabled={false}
+        fullWidth={false}
+        icon={<ContentAddCircle />}
+        label="Record an activity with recipe"
+        labelPosition="after"
+        onClick={[Function]}
+        primary={false}
+        secondary={false}
+        style={
+          Object {
+            "margin": "20px 0",
+          }
+        }
+      />
+      <br />
+      <RaisedButton
+        disabled={false}
+        fullWidth={false}
+        icon={<ContentAddCircle />}
+        label="Start guided activity"
+        labelColor="white"
+        labelPosition="after"
+        onClick={[Function]}
+        primary={true}
+        secondary={false}
+        style={
+          Object {
+            "margin": "20px 0",
+          }
+        }
+      />
+    </div>
+  </Card>
+  <Card
+    containerStyle={
+      Object {
+        "marginBottom": "20px",
+      }
+    }
+    expandable={false}
+    expanded={null}
+    initiallyExpanded={true}
+  >
+    <CardHeader
+      avatar={null}
+      showExpandableButton={true}
+      title="RECIPE"
+    />
+    <CardText
+      expandable={true}
+      style={
+        Object {
+          "padding": "30px",
+          "paddingTop": "0px",
+        }
+      }
+    >
+      <h3>
+        Ingredients
+      </h3>
+      <ul>
+         
+        <li
+          key="Lauke Wholegrain Breadmix"
+        >
+          590
+           
+          grams
+           
+          Lauke Wholegrain Breadmix
+        </li>
+        <li
+          key="WAS MODIFIED (quantity was 3)"
+        >
+          5
+           
+          Teaspoons
+           
+          WAS MODIFIED (quantity was 3)
+        </li>
+        <li
+          key="This was added, water was removed"
+        >
+          2
+           
+          kg
+           
+          This was added, water was removed
+        </li>
+         
+      </ul>
+      <h3>
+        Instructions
+      </h3>
+      <RecipeTimeline
+        instructions={
+          Array [
+            Object {
+              "content": "Dump all ingredients into the bowl",
+              "id": "3e62254f-dec3-469a-a914-1fa5f28ad7b1",
+              "step_number": 1,
+              "time_gap_to_next": 0,
+            },
+            Object {
+              "content": "CHANGED THIS ONE",
+              "id": "0fae1481-8e36-406d-bdb1-1bd63a1fac39",
+              "step_number": 2,
+              "time_gap_to_next": 5,
+            },
+            Object {
+              "content": "Knead",
+              "id": "e7478adf-b000-4b1b-8ee6-9d5608cfc95d",
+              "step_number": 3,
+              "time_gap_to_next": 15,
+            },
+            Object {
+              "content": "Place into a cling wrapped container",
+              "id": "1cf51cf8-3fb7-47ea-9d5a-9743dbde5068",
+              "step_number": 4,
+            },
+            Object {
+              "content": "Proof",
+              "id": "86a03291-146a-4935-b8d7-b1afcef11924",
+              "step_number": 5,
+              "time_gap_to_next": 30,
+            },
+            Object {
+              "content": "Fold",
+              "id": "980dbd9c-2ec3-4ef1-a477-fc9e361a2c59",
+              "step_number": 6,
+            },
+            Object {
+              "content": "Proof",
+              "id": "45e1857e-b223-434c-ad8d-137eae4e3d32",
+              "step_number": 7,
+              "time_gap_to_next": 30,
+            },
+            Object {
+              "content": "1st INSERT AFTER 7",
+              "id": "4210336c-02be-417c-933c-15ed0853ffba",
+              "time_gap_to_next": "",
+            },
+            Object {
+              "content": "2nd INSERT AFTER 7",
+              "id": "9fc0f49b-ae3b-4cb2-b978-4e87a2257509",
+            },
+            Object {
+              "content": "Fold",
+              "id": "f107ac75-7f34-4721-b02b-2a4cc19ee4c7",
+              "step_number": 8,
+              "time_gap_to_next": 0,
+            },
+            Object {
+              "content": "Proof",
+              "id": "51657483-038f-41d2-ac12-e105c6a99b22",
+              "step_number": 9,
+              "time_gap_to_next": 60,
+            },
+            Object {
+              "content": "Preheat oven and dutch oven",
+              "id": "0e301924-217c-44ce-ab84-46495ad63d0b",
+              "step_number": 10,
+            },
+            Object {
+              "content": "Shape dough",
+              "id": "1350120b-79c0-4314-a7cc-08fe9b6fbaab",
+              "step_number": 11,
+            },
+            Object {
+              "content": "Final proof",
+              "id": "05c72cff-a836-4e99-a7a7-5163286333f8",
+              "step_number": 12,
+              "time_gap_to_next": 25,
+            },
+            Object {
+              "content": "Sprinkle a bit of water onto the dough",
+              "id": "92c2d615-cab8-42d7-901b-ffebeeb88d4e",
+            },
+            Object {
+              "content": "Start baking with lid on at the bottom rack of the oven",
+              "id": "c1c185ab-4859-493f-a292-2464b76cc494",
+              "step_number": 13,
+              "time_gap_to_next": 30,
+            },
+            Object {
+              "content": "Remove lid and continue baking",
+              "id": "32a3b48b-4d4f-455a-87b4-b5f36444e595",
+              "step_number": 14,
+              "time_gap_to_next": "15",
+            },
+            Object {
+              "content": "Remove from oven and rest",
+              "id": "dfb737bb-5291-4e58-8162-a19cfa6d3aa3",
+              "step_number": 15,
+              "time_gap_to_next": 10,
+            },
+            Object {
+              "content": "Removed previous last step (EAT ALL)",
+              "id": "87ec0203-8659-4536-83dc-bda438dbcd9d",
+            },
+          ]
+        }
+      />
+    </CardText>
+  </Card>
+  <Card
+    containerStyle={
+      Object {
+        "marginBottom": "20px",
+      }
+    }
+    expandable={false}
+    expanded={null}
+    initiallyExpanded={true}
+  >
+    <CardHeader
+      avatar={null}
+      showExpandableButton={true}
+      title="RECIPE HISTORY"
+    />
+    <CardText
+      expandable={true}
+      style={
+        Object {
+          "padding": "30px",
+          "paddingTop": "0px",
+        }
+      }
+    >
+      <h3>
+        Recipe based off:
+      </h3>
+      <Link
+        replace={false}
+        to="/recipes/1"
+      >
+        It was the only flour they had
+      </Link>
+       created in 5 months
+      <div>
+        <h3>
+          Previous iteration of recipe:
+        </h3>
+        <Link
+          replace={false}
+          to="/recipes/3"
+        >
+          It was the only flour they had v3
+        </Link>
+         created a few seconds ago
+        <h2>
+          Changes made:
+        </h2>
+        <Connect(RecipeDiff)
+          recipe={
+            Object {
+              "base_recipe": 1,
+              "created": "2017-11-21T03:07:01.409623Z",
+              "data": Object {
+                "bake_time": 40,
+                "ingredients": Array [
+                  Object {
+                    "id": "9c827860-1aa5-4e00-9eca-9b25ac3c0a8b",
+                    "name": "Lauke Wholegrain Breadmix",
+                    "quantity": 590,
+                    "unit": "grams",
+                  },
+                  Object {
+                    "id": "eab76adf-a6aa-44f0-aba4-bcc1578ba34e",
+                    "name": "WAS MODIFIED (quantity was 3)",
+                    "quantity": "5",
+                    "unit": "Teaspoons",
+                  },
+                  Object {
+                    "id": "576c31a5-29e7-4c33-90b0-4e1f8bcc616c",
+                    "name": "This was added, water was removed",
+                    "quantity": "2",
+                    "unit": "kg",
+                  },
+                ],
+                "instructions": Array [
+                  Object {
+                    "content": "Dump all ingredients into the bowl",
+                    "id": "3e62254f-dec3-469a-a914-1fa5f28ad7b1",
+                    "step_number": 1,
+                    "time_gap_to_next": 0,
+                  },
+                  Object {
+                    "content": "CHANGED THIS ONE",
+                    "id": "0fae1481-8e36-406d-bdb1-1bd63a1fac39",
+                    "step_number": 2,
+                    "time_gap_to_next": 5,
+                  },
+                  Object {
+                    "content": "Knead",
+                    "id": "e7478adf-b000-4b1b-8ee6-9d5608cfc95d",
+                    "step_number": 3,
+                    "time_gap_to_next": 15,
+                  },
+                  Object {
+                    "content": "Place into a cling wrapped container",
+                    "id": "1cf51cf8-3fb7-47ea-9d5a-9743dbde5068",
+                    "step_number": 4,
+                  },
+                  Object {
+                    "content": "Proof",
+                    "id": "86a03291-146a-4935-b8d7-b1afcef11924",
+                    "step_number": 5,
+                    "time_gap_to_next": 30,
+                  },
+                  Object {
+                    "content": "Fold",
+                    "id": "980dbd9c-2ec3-4ef1-a477-fc9e361a2c59",
+                    "step_number": 6,
+                  },
+                  Object {
+                    "content": "Proof",
+                    "id": "45e1857e-b223-434c-ad8d-137eae4e3d32",
+                    "step_number": 7,
+                    "time_gap_to_next": 30,
+                  },
+                  Object {
+                    "content": "1st INSERT AFTER 7",
+                    "id": "4210336c-02be-417c-933c-15ed0853ffba",
+                    "time_gap_to_next": "",
+                  },
+                  Object {
+                    "content": "2nd INSERT AFTER 7",
+                    "id": "9fc0f49b-ae3b-4cb2-b978-4e87a2257509",
+                  },
+                  Object {
+                    "content": "Fold",
+                    "id": "f107ac75-7f34-4721-b02b-2a4cc19ee4c7",
+                    "step_number": 8,
+                    "time_gap_to_next": 0,
+                  },
+                  Object {
+                    "content": "Proof",
+                    "id": "51657483-038f-41d2-ac12-e105c6a99b22",
+                    "step_number": 9,
+                    "time_gap_to_next": 60,
+                  },
+                  Object {
+                    "content": "Preheat oven and dutch oven",
+                    "id": "0e301924-217c-44ce-ab84-46495ad63d0b",
+                    "step_number": 10,
+                  },
+                  Object {
+                    "content": "Shape dough",
+                    "id": "1350120b-79c0-4314-a7cc-08fe9b6fbaab",
+                    "step_number": 11,
+                  },
+                  Object {
+                    "content": "Final proof",
+                    "id": "05c72cff-a836-4e99-a7a7-5163286333f8",
+                    "step_number": 12,
+                    "time_gap_to_next": 25,
+                  },
+                  Object {
+                    "content": "Sprinkle a bit of water onto the dough",
+                    "id": "92c2d615-cab8-42d7-901b-ffebeeb88d4e",
+                  },
+                  Object {
+                    "content": "Start baking with lid on at the bottom rack of the oven",
+                    "id": "c1c185ab-4859-493f-a292-2464b76cc494",
+                    "step_number": 13,
+                    "time_gap_to_next": 30,
+                  },
+                  Object {
+                    "content": "Remove lid and continue baking",
+                    "id": "32a3b48b-4d4f-455a-87b4-b5f36444e595",
+                    "step_number": 14,
+                    "time_gap_to_next": "15",
+                  },
+                  Object {
+                    "content": "Remove from oven and rest",
+                    "id": "dfb737bb-5291-4e58-8162-a19cfa6d3aa3",
+                    "step_number": 15,
+                    "time_gap_to_next": 10,
+                  },
+                  Object {
+                    "content": "Removed previous last step (EAT ALL)",
+                    "id": "87ec0203-8659-4536-83dc-bda438dbcd9d",
+                  },
+                ],
+                "name": "It was the only flour they had v3 (Nov 21st 17)",
+                "oven_temperature": 250,
+                "yield_count": 1,
+                "yield_type": "Loaf",
+              },
+              "diff": Object {
+                "ingredients": Object {
+                  "added": Array [
+                    Object {
+                      "id": "576c31a5-29e7-4c33-90b0-4e1f8bcc616c",
+                      "name": "This was added, water was removed",
+                      "quantity": "2",
+                      "unit": "kg",
+                    },
+                  ],
+                  "modified": Array [
+                    Object {
+                      "id": "eab76adf-a6aa-44f0-aba4-bcc1578ba34e",
+                      "name": "WAS MODIFIED (quantity was 3)",
+                      "quantity": "5",
+                      "unit": "Teaspoons",
+                    },
+                  ],
+                  "removed": Array [
+                    Object {
+                      "id": "eb1b8781-68d0-4f17-aef5-cd572488c253",
+                      "name": "Water",
+                      "quantity": "380",
+                      "unit": "mL",
+                    },
+                  ],
+                },
+                "instructions": Object {
+                  "added": Array [
+                    Object {
+                      "content": "1st INSERT AFTER 7",
+                      "id": "4210336c-02be-417c-933c-15ed0853ffba",
+                      "time_gap_to_next": "",
+                    },
+                    Object {
+                      "content": "2nd INSERT AFTER 7",
+                      "id": "9fc0f49b-ae3b-4cb2-b978-4e87a2257509",
+                    },
+                    Object {
+                      "content": "Removed previous last step (EAT ALL)",
+                      "id": "87ec0203-8659-4536-83dc-bda438dbcd9d",
+                    },
+                  ],
+                  "modified": Array [
+                    Object {
+                      "content": "CHANGED THIS ONE",
+                      "id": "0fae1481-8e36-406d-bdb1-1bd63a1fac39",
+                      "step_number": 2,
+                      "time_gap_to_next": 5,
+                    },
+                  ],
+                  "removed": Array [
+                    Object {
+                      "content": "EAT ALL THE BREAD",
+                      "id": "983d591d-f050-4fb1-8a34-63db202f6c72",
+                      "step_number": 16,
+                    },
+                  ],
+                },
+              },
+              "id": 30,
+              "parent": 3,
+              "user": "neildc",
+            }
+          }
+        />
+      </div>
+    </CardText>
+  </Card>
+</FadeIn>
+`;
+
+exports[`renders with user logged in (not recipe owner) 1`] = `
+<FadeIn>
+  <Card
+    containerStyle={
+      Object {
+        "marginBottom": "20px",
+      }
+    }
+    expandable={false}
+    expanded={null}
+    initiallyExpanded={false}
+  >
+    <CardTitle
+      className="cardTitle"
+      title={
+        <div
+          className="cardTitleContents"
+        >
+          <IconButton
+            containerElement={
+              <Link
+                replace={false}
+                to="/recipes"
+              />
+            }
+            disableTouchRipple={false}
+            disabled={false}
+            iconStyle={Object {}}
+            tooltip="Back to recipes"
+            tooltipPosition="bottom-center"
+            touch={false}
+          >
+            <NavigationArrowBack
+              color="#999"
+            />
+          </IconButton>
+          <div
+            style={
+              Object {
+                "paddingTop": "5px",
+              }
+            }
+          >
+            It was the only flour they had v3 (Nov 21st 17)
+          </div>
+        </div>
+      }
+    />
+    <div
+      className="recipeMeta"
+    >
+      <div>
+        <b>
+          BY  
+        </b>
+         
+        neildc
+      </div>
+      <div>
+        <b>
+          TIME  
+        </b>
+         
+        133433755025h 10 mins
+      </div>
+      <div>
+        <b>
+          BAKE  
+        </b>
+         
+        40
+         mins at 
+        250
+        °
+      </div>
+      <div>
+        <b>
+          YIELDS  
+        </b>
+         
+        1
+         
+        Loaf
+      </div>
+    </div>
+    <div
+      style={
+        Object {
+          "padding": "30px",
+        }
+      }
+    >
+      <h3>
+        Recent Activity
+      </h3>
+      <Apollo(ActivitiesGallery)
+        recipeId={30}
+      />
+      <RaisedButton
+        disabled={false}
+        fullWidth={false}
+        icon={<ContentAddCircle />}
+        label="Record an activity with recipe"
+        labelPosition="after"
+        onClick={[Function]}
+        primary={false}
+        secondary={false}
+        style={
+          Object {
+            "margin": "20px 0",
+          }
+        }
+      />
+      <br />
+      <RaisedButton
+        disabled={false}
+        fullWidth={false}
+        icon={<ContentAddCircle />}
+        label="Start guided activity"
+        labelColor="white"
+        labelPosition="after"
+        onClick={[Function]}
+        primary={true}
+        secondary={false}
+        style={
+          Object {
+            "margin": "20px 0",
+          }
+        }
+      />
+    </div>
+  </Card>
+  <Card
+    containerStyle={
+      Object {
+        "marginBottom": "20px",
+      }
+    }
+    expandable={false}
+    expanded={null}
+    initiallyExpanded={true}
+  >
+    <CardHeader
+      avatar={null}
+      showExpandableButton={true}
+      title="RECIPE"
+    />
+    <CardText
+      expandable={true}
+      style={
+        Object {
+          "padding": "30px",
+          "paddingTop": "0px",
+        }
+      }
+    >
+      <h3>
+        Ingredients
+      </h3>
+      <ul>
+         
+        <li
+          key="Lauke Wholegrain Breadmix"
+        >
+          590
+           
+          grams
+           
+          Lauke Wholegrain Breadmix
+        </li>
+        <li
+          key="WAS MODIFIED (quantity was 3)"
+        >
+          5
+           
+          Teaspoons
+           
+          WAS MODIFIED (quantity was 3)
+        </li>
+        <li
+          key="This was added, water was removed"
+        >
+          2
+           
+          kg
+           
+          This was added, water was removed
+        </li>
+         
+      </ul>
+      <h3>
+        Instructions
+      </h3>
+      <RecipeTimeline
+        instructions={
+          Array [
+            Object {
+              "content": "Dump all ingredients into the bowl",
+              "id": "3e62254f-dec3-469a-a914-1fa5f28ad7b1",
+              "step_number": 1,
+              "time_gap_to_next": 0,
+            },
+            Object {
+              "content": "CHANGED THIS ONE",
+              "id": "0fae1481-8e36-406d-bdb1-1bd63a1fac39",
+              "step_number": 2,
+              "time_gap_to_next": 5,
+            },
+            Object {
+              "content": "Knead",
+              "id": "e7478adf-b000-4b1b-8ee6-9d5608cfc95d",
+              "step_number": 3,
+              "time_gap_to_next": 15,
+            },
+            Object {
+              "content": "Place into a cling wrapped container",
+              "id": "1cf51cf8-3fb7-47ea-9d5a-9743dbde5068",
+              "step_number": 4,
+            },
+            Object {
+              "content": "Proof",
+              "id": "86a03291-146a-4935-b8d7-b1afcef11924",
+              "step_number": 5,
+              "time_gap_to_next": 30,
+            },
+            Object {
+              "content": "Fold",
+              "id": "980dbd9c-2ec3-4ef1-a477-fc9e361a2c59",
+              "step_number": 6,
+            },
+            Object {
+              "content": "Proof",
+              "id": "45e1857e-b223-434c-ad8d-137eae4e3d32",
+              "step_number": 7,
+              "time_gap_to_next": 30,
+            },
+            Object {
+              "content": "1st INSERT AFTER 7",
+              "id": "4210336c-02be-417c-933c-15ed0853ffba",
+              "time_gap_to_next": "",
+            },
+            Object {
+              "content": "2nd INSERT AFTER 7",
+              "id": "9fc0f49b-ae3b-4cb2-b978-4e87a2257509",
+            },
+            Object {
+              "content": "Fold",
+              "id": "f107ac75-7f34-4721-b02b-2a4cc19ee4c7",
+              "step_number": 8,
+              "time_gap_to_next": 0,
+            },
+            Object {
+              "content": "Proof",
+              "id": "51657483-038f-41d2-ac12-e105c6a99b22",
+              "step_number": 9,
+              "time_gap_to_next": 60,
+            },
+            Object {
+              "content": "Preheat oven and dutch oven",
+              "id": "0e301924-217c-44ce-ab84-46495ad63d0b",
+              "step_number": 10,
+            },
+            Object {
+              "content": "Shape dough",
+              "id": "1350120b-79c0-4314-a7cc-08fe9b6fbaab",
+              "step_number": 11,
+            },
+            Object {
+              "content": "Final proof",
+              "id": "05c72cff-a836-4e99-a7a7-5163286333f8",
+              "step_number": 12,
+              "time_gap_to_next": 25,
+            },
+            Object {
+              "content": "Sprinkle a bit of water onto the dough",
+              "id": "92c2d615-cab8-42d7-901b-ffebeeb88d4e",
+            },
+            Object {
+              "content": "Start baking with lid on at the bottom rack of the oven",
+              "id": "c1c185ab-4859-493f-a292-2464b76cc494",
+              "step_number": 13,
+              "time_gap_to_next": 30,
+            },
+            Object {
+              "content": "Remove lid and continue baking",
+              "id": "32a3b48b-4d4f-455a-87b4-b5f36444e595",
+              "step_number": 14,
+              "time_gap_to_next": "15",
+            },
+            Object {
+              "content": "Remove from oven and rest",
+              "id": "dfb737bb-5291-4e58-8162-a19cfa6d3aa3",
+              "step_number": 15,
+              "time_gap_to_next": 10,
+            },
+            Object {
+              "content": "Removed previous last step (EAT ALL)",
+              "id": "87ec0203-8659-4536-83dc-bda438dbcd9d",
+            },
+          ]
+        }
+      />
+    </CardText>
+  </Card>
+  <Card
+    containerStyle={
+      Object {
+        "marginBottom": "20px",
+      }
+    }
+    expandable={false}
+    expanded={null}
+    initiallyExpanded={true}
+  >
+    <CardHeader
+      avatar={null}
+      showExpandableButton={true}
+      title="RECIPE HISTORY"
+    />
+    <CardText
+      expandable={true}
+      style={
+        Object {
+          "padding": "30px",
+          "paddingTop": "0px",
+        }
+      }
+    >
+      <h3>
+        Recipe based off:
+      </h3>
+      <Link
+        replace={false}
+        to="/recipes/1"
+      >
+        It was the only flour they had
+      </Link>
+       created in 5 months
+      <div>
+        <h3>
+          Previous iteration of recipe:
+        </h3>
+        <Link
+          replace={false}
+          to="/recipes/3"
+        >
+          It was the only flour they had v3
+        </Link>
+         created a few seconds ago
+        <h2>
+          Changes made:
+        </h2>
+        <Connect(RecipeDiff)
+          recipe={
+            Object {
+              "base_recipe": 1,
+              "created": "2017-11-21T03:07:01.409623Z",
+              "data": Object {
+                "bake_time": 40,
+                "ingredients": Array [
+                  Object {
+                    "id": "9c827860-1aa5-4e00-9eca-9b25ac3c0a8b",
+                    "name": "Lauke Wholegrain Breadmix",
+                    "quantity": 590,
+                    "unit": "grams",
+                  },
+                  Object {
+                    "id": "eab76adf-a6aa-44f0-aba4-bcc1578ba34e",
+                    "name": "WAS MODIFIED (quantity was 3)",
+                    "quantity": "5",
+                    "unit": "Teaspoons",
+                  },
+                  Object {
+                    "id": "576c31a5-29e7-4c33-90b0-4e1f8bcc616c",
+                    "name": "This was added, water was removed",
+                    "quantity": "2",
+                    "unit": "kg",
+                  },
+                ],
+                "instructions": Array [
+                  Object {
+                    "content": "Dump all ingredients into the bowl",
+                    "id": "3e62254f-dec3-469a-a914-1fa5f28ad7b1",
+                    "step_number": 1,
+                    "time_gap_to_next": 0,
+                  },
+                  Object {
+                    "content": "CHANGED THIS ONE",
+                    "id": "0fae1481-8e36-406d-bdb1-1bd63a1fac39",
+                    "step_number": 2,
+                    "time_gap_to_next": 5,
+                  },
+                  Object {
+                    "content": "Knead",
+                    "id": "e7478adf-b000-4b1b-8ee6-9d5608cfc95d",
+                    "step_number": 3,
+                    "time_gap_to_next": 15,
+                  },
+                  Object {
+                    "content": "Place into a cling wrapped container",
+                    "id": "1cf51cf8-3fb7-47ea-9d5a-9743dbde5068",
+                    "step_number": 4,
+                  },
+                  Object {
+                    "content": "Proof",
+                    "id": "86a03291-146a-4935-b8d7-b1afcef11924",
+                    "step_number": 5,
+                    "time_gap_to_next": 30,
+                  },
+                  Object {
+                    "content": "Fold",
+                    "id": "980dbd9c-2ec3-4ef1-a477-fc9e361a2c59",
+                    "step_number": 6,
+                  },
+                  Object {
+                    "content": "Proof",
+                    "id": "45e1857e-b223-434c-ad8d-137eae4e3d32",
+                    "step_number": 7,
+                    "time_gap_to_next": 30,
+                  },
+                  Object {
+                    "content": "1st INSERT AFTER 7",
+                    "id": "4210336c-02be-417c-933c-15ed0853ffba",
+                    "time_gap_to_next": "",
+                  },
+                  Object {
+                    "content": "2nd INSERT AFTER 7",
+                    "id": "9fc0f49b-ae3b-4cb2-b978-4e87a2257509",
+                  },
+                  Object {
+                    "content": "Fold",
+                    "id": "f107ac75-7f34-4721-b02b-2a4cc19ee4c7",
+                    "step_number": 8,
+                    "time_gap_to_next": 0,
+                  },
+                  Object {
+                    "content": "Proof",
+                    "id": "51657483-038f-41d2-ac12-e105c6a99b22",
+                    "step_number": 9,
+                    "time_gap_to_next": 60,
+                  },
+                  Object {
+                    "content": "Preheat oven and dutch oven",
+                    "id": "0e301924-217c-44ce-ab84-46495ad63d0b",
+                    "step_number": 10,
+                  },
+                  Object {
+                    "content": "Shape dough",
+                    "id": "1350120b-79c0-4314-a7cc-08fe9b6fbaab",
+                    "step_number": 11,
+                  },
+                  Object {
+                    "content": "Final proof",
+                    "id": "05c72cff-a836-4e99-a7a7-5163286333f8",
+                    "step_number": 12,
+                    "time_gap_to_next": 25,
+                  },
+                  Object {
+                    "content": "Sprinkle a bit of water onto the dough",
+                    "id": "92c2d615-cab8-42d7-901b-ffebeeb88d4e",
+                  },
+                  Object {
+                    "content": "Start baking with lid on at the bottom rack of the oven",
+                    "id": "c1c185ab-4859-493f-a292-2464b76cc494",
+                    "step_number": 13,
+                    "time_gap_to_next": 30,
+                  },
+                  Object {
+                    "content": "Remove lid and continue baking",
+                    "id": "32a3b48b-4d4f-455a-87b4-b5f36444e595",
+                    "step_number": 14,
+                    "time_gap_to_next": "15",
+                  },
+                  Object {
+                    "content": "Remove from oven and rest",
+                    "id": "dfb737bb-5291-4e58-8162-a19cfa6d3aa3",
+                    "step_number": 15,
+                    "time_gap_to_next": 10,
+                  },
+                  Object {
+                    "content": "Removed previous last step (EAT ALL)",
+                    "id": "87ec0203-8659-4536-83dc-bda438dbcd9d",
+                  },
+                ],
+                "name": "It was the only flour they had v3 (Nov 21st 17)",
+                "oven_temperature": 250,
+                "yield_count": 1,
+                "yield_type": "Loaf",
+              },
+              "diff": Object {
+                "ingredients": Object {
+                  "added": Array [
+                    Object {
+                      "id": "576c31a5-29e7-4c33-90b0-4e1f8bcc616c",
+                      "name": "This was added, water was removed",
+                      "quantity": "2",
+                      "unit": "kg",
+                    },
+                  ],
+                  "modified": Array [
+                    Object {
+                      "id": "eab76adf-a6aa-44f0-aba4-bcc1578ba34e",
+                      "name": "WAS MODIFIED (quantity was 3)",
+                      "quantity": "5",
+                      "unit": "Teaspoons",
+                    },
+                  ],
+                  "removed": Array [
+                    Object {
+                      "id": "eb1b8781-68d0-4f17-aef5-cd572488c253",
+                      "name": "Water",
+                      "quantity": "380",
+                      "unit": "mL",
+                    },
+                  ],
+                },
+                "instructions": Object {
+                  "added": Array [
+                    Object {
+                      "content": "1st INSERT AFTER 7",
+                      "id": "4210336c-02be-417c-933c-15ed0853ffba",
+                      "time_gap_to_next": "",
+                    },
+                    Object {
+                      "content": "2nd INSERT AFTER 7",
+                      "id": "9fc0f49b-ae3b-4cb2-b978-4e87a2257509",
+                    },
+                    Object {
+                      "content": "Removed previous last step (EAT ALL)",
+                      "id": "87ec0203-8659-4536-83dc-bda438dbcd9d",
+                    },
+                  ],
+                  "modified": Array [
+                    Object {
+                      "content": "CHANGED THIS ONE",
+                      "id": "0fae1481-8e36-406d-bdb1-1bd63a1fac39",
+                      "step_number": 2,
+                      "time_gap_to_next": 5,
+                    },
+                  ],
+                  "removed": Array [
+                    Object {
+                      "content": "EAT ALL THE BREAD",
+                      "id": "983d591d-f050-4fb1-8a34-63db202f6c72",
+                      "step_number": 16,
+                    },
+                  ],
+                },
+              },
+              "id": 30,
+              "parent": 3,
+              "user": "neildc",
+            }
+          }
+        />
+      </div>
+    </CardText>
+  </Card>
+</FadeIn>
+`;
+
+exports[`renders with user logged in that created recipe 1`] = `
+<FadeIn>
+  <Card
+    containerStyle={
+      Object {
+        "marginBottom": "20px",
+      }
+    }
+    expandable={false}
+    expanded={null}
+    initiallyExpanded={false}
+  >
+    <CardTitle
+      className="cardTitle"
+      title={
+        <div
+          className="cardTitleContents"
+        >
+          <IconButton
+            containerElement={
+              <Link
+                replace={false}
+                to="/recipes"
+              />
+            }
+            disableTouchRipple={false}
+            disabled={false}
+            iconStyle={Object {}}
+            tooltip="Back to recipes"
+            tooltipPosition="bottom-center"
+            touch={false}
+          >
+            <NavigationArrowBack
+              color="#999"
+            />
+          </IconButton>
+          <div
+            style={
+              Object {
+                "paddingTop": "5px",
+              }
+            }
+          >
+            It was the only flour they had v3 (Nov 21st 17)
+          </div>
+        </div>
+      }
+    />
+    <div
+      className="recipeMeta"
+    >
+      <div>
+        <b>
+          BY  
+        </b>
+         
+        neildc
+      </div>
+      <div>
+        <b>
+          TIME  
+        </b>
+         
+        133433755025h 10 mins
+      </div>
+      <div>
+        <b>
+          BAKE  
+        </b>
+         
+        40
+         mins at 
+        250
+        °
+      </div>
+      <div>
+        <b>
+          YIELDS  
+        </b>
+         
+        1
+         
+        Loaf
+      </div>
+    </div>
+    <div
+      style={
+        Object {
+          "padding": "30px",
+        }
+      }
+    >
+      <IconMenu
+        anchorOrigin={
+          Object {
+            "horizontal": "left",
+            "vertical": "top",
+          }
+        }
+        animated={true}
+        className="recipeActions"
+        iconButtonElement={
+          <IconButton
+            disableTouchRipple={false}
+            disabled={false}
+            iconStyle={Object {}}
+            tooltip="Delete recipe"
+            tooltipPosition="bottom-center"
+            touch={false}
+          >
+            <ActionDelete />
+          </IconButton>
+        }
+        multiple={false}
+        onClick={[Function]}
+        onItemTouchTap={[Function]}
+        onKeyboardFocus={[Function]}
+        onMouseDown={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onRequestChange={[Function]}
+        open={null}
+        targetOrigin={
+          Object {
+            "horizontal": "left",
+            "vertical": "top",
+          }
+        }
+        touchTapCloseDelay={200}
+        useLayerForClickAway={false}
+      >
+        <MenuItem
+          anchorOrigin={
+            Object {
+              "horizontal": "right",
+              "vertical": "top",
+            }
+          }
+          checked={false}
+          desktop={false}
+          disabled={false}
+          focusState="none"
+          insetChildren={false}
+          leftIcon={
+            <ActionDelete
+              color="black"
+            />
+          }
+          onClick={[Function]}
+          primaryText="Confirm Deletion"
+          targetOrigin={
+            Object {
+              "horizontal": "left",
+              "vertical": "top",
+            }
+          }
+        />
+      </IconMenu>
       <h3>
         Recent Activity
       </h3>

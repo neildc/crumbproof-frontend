@@ -50,10 +50,11 @@ class RecipeShow extends Component {
   }
 
   render() {
-    const { recipe, parentRecipe, baseRecipe } = this.props;
+    const { user, recipe, parentRecipe, baseRecipe } = this.props;
 
     return (
       <RecipeShowPresentation
+        user={user}
         recipe={recipe}
         parentRecipe={parentRecipe}
         baseRecipe={baseRecipe}

@@ -169,6 +169,7 @@ const RecipeShowPresentation = (props) => {
 };
 
 RecipeShowPresentation.propTypes = {
+  user: PropTypes.string,
   recipe: PropTypes.object,
   baseRecipe: PropTypes.object,
   parentRecipe: PropTypes.object,
