@@ -51,6 +51,13 @@ export function authForbidden(errorMessage) {
   };
 }
 
+export function authClearError() {
+  return {
+    type: AUTH_CLEAR_ERROR,
+    payload: null,
+  };
+}
+
 export function authCheckLocalStorage() {
   return {
     type: AUTH_CHECK_LOCAL_STORAGE,

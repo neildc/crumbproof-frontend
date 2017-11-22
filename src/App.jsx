@@ -10,8 +10,6 @@ import { authCheckLocalStorage } from './actions/actions_auth';
 import Header from './components/header';
 import RequireAuth from './components/hoc/require_auth';
 
-import UserFeedbackSnackbar from './components/user_feedback_snackbar';
-
 import LoginIndex from './components/login_index';
 import RegisterIndex from './components/register_index';
 import RecipesIndex from './components/recipes_index';
@@ -79,15 +77,14 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-          <div className="bg">
-            <Header />
-            <div className="container">
-              <div className="main">
-                {this.routes()}
-                <UserFeedbackSnackbar />
-              </div>
+        <div className="bg">
+          <Header />
+          <div className="container">
+            <div className="main">
+              {this.routes()}
             </div>
           </div>
+        </div>
       </BrowserRouter>
     );
   }

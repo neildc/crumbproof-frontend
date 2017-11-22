@@ -5,12 +5,10 @@ import {
   DELETE_RECIPE,
 } from '../actions/actions_recipe';
 
-import { CLEAR_FEEDBACK_MESSAGE } from '../actions/actions_feedback_messages';
-
 export default function (state = {}, action) {
   switch (action.type) {
     case DELETE_RECIPE: {
-      return {..._.omit(state, action.payload), message: "Recipe deleted"}
+      return _.omit(state, action.payload);
     /*
      *
      *  The _.merge is to handle a possible race condition of
@@ -34,13 +32,6 @@ export default function (state = {}, action) {
       const newRecipes = _.mapKeys(action.payload.data.results, 'id');
       return _.merge({}, newRecipes, state);
     }
-
-    case CLEAR_FEEDBACK_MESSAGE:
-      if (action.payload === 'recipes') {
-        return { ...state, error: null, message: null };
-      } else {
-        return state;
-      }
 
     default: {
       return state;

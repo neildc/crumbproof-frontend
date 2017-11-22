@@ -4,9 +4,8 @@ import {
   AUTH_LOGOUT,
   AUTH_REGISTER,
   AUTH_FORBIDDEN,
+  AUTH_CLEAR_ERROR,
 } from '../actions/actions_auth';
-
-import { CLEAR_FEEDBACK_MESSAGE } from '../actions/actions_feedback_messages';
 
 const DEFAULT_ERROR_MESSAGE = 'Please check your internet or try again later';
 
@@ -42,7 +41,7 @@ export default function (state = {}, action) {
     case AUTH_LOGOUT:
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      return { user: null, message: "Logged out"};
+      return { user: null };
 
     case AUTH_REGISTER:
 
@@ -88,12 +87,8 @@ export default function (state = {}, action) {
     case AUTH_FORBIDDEN:
       return { error: action.payload };
 
-    case CLEAR_FEEDBACK_MESSAGE:
-      if (action.payload === 'auth') {
-        return { ...state, error: null, message: null };
-      } else {
-        return state;
-      }
+    case AUTH_CLEAR_ERROR:
+      return { ...state, error: null };
 
     case AUTH_CHECK_LOCAL_STORAGE:
       if (localStorage.getItem('token') !== null

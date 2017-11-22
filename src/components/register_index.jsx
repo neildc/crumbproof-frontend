@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
+import Snackbar from 'material-ui/Snackbar';
 import TextField from 'material-ui/TextField';
 import { Card, CardTitle } from 'material-ui/Card';
 
 import { required } from '../validators';
-import { authRegister } from '../actions/actions_auth';
+import { authRegister, authClearError } from '../actions/actions_auth';
 
 import SubmitButton from './submit_button';
 import { FadeIn } from './animations/fade';
@@ -82,12 +83,24 @@ export class RegisterIndex extends Component {
             />
 
           </form>
+
+          <Snackbar
+            open={this.props.error != null}
+            message={this.props.error ? this.props.error : ''}
+            autoHideDuration={5000}
+            style={{ backgroundColor: 'red' }}
+            onRequestClose={this.props.authClearError}
+          />
         </Card>
       </FadeIn>
     );
   }
 }
 
+function mapStateToProps({ auth }, ownProps) {
+  return { error: auth.error };
+}
+
 export default reduxForm({
   form: 'RegisterForm',
-})(connect(null, { authRegister })(RegisterIndex));
+})(connect(mapStateToProps, { authRegister, authClearError })(RegisterIndex));
