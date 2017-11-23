@@ -1,0 +1,141 @@
+@-webkit-keyframes placeHolderShimmer {
+    0% {
+        background-position: -640px 0
+    }
+    100% {
+        background-position: 640px 0
+    }
+}
+
+@keyframes placeHolderShimmer {
+    0% {
+        background-position: -640px 0
+    }
+    100% {
+        background-position: 640px 0
+    }
+}
+
+.placeholder-wrapper {
+    color: #141823;
+}
+
+.placeholder-item {
+    background: #fff;
+    border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+    border-radius: 3px;
+    padding: 12px;
+    margin: 0 auto;
+    min-height: 200px;
+}
+
+.animated-background {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-name: placeHolderShimmer;
+    animation-name: placeHolderShimmer;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: #eeeeee;
+    background: -webkit-gradient(linear, left top, right top, color-stop(8%, #eeeeee), color-stop(18%, #dddddd), color-stop(33%, #eeeeee));
+    background: -webkit-linear-gradient(left, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    -webkit-background-size: 1500px 104px;
+    background-size: 1500px 104px;
+    height: 600px;
+    position: relative;
+}
+
+.background-masker {
+    background: #fff;
+    position: absolute;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.outlined:hover .background-masker {
+    border: none;
+}
+
+.outlined:hover .background-masker:hover {
+    border: 1px solid #ccc;
+    z-index: 1;
+}
+
+.background-masker.header-top,
+.background-masker.header-bottom {
+    top: 0;
+    left: 40px;
+    right: 0;
+    height: 10px;
+}
+
+.background-masker.header-left,
+.background-masker.header-right {
+    top: 10px;
+    left: 40px;
+    height: 8px;
+    width: 10px;
+}
+
+.background-masker.header-bottom {
+    top: 18px;
+    height: 6px;
+}
+
+.background-masker.header-right {
+    width: auto;
+    left: 300px;
+    right: 0;
+}
+
+
+.background-masker.content-top,
+.background-masker.content-second-line,
+.background-masker.content-third-line,
+.background-masker.content-second-end,
+.background-masker.content-third-end,
+.background-masker.content-first-end {
+    top: 200px;
+    left: 0;
+    right: 0px;
+    height: 10px;
+}
+
+.background-masker.content-top {
+    height: 20px;
+}
+
+.background-masker.content-first-end,
+.background-masker.content-second-end,
+.background-masker.content-third-end {
+    width: auto;
+    left: 380px;
+    right: 0;
+    top: 260px;
+    height: 8px;
+}
+
+.background-masker.content-second-line {
+    top: 268px;
+}
+
+.background-masker.content-second-end {
+    left: 420px;
+    top: 274px;
+}
+
+.background-masker.content-third-line {
+    top: 282px;
+}
+
+.background-masker.content-third-end {
+    left: 300px;
+    top: 288px;
+}
