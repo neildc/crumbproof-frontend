@@ -15,28 +15,51 @@ exports[`renders without throwing 1`] = `
     className="placeholder-wrapper"
   >
     <div
-      className="placeholder-item"
+      className="placeholder-crumbshot"
     >
       <div
         className="animated-background"
       >
         <div
-          className="background-masker content-top"
+          className="background-masker crumbshot-top"
+        />
+      </div>
+    </div>
+    <div
+      className="placeholder-recipe"
+    >
+      <div
+        className="animated-background"
+      >
+        <div
+          className="background-masker recipe-right-block"
         />
         <div
-          className="background-masker content-first-end"
+          className="background-masker recipe-right-end"
         />
         <div
-          className="background-masker content-second-line"
+          className="background-masker recipe-second-line"
         />
         <div
-          className="background-masker content-second-end"
+          className="background-masker recipe-second-end"
         />
         <div
-          className="background-masker content-third-line"
+          className="background-masker recipe-third-line"
         />
         <div
-          className="background-masker content-third-end"
+          className="background-masker recipe-third-end"
+        />
+        <div
+          className="background-masker recipe-fourth-line"
+        />
+        <div
+          className="background-masker recipe-fourth-end"
+        />
+        <div
+          className="background-masker recipe-fifth-line"
+        />
+        <div
+          className="background-masker recipe-fifth-end"
         />
       </div>
     </div>
