@@ -20,13 +20,19 @@
     color: #141823;
 }
 
-.placeholder-item {
+.placeholder-recipe,
+.placeholder-crumbshot {
     background: #fff;
     border-color: #e5e6e9 #dfe0e4 #d0d1d5;
     border-radius: 3px;
     padding: 12px;
     margin: 0 auto;
     min-height: 200px;
+}
+
+.placeholder-recipe {
+    margin-left: 35px;
+    margin-right: 30px;
 }
 
 .animated-background {
@@ -38,7 +44,11 @@
     animation-iteration-count: infinite;
     -webkit-animation-name: placeHolderShimmer;
     animation-name: placeHolderShimmer;
-    -webkit-animation-timing-function: linear;
+    -webkit-webkit-anim: ;
+    -moz-webkit-anim: ;
+    -ms-webkit-anim: ;
+    -o-webkit-anim: ;
+    webkit-anim: ;ation-timing-function: linear;
     animation-timing-function: linear;
     background: #f6f7f8;
     background: #eeeeee;
@@ -47,7 +57,7 @@
     background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
     -webkit-background-size: 1500px 104px;
     background-size: 1500px 104px;
-    height: 600px;
+    height: 300px;
     position: relative;
 }
 
@@ -68,74 +78,82 @@
     z-index: 1;
 }
 
-.background-masker.header-top,
-.background-masker.header-bottom {
+.background-masker.crumbshot-top,
+.background-masker.recipe-second-line,
+.background-masker.recipe-third-line,
+.background-masker.recipe-fourth-line,
+.background-masker.recipe-fifth-line,
+.background-masker.recipe-second-end,
+.background-masker.recipe-third-end,
+.background-masker.recipe-fifth-end,
+.background-masker.recipe-first-end {
     top: 0;
-    left: 40px;
-    right: 0;
-    height: 10px;
-}
-
-.background-masker.header-left,
-.background-masker.header-right {
-    top: 10px;
-    left: 40px;
-    height: 8px;
-    width: 10px;
-}
-
-.background-masker.header-bottom {
-    top: 18px;
-    height: 6px;
-}
-
-.background-masker.header-right {
-    width: auto;
-    left: 300px;
-    right: 0;
-}
-
-
-.background-masker.content-top,
-.background-masker.content-second-line,
-.background-masker.content-third-line,
-.background-masker.content-second-end,
-.background-masker.content-third-end,
-.background-masker.content-first-end {
-    top: 200px;
     left: 0;
     right: 0px;
     height: 10px;
 }
 
-.background-masker.content-top {
+
+.background-masker.crumbshot-top {
     height: 20px;
+    top: 200px;
 }
 
-.background-masker.content-first-end,
-.background-masker.content-second-end,
-.background-masker.content-third-end {
+.background-masker.recipe-right-block,
+.background-masker.recipe-first-end,
+.background-masker.recipe-second-end,
+.background-masker.recipe-fourth-end,
+.background-masker.recipe-fifth-end,
+.background-masker.recipe-third-end {
     width: auto;
     left: 380px;
     right: 0;
     top: 260px;
-    height: 8px;
+    height: 20px;
 }
 
-.background-masker.content-second-line {
-    top: 268px;
+.background-masker.recipe-second-line {
+    top: 68px;
 }
 
-.background-masker.content-second-end {
+.background-masker.recipe-second-end {
     left: 420px;
-    top: 274px;
+    top: 74px;
 }
 
-.background-masker.content-third-line {
-    top: 282px;
+.background-masker.recipe-third-line {
+    top: 88px;
 }
 
-.background-masker.content-third-end {
+.background-masker.recipe-third-end {
+    left: 220px;
+    top: 98px;
+}
+
+.background-masker.recipe-fourth-line {
+    top: 148px;
+}
+
+.background-masker.recipe-fourth-end {
+    left: 250px;
+    top: 175px;
+}
+
+.background-masker.recipe-fifth-line {
+    top: 218px;
+}
+
+.background-masker.recipe-fifth-end {
+    left: 0px;
+    top: 265px;
+}
+
+.background-masker.recipe-right-block {
+    top: 82px;
+    height: 300px;
+}
+
+.background-masker.recipe-right-end {
     left: 300px;
-    top: 288px;
+    top: 388px;
 }
