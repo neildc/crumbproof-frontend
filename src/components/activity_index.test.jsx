@@ -14,6 +14,19 @@ it('renders without throwing', () => {
   expect(component).toMatchSnapshot();
 });
 
+
+it('renders the placeholder', () => {
+  const component = shallow(
+    <ActivityIndex
+      activities={{}}
+      fetchMoreActiviites={jest.fn()}
+      fetchActivities={jest.fn()}
+    />,
+  );
+
+  expect(component).toMatchSnapshot();
+});
+
 const activities = {
   byId: {
     1: {
