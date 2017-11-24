@@ -15,8 +15,8 @@ import ImageZoom from 'react-medium-image-zoom';
 
 import { deleteActivity } from '../actions/actions_activity';
 
-import LoadingCard from './loading_card';
 import RecipeDiff from './recipe_diff';
+import ActivityCardPlaceholder from './activity_card_placeholder';
 
 import './activity_card.css';
 
@@ -30,7 +30,7 @@ export class ActivityCard extends Component {
     const { activity } = this.props;
 
     if (!activity) {
-      return <LoadingCard />;
+      return <ActivityCardPlaceholder />;
     }
 
     let duration = null;
@@ -43,7 +43,7 @@ export class ActivityCard extends Component {
 
 
     return (
-      <Card >
+      <Card style={this.props.style} >
 
         <CardMedia
           className="cardPhoto"

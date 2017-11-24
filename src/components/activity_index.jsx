@@ -10,7 +10,6 @@ import FloatingActionButton from './floating_action_button';
 import ActivityCard from './activity_card';
 import ActivityCardPlaceholder from './activity_card_placeholder';
 import { SlideInBottom } from './animations/slide';
-import { FadeIn } from './animations/fade';
 
 export class ActivityIndex extends Component {
   loadMoreActivities() {
@@ -19,29 +18,18 @@ export class ActivityIndex extends Component {
     }
   }
 
+  renderActivityCard(activity) {
+    return (
+      <ActivityCard activity={activity} style={{ marginBottom: '50px' }} key={activity.id}/>
+    );
+  }
+
   renderActivityCards() {
-    const ActivityCardPadded = ({ activity }) => (
-      <div style={{ marginBottom: '50px' }}>
-        <ActivityCard activity={activity} />
-      </div>
-    );
-
     const activities = _.orderBy(this.props.activities.byId, ['created'], ['desc']);
-    const firstActivity = _.head(activities);
 
-    /*
-     * Only animate the first activity, otherwise the slide in is quite laggy
-     */
-    const head = (
-      <FadeIn key={firstActivity.id}>
-        <ActivityCardPadded activity={firstActivity} />
-      </FadeIn>
-    );
-    const tail = _.map(_.tail(activities), activity => (
-      <ActivityCardPadded activity={activity} key={activity.id} />
+    return _.map(activities, activity => (
+      this.renderActivityCard(activity)
     ));
-
-    return _.concat(head, tail);
   }
 
   render() {
@@ -58,6 +46,7 @@ export class ActivityIndex extends Component {
           :
             <InfiniteScroll
               pageStart={0}
+              threshold={750}
               loadMore={this.loadMoreActivities.bind(this)}
               hasMore={this.props.activities.next != null}
               loader={<ActivityCardPlaceholder />}
