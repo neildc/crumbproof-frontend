@@ -22,6 +22,12 @@ import './activity_card.css';
 
 
 export class ActivityCard extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
+  }
+
   handleDeleteClick() {
     this.props.deleteActivity(this.props.activity.id, () => {});
   }
@@ -84,7 +90,7 @@ export class ActivityCard extends Component {
               <MenuItem
                 primaryText="Delete"
                 leftIcon={<DeleteIcon color="black" />}
-                onClick={this.handleDeleteClick.bind(this)}
+                onClick={this.handleDeleteClick}
               />
             </IconMenu>
           }

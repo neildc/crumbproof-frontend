@@ -16,6 +16,12 @@ import { required } from '../validators';
 import './login_index.css';
 
 export class LoginIndex extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
   renderField(field) {
     const { meta: { touched, error } } = field;
 
@@ -49,7 +55,7 @@ export class LoginIndex extends Component {
           <CardTitle title="Login" className="loginCardTitle" />
 
           <form
-            onSubmit={handleSubmit(this.onSubmit.bind(this))}
+            onSubmit={handleSubmit(this.onSubmit)}
             className="loginForm"
           >
 

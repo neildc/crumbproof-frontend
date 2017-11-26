@@ -14,6 +14,12 @@ import { FadeIn } from './animations/fade';
 import './register_index.css';
 
 export class RegisterIndex extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
   renderField(field) {
     const { meta: { touched, error } } = field;
 
@@ -47,7 +53,7 @@ export class RegisterIndex extends Component {
           <CardTitle title="Register" className="registerCardTitle" />
 
           <form
-            onSubmit={handleSubmit(this.onSubmit.bind(this))}
+            onSubmit={handleSubmit(this.onSubmit)}
             className="registerForm"
           >
 

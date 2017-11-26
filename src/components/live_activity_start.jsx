@@ -13,6 +13,11 @@ import {
 import LoadingCard from './loading_card';
 
 class LiveActivityStart extends Component {
+  constructor(props) {
+    super(props);
+    this.handleDiscardAndContinue = this.handleDiscardAndContinue.bind(this);
+  }
+
   componentDidMount() {
     this.props.fetchLiveActivity();
   }
@@ -54,7 +59,7 @@ class LiveActivityStart extends Component {
       <RaisedButton
         primary
         label="Discard and continue"
-        onClick={this.handleDiscardAndContinue.bind(this)}
+        onClick={this.handleDiscardAndContinue}
       />,
     ];
 

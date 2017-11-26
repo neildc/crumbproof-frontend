@@ -28,6 +28,9 @@ import { required, isNumber } from '../validators';
 class ActivityNew extends Component {
   constructor(props) {
     super(props);
+
+    this.onSubmit = this.onSubmit.bind(this);
+
     this.state = {
       recipe_modified: false,
     };
@@ -183,7 +186,7 @@ class ActivityNew extends Component {
     return (
       <CPCard title="New Activity">
         <form
-          onSubmit={handleSubmit(this.onSubmit.bind(this))}
+          onSubmit={handleSubmit(this.onSubmit)}
           style={{ margin: '20px' }}
         >
           <Field
