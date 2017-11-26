@@ -21,6 +21,11 @@ import { RECIPE_NEW_FORM_NAME } from '../constants/form_names';
 class RecipesNew extends Component {
   constructor(props) {
     super(props);
+
+    this.onSubmit = this.onSubmit.bind(this);
+    this.handleNext = this.handleNext.bind(this);
+    this.handlePrev = this.handlePrev.bind(this);
+
     this.state = {
       stepIndex: 0,
     };
@@ -71,17 +76,17 @@ class RecipesNew extends Component {
         </Stepper>
         <div style={contentStyle}>
           {stepIndex === 0 &&
-            <RecipesNewWizard1Basic onSubmit={this.handleNext.bind(this)} />}
+            <RecipesNewWizard1Basic onSubmit={this.handleNext} />}
 
           {stepIndex === 1 &&
             <RecipesNewWizard2Ingredients
-              previousPage={this.handlePrev.bind(this)}
-              onSubmit={this.handleNext.bind(this)}
+              previousPage={this.handlePrev}
+              onSubmit={this.handleNext}
             />}
           {stepIndex === 2 &&
             <RecipesNewWizard3Instructions
-              previousPage={this.handlePrev.bind(this)}
-              onSubmit={handleSubmit(this.onSubmit.bind(this))}
+              previousPage={this.handlePrev}
+              onSubmit={handleSubmit(this.onSubmit)}
             />}
 
         </div>

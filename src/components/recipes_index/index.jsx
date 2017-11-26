@@ -6,6 +6,11 @@ import { fetchRecipes } from '../../actions/actions_recipe';
 import RecipeIndexPresentation from './recipes_index';
 
 class RecipesIndex extends Component {
+  constructor(props) {
+    super(props);
+    this.handleRecipeClick = this.handleRecipeClick.bind(this);
+  }
+
   componentDidMount() {
     this.props.fetchRecipes();
   }
@@ -18,7 +23,7 @@ class RecipesIndex extends Component {
     return (
       <RecipeIndexPresentation
         recipes={this.props.recipes}
-        onRecipeClick={this.handleRecipeClick.bind(this)}
+        onRecipeClick={this.handleRecipeClick}
       />
     );
   }
