@@ -7,6 +7,13 @@ import { fetchRecipe, deleteRecipe } from '../../actions/actions_recipe';
 
 
 class RecipeShow extends Component {
+  constructor(props) {
+    super(props);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    this.handleRecordActivityClick = this.handleRecordActivityClick.bind(this);
+    this.handleStartActivityClick = this.handleStartActivityClick.bind(this);
+  }
+
   componentDidMount() {
     if (!this.props.recipe) {
       const { id } = this.props.match.params;
@@ -58,9 +65,9 @@ class RecipeShow extends Component {
         recipe={recipe}
         parentRecipe={parentRecipe}
         baseRecipe={baseRecipe}
-        onDeleteClick={this.handleDeleteClick.bind(this)}
-        onRecordActivityClick={this.handleRecordActivityClick.bind(this)}
-        onStartActivityClick={this.handleStartActivityClick.bind(this)}
+        onDeleteClick={this.handleDeleteClick}
+        onRecordActivityClick={this.handleRecordActivityClick}
+        onStartActivityClick={this.handleStartActivityClick}
       />
     );
   }

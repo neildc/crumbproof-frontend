@@ -12,6 +12,11 @@ import ActivityCardPlaceholder from './activity_card_placeholder';
 import { SlideInBottom } from './animations/slide';
 
 export class ActivityIndex extends Component {
+  constructor (props) {
+    super(props);
+    this.loadMoreActivities = this.loadMoreActivities.bind(this);
+  }
+
   loadMoreActivities() {
     if (this.props.activities.next) {
       this.props.fetchMoreActivities(this.props.activities.next);
@@ -47,7 +52,7 @@ export class ActivityIndex extends Component {
             <InfiniteScroll
               pageStart={0}
               threshold={750}
-              loadMore={this.loadMoreActivities.bind(this)}
+              loadMore={this.loadMoreActivities}
               hasMore={this.props.activities.next != null}
               loader={<ActivityCardPlaceholder />}
             >
