@@ -17,6 +17,7 @@ import generateInstructionTimeline from '../util/instruction_timeline';
 export default class RecipeTimeline extends Component {
   constructor(props) {
     super(props);
+    this.handleTimePickerChange = this.handleTimePickerChange.bind(this);
     this.state = {
       recipeStartTime: moment(),
     };
