@@ -43,12 +43,9 @@ class LiveActivity extends Component {
   }
 
   componentDidMount() {
-    if (this.props.user) {
+    if (!this.props.liveActivity.current_step) {
       askPushNotificationsPermission();
       subscribeUserToPush();
-    }
-
-    if (!this.props.liveActivity.current_step) {
       this.props.fetchLiveActivity();
     }
   }
