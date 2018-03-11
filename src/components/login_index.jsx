@@ -40,6 +40,47 @@ export class LoginIndex extends Component {
     );
   }
 
+  renderForm(props) {
+
+    const { handleSubmit, submitting } = props;
+
+    return (
+      <form
+        onSubmit={handleSubmit(this.onSubmit)}
+        className="loginForm"
+      >
+
+        <Field
+          label="Username"
+          name="username"
+          component={this.renderField}
+          validate={[required]}
+        />
+        <Field
+          label="Password"
+          name="password"
+          type="password"
+          component={this.renderField}
+          validate={[required]}
+        />
+
+        <SubmitButton
+          className="loginButton"
+          label="Login"
+          labelInProgress="Logging in..."
+          submittingFlag={submitting}
+          fullWidth
+        />
+        <RaisedButton
+          type="button"
+          label="Register"
+          fullWidth
+          containerElement={<Link to="/register" />}
+        />
+      </form>
+    )
+  }
+
   onSubmit(values) {
     return this.props.authLogin(values, () => {
       this.props.history.push('/');
@@ -47,46 +88,13 @@ export class LoginIndex extends Component {
   }
 
   render() {
-    const { handleSubmit, submitting } = this.props;
-
     return (
       <FadeIn>
         <Card className="loginCard">
           <CardTitle title="Login" className="loginCardTitle" />
 
-          <form
-            onSubmit={handleSubmit(this.onSubmit)}
-            className="loginForm"
-          >
+          {this.renderForm(this.props)}
 
-            <Field
-              label="Username"
-              name="username"
-              component={this.renderField}
-              validate={[required]}
-            />
-            <Field
-              label="Password"
-              name="password"
-              type="password"
-              component={this.renderField}
-              validate={[required]}
-            />
-
-            <SubmitButton
-              className="loginButton"
-              label="Login"
-              labelInProgress="Logging in..."
-              submittingFlag={submitting}
-              fullWidth
-            />
-            <RaisedButton
-              type="button"
-              label="Register"
-              fullWidth
-              containerElement={<Link to="/register" />}
-            />
-          </form>
         </Card>
       </FadeIn>
     );
