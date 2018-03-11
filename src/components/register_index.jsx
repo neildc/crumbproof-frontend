@@ -38,6 +38,50 @@ export class RegisterIndex extends Component {
     );
   }
 
+  renderForm(props) {
+
+    const { handleSubmit, submitting } = props;
+
+    return (
+      <form
+        onSubmit={handleSubmit(this.onSubmit)}
+        className="registerForm"
+      >
+
+        <Field
+          label="Username"
+          name="username"
+          component={this.renderField}
+          validate={[required]}
+        />
+        <Field
+          label="Password"
+          name="password1"
+          type="password"
+          component={this.renderField}
+          validate={[required]}
+        />
+
+        <Field
+          label="Confirm Password"
+          name="password2"
+          type="password"
+          component={this.renderField}
+          validate={[required]}
+        />
+
+        <SubmitButton
+          className="registerButton"
+          submittingFlag={submitting}
+          label="Register"
+          labelInProgress="Registering..."
+          fullWidth
+        />
+
+      </form>
+    )
+  }
+
   onSubmit(values) {
     return this.props.authRegister(values, () => {
       this.props.history.push('/');
@@ -45,54 +89,20 @@ export class RegisterIndex extends Component {
   }
 
   render() {
-    const { handleSubmit, submitting } = this.props;
-
     return (
       <FadeIn>
         <Card className="registerCard">
           <CardTitle title="Register" className="registerCardTitle" />
 
-          <form
-            onSubmit={handleSubmit(this.onSubmit)}
-            className="registerForm"
-          >
+          {this.renderForm(this.props)}
 
-            <Field
-              label="Username"
-              name="username"
-              component={this.renderField}
-              validate={[required]}
-            />
-            <Field
-              label="Password"
-              name="password1"
-              type="password"
-              component={this.renderField}
-              validate={[required]}
-            />
-
-            <Field
-              label="Confirm Password"
-              name="password2"
-              type="password"
-              component={this.renderField}
-              validate={[required]}
-            />
-
-            <SubmitButton
-              className="registerButton"
-              submittingFlag={submitting}
-              label="Register"
-              labelInProgress="Registering..."
-              fullWidth
-            />
-
-          </form>
         </Card>
       </FadeIn>
     );
   }
 }
+
+
 
 export default reduxForm({
   form: 'RegisterForm',
