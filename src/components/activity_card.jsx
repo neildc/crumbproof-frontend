@@ -138,7 +138,7 @@ export class ActivityCard extends Component {
           this.renderMenu(this.handleDeleteClick)
         }
 
-e       <div style={{ padding: '30px' }}>
+        <div style={{ padding: '30px' }}>
           {this.renderRecipeInfo(activity)}
         </div>
 
