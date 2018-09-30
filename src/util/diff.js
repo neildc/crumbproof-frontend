@@ -1,21 +1,21 @@
-import _ from 'lodash';
-import equal from 'fast-deep-equal';
+import _ from "lodash";
+import equal from "fast-deep-equal";
 
-export const INSTRUCTIONS = 'instructions';
-export const INGREDIENTS = 'ingredients';
+export const INSTRUCTIONS = "instructions";
+export const INGREDIENTS = "ingredients";
 
 export function generateDiff(type, orig, curr) {
   if (equal(orig, curr)) {
     return null;
   }
 
-  const key = 'id';
+  const key = "id";
 
   const removed = _.differenceBy(orig, curr, key);
 
   const existedInOriginal = _.filter(curr, i => key in i);
 
-  const modified = _.filter(existedInOriginal, (i) => {
+  const modified = _.filter(existedInOriginal, i => {
     const match = _.find(orig, { [key]: i[key] });
     return !equal(i, match);
   });
@@ -30,14 +30,14 @@ function findLivingNeighbour(bot, top, curr) {
     if (top[i]) {
       const topIndex = _.findIndex(curr, { id: top[i].id });
       if (topIndex) {
-        return { index: topIndex, position: 'below' };
+        return { index: topIndex, position: "below" };
       }
     }
 
     if (bot[i]) {
       const botIndex = _.findIndex(curr, { id: bot[i].id });
       if (botIndex) {
-        return { index: botIndex, position: 'above' };
+        return { index: botIndex, position: "above" };
       }
     }
   }
@@ -47,8 +47,8 @@ function findLivingNeighbour(bot, top, curr) {
 function insertDeadNextToLivingNeighbour(dead, all, neighbour) {
   const { index, position } = neighbour;
 
-  if (position === 'below') all.splice(index + 1, 0, dead);
-  if (position === 'above') all.splice(index - 1, 0, dead);
+  if (position === "below") all.splice(index + 1, 0, dead);
+  if (position === "above") all.splice(index - 1, 0, dead);
 }
 
 /*
@@ -89,7 +89,7 @@ function insertDeadToClosestLivingNeighbour(dead, prev, living) {
   } else {
     // If we can't find anyone alive then simply
     // place the instruction at the top of the list
-    insertDeadNextToLivingNeighbour(dead, living, { id: 0, position: 'above' });
+    insertDeadNextToLivingNeighbour(dead, living, { id: 0, position: "above" });
   }
 }
 

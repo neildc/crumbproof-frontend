@@ -3,10 +3,10 @@ import {
   DISCARD_LIVE_ACTIVITY,
   FETCH_LIVE_ACTIVITY,
   LIVE_ACTIVITY_NEXT_STEP,
-  LIVE_ACTIVITY_START_TIMER,
-} from '../actions/actions_live_activity';
+  LIVE_ACTIVITY_START_TIMER
+} from "../actions/actions_live_activity";
 
-export default function (state = {}, action) {
+export default function(state = {}, action) {
   switch (action.type) {
     case DISCARD_LIVE_ACTIVITY:
     case START_LIVE_ACTIVITY:
@@ -22,7 +22,7 @@ export default function (state = {}, action) {
       return {
         ...state,
         current_step,
-        end_times: { ...state.end_times, ...end_times },
+        end_times: { ...state.end_times, ...end_times }
       };
 
     case LIVE_ACTIVITY_START_TIMER:
@@ -30,7 +30,7 @@ export default function (state = {}, action) {
 
       return {
         ...state,
-        start_times: { ...state.start_times, ...start_times },
+        start_times: { ...state.start_times, ...start_times }
       };
 
     default:

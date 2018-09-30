@@ -189,23 +189,24 @@ class LiveActivityControl extends Component {
 
     return (
       <Card className="liveController">
-      { currStepInstruction.time_gap_to_next &&
-        <Timer
-          currStepInstruction={currStepInstruction}
-          currStepStartTime={currStepStartTime}
-          isSubmitting={this.state.startingTimer}
-          startTimerHandler={() => this.handleStartTimerClick()}
-        />
-      }
 
-      <PageControls
-        currentStepInAnchor={this.props.currentStepInAnchor}
-        currStep
-        movingToNextStep={this.state.movingToNextStep}
-        instructions
-        recipe
-        nextClickHandler={() => this.handleNextClick(recipe, currStep)}
-      />
+        { currStepInstruction.time_gap_to_next &&
+          <Timer
+            currStepInstruction={currStepInstruction}
+            currStepStartTime={currStepStartTime}
+            isSubmitting={this.state.startingTimer}
+            startTimerHandler={() => this.handleStartTimerClick()}
+          />
+        }
+
+        <PageControls
+          currentStepInAnchor={this.props.currentStepInAnchor}
+          currStep
+          movingToNextStep={this.state.movingToNextStep}
+          instructions
+          recipe
+          nextClickHandler={() => this.handleNextClick(recipe, currStep)}
+        />
 
       </Card>
     );

@@ -1,17 +1,17 @@
-import _ from 'lodash';
+import _ from "lodash";
 import {
   FETCH_RECIPES,
   FETCH_RECIPE,
-  DELETE_RECIPE,
-} from '../actions/actions_recipe';
+  DELETE_RECIPE
+} from "../actions/actions_recipe";
 
-import { CLEAR_FEEDBACK_MESSAGE } from '../actions/actions_feedback_messages';
+import { CLEAR_FEEDBACK_MESSAGE } from "../actions/actions_feedback_messages";
 
-export default function (state = {}, action) {
+export default function(state = {}, action) {
   switch (action.type) {
     case DELETE_RECIPE: {
-      return {..._.omit(state, action.payload), message: "Recipe deleted"}
-    /*
+      return { ..._.omit(state, action.payload), message: "Recipe deleted" };
+      /*
      *
      *  The _.merge is to handle a possible race condition of
      *  FETCH_RECIPES or FETCH_RECIPE resolving before FETCH_RECIPE_ACTIVITIES
@@ -31,12 +31,12 @@ export default function (state = {}, action) {
       return _.merge({}, newRecipe, state);
     }
     case FETCH_RECIPES: {
-      const newRecipes = _.mapKeys(action.payload.data.results, 'id');
+      const newRecipes = _.mapKeys(action.payload.data.results, "id");
       return _.merge({}, newRecipes, state);
     }
 
     case CLEAR_FEEDBACK_MESSAGE:
-      if (action.payload === 'recipes') {
+      if (action.payload === "recipes") {
         return { ...state, error: null, message: null };
       } else {
         return state;

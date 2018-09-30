@@ -100,7 +100,8 @@ const RecipeDiffPresentation = (props) => {
     <div>
       <b>Ingredients:</b>
       <ul>
-        { diff && diff.ingredients ? renderDiff(props, INGREDIENTS) :
+        { diff && diff.ingredients ?
+          renderDiff(props, INGREDIENTS) :
           renderIngredients(ingredients)
         }
       </ul>
@@ -109,7 +110,8 @@ const RecipeDiffPresentation = (props) => {
 
       <b>Instructions:</b>
       <ol>
-        { diff && diff.instructions ? renderDiff(props, INSTRUCTIONS) :
+        { diff && diff.instructions ?
+          renderDiff(props, INSTRUCTIONS) :
           renderInstructions(instructions)
         }
       </ol>
