@@ -3,12 +3,17 @@ import {
   AUTH_LOGIN,
   AUTH_LOGOUT,
   AUTH_REGISTER,
+  AUTH_TOGGLE_CONTENT_VISIBILITY,
   AUTH_FORBIDDEN
 } from "../actions/actions_auth";
 
 import { CLEAR_FEEDBACK_MESSAGE } from "../actions/actions_feedback_messages";
 
 const DEFAULT_ERROR_MESSAGE = "Please check your internet or try again later";
+
+const LS_USER_KEY = "crumbproof_user";
+const LS_TOKEN_KEY = "crumbproof_token";
+const LS_CONTENT_VIS_KEY = "crumbproof_user_content_only";
 
 export default function(state = {}, action) {
   switch (action.type) {
@@ -34,13 +39,13 @@ export default function(state = {}, action) {
         }
         return { error: DEFAULT_ERROR_MESSAGE };
       }
-      localStorage.setItem("token", action.payload.token);
-      localStorage.setItem("user", action.payload.user);
+      localStorage.setItem(LS_TOKEN_KEY, action.payload.token);
+      localStorage.setItem(LS_USER_KEY, action.payload.user);
       return { user: action.payload.user };
 
     case AUTH_LOGOUT:
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
+      localStorage.removeItem(LS_TOKEN_KEY);
+      localStorage.removeItem(LS_USER_KEY);
       return { user: null, message: "Logged out" };
 
     case AUTH_REGISTER:
@@ -79,8 +84,8 @@ export default function(state = {}, action) {
         }
         return { error: DEFAULT_ERROR_MESSAGE };
       }
-      localStorage.setItem("token", action.payload.token);
-      localStorage.setItem("user", action.payload.user);
+      localStorage.setItem(LS_TOKEN_KEY, action.payload.token);
+      localStorage.setItem(LS_USER_KEY, action.payload.user);
       return { user: action.payload.user };
 
     case AUTH_FORBIDDEN:
@@ -93,12 +98,22 @@ export default function(state = {}, action) {
         return state;
       }
 
+    case AUTH_TOGGLE_CONTENT_VISIBILITY:
+      let toggled = !state.contentVisibilityUserOnly;
+      localStorage.setItem(LS_CONTENT_VIS_KEY, toggled);
+
+      return { ...state, contentVisibilityUserOnly: toggled };
+
     case AUTH_CHECK_LOCAL_STORAGE:
       if (
-        localStorage.getItem("token") !== null &&
-        localStorage.getItem("user") !== null
+        localStorage.getItem(LS_TOKEN_KEY) !== null &&
+        localStorage.getItem(LS_USER_KEY) !== null
       ) {
-        return { ...state, user: localStorage.getItem("user") };
+        return {
+          ...state,
+          user: localStorage.getItem(LS_USER_KEY),
+            contentVisibilityUserOnly: JSON.parse(localStorage.getItem(LS_CONTENT_VIS_KEY))
+        };
       }
       return state;
 

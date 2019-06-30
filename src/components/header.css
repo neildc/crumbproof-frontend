@@ -17,3 +17,9 @@
         margin-left: 100px !important;
     }
 }
+
+
+.tooltip {
+    font-size: 14px !important;
+    display: block !important;
+}

@@ -1,27 +1,33 @@
-import _ from 'lodash';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import _ from "lodash";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-import Drawer from 'material-ui/Drawer';
-import { ListItem } from 'material-ui/List';
+import Drawer from "material-ui/Drawer";
+import { ListItem } from "material-ui/List";
 
-import AppBar from 'material-ui/AppBar';
-import FlatButton from 'material-ui/FlatButton';
+import AppBar from "material-ui/AppBar";
+import FlatButton from "material-ui/FlatButton";
 
-import RecipeIcon from 'material-ui/svg-icons/action/description';
-import ActivityIcon from 'material-ui/svg-icons/image/gradient';
-import LiveIcon from 'material-ui/svg-icons/image/timer';
+import ReactTooltip from "react-tooltip";
 
-import { authLogout } from '../actions/actions_auth';
+import RecipeIcon from "material-ui/svg-icons/action/description";
+import ActivityIcon from "material-ui/svg-icons/image/gradient";
+import LiveIcon from "material-ui/svg-icons/image/timer";
+import PersonIcon from "material-ui/svg-icons/social/person";
+import PublicIcon from "material-ui/svg-icons/social/public";
 
-import './header.css';
+import {
+  authLogout,
+  authToggleContentVisibility
+} from "../actions/actions_auth";
 
+import "./header.css";
 
 const navItems = [
-  { title: 'Activities', url: '/activity', icon: ActivityIcon },
-  { title: 'Recipes', url: '/recipes', icon: RecipeIcon },
-  { title: 'Live activity', url: '/live', icon: LiveIcon },
+  { title: "Activities", url: "/activity", icon: ActivityIcon },
+  { title: "Recipes", url: "/recipes", icon: RecipeIcon },
+  { title: "Live activity", url: "/live", icon: LiveIcon }
 ];
 
 export class Header extends Component {
@@ -30,21 +36,70 @@ export class Header extends Component {
     this.state = { drawerOpen: false };
   }
 
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.contentVisibilityUserOnly !==
+      prevProps.contentVisibilityUserOnly
+    ) {
+        ReactTooltip.hide();
+      ReactTooltip.rebuild();
+    }
+  }
+
   handleDrawerToggle() {
     this.setState({ drawerOpen: !this.state.drawerOpen });
   }
 
+  contentVisIcon(color) {
+    if (this.props.contentVisibilityUserOnly === true) {
+      return <PersonIcon color={color} data-tip data-for="tooltip" />;
+    } else {
+      return <PublicIcon color={color} data-tip data-for="tooltip" />;
+    }
+  }
+
   authButton() {
     const Button = props => (
-      <FlatButton
-        {...props}
-        labelStyle={{ color: 'white' }}
-        className="authButton"
-      />
+      <FlatButton {...props} labelStyle={{ color: "white" }} />
     );
-
     if (this.props.authenticatedUser) {
-      return <Button onClick={this.props.authLogout} label="Logout" />;
+      return (
+        <div>
+          <ReactTooltip
+            multiline
+            place="bottom"
+            type="dark"
+            effect="solid"
+            getContent={() =>
+              this.props.contentVisibilityUserOnly ? (
+                <p>
+                  Showing your activities/recipes only
+                  <br />
+                  <br /> Click to show everyones.
+                </p>
+              ) : (
+                <p>
+                  Showing everyones activities/recipes
+                  <br /> <br /> Click to see yours only.
+                </p>
+              )
+            }
+            id="tooltip"
+          />
+
+          <Button
+            labelStyle={{ color: "white" }}
+            onClick={this.props.authToggleContentVisibility}
+            label=""
+            icon={this.contentVisIcon("#FFFFFF")}
+          />
+          <Button
+            onClick={this.props.authLogout}
+            label="Logout"
+            className="authButton"
+          />
+        </div>
+      );
     }
     return <Button containerElement={<Link to="/login" />} label="Login" />;
   }
@@ -54,21 +109,19 @@ export class Header extends Component {
   }
 
   renderAppBarNavLinks() {
-    return (
-      _.map(navItems, i => (
-        <FlatButton
-          key={i.title}
-          containerElement={<Link to={i.url} />}
-          label={i.title}
-          labelStyle={{ color: 'white' }}
-          icon={<i.icon color="#FFFFFF" />}
-        />
-      ))
-    );
+    return _.map(navItems, i => (
+      <FlatButton
+        key={i.title}
+        containerElement={<Link to={i.url} />}
+        label={i.title}
+        labelStyle={{ color: "white" }}
+        icon={<i.icon color="#FFFFFF" />}
+      />
+    ));
   }
 
   renderNavDrawerItems() {
-    return (
+    return _.concat(
       _.map(navItems, i => (
         <ListItem
           key={i.title}
@@ -77,22 +130,29 @@ export class Header extends Component {
           leftIcon={<i.icon />}
           onClick={() => this.closeDrawer()}
         />
-      ))
+      )),
+      <ListItem
+        key={"AAAAA"}
+        primaryText={"Toggle content visibility"}
+        leftIcon={this.contentVisIcon("#000000")}
+        onClick={() => {
+          this.props.authToggleContentVisibility();
+          this.closeDrawer();
+        }}
+      />
     );
   }
 
   render() {
     return (
-      <div style={{ position: 'fixed', width: '100%', zIndex: 3 }}>
+      <div style={{ position: "fixed", width: "100%", zIndex: 3 }}>
         <AppBar
           className="appBar"
           title="crumbproof"
           onLeftIconButtonTouchTap={() => this.handleDrawerToggle()}
         >
           <div className="navLinks">
-            { window.innerWidth > 640 &&
-              this.renderAppBarNavLinks()
-            }
+            {window.innerWidth > 640 && this.renderAppBarNavLinks()}
             {this.authButton()}
           </div>
         </AppBar>
@@ -113,7 +173,11 @@ export class Header extends Component {
 function mapStateToProps({ auth }) {
   return {
     authenticatedUser: auth.user,
+    contentVisibilityUserOnly: auth.contentVisibilityUserOnly
   };
 }
 
-export default connect(mapStateToProps, { authLogout })(Header);
+export default connect(
+  mapStateToProps,
+  { authLogout, authToggleContentVisibility }
+)(Header);

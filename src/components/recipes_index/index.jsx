@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import { fetchRecipes } from '../../actions/actions_recipe';
+import { fetchRecipes } from "../../actions/actions_recipe";
+import _ from "lodash";
+import RecipeIndexPresentation from "./recipes_index";
 
-import RecipeIndexPresentation from './recipes_index';
+// import { Card } from 'material-ui/Card';
 
 class RecipesIndex extends Component {
   constructor(props) {
@@ -29,8 +31,17 @@ class RecipesIndex extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return { recipes: state.recipes };
+
+function mapStateToProps({ recipes, auth }) {
+  if (auth.contentVisibilityUserOnly) {
+    return { recipes: _.filter(recipes, { user: auth.user }) };
+  } else {
+      debugger;
+      return { recipes: _.isEmpty(recipes) ? null : recipes  };
+  }
 }
 
-export default connect(mapStateToProps, { fetchRecipes })(RecipesIndex);
+export default connect(
+  mapStateToProps,
+  { fetchRecipes }
+)(RecipesIndex);

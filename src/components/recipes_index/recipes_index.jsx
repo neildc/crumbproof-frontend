@@ -1,15 +1,15 @@
-import _ from 'lodash';
-import React from 'react';
-import PropTypes from 'prop-types';
+import _ from "lodash";
+import React from "react";
+import PropTypes from "prop-types";
 
-import { List, ListItem } from 'material-ui/List';
-import LinearProgress from 'material-ui/LinearProgress';
-import ContentSend from 'material-ui/svg-icons/content/send';
-import ArrowRight from 'material-ui/svg-icons/navigation/subdirectory-arrow-right';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import { List, ListItem } from "material-ui/List";
+import LinearProgress from "material-ui/LinearProgress";
+import ContentSend from "material-ui/svg-icons/content/send";
+import ArrowRight from "material-ui/svg-icons/navigation/subdirectory-arrow-right";
+import ContentAdd from "material-ui/svg-icons/content/add";
 
-import CPCard from '../crumbproof_card';
-import FloatingActionButton from '../floating_action_button';
+import CPCard from "../crumbproof_card";
+import FloatingActionButton from "../floating_action_button";
 
 const renderRecipeNode = (recipe, onRecipeClick) => (
   <ListItem
@@ -20,17 +20,17 @@ const renderRecipeNode = (recipe, onRecipeClick) => (
     initiallyOpen
     onClick={() => onRecipeClick(recipe.id)}
     nestedItems={
-      recipe.children ?
-        _.map(recipe.children, r => renderRecipeNode(r, onRecipeClick)) :
-        null
+      recipe.children
+        ? _.map(recipe.children, r => renderRecipeNode(r, onRecipeClick))
+        : null
     }
   />
 );
 
-const buildRecipeTree = (recipesList) => {
+const buildRecipeTree = recipesList => {
   const recipes = _.mapKeys(
-    _.map(recipesList, r => ({ ...r, children: [] }))
-    , 'id',
+    _.map(recipesList, r => ({ ...r, children: [] })),
+    "id"
   );
 
   const root = _.filter(recipes, r => r.base_recipe === null);
@@ -49,27 +49,27 @@ const renderRecipes = ({ recipes, onRecipeClick }) => {
 
   const recipeTree = buildRecipeTree(recipes);
 
-  return _.map(recipeTree, rootRecipe => (
+  return _.map(recipeTree, rootRecipe =>
     renderRecipeNode(rootRecipe, onRecipeClick)
-  ));
+  );
 };
 
-const RecipeIndexPresentation = props => (
-  <div>
-    <FloatingActionButton link="/recipes/new">
-      <ContentAdd />
-    </FloatingActionButton>
-    <CPCard title="Recipes">
-      <List>
-        {renderRecipes(props)}
-      </List>
-    </CPCard>
-  </div>
-);
+const RecipeIndexPresentation = props => {
+  return (
+    <div>
+      <FloatingActionButton link="/recipes/new">
+        <ContentAdd />
+      </FloatingActionButton>
+      <CPCard title="Recipes">
+        <List>{renderRecipes(props)}</List>
+      </CPCard>
+    </div>
+  );
+};
 
 RecipeIndexPresentation.propTypes = {
-  recipes: PropTypes.object.isRequired,
-  onRecipeClick: PropTypes.func.isRequired,
+  recipes: PropTypes.object,
+  onRecipeClick: PropTypes.func.isRequired
 };
 
 export default RecipeIndexPresentation;

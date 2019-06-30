@@ -2,16 +2,20 @@ import React from 'react';
 import { Card } from 'material-ui/Card';
 import './activity_card_placeholder.css';
 
-const ActivityCardPlaceholder = () => (
+const animateIfNeeded= (shouldAnimate) =>
+      (shouldAnimate ? "animated-background" : "");
+
+const ActivityCardPlaceholder = (p) => (
+
   <Card style={{ height: '800px' }}>
     <div className="placeholder-wrapper">
       <div className="placeholder-crumbshot">
-        <div className="animated-background">
+        <div className={animateIfNeeded(p.animate)}>
           <div className="background-masker crumbshot-top" />
         </div>
       </div>
       <div className="placeholder-recipe">
-        <div className="animated-background">
+        <div className={animateIfNeeded(p.animate)}>
 
           {/* TODO: Dynamically generate these
             */}
