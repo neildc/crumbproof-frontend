@@ -36,7 +36,6 @@ function mapStateToProps({ recipes, auth }) {
   if (auth.contentVisibilityUserOnly) {
     return { recipes: _.filter(recipes, { user: auth.user }) };
   } else {
-      debugger;
       return { recipes: _.isEmpty(recipes) ? null : recipes  };
   }
 }

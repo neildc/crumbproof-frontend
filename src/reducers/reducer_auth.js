@@ -8,12 +8,10 @@ import {
 } from "../actions/actions_auth";
 
 import { CLEAR_FEEDBACK_MESSAGE } from "../actions/actions_feedback_messages";
+import { LS_USER_KEY, LS_TOKEN_KEY, LS_CONTENT_VIS_KEY } from "../constants/local_storage_keys";
 
 const DEFAULT_ERROR_MESSAGE = "Please check your internet or try again later";
 
-const LS_USER_KEY = "crumbproof_user";
-const LS_TOKEN_KEY = "crumbproof_token";
-const LS_CONTENT_VIS_KEY = "crumbproof_user_content_only";
 
 export default function(state = {}, action) {
   switch (action.type) {
