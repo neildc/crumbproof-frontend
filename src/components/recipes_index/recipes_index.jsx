@@ -33,6 +33,10 @@ const buildRecipeTree = recipesList => {
     "id"
   );
 
+  // When content is filtered to user's only the original base recipes
+  // might not exist because it from another user
+  _.forEach(recipes, r => { if (recipes[r.parent] == null)  r.base_recipe = null } );
+
   const root = _.filter(recipes, r => r.base_recipe === null);
 
   const variants = _.filter(recipes, r => r.base_recipe !== null);
