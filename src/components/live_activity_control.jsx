@@ -63,8 +63,9 @@ const Timer = ({ currStepInstruction, currStepStartTime, started, isSubmitting, 
       <Tooltip
         className="tooltip"
         content={[
-          'This timer is running remotely, you may close this page if you want.\n',
-          'The push notification for this timer may be early/late by at most 1 minute']}
+            'This timer is running remotely, you may close this page if you want.\n'
+            //, 'The push notification for this timer may be early/late by at most 1 minute'
+        ]}
       >
         {currStepStartTime ?
           <CountdownText

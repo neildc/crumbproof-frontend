@@ -6,10 +6,10 @@ import { Card, CardTitle, CardText } from 'material-ui/Card';
 import { SectionsContainer, Section, Footer } from 'react-fullpage';
 import LoadingCard from './loading_card';
 
-import {
-  askPushNotificationsPermission,
-  subscribeUserToPush,
-} from '../util/web_push';
+// import {
+//   askPushNotificationsPermission,
+//   subscribeUserToPush,
+// } from '../util/web_push';
 
 import './live_activity.css';
 
@@ -44,8 +44,8 @@ class LiveActivity extends Component {
 
   componentDidMount() {
     if (!this.props.liveActivity.current_step) {
-      askPushNotificationsPermission();
-      subscribeUserToPush();
+      //askPushNotificationsPermission();
+      //subscribeUserToPush();
       this.props.fetchLiveActivity();
     }
   }
