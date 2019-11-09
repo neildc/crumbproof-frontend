@@ -30,6 +30,10 @@ const navItems = [
   { title: "Live activity", url: "/live", icon: LiveIcon }
 ];
 
+const Button = props => (
+  <FlatButton {...props} labelStyle={{ color: "white" }} />
+);
+
 export class Header extends Component {
   constructor(props) {
     super(props);
@@ -41,7 +45,7 @@ export class Header extends Component {
       this.props.contentVisibilityUserOnly !==
       prevProps.contentVisibilityUserOnly
     ) {
-        ReactTooltip.hide();
+      ReactTooltip.hide();
       ReactTooltip.rebuild();
     }
   }
@@ -57,11 +61,7 @@ export class Header extends Component {
       return <PublicIcon color={color} data-tip data-for="tooltip" />;
     }
   }
-
-  authButton() {
-    const Button = props => (
-      <FlatButton {...props} labelStyle={{ color: "white" }} />
-    );
+  contentVisToggleButton() {
     if (this.props.authenticatedUser) {
       return (
         <div>
@@ -90,18 +90,32 @@ export class Header extends Component {
           <Button
             labelStyle={{ color: "white" }}
             onClick={this.props.authToggleContentVisibility}
-            label=""
+            label={
+              this.props.contentVisibilityUserOnly
+                ? "Your Content"
+                : "All Content"
+            }
             icon={this.contentVisIcon("#FFFFFF")}
-          />
-          <Button
-            onClick={this.props.authLogout}
-            label="Logout"
-            className="authButton"
           />
         </div>
       );
+    } else {
+      return <div></div>;
     }
-    return <Button containerElement={<Link to="/login" />} label="Login" />;
+  }
+
+  authButton() {
+    if (this.props.authenticatedUser) {
+      return (
+        <Button
+          onClick={this.props.authLogout}
+          label="Logout"
+          className="authButton"
+        />
+      );
+    } else {
+      return <Button containerElement={<Link to="/login" />} label="Login" />;
+    }
   }
 
   closeDrawer() {
@@ -153,6 +167,7 @@ export class Header extends Component {
         >
           <div className="navLinks">
             {window.innerWidth > 640 && this.renderAppBarNavLinks()}
+            {window.innerWidth > 640 && this.contentVisToggleButton()}
             {this.authButton()}
           </div>
         </AppBar>
