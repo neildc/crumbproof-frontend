@@ -6,7 +6,7 @@
     "apollo-cache-inmemory": "^1.0.0",
     "apollo-client": "^2.0.1",
     "apollo-link-http": "^1.1.0",
-    "axios": "^0.16.2",
+    "axios": "^0.21.1",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.0",
     "fast-deep-equal": "^1.0.0",
